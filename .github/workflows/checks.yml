@@ -8,6 +8,8 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+          cache: pip
+          cache-dependency-path: requirements-colab.txt
       - run: python -m pip install -r requirements-colab.txt
       - run: python -m unittest discover -s tests -v
       - run: python tests/cloud_integration.py

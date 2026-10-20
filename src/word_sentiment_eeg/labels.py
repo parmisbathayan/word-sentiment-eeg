@@ -17,6 +17,7 @@ from .common import file_digest, normalize_word, write_json
 
 NRC_URL = "https://saifmohammad.com/WebDocs/Lexicons/NRC-VAD-Lexicon.zip"
 NRC_HOME = "https://saifmohammad.com/WebPages/nrc-vad.html"
+NRC_V1_MEMBER = "NRC-VAD-Lexicon/NRC-VAD-Lexicon.txt"
 NEGATORS = {"not", "no", "nor", "neither", "never", "without", "hardly", "barely", "scarcely"}
 CONTRAST = {"but", "however", "although", "though", "yet", "despite"}
 
@@ -43,7 +44,9 @@ def ensure_lexicon(directory):
             raise ValueError("NRC download is not a ZIP; original server may be unavailable.")
         tmp.replace(archive)
     with zipfile.ZipFile(archive) as z:
-        candidates = [n for n in z.namelist() if Path(n).name == "NRC-VAD-Lexicon.txt" and "__MACOSX" not in n]
+        # The official archive also contains BipolarScale/NRC-VAD-Lexicon.txt.
+        # Select the documented [0,1] file explicitly; never take an arbitrary basename match.
+        candidates = [n for n in z.namelist() if n == NRC_V1_MEMBER]
         if len(candidates) != 1:
             raise ValueError(f"Expected one v1 English lexicon; found {candidates}")
         target.write_bytes(z.read(candidates[0]))

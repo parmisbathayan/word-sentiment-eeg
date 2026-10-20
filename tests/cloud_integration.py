@@ -20,7 +20,7 @@ import pandas as pd
 from scipy.io import savemat
 
 from word_sentiment_eeg.common import atomic_npz, sentence_key
-from word_sentiment_eeg.labels import NRC_URL, load_lexicon
+from word_sentiment_eeg.labels import NRC_URL, NRC_V1_MEMBER, load_lexicon
 from word_sentiment_eeg.raw_export import iter_raw_words, export_available_raw
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -105,7 +105,7 @@ with tempfile.TemporaryDirectory() as tmp:
         request = urllib.request.Request(NRC_URL, headers={"User-Agent": "word-sentiment-eeg/research"})
         with urllib.request.urlopen(request, timeout=90) as response:
             archive = zipfile.ZipFile(io.BytesIO(response.read()))
-        names = [n for n in archive.namelist() if Path(n).name == "NRC-VAD-Lexicon.txt" and "__MACOSX" not in n]
+        names = [n for n in archive.namelist() if n == NRC_V1_MEMBER]
         assert len(names) == 1, names
         path = directory / "NRC-VAD-Lexicon.txt"
         path.write_bytes(archive.read(names[0]))
