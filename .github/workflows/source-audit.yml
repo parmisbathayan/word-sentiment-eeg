@@ -1,0 +1,22 @@
+name: Inspect real word EEG availability
+on:
+  workflow_dispatch:
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: requirements-colab.txt
+      - run: python -m pip install -r requirements-colab.txt
+      - run: python -u scripts/audit_source_availability.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: source-availability-audit
+          path: source_availability_audit.json
+          retention-days: 7
