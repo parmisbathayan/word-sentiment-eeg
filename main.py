@@ -87,8 +87,12 @@ def execute(args, config, run_dir):
     class_exports(table, x, run_dir)
     if args.raw_dir:
         from word_sentiment_eeg.raw_export import export_available_raw
+        # Changes to folds/probes do not duplicate large raw class exports.
+        raw_fingerprint = digest({"sources": sources, "lexicon_sha256": file_digest(lexicon_path),
+                                  "thresholds": config["label_thresholds"],
+                                  "exporter_sha256": file_digest(Path(__file__).parent / "src/word_sentiment_eeg/raw_export.py")})
         raw_report = export_available_raw(table, args.raw_dir,
-            Path(args.thesis_root) / "CachedArtifacts/word_sentiment_eeg/raw_by_class", fingerprint)
+            Path(args.thesis_root) / "CachedArtifacts/word_sentiment_eeg/raw_by_class", raw_fingerprint)
         write_json(run_dir / "raw_export.json", raw_report)
         manifest["raw_export_status"] = raw_report["status"]
     manifest["plot_status"] = make_plots(table, run_dir / "plots", x)

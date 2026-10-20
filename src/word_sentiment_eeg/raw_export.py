@@ -13,10 +13,12 @@ import pandas as pd
 from .common import atomic_npz, digest, file_digest, sentence_key, write_json
 
 
-def orient(segment):
+def orient(segment, from_hdf5=False):
     segment = np.asarray(segment)
     if segment.ndim != 2 or not np.issubdtype(segment.dtype, np.number):
         return None
+    if segment.shape == (105, 105):
+        return (segment.T if from_hdf5 else segment).astype(np.float32)
     if segment.shape[0] == 105:
         return segment.astype(np.float32)
     if segment.shape[1] == 105:
@@ -33,7 +35,7 @@ def hdf_cells(handle, ref):
         return []
     if h5py.check_dtype(ref=obj.dtype) is not None:
         return [v for child in np.asarray(obj).reshape(-1) for v in hdf_cells(handle, child)]
-    value = orient(np.asarray(obj))
+    value = orient(np.asarray(obj), from_hdf5=True)
     return [value] if value is not None and value.shape[1] else []
 
 

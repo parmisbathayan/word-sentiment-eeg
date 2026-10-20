@@ -169,6 +169,11 @@ class DataTests(unittest.TestCase):
         self.assertEqual(sentence_key(["Good", "film"]), sentence_key(["good", "film"]))
         self.assertNotEqual(sentence_key(["good", "film"]), sentence_key(["film", "good"]))
 
+    def test_square_raw_arrays_follow_matlab_storage_convention(self):
+        stored = np.arange(105 * 105).reshape(105, 105)
+        np.testing.assert_equal(orient(stored), stored)
+        np.testing.assert_equal(orient(stored, from_hdf5=True), stored.T)
+
 
 if __name__ == "__main__":
     unittest.main()
