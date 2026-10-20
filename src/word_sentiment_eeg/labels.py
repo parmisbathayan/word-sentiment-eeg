@@ -63,10 +63,13 @@ def ensure_lexicon(directory):
 
 
 def load_lexicon(path):
-    table = pd.read_csv(path, sep="\t", encoding="utf-8-sig")
-    table.columns = [str(c).strip().lower() for c in table.columns]
-    if not {"word", "valence", "arousal", "dominance"}.issubset(table.columns):
-        raise ValueError("Supply the English NRC VAD v1 TSV with Word/Valence/Arousal/Dominance headers.")
+    # The official v1 English file is headerless. Also accept a named-column
+    # copy without dropping its first real word (pandas' default header inference).
+    columns = ["word", "valence", "arousal", "dominance"]
+    table = pd.read_csv(path, sep="\t", encoding="utf-8-sig", header=None, names=columns)
+    if len(table) and str(table.iloc[0]["word"]).strip().lower() == "word":
+        if [str(v).strip().lower() for v in table.iloc[0]] == columns:
+            table = table.iloc[1:].copy()
     for c in ("valence", "arousal", "dominance"):
         table[c] = pd.to_numeric(table[c], errors="raise")
         if not table[c].between(0, 1).all():
