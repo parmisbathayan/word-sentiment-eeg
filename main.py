@@ -19,7 +19,7 @@ import pandas as pd
 from word_sentiment_eeg.common import digest, file_digest, write_json
 from word_sentiment_eeg.data import inspect_sources, load_sources
 from word_sentiment_eeg.evaluate import run_probe
-from word_sentiment_eeg.labels import annotate, apply_reviews, ensure_lexicon, load_lexicon
+from word_sentiment_eeg.labels import annotate, apply_reviews, load_lexicon
 from word_sentiment_eeg.report import class_exports, make_plots, write_report
 
 
@@ -41,10 +41,15 @@ def execute(args, config, run_dir):
     inventory = inspect_sources(args.thesis_root, config)
     write_json(run_dir / "data_inventory.json", inventory)
     table, x, sources = load_sources(inventory)
-    lexicon_path = Path(args.lexicon) if args.lexicon else ensure_lexicon(
-        Path(args.thesis_root) / "CachedArtifacts/word_sentiment_eeg/lexicons/NRC_VAD_v1")
-    lexicon = load_lexicon(lexicon_path)
-    fingerprint = digest({"config": config, "sources": sources, "lexicon": file_digest(lexicon_path),
+    if args.lexicon:
+        lexicon_path = Path(args.lexicon)
+        table = annotate(table, load_lexicon(lexicon_path), config["label_thresholds"])
+        label_provenance = {'mode': 'legacy_lexicon_comparison', 'sha256': file_digest(lexicon_path)}
+    else:
+        from word_sentiment_eeg.agent_annotations import attach_agent_annotations
+        table, label_provenance = attach_agent_annotations(table, args.annotations)
+        label_provenance['mode'] = 'prepared_agent_annotations'
+    fingerprint = digest({"config": config, "sources": sources, "labels": label_provenance,
                           "reviews": file_digest(args.reviews) if args.reviews else None,
                           "raw_dir": args.raw_dir,
                           "raw_inventory": [{"path": str(p), "bytes": p.stat().st_size, "mtime_ns": p.stat().st_mtime_ns}
@@ -71,12 +76,12 @@ def execute(args, config, run_dir):
             versions[package] = "not-installed"
     manifest = {"schema_version": 1, "status": "running", "started_utc": datetime.now(timezone.utc).isoformat(),
                 "config": config, "fingerprint": fingerprint, "sources": sources, "git_commit": commit,
-                "lexicon_sha256": file_digest(lexicon_path), "versions": versions,
+                "label_provenance": label_provenance, "versions": versions,
                 "python": platform.python_version(), "reviews": args.reviews,
                 "dataset_scope": "ZuCo 1.0 SR/NR/TSR caches; ZuCo 2.0 and TeCo not included"}
     write_json(old_manifest, manifest)
-    table = annotate(table, lexicon, config["label_thresholds"])
     table = apply_reviews(table, args.reviews)
+    write_json(run_dir / 'annotation_alignment.json', label_provenance)
     table.to_csv(run_dir / "all_words.csv.gz", index=False, compression="gzip")
     unique = table.drop_duplicates("item_id").drop(columns=["subject", "row_id", "source_file", "source_word_row", "source_sentence_row", "sample_id_original", "eeg_status", "n_fixations", "trt_ms", "ffd_ms", "gd_ms"])
     unique.to_csv(run_dir / "word_inventory.csv", index=False)
@@ -88,7 +93,7 @@ def execute(args, config, run_dir):
     if args.raw_dir:
         from word_sentiment_eeg.raw_export import export_available_raw
         # Changes to folds/probes do not duplicate large raw class exports.
-        raw_fingerprint = digest({"sources": sources, "lexicon_sha256": file_digest(lexicon_path),
+        raw_fingerprint = digest({"sources": sources, "labels": label_provenance,
                                   "thresholds": config["label_thresholds"],
                                   "exporter_sha256": file_digest(Path(__file__).parent / "src/word_sentiment_eeg/raw_export.py")})
         raw_report = export_available_raw(table, args.raw_dir,
@@ -100,6 +105,8 @@ def execute(args, config, run_dir):
     for task in config["tasks"]:
         for classes in (["negative", "positive"], ["negative", "neutral", "positive"]):
             selected = table.task.eq(task) & table.eeg_status.eq("ok") & table.lexical_class.isin(classes)
+            if not args.lexicon and config.get('require_lexical_context_agreement', True):
+                selected &= table.lexical_class.eq(table.contextual_class)
             if config["exclude_context_flagged"]:
                 selected &= ~table.needs_context_review
             selected &= ~table.contextual_class.isin(["exclude", "uncertain"])
@@ -139,7 +146,8 @@ def main():
     parser.add_argument("--thesis-root", default="/content/drive/MyDrive/Thesis")
     parser.add_argument("--config", default=str(Path(__file__).parent / "configs/default.json"))
     parser.add_argument("--run-tag", default=None)
-    parser.add_argument("--lexicon", help="Existing NRC VAD v1 TSV; otherwise fetched in Colab only")
+    parser.add_argument("--annotations", default=str(Path(__file__).parent / 'annotations/word_labels.csv'))
+    parser.add_argument("--lexicon", help="Optional legacy lexicon comparison; overrides prepared annotations explicitly")
     parser.add_argument("--reviews", help="Optional reviewed contextual annotation CSV")
     parser.add_argument("--raw-dir", help="Export available ZuCo 1.0 word.rawEEG from this directory; no downloads")
     args = parser.parse_args()

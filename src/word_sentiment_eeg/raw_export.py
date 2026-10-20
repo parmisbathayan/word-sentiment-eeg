@@ -129,12 +129,14 @@ def export_available_raw(table, raw_dir, artifact_dir, fingerprint):
                         metadata[label].append({"row_id": row.row_id, "item_id": row.item_id,
                             "word": row.word, "word_index": j, "sentence_key": skey,
                             "raw_sentence_position": sentence_position, "fixation_index_in_stored_cell": fixation_index,
-                            "n_samples": segment.shape[1], "context_flagged": row.needs_context_review})
+                            "n_samples": segment.shape[1], "context_flagged": row.needs_context_review,
+                            "lexical_class": row.lexical_class,
+                            "contextual_class": getattr(row, 'contextual_class', 'unreviewed')})
             for label, blocks in segments.items():
                 offsets = np.cumsum([0] + [b.shape[1] for b in blocks], dtype=np.int64)
                 atomic_npz(target / f"{label}.npz", samples=np.concatenate(blocks, axis=1) if blocks else np.zeros((105, 0), np.float32),
                            offsets=offsets, sfreq_hz=np.array(500), row_id=np.array([r["row_id"] for r in metadata[label]], dtype=np.int64))
-                pd.DataFrame(metadata[label], columns=["row_id", "item_id", "word", "word_index", "sentence_key", "raw_sentence_position", "fixation_index_in_stored_cell", "n_samples", "context_flagged"]).to_csv(target / f"{label}_segments.csv", index=False)
+                pd.DataFrame(metadata[label], columns=["row_id", "item_id", "word", "word_index", "sentence_key", "raw_sentence_position", "fixation_index_in_stored_cell", "n_samples", "context_flagged", "lexical_class", "contextual_class"]).to_csv(target / f"{label}_segments.csv", index=False)
             item = {"source": str(path), "source_sha256": source_hash, "task": task, "subject": subject,
                     "output_dir": str(target), "raw_field_present": field_present,
                     "status": "exported" if field_present else "rawEEG_unavailable",

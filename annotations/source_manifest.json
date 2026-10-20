@@ -1,0 +1,16 @@
+{
+  "sentences": 1037,
+  "unique_word_rows": 20458,
+  "task_unique_sentences": {
+    "SR": 400,
+    "NR": 300,
+    "TSR": 386
+  },
+  "alignment_warning_sentences": [
+    113637237
+  ],
+  "source_sha256": "bcee526eb557677e850ade925ffa9128880208f6145d2153eef51a6090081490",
+  "sr_word_source_sha256": "4f3a27663aac3c788d7e2adc1054b662afce62bd6e0c84ad1dbcb3bf5878dfd6",
+  "source_words_sha256": "793c7e643f661194f6768c7bb05b39f8563f88c5456db938f9e8c3e352fcb3ad",
+  "source_note": "Existing local output reconstructed directly from original word caches; SR boundaries verified against original word table; NR/TSR word counts checked against all subject extraction records."
+}

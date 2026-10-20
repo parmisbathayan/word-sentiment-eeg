@@ -116,10 +116,9 @@ def run_probe(table, eeg, config, protocol, classes):
     rng = np.random.default_rng(config["seed"] + 811)
     forms = sorted(table.word_form.unique())
     by_form = table.groupby("word_form").lexical_class.agg(lambda s: len(set(s)))
-    if (by_form != 1).any():
-        raise ValueError("Word-form permutation requires one lexical label per normalized form")
+    permutation_applicable = not (by_form != 1).any()
     form_labels = np.array([y[np.flatnonzero(table.word_form.to_numpy() == w)[0]] for w in forms])
-    permuted = [dict(zip(forms, rng.permutation(form_labels))) for _ in range(config["permutations"])]
+    permuted = [dict(zip(forms, rng.permutation(form_labels))) for _ in range(config["permutations"])] if permutation_applicable else []
     results, predictions = [], []
     null_predictions = [[] for _ in permuted]
     null_targets = [[] for _ in permuted]
@@ -188,6 +187,7 @@ def run_probe(table, eeg, config, protocol, classes):
                 for a, b in zip(null_targets, null_predictions) if a]
         observed = summary["scores"]["eeg"]["balanced_accuracy"]
         summary["word_form_permutation_screen"] = {
+            "status": "computed" if permutation_applicable else "not_applicable_word_form_has_multiple_sense_labels",
             "n": len(null), "null_balanced_accuracies": null,
             "p_uncorrected": float((1 + sum(v >= observed for v in null)) / (1 + len(null))) if null else None,
             "validity": "exploratory; word-form labels exchangeable null; no correction across tasks/protocols",

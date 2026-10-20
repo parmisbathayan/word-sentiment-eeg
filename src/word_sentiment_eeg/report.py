@@ -18,9 +18,16 @@ def class_exports(table, x, out):
         reader_word_rows=("row_id", "size"), context_flagged=("needs_context_review", "sum")
     ).reset_index().to_csv(out / "class_counts.csv", index=False)
     rows = []
+    if 'lexical_context_agree' in table:
+        other = table[~table.lexical_context_agree | table.contextual_class.eq('uncertain')]
+        other.to_csv(out / 'context_disagreement_and_uncertainty.csv', index=False)
+        table.loc[table.eeg_status.eq('ok'), ['row_id','task','subject','word','word_index',
+            'lexical_class','contextual_class','source_file','source_word_row']].to_csv(out / 'contextual_class_source_index.csv', index=False)
     for task, task_rows in table.groupby("task"):
         for label in ("negative", "neutral", "positive"):
             subset = task_rows[(task_rows.lexical_class == label) & (task_rows.eeg_status == "ok")]
+            if 'lexical_context_agree' in subset:
+                subset = subset[subset.lexical_context_agree]
             ids = subset.row_id.to_numpy(int)
             # Actual EEG band vectors, not a list of class labels or a sentence average.
             atomic_npz(out / "eeg_by_class" / task / f"{label}.npz",
@@ -41,7 +48,8 @@ def class_exports(table, x, out):
         "representation": "ZuCo precomputed TRT word band power, not raw time-series EEG",
         "source": "Original preprocessed word caches, unchanged physical feature values",
         "row_id": "Joins to all_words.csv for exact source-file/word-row/reader mapping",
-        "context": "All labeled complete-EEG rows are exported, including context-flagged rows; flags remain in metadata. Probes use the configured exclusion.",
+        "context": ("Primary exports contain only lexical/contextual agreement. Disagreements and uncertain rows are kept in separate CSVs; the contextual source index points to the unchanged original caches."
+                    if 'lexical_context_agree' in table else "Legacy lexical comparison: all labeled complete-EEG rows exported; context flags remain in metadata."),
         "independence": "Repeated readers/words are dependent. These exports are descriptive, not an inferential class-effect test."
     })
 
@@ -72,6 +80,8 @@ def make_plots(table, out, eeg=None):
         for task, ax in zip(tasks, axes[:, 0]):
             means = {label: [] for label in labels}
             eligible = table[(table.task == task) & (table.eeg_status == "ok")]
+            if 'lexical_context_agree' in eligible:
+                eligible = eligible[eligible.lexical_context_agree]
             for subject, reader in eligible.groupby("subject"):
                 values = eeg[reader.row_id.to_numpy(int)].mean(axis=2)
                 mean, sd = values.mean(axis=0), values.std(axis=0)
@@ -88,7 +98,7 @@ def make_plots(table, out, eeg=None):
                 if means[label]:
                     ax.plot(BANDS, np.mean(means[label], axis=0), marker="o", label=label, color=color)
             ax.axhline(0, color="#d1d5db", linewidth=1)
-            ax.set_title(f"{task}: equal-reader class means (descriptive; context-flagged words included)")
+            ax.set_title(f"{task}: equal-reader class means (descriptive; primary eligible word rows)")
             ax.set_ylabel("Within-reader standardized band value")
             ax.legend()
         fig.tight_layout()
@@ -102,15 +112,19 @@ def write_report(run_dir, table, inventory, evaluations, manifest):
     run_dir = Path(run_dir)
     n_items = table.item_id.nunique()
     eligible = table.eeg_status.eq("ok") & table.lexical_class.isin(["negative", "neutral", "positive"])
-    lines = ["# Word sentiment EEG — first-pass report", "",
-             "This run tests automatic lexical valence labels. It does not establish the reader's emotional state or word meaning in context.", "",
+    prepared = manifest.get('label_provenance', {}).get('mode') == 'prepared_agent_annotations'
+    provenance = manifest.get('label_provenance', {})
+    explanation = (f"This run uses prepared single-agent annotations covering {provenance.get('annotation_sentences', 0):,} distinct source sentences and {provenance.get('annotation_rows', 0):,} word occurrences. Both lexical and contextual labels were assigned before this EEG run. These are agent annotations, not human consensus or a measure of the reader's emotional state. The primary screen uses words whose lexical and contextual class agree; other labels remain in the full audit."
+                   if prepared else "This explicit legacy comparison uses automatic NRC lexical labels, not the prepared agent annotations.")
+    lines = ["# Word sentiment EEG — report", "", explanation, "",
              f"- Unique task × sentence × word occurrences: {n_items:,}",
              f"- Reader × word rows: {len(table):,}; complete EEG and a class: {int(eligible.sum()):,}",
              f"- Context review candidates (unique items): {table.loc[table.needs_context_review, 'item_id'].nunique():,}",
              f"- Dataset identity: ZuCo 1.0; all requested tasks: {', '.join(manifest['config']['tasks'])}",
              "- Signal representation: precomputed word TRT band power (8 × 105), not sentence EEG or raw waveforms.",
-             "- Lexical classes: negative ≤0.35; neutral 0.45–0.55; positive ≥0.65 under the default config. Gaps are ambiguous, absent lexicon entries unknown.",
-             "- Nearby negation, contrasts and mixed polarities are review flags, not automatic contextual labels.", "",
+             ("- Labels are categorical agent decisions: positive, negative, neutral or uncertain. Neutral is an explicit decision within a reviewed sentence, not a missing-word fallback. Unmatched cache words fail alignment validation or receive the documented alignment exclusion."
+              if prepared else "- NRC comparison thresholds are recorded in the run config; unknown entries never become neutral."),
+             "- Negation, irony, idioms and proper-name uses are documented in annotation flags and notes. They are not mechanically inverted or copied from sentence sentiment.", "",
              "## Data coverage", "", "| Task | Subject files | Missing expected readers |", "|---|---:|---|",
              *[f"| {s['task']} | {len(s['files'])} | {', '.join(s['missing_expected_subjects']) or 'none'} |" for s in inventory],
              "", "## EEG-only screen", "",
@@ -125,13 +139,14 @@ def write_report(run_dir, table, inventory, evaluations, manifest):
               "## Files to review", "",
               "- `all_words.csv.gz`: every original word row, including missing EEG and unmatched labels.",
               "- `word_inventory.csv`: one row per word occurrence shared across readers.",
-              "- `context_review.csv`: optional annotation sheet; `contextual_class` starts unreviewed.",
+              ("- `context_review.csv`: agent-uncertain or unresolved-alignment rows for optional professor review; other contextual labels are already prepared."
+               if prepared else "- `context_review.csv`: optional contextual annotation sheet for the legacy comparison."),
               "- `eeg_by_class/<task>/<class>.npz` and metadata CSV: actual word band-power arrays by class.",
               "- `evaluations/`: metrics, exact splits via row IDs, fold coverage, predictions and null values.",
               "- `raw_export.json` (when requested): availability and paths of original word.rawEEG fixation segments, grouped by class under CachedArtifacts. Raw segments are variable-length preprocessed recordings, not fixed-window/deconvolved FRPs. Missing raw fields/tasks are reported without substituting sentence signals.",
               "- `manifest.json`, `data_inventory.json`, `run.log`: provenance, source hashes, versions and progress.", "",
               "## Interpretation and next step", "",
               "The earlier sentence-level negative results do not demonstrate that EEG has no sentiment information. This run is a different, word-level hypothesis. Conversely, a difference in class-average EEG does not establish single-trial decoding or a causal sentiment effect.", "",
-              "First inspect class balance, independent word forms, task/reader coverage and the context review examples. Compare EEG with the nuisance and permutation controls, especially under sentence + word-form holdout. Keep binary and ternary results separate. Any promising pattern needs a prespecified confirmatory follow-up with reader generalization, stronger confound matching and multiplicity control.", "",
+              "First inspect class balance, independent word forms, task/reader coverage and the context review examples. Compare EEG with the nuisance controls and any applicable permutation screen, especially under sentence + word-form holdout. A word-form label permutation is not computed when that form has multiple sense-dependent class labels; JSON reports this explicitly. Keep binary and ternary results separate. Any promising pattern needs a prespecified confirmatory follow-up with reader generalization, stronger confound matching and multiplicity control.", "",
               "A directly relevant precedent is [Pfeiffer et al. (2020)](https://doi.org/10.1016/j.neuroimage.2020.116934): fixation-related word sentiment analysis on ZuCo SR, with negation exclusions and deconvolution. Their reported decoding used trial averages; this band-power screen is not a reproduction of that method.", ""]
     (run_dir / "REPORT.md").write_text("\n".join(lines))

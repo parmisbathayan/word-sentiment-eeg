@@ -1,0 +1,1039 @@
+# Agent reviewed every token in each listed sentence. Unlisted tokens are explicitly neutral.
+# Keys: p/n/u=context positive/negative/uncertain; lp/ln/l0=lexical overrides; flags/note=review rationale.
+0|p=good decency|n=failing|flags=mixed
+1|p=beautifully engaging quality|flags=figurative|note=Hungry and twisty describe audience/plot rather than an independent sentiment judgment.
+2|n=flaws shred|lp=sweet|l0=shred|flags=proper_name figurative|note=Sweet belongs to the movie title; shred is figurative criticism.
+3|p=hilarious|n=slow silly|flags=mixed
+4|n=unsatisfying|u=emp11111ty|flags=corrupted_token analogy|note=The damaged token appears to mean empty but is not silently repaired.
+5|p=fizz excitement|flags=figurative
+6|n=rehashes pointless insanely violent|u=graphic|flags=domain_sense|note=Graphic can mean explicit depiction rather than poor quality.
+7|p=brilliant|n=conflicted|flags=mixed|note=Conflicted describes Daniel's state, not Gosling's performance quality.
+8|p=good|n=bad|lp=wild|flags=proper_name contrast irony|note=Wild is part of a title; bad and good are explicitly contrasted in a so-bad-it-is-good construction.
+9|p=intimate bolder|n=calculated artifice overwhelms|flags=mixed
+10|p=disaster|ln=disaster|flags=negation contrast|note=No disaster is weak reassurance, not a disaster claim; the second clause withholds endorsement.
+11|p=mesmerizing
+12|p=astonishing delicacy force|flags=domain_sense|note=Force praises artistic power in this construction.
+13|n=witless inane|p=laugh|flags=mixed|note=The hoped-for laugh stays positively valenced despite failure to sustain it.
+14|flags=implicit_evaluation|note=The ingredients metaphor suggests adequacy but supplies no unambiguous affective word target.
+15|p=fun|u=guilty|ln=guilty|flags=mwe|note=Guilty pleasure construction does not literally attribute guilt.
+16|p=stylish surprises ok|flags=contrast|note=Surprises are approving here; not much concerns substance without reversing stylish.
+17|n=stiff lacks worst|p=wit|flags=negation contrast|note=Wit names a desired property whose absence is expressed by lacks; it does not become a negative lexical property.
+18|p=nostalgia deeper true|n=inability|flags=mixed
+19|n=chemistry workmanlike|lp=chemistry|lu=workmanlike|flags=negation domain_sense|note=No palpable chemistry is a negative evaluation; workmanlike is disparaging in the extreme. Working Girl is a title.
+20|p=first-class involving effectively surefire beloved
+21|n=bad improve|lp=improve|flags=negation comparison|note=Doesn't improve explicitly denies improvement.
+22|n=convincing relevance|lp=convincing relevance|flags=negation|note=Never make a convincing case scopes the denied persuasive relevance.
+23|p=best|flags=quoted_ranking
+24|p=good|n=shapeless|flags=mixed
+25|u=better worse|lp=better|ln=worse|flags=counterfactual comparison|note=Both alternatives are unrealized and do not identify a stable realized polarity for these comparison targets.
+26|p=love robust
+27|u=vintage satisfying|lp=satisfying|flags=negation degree|note=Not vintage and minimally satisfying give qualified evaluation; do not mechanically invert satisfying.
+28|p=worth|flags=mwe
+29|p=pleasurable|u=trifle|flags=qualified_praise
+30|n=punishment|flags=figurative
+31|p=seductive great realistic|n=dangerously unsettlingly|flags=mixed|note=Unsettling describes affect while realistic praises execution.
+32|p=loving|n=fanatical excess|flags=mixed|note=Can't stop loving is persistent positive feeling, not a negation of love.
+33|p=worth thrills entertainment|n=cheap|flags=qualified_praise
+34|p=beautifully miraculously unsentimental|l0=unsentimental|flags=domain_sense|note=Unsentimental is approving restraint in this context.
+35|p=compelling terrific|n=dark|ln=killed|flags=proper_name|note=Killed occurs inside the movie title and is neutral as the named title; dark describes difficult relationships.
+36|n=hastily|flags=implicit_criticism
+37|n=lack derails|p=ability|flags=negation|note=Ability names a desirable capacity whose absence is expressed by lack; film.1 is a source artifact.
+38|n=lumpy sad un-bear-able|flags=wordplay figurative
+39|n=worst|ln=crush|flags=proper_name|note=Crush is the film title rather than a harmful action.
+40|p=reassuring uplifter
+41|n=flaccid exasperatingly slow
+42|flags=prediction|note=Audience reach is predicted without an explicit sentiment-bearing word.
+43|flags=rhetorical_question implicit_criticism|note=Negative implication exists at sentence level but is not assigned to neutral made.
+44|p=like love|note=Like is an approving verb here.
+45|n=masochism sadism|p=interest|u=evaded|flags=mixed
+46|n=bad|flags=rhetorical_question
+47|p=pretty
+48|u=well|flags=conditional|note=How well asks about fit to audience preference without asserting that fit.
+49|n=stupidest insulting
+50|n=dead weight|flags=mwe figurative|note=Dead weight is a negative idiom, not a literal death.
+51|p=sparkling hilarious romantic|n=jealousy|flags=mixed
+52|n=repulsive|flags=comparison
+53|n=lousy unwatchable unlistenable|flags=not_merely|note=Not merely strengthens unwatchable; it does not reverse it.
+54|p=best happiness masterpiece|n=obstacles|flags=mixed
+55|p=strong powerful splendid good|flags=not_only|note=Not only scopes pianist and does not negate good.
+56|n=damn funny|lp=funny|flags=negation|note=Isn't funny denies the film's comic success.
+57|p=sincere|n=flawed|flags=idiom_negation contrast|note=Nothing if not sincere affirms sincerity.
+58|flags=insufficient_context|note=Fanboy what-if is a description with no reliable single-word affective target.
+59|n=lost|flags=figurative
+60|n=shorn pretension|p=insight interest|ln=fight|flags=proper_name mixed|note=Fight Club is a title; insight and interest are desired qualities said to be absent.
+61|p=pretty pleasant|u=grandiloquent|flags=qualified_praise|note=Grandiloquent may be admiring or disparaging here.
+62|p=powerful best|n=flawed|flags=mixed mwe|note=Lump in your throat is a moving-emotion idiom; no single neutral noun is relabeled.
+63|p=intriguing entertaining
+64|n=superficial forced lowbrow
+65|n=holes predictable|flags=contrast figurative|note=Jump in my chair conveys an effect without a reliable positive/negative word-level valence.
+66|n=limping|p=dearly-loved survive|flags=mixed figurative
+67|n=con|flags=counterfactual|note=The same con appears twice; both name a deceptive scheme.
+68|n=unfunny unentertaining excess piss
+69|p=clean|n=mass-murdering|flags=mixed irony|note=Clean describes literal clothing condition in a humorous contrast, not approval of murder.
+70|n=hapless victims arrogant syndrome|u=funny|lp=funny|flags=quoted_hypothetical|note=Funny is the quoted filmmakers' expectation, which this sentence questions.
+71|p=heartwarming impressively discreet remarkable ability|n=car-wreck|flags=mixed|note=Heartwarming is an anticipated scene; emotional car-wreck describes distress.
+72|n=mindless lifeless meandering loud painful obnoxious|flags=genre_metaphor
+73|p=fun fondness respect
+74|p=hilarious gritty|n=cruelly|flags=mixed|note=Gritty praises this filmmaking approach; cruelly retains harsh affect.
+75|u=sentimentalist worshipful|flags=insufficient_context|note=Whether the sentimentality is praise or criticism is underdetermined in this fragment.
+76|n=lacking|p=suspense surprise conviction|flags=absence|note=The desirable qualities retain lexical valence; lacking carries the adverse judgment.
+77|n=mistakes bad|p=nobility|flags=contrast|note=Bad modifies other movies, not High Crimes; High Crimes is a title.
+78|n=long convoluted muddle|flags=degree|note=Too long is explicitly an adverse duration judgment.
+79|n=works|lp=works|flags=negation|note=Works on no level denies success of the thing.
+80|n=bland yawner murder-on-campus|flags=genre
+81|n=disappointingly thin little|flags=degree|note=Lower-class describes socioeconomic position and is not assigned negative sentiment.
+82|p=finest humane important|n=holocaust|flags=mixed|note=Holocaust names a harmful historical event while the film is praised.
+83|n=suffers rambling repetitive drabness
+84|p=resonance|n=irritating|flags=mixed
+85|n=nightmarish|flags=proper_name|note=Angel is a title; nightmarish describes the fairytale's affect.
+86|p=affecting love
+87|p=deftly
+88|n=struggled heavy|p=valiantly|u=interested|lp=interested|flags=irony figurative|note=The struggle to remain interested implies disengagement but does not justify a simple polarity flip of interested.
+89|p=solid well-formed
+90|p=courage merits|u=high|flags=qualified_praise|note=High marks is praise at phrase level; high by itself is not reliably affective.
+91|p=treasured extraordinary intelligence originality lyrical love
+92|p=visceral|n=conflicted|u=melodramatic|flags=counterfactual comparison|note=Melodramatic describes an unrealized alternative; visceral is approving here.
+93|n=reeks rot hack|flags=figurative
+94|u=surprise|flags=prediction|note=The surprise's positive or negative valence is unspecified.
+95|n=pretty|lp=pretty|flags=negation figurative|note=Ain't pretty denies an attractive result; potatoes metaphor is not literal food sentiment.
+96|n=interminable shapeless|p=patience|u=hardened voyeur|flags=mixed
+97|n=creepy dark|p=authentic|flags=mixed|note=Affectively dark and creepy can coexist with approving authenticity; no whole-sentence label is copied.
+98|n=lame unsympathetic stupid|p=romantic
+99|n=infantile gimmick unimaginative|flags=proper_name|note=Hot Chick is a title and does not assign desirability to a real person here.
+100|n=contrivance artificial|p=enjoyable|flags=contrast
+101|n=worst callow|p=best thoughtful|flags=contrast
+102|p=zings vibrance warmth|flags=figurative
+103|p=epic worthy talents|flags=proper_name|note=All American is a film title.
+104|p=patient tenacious remarkable serenity discipline|n=difficult endless|flags=mixed
+105|flags=implicit_criticism|note=Hiding the film implies poor quality without giving a reliable individual evaluative word target.
+106|p=talented|n=shame poorly|lp=great|flags=mixed|note=Great intensifies shame rather than expressing praise.
+107|p=breathtakingly assured stylish expressiveness
+108|p=best|n=horror|flags=genre|note=Horror names frightening affect/genre, not poor film quality.
+109|p=compelling sharp intellect|n=contradictory self-hating self-destructive|flags=mixed|note=Sharp intellect is approving capacity; the character's adverse states remain separate.
+110|p=wonderful funny love real
+111|n=better|lp=better|flags=irony mwe|note=Better at putting you to sleep is disparaging boredom; better is positive in isolation.
+112|n=bottom-feeder|flags=proper_name
+113|p=elegantly expressively wonders ecstasy
+114|u=greatest-hits|flags=proper_name insufficient_context|note=Greatest-hits reel can be a favorable collection or a dismissive fragmentary comparison.
+115|p=celebrated winning charm|n=slight glib|u=glossy|flags=mixed
+116|p=romantic fresh|n=figure|l0=figure|flags=negation|note=The denial concerns Hollywood accommodating a fresh viewpoint; figure is otherwise neutral.
+117|p=wonderous accomplishment veracity grace
+118|n=blow|p=decent|l0=blow|flags=slang contrast|note=Blow the big one is disparaging slang here.
+119|n=insulted torture|u=harmed|ln=harmed|flags=negation irony|note=No people harmed explicitly denies literal harm; the joke contrasts insult and audience torture.
+120|u=feeling|p=realism|flags=figurative insufficient_context|note=Feeling this movie is approval in slang, but the clipped construction is marked uncertain rather than guessed.
+121|p=simplicity|flags=domain_sense|note=Few equals praises simplicity rather than negating it.
+122|p=exceptionally well
+123|n=intolerance deform tear|flags=mwe|note=Tear them apart denotes damage to family relationships.
+124|n=stupid derivative extreme gore|p=suspense|flags=genre|note=Gore carries harmful imagery; horror here names genre rather than adverse film quality.
+125|p=great wonderful
+126|p=better|flags=comparison different_referent|note=Better positively compares another work; it is not inverted merely because the sentence criticizes this film.
+127|u=killed|ln=killed|flags=counterfactual hyperbole|note=Would have killed him is a hypothetical idiom of strong reaction, not a literal killing claim.
+128|p=miraculous wisdom|u=slight|flags=qualified_praise
+129|p=clever subtle confidence victorious|n=precarious exiled cruel|u=extravagant earnestness|flags=mixed
+130|n=weak weaker
+131|n=anemic grubbing loveless|flags=figurative mwe
+132|p=heart fun|flags=figurative
+133|flags=implicit_fear|note=Leaving a light on implies fear but neither light nor night is independently negative.
+134|n=festers dungpile feces|flags=figurative insult
+135|n=under-rehearsed lifeless
+136|flags=implicit_criticism insufficient_context|note=Kaos is a person's name; the joke supplies no reliable affective token.
+137|p=legendary|n=shlockmeister alarming|flags=mixed|note=Alarming is adverse affect; named Vampire Chronicles remains a title.
+138|p=fresh funny worthwhile|n=depressing|flags=contrast proper_name|note=Fresh/funny/worthwhile describe former expectations; Hollywood Ending is a title.
+139|p=health energy|n=dies|flags=mixed
+140|p=fun smooth shrewd powerful
+141|n=fresh|lp=fresh|flags=irony comparison|note=Fresh as last week's issue is explicitly stale rather than fresh.
+142|n=aimless hodgepodge|flags=negation|note=No movies of Nijinsky is an absence of footage, not negative sentiment of movies.
+143|u=genuine chemistry|lp=genuine chemistry|flags=scope|note=Rarely enough to spark chemistry implies largely failed chemistry rather than a simple direct negation.
+144|n=unimpressively fussy pretentious
+145|p=joyous|flags=mwe|note=Mazel tov is a congratulatory phrase; preserve phrase meaning without labeling an isolated opaque token.
+146|u=loss|ln=loss|flags=counterfactual exception|note=Would be a loss if not for performances describes an unrealized loss qualified by the exception.
+147|p=inspiring heart-affecting hopes alive|n=desperate refugees|flags=mixed|note=Refugees evokes adverse displacement; nationality itself remains neutral.
+148|n=loud chaotic unfunny
+149|p=immersive perfect breathtakingly beautiful
+150|flags=implicit_criticism|note=Negative implication is expressed by an entire clause, not a reliable single sentiment word.
+151|n=dull wooden|lp=pretty|flags=degree|note=Pretty is an intensifier, not attractive in this use.
+152|p=funniest likeable
+153|p=sophisticated discerning laugh|n=stuffiest|flags=contrast|note=Not a cup of tea is an idiom; neutral tea is not inverted.
+154|p=refreshing|u=cynicism|ln=cynicism|flags=absence|note=Absence denies cynicism; do not report the word as a present negative attitude.
+155|n=holes|flags=figurative|note=Killer whale names a species; killer is not a murder accusation here.
+156|p=movingly genuine
+157|n=bad ugly destructive
+158|p=top-notch|u=drooling|flags=figurative|note=Drooling is figurative attraction rather than literal unpleasant drool.
+159|n=out-bad-act|flags=wordplay
+160|p=stronger|n=war battle|flags=mixed|note=War and battle name harmful conflict; the film's focus receives the praise.
+161|n=boring
+162|p=splendid honored sparkling believable
+163|n=atonal demonizes vomit|p=sympathetic|u=nice gifting|lp=nice gifting|flags=irony|note=Nice/gifting describe an adverse vomit bath sarcastically; intended token polarity is marked uncertain.
+164|n=low bowser|flags=slang
+165|p=delicious grand|flags=figurative
+166|p=entertainment giggles|n=choppy sloppy|flags=mixed
+167|p=valuable|n=devastating horror suffered|flags=mixed
+168|p=benevolent worth|n=deception|u=bittersweet|flags=mixed|note=Bittersweet explicitly combines pleasant and painful affect.
+169|n=hard|flags=degree|note=Too hard criticizes excessive effort; serious describes genre, not adverse emotion.
+170|p=excels stunning talent|u=intense|flags=domain_sense
+171|p=impact|flags=figurative|note=Big impact is approving significance rather than a physical collision.
+172|p=bold lyrical fun rousing sensual empowerment|n=pat|flags=mixed
+173|p=richness eloquently|n=melancholy uncinematic|flags=mixed
+174|n=stretched|flags=figurative
+175|n=stupid maudlin
+176|p=stunning impress|n=pretension|u=patience|lp=patience|flags=mixed negation|note=Little patience expresses intolerance of pretension; patience is positive in isolation.
+177|n=plods|p=humor eye-popping hero|flags=absence|note=Minus expresses the absence of expected strengths; the target words retain desired-quality meaning.
+178|p=impresses skillfully polished professional|n=chilling unsettling|flags=mixed
+179|p=genius|n=knee-jerk|u=incendiary|flags=figurative|note=Incendiary may indicate exciting provocation or destructive inflammatory quality.
+180|n=badly blandly|flags=counterfactual insult
+181|p=picture-perfect|flags=formulaic_scenario
+182|n=conventional|u=rebellious raucous|flags=irony comparison|note=The comparisons undercut rebelliousness; polarity cannot be read directly from the adjective.
+183|u=roller-coaster|flags=mwe|note=The fragment suggests excitement but does not distinguish enjoyment from unpleasant turbulence.
+184|p=colorful vibrant lushly beautifully
+185|p=successfully gripping compelling suspense
+186|n=lacks|p=thrills humor|flags=negation proper_name|note=Trouble Every Day is a title; lacks carries the negative judgment about missing strengths.
+187|n=long tedious
+188|p=cool slick|flags=domain_sense|note=Cool and slick approve this entertainment; quench thirst is metaphorical fulfillment.
+189|p=brilliant charismatic|n=suffers rampant devaluation|flags=mixed
+190|n=loud ugly irritating|flags=negation|note=Without hitting a target denies satirical success; target remains a neutral noun.
+191|p=appetizing|flags=figurative comparison
+192|n=alarmingly|flags=historical_comparison
+193|p=wonderful stunning
+194|n=creepiness dragged sad sordid avarice damaged|u=guns drugs|flags=mixed_sense|note=Guns/drugs are contextually adverse here but their exact senses are underspecified.
+195|p=fun funky thrives|n=artificial artificiality|flags=mixed
+196|p=hoot unscathed|n=raging|flags=figurative|note=Raging describes dangerous fire; the stunt is enjoyed.
+197|p=sophisticated intrigue|u=suck|flags=idiom|note=Suck the audience in means engage, not poor quality or literal suction.
+198
+199|n=relentless hard tiring|flags=degree|note=Tries way too hard is criticism of excessive effort.
+200|p=best@2|lp=best@15|flags=proper_name|note=Best Picture is also an award category; the first best is direct praise.
+201|n=disappointments
+202|p=engage|ln=fails|flags=double_negation|note=Never fails affirms reliable engagement rather than reporting failure.
+203|n=rage obsession discord|flags=figurative
+204|n=downhill|u=macho|flags=figurative
+205|p=romantic satisfying|n=teary-eyed|flags=mixed
+206|p=best ravishing penetrating|u=impenetrable|flags=mixed|note=Impenetrable may criticize opacity or praise difficulty.
+207|n=repulsive depressing
+208|p=beautiful|flags=referent|note=Beautiful describes the women, not the film's overall quality.
+209|n=long dull|flags=degree
+210|p=hero elegance
+211|p=heal|n=welt tortured|flags=mixed analogy
+212|n=crudity|p=inspiration|flags=comparison absence|note=Inspiration praises moments in the other movie; its absence here does not invert the word's meaning.
+213|u=amusing funny|lp=amusing funny|flags=denied_evaluation|note=The sentence rhetorically denies that mature viewers would find the antics funny; scope is explicit but the targets are marked uncertain.
+214|flags=missing_antecedent|note=Never is what is not supplied; no affective word can be safely labeled.
+215|p=funny smarter savvier|flags=not_only comparative
+216|p=effectively|n=creepy haunted|u=moodily|flags=mixed genre
+217|p=amusing|n=redeeming|lp=redeeming|flags=negation exception|note=There isn't a redeeming moment denies redemption except for the cited improvisations.
+218|p=funny clever likeable
+219|p=goodwill|n=slow|flags=mixed
+220|p=charm suitable|u=appeal|lp=appeal|flags=negation contrast
+221|p=credible romantic|u=urgency|flags=counterfactual|note=The wished-for emphasis and credibility are not necessarily achieved.
+222|flags=absence|note=Context is a neutral informational noun; its absence implies criticism without making context a negative word.
+223|n=sloppy hates criticism refuses
+224|p=touching realistic love
+225|n=complications predictable
+226|p=game pitch-perfect hilarious scores proud|flags=figurative|note=Shoots and scores is a success metaphor, not violent shooting.
+227|p=smile
+228|n=misery voyeuristic forgotten
+229|n=awful dumb chaotic sloppy weird|flags=proper_name|note=The Thing and Scream are titles, not adverse assertions about their literal referents.
+230|p=well-produced marvel|n=joylessly extravagant hastily emptily|flags=mixed
+231|p=oscar-sweeping exceptional|flags=proper_name
+232|p=respect decency important|n=flawed crazy|flags=mixed negation|note=Respect occurs twice; the first is absent, the second present. Both denote a valued attitude; no respect denies its presence, not its desirability.
+233|u=strange|flags=implicit_criticism|note=Done too much is criticism; strange alone can be curiosity or disapproval.
+234|flags=implicit_criticism|note=No reason to remember it is a negative judgment distributed across a clause rather than on a sentiment-bearing word.
+235|p=funny|n=darkly grueling time-consuming|flags=mixed
+236|flags=description|note=Quintessential Bollywood is a genre comparison whose desirability depends on unstated preference.
+237|flags=competition_metaphor|note=Upping the ante denotes escalation, not inherently approval or harm.
+238|n=disingenuous|u=great|lp=great|flags=denied_evaluation|note=The author denies that great is warranted.
+239|u=funny|lp=funny|flags=absence|note=Without being funny denies the property while describing structural jokes.
+240|p=brilliant|n=crime|flags=comparison absence|note=Brilliant describes other dramas, not this film.
+241|p=no-bull|flags=slang|note=No-bull is approving directness, not a negation of a literal animal.
+242|p=intriguing intoxicating|flags=figurative
+243|p=wonderful sweetness extraordinary accomplishments magic|n=flat|flags=contrast negation|note=Magic names the previous film's desired quality; flat is the adverse current result.
+244|n=annoying crime|flags=referent|note=Both crime tokens denote unlawful harm; the title is not labeled from its sentence context.
+245|p=originality forgiveness love assets commend innocent|n=jaded|flags=mixed
+246|p=heart funnybone energetic surprising|flags=figurative
+247|n=worst implodes bad|flags=figurative
+248|n=bad baffling
+249|p=blast energy bouncy catchy|flags=figurative
+250|n=good|lp=good|u=masterpiece|lp=masterpiece|flags=negation irony|note=Wasn't good denies quality. Masterpiece is an exaggerated relative comparison, not a literal endorsement of the earlier work.
+251|n=perilously|flags=allusion|note=Amoses and Andys alludes to stereotyping; person names are not automatically negative words.
+252|p=lovely|n=forced dullest|u=funniness flakiness|lp=funniness|flags=absence contrast|note=Lovely modifies a missing former quality; forced funniness is not genuine comic success.
+253|p=charm comic|u=trifle|flags=qualified_praise
+254|p=cute side-splittingly funny breakthrough|lp=gorgeous|ln=dead|flags=proper_name|note=Drop Dead Gorgeous is a title; neither dead nor gorgeous describes a present event/person here.
+255|p=works superbly|ln=fails|flags=negation|note=Almost never fails is reliable success, not asserted failure.
+256|p=perfectly hopes dreams|flags=aspiration
+257|p=warm-blooded empathy|n=a**holes|flags=figurative profanity
+258|p=good|flags=concession unfinished|note=Good intentions are acknowledged; the unfinished but does not erase their positive meaning.
+259|p=compelling depth|n=shocking anti-semitism neo-fascism|flags=mixed
+260|n=fatal mistake upsets shreds|p=exquisite|flags=mixed|note=Lower-class is socioeconomic description; the exquisite balance is harmed, not an adverse quality itself.
+261|u=classic|flags=ambiguous_evaluation|note=Classic tradition may describe a convention rather than praise quality.
+262|p=extraordinary deft subtle
+263|flags=proper_name analogy|note=American Pie and Valium are reference names; intended evaluative polarity is not explicit in a single word.
+264|p=good|n=merit|lp=merit|flags=negation|note=Doesn't merit denies the film deserving the good performance.
+265|n=dull costumey|u=racy|lp=racy|flags=absence figurative|note=Far from racy denies liveliness; racy's desirability is context-dependent.
+266|p=best
+267|p=right|flags=quotation|note=Right evaluates the truth of Wolfe's statement, not an implication about the quality of home.
+268|n=fake|u=stately consistent|lp=consistent|flags=negation|note=Never settles on a consistent tone denies consistency; stately pacing may be deliberate or ponderous.
+269|flags=implicit_criticism|note=Beyond me expresses bafflement about the decision; no neutral production-role word is relabeled.
+270|u=enjoy rewarded bright|lp=enjoy rewarded bright|flags=irony negation|note=The conditional enjoyment/reward is sarcastic and the script assumes lack of intelligence; keep uncertain rather than using automatic reversal.
+271|p=good clarify|flags=figurative|note=Good sweat refers approvingly to a purifying process, not the sentence's criticism of the director.
+272|n=showboating old|flags=figurative|note=Getting old means stale, not merely chronological age.
+273|n=cursing|flags=proper_name|note=Circuit queens is a social term here; do not assign sentiment from identity alone.
+274|p=talent|n=wasted crass low-wattage|flags=mixed
+275|p=funny|n=turmoil irritating|u=urgency|flags=mixed
+276|p=superior
+277|n=stuck flails limply bizarre pallid|flags=insult_metaphor|note=Stuck pig describes the film disparagingly; neutral pig is not separately labeled.
+278|p=spiritual wonderfully sublimely lofty grand|u=vulgar visceral|flags=mixed|note=Wonderfully vulgar is an approving reframing of a usually adverse descriptor.
+279|p=delicious lighthearted glow glorious liberating ability triumph|n=impudent scrooge|flags=figurative|note=Scrooge is used as a stingy-person archetype rather than a neutral title reference.
+280|p=precision helps power|n=inhospitability|flags=mixed
+281|p=funny|n=baffling|flags=mixed
+282|p=commended fresh true|n=mannered dulls tragedy|flags=contrast
+283|p=endearing caring warm|u=hard|flags=polysemy|note=Hard can mean emotionally tough, harsh or merely difficult.
+284|u=problem difficult|ln=problem difficult|flags=negation quotation|note=No problem denies a negative reaction, and difficult is discussed as a category rather than a simple criticism.
+285|p=love giddily entertaining|n=junk|flags=mixed proper_name
+286|p=love|n=crime|u=unusual|flags=description|note=Unusual does not by itself establish favorable or unfavorable sentiment.
+287|n=good coma|lp=good|flags=negation|note=Never a good sign expresses a negative diagnostic judgment; coma is an adverse medical state.
+288|n=creaky|flags=figurative
+289|p=effectively|n=dangers unfortunately|u=drugs|flags=ambiguous_sense|note=The drug sense is not made explicit by this sentence alone.
+290|p=like|n=butchered|flags=referent|note=Like predicts enjoyment of Rollerball; robot destruction is a separate adverse event.
+291|p=together|l0=together|flags=idiom|note=Holds the film together expresses successful coherence, rather than physical togetherness.
+292|p=breathtaking poignant uplifting stunning|flags=proper_name|note=Spirit is a title; it is not independently assigned positive affect here.
+293|n=blandly|flags=negated_idiom|note=Won't bust your gut denies strong laughter, not a literal injury.
+294|flags=audience_description
+295|n=bad wreckage|flags=proper_name
+296|p=better entertainment|flags=comparison
+297|p=solid|n=deadly|flags=mixed
+298|u=cocky loopiness|flags=ambiguous_evaluation|note=The tone could be appreciative or disparaging without additional context.
+299|p=funniest
+300|flags=allusion insufficient_context|note=The Beckett comparison may imply absurdity, but no explicit word supplies reliable polarity.
+301|p=compelling brilliantly|u=strangely
+302|n=gruelling heartbreaking maudlin disease|p=sterling|flags=mixed
+303|p=enthralling playful|n=haunting|u=iconoclastic unknowable|flags=mixed|note=Haunting is affectively unsettling even where artistically effective.
+304|n=laugh|lp=laugh|flags=negation|note=Didn't laugh denies amusement; the performer names are neutral.
+305|p=best|n=resentful manipulative needy|u=guarded|flags=mixed
+306|p=deserves wonderful|n=conflicted|flags=mixed
+307|n=missing|flags=absence|note=Bigger and point indicate absent significance, not inherently affective objects.
+308|p=interesting|n=bizarre fritters banal unimpressive indifferent|u=curiosity memorable|flags=mixed
+309|n=stuck unavailable rut|flags=figurative
+310|n=dim-witted lazy opportunism glaring
+311|p=good|n=unimpressive despairingly awful|flags=mixed
+312|p=successful|n=tedious reductive|u=methodical measured|flags=mixed|note=Secret Ballot is a title and is not labeled by secret's ordinary connotation.
+313|p=exciting
+314|n=rash|lp=crazy|flags=proper_name irony|note=Crazy is in the movie title; growth like a rash is a negative comparison.
+315|n=formulaic|p=awe|flags=comparison|note=Awe is an expected positive response whose absence is implied.
+316|n=pitiful slapdash disaster
+317|p=fine|n=tense arguing|flags=mixed
+318|u=romantic thrilling|lp=romantic thrilling|flags=negation degree|note=Neither as X as it should be denies sufficient degree, not all presence; retain uncertainty.
+319|p=fine wit
+320|flags=quotation|note=Pretty much is an intensifier in quoted speech, not attractiveness.
+321|p=like|flags=conditional|note=Like is a positive preference conditional, not an endorsement by the narrator.
+322|n=awful malleable|p=satisfy|flags=mixed|note=Satisfaction belongs to a restricted audience, not a negative meaning of satisfy.
+323|p=extraordinary universal|flags=not_least|note=Not least emphasizes the stated strengths.
+324|p=aptly shimmering beautifully|n=work|l0=work|flags=negation contrast|note=Doesn't work is failure of artistic effectiveness; ordinary work is neutral.
+325|p=engaging nostalgia|u=realistic|lp=realistic|flags=negation degree
+326|p=luminary|flags=figurative|note=Raises the standard is praise at phrase level.
+327|p=gripping
+328|p=giddy delight discovery|flags=positive_experience|note=Foreign is descriptive and not assigned adverse affect.
+329|n=exciting|lp=exciting|flags=irony comparison|note=The last-place-team comparison undercuts exciting.
+330|u=wild civil|flags=fragment|note=This fragment does not make an unambiguous judgment about either behavioral description.
+331|p=best|n=sad|flags=contrast|note=Best remains a relative positive ranking within a criticized career.
+332|p=exciting|n=trapped inane illogical|flags=mixed
+333|p=engaging|u=sentimental|flags=genre_comparison
+334|p=great killer|n=battle|ln=killer|flags=idiom|note=Killer CGI is approving slang; battle names harmful conflict.
+335|p=sumptuous|n=stultifying|flags=contrast
+336|p=smart talent|u=wise|flags=idiom corrupted_profanity|note=Wise *** likely means wise-ass, not straightforward wisdom; the masked word prevents reliable token interpretation.
+337|n=problem deadly dull|flags=figurative
+338|n=clashing|flags=figurative|note=Thinly veiled is about indirect disclosure rather than inherently adverse thinness.
+339|p=exhilarating
+340|n=awkward threatens overwhelm squirm|p=acute recognition|flags=mixed
+341|p=accessible affecting
+342|p=well|n=conflict|flags=mixed
+343|n=sub-par drown boredom|u=shivers|flags=figurative|note=Shivers may be fearful or pleasurable excitement.
+344|p=wonderment|n=rambling incoherent vagueness excess ponderous pretentious unfocused tediously exasperating|lp=praise love|flags=proper_name|note=Praise and Love occur in the title In Praise of Love, not an assertion of praise here.
+345|n=shamelessly grimace|p=energy prevail|u=silliness|flags=mixed
+346|u=care amusing dramatic|lp=care amusing|p=interest|flags=negation|note=Never care and neither amusing nor dramatic enough deny engagement; sufficient-degree ambiguity is retained.
+347|n=haunting dismay
+348|p=entertainingly|n=scandal
+349|p=informed|u=adult|flags=counterfactual|note=Adult hindsight is a wished-for maturity rather than a literal age evaluation.
+350|n=idiot|flags=quotation
+351|p=tremendous chemistry romantic|u=tension|flags=mixed_sense|note=Sexual tension can be desirable attraction or discomfort.
+352|p=romantic charming hilarious|u=quirky|flags=source_tokenization|note=Steinis is preserved as written, not silently corrected.
+353|p=incredible
+354|n=haunting disturbing hallucinations
+355|n=pale imitation|flags=figurative
+356|flags=implicit_boredom|note=Thinking of groceries implies disengagement; ordinary grocery and time words are not relabeled.
+357|p=affection care|u=distinctive humorous|lp=humorous|flags=negation comparison|note=Not as distinctive or humorous denies sufficient quality, not necessarily all positive affect.
+358|n=generic|u=appreciated|lp=appreciated|flags=prediction qualified_audience
+359|u=energy tension|lp=energy|flags=absence|note=Without energy or tension describes missing genre strengths; tension has ambiguous affective direction.
+360|n=standard-issue crime spat|flags=figurative
+361|p=poetic tribute inventive mesmerizing|u=odd|flags=description|note=Pretty much is degree, not attractive.
+362|n=dreadfully short|flags=idiom|note=Fall short denotes failure, not physical height.
+363|n=amateurish ugly
+364|p=great terrifically|n=cheat|flags=contrast
+365|n=gratingly unfunny groaner zero-dimensional unlikable hackneyed threadbare
+366|p=gentle affecting raptures|n=slight|u=introspective|flags=mixed
+367|p=spectacularly|u=outrageous|flags=ambiguous_evaluation|note=Outrageous may be admiring comic excess or condemnation.
+368|n=stupid hackneyed meanspirited|u=cardboard|p=credibility|flags=figurative|note=Cardboard describes shallow characterization rather than literal material.
+369|p=poignant fascinating|u=quirky|lp=warm|flags=proper_name|note=Warm Water Under a Red Bridge is a title; warm is not asserted as emotional warmth.
+370|u=horrible failure grand|ln=horrible failure|lp=grand|flags=negation irony counterfactual|note=The author wishes it were a grand failure rather than denying negative quality through mechanical reversal.
+371|u=moral|lp=moral|flags=absence|note=Lacking moral substance is implied, but moral here identifies a dimension rather than directly calling the film immoral.
+372|n=bewildering
+373|n=triumphant|lp=triumphant|flags=negation|note=Nothing remotely triumphant explicitly denies triumph.
+374|p=talented|n=fight|flags=mixed|note=Fight scenes portray conflict; their presence is offered as a reason to watch, not a reversal of fight's event valence.
+375|p=solid affecting thought-provoking
+376|p=interesting|n=overexposed waste|flags=contrast
+377|p=perfectly
+378|p=important power|u=move|flags=figurative|note=Move us means emotional impact; pleasant versus painful impact is not specified.
+379|p=well-acted|n=dangerously slow|flags=contrast
+380|p=richly admirably mature gifted
+381|p=exquisite beautifully clever hope
+382|p=distinctive gifts|u=nastier able|ln=nastier|flags=counterfactual negation|note=Nastier is wished-for genre intensity; the unrealized comparison does not make nastiness unambiguously positive.
+383|p=nice intelligence
+384|n=anachronistic
+385|p=finest|flags=proper_name|note=Heat and Day of the Jackal are titles, not affective assertions.
+386|n=murder bored shootouts|flags=idiom|note=Murder by numbers is a formulaic-production metaphor as well as an adverse content reference.
+387|p=peace|n=prejudices
+388|n=slight|p=smartest|flags=mixed
+389|flags=implicit_criticism|note=Doesn't know it is a comedy is a sentence-level criticism; know and comedy are not independently reversed.
+390|p=classy legend chops drive|flags=figurative|note=Chops and drive praise skill and motivation.
+391|n=mediocre downward thuds incompetent|flags=figurative
+392|n=tastelessness bad|flags=ironic_idiom
+393|p=engaging simplicity appealing
+394|n=disappointed bored
+395|p=head-turner thoughtfully beautifully humanizing|flags=figurative
+396|flags=idiom|note=At sea and no clue express incompetence at phrase level; Savage Garden is a proper name.
+397|u=good monsterous|lp=good|ln=monsterous|flags=negation degree|note=Not particularly good but neither monstrous leaves qualified, intermediate evaluation; source spelling preserved.
+398|n=insignificance|flags=irony|note=Ultimate intensifies insignificance rather than praise.
+399|n=screwed|flags=slang|note=Royally screwed denotes being badly mistreated; Martyr is a title/name here.
+400|p=interest
+401|p=victory favorite|flags=referent|note=Favorite means predicted winner, not necessarily personal affection; victory is the favorable outcome.
+402|n=forced|flags=coercion
+403|p=promotion
+404|p=completion
+405|p=prosperous|flags=demographic_neutrality|note=Immigrants and national origins are neutral descriptions.
+406|n=wars nazi|flags=historical_harm|note=Negative event/ideology valence does not assign sentiment to a person's name or to the entire biography.
+407
+408|lp=aid|flags=proper_name|note=National Socialist is a movement's name; aid is factual financial assistance, not approval of its recipient.
+409
+410
+411
+412
+413|lp=best|flags=degree_idiom|note=Best known means most widely recognized, not best quality.
+414|flags=demographic_neutrality
+415|lp=magic|flags=proper_names|note=Movie titles, including Magic Railroad, are named works rather than claims of magical positive quality.
+416|u=famous|flags=fame_not_approval|note=Famous indicates recognition, which is not necessarily a favorable evaluation.
+417
+418|p=interest|flags=political_identity_neutrality|note=Liberal Democrat is political identification, not a sentiment class.
+419
+420|lp=glory|flags=proper_name|note=Glory appears in the movie title Thirteen Days of Glory.
+421|lp=friends|flags=proper_name|note=Friends is part of a series title here.
+422|n=infamous pedophile|flags=harmful_character_description
+423|p=popular
+424|flags=proper_name
+425
+426
+427
+428|p=won
+429|flags=demographic_neutrality
+430
+431
+432
+433
+434|ln=wild hard|flags=proper_name|note=Wild Man Fischer and It's a Hard Business are names/titles, not current behavioral or difficulty assertions.
+435|lp=ethics|flags=proper_name|note=Ethics & Religion is the column's title.
+436|flags=implicit_ethical_issue|note=Non-disclosure of payment implies an ethical issue, but no neutral money/administration word inherits negative sentiment.
+437
+438
+439
+440
+441|n=died
+442
+443|n=wars
+444
+445|n=unauthorized|u=dissident|flags=attributed_perspective|note=Unauthorized is disapproval relative to an institution; dissident itself need not be harmful.
+446|lp=strong|flags=degree|note=Strong quantifies influence, not its desirability.
+447|n=banished heretic|flags=attributed_perspective|note=Heretic carries attributed religious condemnation rather than the annotator endorsing that condemnation.
+448
+449
+450
+451
+452|ln=jezebel defied|flags=proper_name|note=The evaluative words occur inside a biography title, not as separate present judgments by the narrator.
+453
+454
+455|n=persecutors
+456|p=companion care-giver|lp=best|flags=degree_idiom|note=Best known denotes recognition, not best quality.
+457
+458|p=won prize
+459|p=prize
+460
+461|p=greatest luminaries
+462|p=awarded prize miracle|flags=quoted_evaluation|note=Miracle year is an approving quoted epithet, not a movie or organization title.
+463|u=progressive|flags=political_or_developmental_sense|note=Progressive education names an approach without proving the writer's approval.
+464
+465
+466|n=obituary|p=collaborative
+467|n=illegitimate|flags=historically_stigmatizing_language|note=Illegitimate carries social condemnation in the wording; this records that connotation without endorsing stigma about a child.
+468|n=failure
+469|p=excelling|n=failure setback|flags=mixed|note=Liberal arts is a field name, not a political or favorable judgment.
+470|p=friend
+471|n=stateless
+472
+473
+474|flags=religious_identity_neutrality
+475|n=villain
+476|flags=proper_name
+477|flags=proper_name
+478|p=winner
+479|p=splendor glamour
+480|p=hero interests
+481|flags=proper_name
+482|lp=classic sunshine|ln=lost|flags=proper_name|note=Lost In Space and Sunshine are show titles; classic may praise the series but is retained only lexically to avoid conflating convention with quality.
+483|lp=grace|ln=vice|flags=proper_name|note=Will & Grace and Miami Vice are show titles.
+484|flags=proper_name
+485|flags=proper_name
+486|lp=best pride|flags=proper_name|note=Best Spoken Word Album and Simba's Pride are named category/work references.
+487|lp=exonerated|flags=proper_name|note=The Exonerated is a stage-production title.
+488
+489
+490|p=friends|n=funeral
+491
+492|flags=sentence_fragment
+493
+494
+495|flags=political_identity_neutrality
+496|n=died
+497
+498|n=died buried burial|flags=encoding_damage|note=The damaged apostrophe in St. Paul's is preserved; Burial still refers to a place associated with death.
+499
+500|flags=encoding_damage|note=Damaged possessive characters do not alter the neutral government and office words.
+501|lp=fame|flags=proper_name|note=Hall of Fame is an institution's name rather than the writer's direct evaluation.
+502|flags=demographic_neutrality
+503|p=scholarship
+504
+505|p=honor|flags=organization_description|note=Honor society denotes recognition of merit, although Arista itself is a neutral name.
+506
+507
+508
+509|u=famously|flags=fame_not_approval
+510
+511
+512
+513|n=died
+514|p=important|u=famous|flags=fame_not_approval
+515
+516
+517|flags=political_identity_neutrality
+518|p=successful
+519
+520
+521
+522|p=laureate|flags=demographic_neutrality
+523|p=awarded|lp=freedom|flags=proper_name|note=Freedom is in the award's name rather than a separate assertion about liberty.
+524|p=instrumental nonviolent|u=moral|flags=attributed_authority|note=Moral authority is attributed to institutions; political and racial identities remain neutral.
+525|p=nonviolent@2|lp=nonviolent@17|n=criticized|u=radical challenged|flags=attributed_perspective|note=Student Nonviolent Coordinating Committee is a name; nonviolent principles describes conduct. The organizational-name occurrence is neutral in context, while its ordinary lexical meaning stays positive.
+526
+527
+528|n=rejected
+529
+530|n=died
+531
+532
+533
+534|flags=proper_name
+535|n=cancer interred cemetery|flags=death_euphemism|note=Passed away denotes death at phrase level; passed/away are not separately given negative senses.
+536
+537
+538|flags=source_typo|note=Scool is preserved, and is not guessed to carry sentiment.
+539
+540|flags=epithet|note=King of Rock and Roll is a title/epithet rather than an independent assertion of royal merit.
+541|p=best
+542|p=praised
+543|lp=love|flags=proper_name|note=Love is a person's name here.
+544
+545|n=died
+546|lp=love tender|flags=proper_name|note=Love Me Tender is a movie title.
+547|p=praised respected polite hardworking|flags=negation_prefix|note=Unfailingly strengthens politeness and does not report failure.
+548|u=famous|flags=fame_not_approval
+549
+550
+551
+552|p=instrumental|u=dependent|flags=prevented_state|note=Keeping the country from dependence describes an averted state; neutral label is not automatically reversed to positive.
+553
+554|p=importance
+555
+556|p=venerable|n=war
+557
+558
+559
+560|n=lost|u=surprise|flags=unvalenced_surprise|note=Popular votes means votes by the public, not liking.
+561|p=won
+562|n=defeated
+563
+564
+565
+566|p=win|n=death|flags=mixed
+567
+568|p=brilliant|u=famous|flags=fame_not_approval
+569|p=great progress pacifist|n=dehumanising|lp=brave|flags=proper_name|note=Brave New World is a title; great evaluates the novels outside the title.
+570
+571
+572|p=important|flags=proper_name|note=Darwin's Bulldog is a nickname, not an assertion about aggression.
+573
+574
+575|flags=proper_name
+576|flags=proper_name
+577|flags=proper_name
+578
+579
+580|n=war
+581
+582
+583
+584|flags=proper_name|note=Port Royal and ship names are neutral locations/identifiers.
+585|p=awarded|lp=distinguished|flags=proper_name|note=Distinguished Service Medal is the award's name.
+586|n=battle combat death
+587|lp=relieved|flags=military_sense|note=Relieved means formally replaced in command, not emotionally comforted.
+588
+589
+590|flags=political_identity_neutrality
+591|n=defeated
+592
+593|n=died buried cemetery|flags=proper_name
+594|flags=sentence_fragment
+595
+596
+597
+598
+599|lp=hope|flags=proper_name|note=Hope Lincoln is a person's name.
+600
+601
+602|p=good fortune friends|flags=quoted_evaluation
+603|lp=retreat|flags=property_sense|note=Retreat is a residence, not military defeat or therapeutic relief.
+604|n=war
+605|lp=intelligence|flags=military_sense|note=Intelligence denotes information services, not superior cognitive ability.
+606|n=fire offensive|lp=intelligence|flags=military_sense|note=Under fire and offensive describe combat; intelligence is an information function.
+607|n=failed
+608
+609
+610|p=defeating|n=death|flags=competition_referent|note=Defeating is favorable to the winning candidate; death is separately adverse.
+611|p=staunch supporter
+612
+613|n=weapons war|lp=assistance|flags=military_context|note=Assistance describes logistical support without expressing approval of war.
+614|u=famous|flags=fame_not_approval
+615
+616|flags=proper_name
+617|flags=proper_name
+618
+619|flags=military_sense|note=Discharge means ending military service, not an unpleasant bodily emission.
+620|n=losing
+621|p=supporters|flags=proper_name|note=An organization name is retained without importing sentiment from demographic terms.
+622
+623
+624|lp=success|flags=proper_name|note=Lake Success is a place name.
+625|u=famous|flags=fame_not_approval
+626|lp=best|flags=proper_name|note=Best Supporting Actress and Best Actress are award-category names.
+627|flags=corrupted_token|note=111Senator is a source artifact and remains neutral as an office reference.
+628
+629|n=died
+630|u=notable|flags=recognition_not_approval
+631|ln=terrible|lp=lionheart|flags=proper_name|note=Ivan the Terrible and Richard the Lionheart are historical names/epithets, not separate judgments in this sentence.
+632
+633|flags=political_identity_neutrality
+634
+635
+636|flags=technological_sense|note=Talking films revolution means a technological transition, not armed conflict.
+637
+638|p=popular|flags=proper_name|note=Young is an actor's surname, not an approving age judgment.
+639|flags=proper_name
+640|n=died
+641|p=hero|n=war
+642|n=war
+643
+644|n=war
+645|flags=proper_name|note=Lightning identifies an aircraft model, not a dangerous weather event in this use.
+646|n=excessive
+647
+648|flags=alignment_warning encoding_damage|note=Date typography/tokenization differs from the cache audit; all meaningful words here are neutral, but this sentence must not be silently aligned to EEG.
+649|lp=comfort|ln=cold|flags=proper_name|note=Cold Comfort Farm is a title, not an assertion of emotional coldness or consolation.
+650
+651
+652|u=prominent|n=war|flags=recognition_not_approval
+653|u=authority|flags=expertise_sense|note=Authority denotes recognized expertise rather than domination.
+654|p=renowned
+655|n=died
+656|ln=absurd|flags=proper_name|note=Theatre of the Absurd names an artistic movement, not an insult to this author.
+657
+658|flags=political_identity_neutrality
+659
+660|flags=political_identity_neutrality
+661|flags=political_idiom|note=Stalking horse is a candidacy strategy rather than literal threatening stalking.
+662|p=hope
+663|ln=strange|flags=proper_name|note=Strange is a middle name; Defense is an office name rather than an asserted protective act.
+664
+665
+666
+667
+668|n=bombers|p=efficiency effectiveness|flags=military_context|note=Effectiveness is instrumental achievement, not moral approval of bombing.
+669
+670|n=bombing
+671|n=unprofitable|lp=life|flags=proper_name|note=Life is a magazine title, not a positive life/death contrast here.
+672
+673
+674|lp=intelligence|flags=proper_name|note=Defense Intelligence Agency uses an information-services sense.
+675|u=controversial|lp=best|flags=degree_idiom|note=Best known means widely recognized; controversy alone does not specify whose favorable or adverse view is intended.
+676|n=war
+677|u=notable|flags=kinship_sense|note=All three great tokens express genealogy, not positive quality.
+678
+679|n=slavery|flags=political_action|note=Protest and secede identify actions whose desirability is not assigned from political alignment alone.
+680|p=fortunes|flags=aspiration|note=Fortunes means sought wealth, while Gold Rush is an event name.
+681|lp=holy|flags=proper_name|note=Holy Cross and Boston Patriots are names of organizations.
+682|n=misjudged|p=ironman|flags=negation idiom|note=Ironman praises endurance; never missed a game denies an absence rather than criticizing missed.
+683|lp=all-star|flags=proper_name|note=All-Star is a named team/category of recognition.
+684
+685|flags=political_identity_neutrality
+686|n=died
+687|n=lost
+688|n=died
+689|p=greatest
+690|lp=sacred heart|flags=proper_name|note=Sacred Heart is part of the university name.
+691
+692|lp=saviour's|flags=proper_name|note=St. Saviour's is a parish name, not a new claim of rescue.
+693
+694
+695|p=significant
+696|p=won prize|flags=discipline_sense|note=Chemistry denotes the scientific field and is neutral here.
+697|flags=proper_name|note=Beat Generation names a literary movement and does not mean physical beating.
+698|n=trouble failing murder|lp=collaborated|ln=boiled virus|flags=proper_name|note=Boiled and Virus occur in work titles; the murder/failure-to-report event is asserted outside them.
+699|p=friends
+700|p=won
+701|p=decorated heroic achievement assist|n=injuries downed|lp=hearts|flags=proper_name military_context|note=Purple Hearts is an award name; injury and the downed airman describe harm.
+702|p=awarded|lp=freedom|flags=proper_name
+703|p=awarded prize
+704|p=grown|flags=institutional_growth|note=Grown describes an approving expansion rather than physical size alone.
+705|n=war|lp=heart victory|flags=proper_name|note=Purple Heart and Victory Medal are award names; war still denotes armed conflict.
+706|p=won|lp=best|flags=proper_name|note=Best Supporting Actor and Golden Globe are award/category names.
+707|p=recognition
+708|p=awarded|lp=freedom great|flags=proper_name degree|note=Great change means extensive change, without specifying its desirability.
+709|p=support|n=wwii|flags=historical_war_abbreviation
+710|p=awarded|lp=honor|flags=proper_name
+711|lp=freedom|flags=proper_name
+712|lp=best|flags=proper_name fragment
+713|n=death|p=honored prize|lp=peace|flags=proper_name|note=Peace occurs inside the Nobel award's name; the honoring is an asserted recognition.
+714|p=awarded prizes
+715|n=died
+716|p=won
+717|p=won|lp=best|flags=proper_name
+718|p=won
+719
+720|p=won scholarship
+721|p=won
+722|p=won prize
+723|p=awarded prize
+724|flags=proper_name fragment
+725|u=notable|flags=recognition_not_approval
+726|p=prestigious gallantry awarded|n=enemy|flags=military_context|note=Highest is rank; gallantry is directly favorable courage, not endorsement of all military conduct.
+727|p=awarded|n=battle|lp=honor|u=famous|flags=proper_name fame_not_approval
+728|p=influential mediation awarded prize|n=war|lp=peace|flags=proper_name
+729|p=win prize
+730|lp=best unsinkable|flags=proper_name|note=Best Actress and The Unsinkable Molly Brown are named category/work references.
+731|lp=achievement|flags=proper_name|note=Lifetime Achievement Award is the award's name rather than a separate predicate.
+732
+733|p=honor|flags=recognition|note=In his honor expresses esteem outside the medal's proper name.
+734|p=legend|lp=best|flags=proper_name
+735|p=won|lp=love|ln=ruins|flags=proper_name|note=Love Among the Ruins is a work title.
+736|p=fan|lp=fame|flags=proper_name
+737|n=wars
+738|p=won|ln=angry|flags=proper_name source_anomaly|note=Twelve Angry Men is a title; the source's 1854 date is preserved rather than silently corrected.
+739|u=stunned|flags=surprise|note=Stunned indicates surprise without a reliable pleasant/unpleasant direction.
+740
+741|n=prison|flags=religious_identity_neutrality
+742|flags=political_identity_neutrality
+743|n=ill-fated|p=relief
+744
+745|n=died
+746|n=war
+747|flags=sentence_fragment
+748
+749
+750
+751|p=powerhouse scholarship
+752|flags=sentence_fragment|note=Passed means meeting a height requirement; barely specifies margin rather than an adverse judgment.
+753|p=romance
+754|lp=sacred heart|flags=proper_name source_typo|note=The leading 1 in 1Universidad is retained; Sacred Heart belongs to the university name.
+755
+756
+757
+758|flags=religious_identity_neutrality
+759
+760
+761|p=scholarship
+762|n=villain
+763|p=honors
+764
+765|flags=academic_record|note=Straight A's is an excellent academic record expressed by a grade phrase, not an isolated affective token.
+766
+767
+768
+769
+770|flags=political_action|note=Boycott is an action whose desirability depends on the issue and viewpoint, not an inherently negative word here.
+771|flags=proper_name|note=Glee Club is an organization name, not an assertion that he felt glee.
+772
+773
+774
+775
+776
+777
+778
+779|p=popular
+780|flags=irony description|note=Working is put in quotation marks and contrasted with inactivity; dozing/doughnuts do not independently become negative words.
+781
+782|p=enhanced|flags=political_identity_neutrality|note=Anti-Communist specifies a political stance rather than a sentiment label for an identity.
+783|p=helped secure|ln=doubt|flags=negated_idiom|note=No doubt expresses certainty, not adverse doubt.
+784
+785|lp=nobility|flags=hereditary_rank|note=Nobility denotes a social estate, not moral virtue.
+786|n=war
+787
+788|n=opposition|flags=demographic_neutrality|note=Foreign-born is neutral origin information; opposition is the father's adverse attitude, not the annotator's.
+789
+790
+791
+792
+793|lp=distinguished|flags=proper_name|note=Distinguished Fellow is an official title of appointment.
+794
+795|lp=concern|flags=business_sense|note=Concern means a business, not worry or compassion.
+796
+797
+798|lp=classics|flags=proper_name|note=American Movie Classics is a channel/show brand.
+799|n=loss
+800|u=fame|flags=fame_not_approval|note=Money Maze is a title, not a sentiment-bearing claim about wealth or confusion.
+801
+802|n=bored abandoned
+803
+804
+805
+806
+807
+808|flags=proper_name
+809|p=won|lp=beauty|flags=proper_name|note=Beauty Contest is the competition category; won asserts success.
+810
+811|flags=proper_name|note=Bleach is an album title rather than an unpleasant substance/event here.
+812|n=death
+813|n=war
+814
+815
+816
+817
+818
+819|p=philanthropic welfare
+820
+821|p=success
+822|flags=political_identity_neutrality|note=Capitalist and Standard Oil are descriptors/names, not automatically evaluative.
+823|p=gifts
+824|p=gift helped|lp=great|flags=proper_name|note=Great Smoky Mountains is a place name, not a separate quality judgment.
+825|p=respect
+826|flags=business_sense|note=Silent partner is an investment role, not social withdrawal.
+827
+828|flags=negation_timing|note=Didn't start until six expresses timing, not an adverse sentiment toward learning.
+829|lp=freedom|flags=proper_name|note=Freedom House is an institution's name.
+830
+831
+832|u=flashy|flags=ambiguous_evaluation|note=Flashy may imply attractive style or superficial display.
+833|flags=political_identity_neutrality
+834|n=poverty|ln=poor|lp=saint|flags=proper_name|note=Order of Poor Ladies is an order's name; vow of poverty outside the name denotes material deprivation, even if voluntarily chosen.
+835|lp=energy|flags=proper_name|note=Arbusto Energy is an enterprise name, not an assertion of vigor.
+836|lp=energy trust|flags=proper_name financial_sense|note=Trust fund is a legal/financial structure, not interpersonal trust.
+837
+838
+839|p=epochal instrumental
+840|p=prominence
+841
+842
+843|flags=proper_name
+844
+845|lp=liberty|flags=proper_name|note=Liberty City Charter School is a school name.
+846|ln=war|flags=proper_name|note=Naval War College is an institution name rather than an assertion of a war event.
+847
+848|lp=intelligence|p=appeal|flags=educational_sense|note=Multiple intelligence identifies an educational theory rather than a direct compliment to cognitive ability.
+849
+850
+851|n=accusations violated|p=defend|flags=attributed_allegation|note=The allegation is attributed; nationality is neutral and is not assigned adverse sentiment.
+852
+853
+854|p=lovers|lp=surviving|flags=document_sense|note=Surviving letters are extant documents, not people overcoming danger.
+855
+856|lp=best|flags=degree_idiom political_identity_neutrality
+857
+858|p=interested
+859|flags=political_identity_neutrality
+860|flags=occupation political_identity_neutrality|note=Critic names an intellectual role rather than automatically expressing disapproval of the person.
+861
+862|p=lauded|u=famous|lp=better|flags=degree_idiom fame_not_approval|note=Better known identifies the commonly used name, not superior personal quality.
+863
+864|n=fatal accident
+865
+866
+867
+868
+869
+870|p=prodigy
+871|p=achieved hero|n=war|u=fame|flags=fame_not_approval
+872
+873
+874|n=torpedo|flags=military_object|note=The weapon denotes destructive capacity; theater is a geographical command region here.
+875|p=assisted
+876
+877
+878|n=war
+879
+880|p=defeating|flags=competition_referent|note=The same word appears twice and both occurrences describe the candidate's electoral success.
+881|flags=sport_sense|note=Defensive is a playing position, not a hostile personality judgment.
+882|n=died|lp=professional|flags=occupation_sense|note=Professional identifies paid sporting status rather than directly praising skill.
+883|p=philanthropist abolitionist|flags=role_semantics|note=These roles denote charitable assistance and opposition to enslavement, not a whole-person or whole-sentence rating.
+884
+885
+886|lp=best|ln=wars|flags=degree_idiom proper_name|note=Star Wars is a program nickname, not a separately asserted war event.
+887|lp=health welfare|flags=proper_name|note=Health and Welfare occur within a government department name.
+888|p=popular
+889
+890|p=fan|flags=figurative|note=Jumped is a numerical increase in mail, not an emotion itself.
+891
+892|flags=office_title|note=Minority Whip names a parliamentary office, not adverse minority status or physical whipping.
+893
+894
+895
+896|n=succumbed diabetes
+897|flags=demographic_neutrality
+898|n=assassination
+899
+900|n=war
+901|p=friends disciplined focused|u=drinking gambling|flags=negation|note=Neither activity occurs in the described behavior; possible adverse connotations are not treated as actual events.
+902
+903
+904|p=supporter|lp=strong|flags=degree political_identity_neutrality|note=Strong quantifies support; the party and ancestry terms remain neutral.
+905
+906|flags=religious_identity_neutrality
+907
+908|flags=occupation|note=Social critic is an occupation, not a negative personal judgment.
+909
+910
+911|flags=demographic_neutrality
+912
+913
+914
+915|flags=proper_name encoding_damage|note=Beat is a literary-movement name; the damaged phonetic transcription is preserved without invented affective meaning.
+916
+917|p=renowned regarded|flags=degree|note=Highly regarded expresses esteem.
+918
+919|n=died infection
+920|lp=best|flags=degree_idiom
+921|n=convicted perjurer|flags=political_identity_neutrality|note=Perjury is dishonesty; Conservative remains a political identity rather than a sentiment label.
+922
+923|flags=political_identity_neutrality
+924|flags=political_identity_neutrality
+925|p=joked
+926|flags=political_identity_neutrality
+927|flags=degree_idiom political_identity_neutrality|note=Popularly remembered means widely remembered rather than personally liked.
+928|p=helpful
+929|flags=political_identity_neutrality
+930|flags=political_identity_neutrality
+931|lp=health welfare|flags=proper_name political_identity_neutrality
+932|flags=political_identity_neutrality
+933
+934|flags=political_identity_neutrality
+935|flags=political_identity_neutrality|note=Moderate and centrist locate political positions, not a universal favorable judgment.
+936|flags=political_identity_neutrality
+937|flags=political_identity_neutrality
+938|p=fearless expert
+939|flags=political_identity_neutrality
+940|lp=professional|flags=occupation_sense political_identity_neutrality
+941|flags=political_identity_neutrality
+942
+943|flags=political_identity_neutrality
+944|flags=political_identity_neutrality
+945|flags=political_identity_neutrality
+946|flags=political_identity_neutrality
+947|n=bitter|flags=figurative|note=Bitter describes hostile rivalry rather than taste.
+948|flags=political_identity_neutrality
+949|p=supported|flags=political_identity_neutrality
+950|flags=political_identity_neutrality
+951|flags=political_identity_neutrality
+952
+953|flags=political_identity_neutrality
+954|flags=political_identity_neutrality
+955
+956|flags=political_identity_neutrality
+957|flags=political_identity_neutrality
+958|flags=source_tokenization|note=Bol-tee).He is a source tokenization artifact; proper name/biographical content remains neutral.
+959
+960|p=conservation protection
+961
+962|n=depression hard|lp=great|flags=historical_event|note=Great Depression names the adverse economic event; great indicates magnitude, not approval.
+963
+964|p=pioneering|lp=great|u=famously|flags=proper_name|note=Great Plains and Great American Desert are geographical names; great is not asserted quality.
+965|n=poor|flags=material_deprivation demographic_neutrality|note=Poor denotes economic deprivation, not a negative judgment of racial identity or the people themselves.
+966
+967
+968|lp=sterling|flags=proper_name|note=Sterling is a Virginia place name, not excellent quality.
+969
+970
+971
+972
+973
+974|flags=figurative_affection|note=Eternally a baby is a familial characterization; the sentence does not establish contempt or approval of baby itself.
+975|p=electrified|l0=electrified|flags=figurative political_identity_neutrality|note=Electrified means excited and energized the audience, not physical electrocution.
+976|lp=trusts|flags=financial_sense|note=Trusts are legal financial structures rather than interpersonal confidence.
+977|n=fled debt prosecution
+978|u=away|flags=idiom|note=Ran away denotes departure; distress is possible but not explicit in this sentence.
+979
+980|p=honor
+981|n=war
+982|n=arrest destruction|u=victim|ln=victim|flags=figurative|note=Records falling victim to time is a figurative loss, not literal victimization of a person.
+983|p=sweetheart
+984
+985
+986|p=ability rescue|n=mobs assassination|flags=attributed_allegation mixed|note=Positive rescue and alleged harmful involvement remain separate word-level meanings.
+987|n=dropout struggling|lp=good|flags=quantity_idiom|note=Good chunk means a substantial amount of time, not favorable quality of the years.
+988|ln=rat|flags=proper_name|note=Rat Pack is a group name, not a literal animal or insult here.
+989|flags=academic_sense|note=Biblical criticism names scholarly analysis, not a negative review of the person or religious identity.
+990
+991|p=fortune|n=war|flags=negation_completion|note=Did not complete is a fact about the degree; it does not make neutral degree a negative word.
+992|flags=military_idiom|note=Boot training is military initial training, not adverse treatment asserted by the word boot.
+993|n=nazi|flags=historical_ideology|note=This records the harmful ideological connotation, not sentiment inferred from a person's surname or ethnicity.
+994
+995
+996
+997|n=death
+998
+999
+1000
+1001|n=divorced|lp=mirth|flags=proper_name relationship_dissolution|note=House of Mirth is a film title; divorced denotes dissolution, not a claim about either person's feelings.
+1002|n=divorced|ln=strange|flags=proper_name relationship_dissolution|note=Michael Strange is a pseudonym, not an oddness judgment.
+1003|n=divorced|flags=relationship_dissolution
+1004
+1005|flags=negation_naming|note=Not given a middle name is a neutral naming fact, not an adverse evaluation.
+1006
+1007
+1008
+1009
+1010|p=anti-slavery|flags=opposition_to_harm|note=The compound opposes enslavement; its polarity is not computed by stripping the anti prefix.
+1011
+1012
+1013|p=best
+1014|p=important care|u=complex|flags=technical_complexity|note=Complex describes policy structure; it is not automatically adverse.
+1015
+1016
+1017|n=war
+1018|p=break|l0=break|flags=idiom|note=Big break means a favorable career opportunity, not physical damage.
+1019|p=girlfriend|flags=preference_idiom|note=In favor of politics describes choosing a field rather than its inherent moral value.
+1020|n=hyperactivity blamed addiction heroin|lp=love|flags=proper_name attributed_causation|note=Courtney Love is a person's name; the claimed causal role of medication is attributed to her, not independently established here.
+1021
+1022|n=mediocre|p=friendships
+1023|p=close|flags=relationship_sense|note=Close means emotional relationship, not physical proximity or ending something.
+1024
+1025
+1026
+1027|p=apologized|flags=repair_action|note=Apology is a conciliatory act; it does not establish the content or severity of the preceding comment.
+1028|n=opposition
+1029
+1030|n=death
+1031
+1032|n=died|lp=grace|flags=proper_name|note=Grace Coolidge is a person's name; both died tokens refer to deaths.
+1033
+1034
+1035
+1036|n=divorce|flags=relationship_dissolution

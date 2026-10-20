@@ -60,11 +60,12 @@ def check_raw_schemas(directory):
         assert entry["segments_per_class"] == {"negative": 1, "neutral": 0, "positive": 1}
 
 
-def smoke(directory):
+def smoke(directory, prepared=False):
     config = json.loads((ROOT / "configs/default.json").read_text())
     config.update(tasks=["SR"], folds=3, permutations=3, exclude_context_flagged=False,
                   minimum_train_per_class=5, minimum_test_per_class=3,
-                  minimum_train_word_forms_per_class=2, max_eeg_components=8, run_tag="smoke")
+                  minimum_train_word_forms_per_class=2, max_eeg_components=8,
+                  run_tag="smoke_prepared" if prepared else "smoke_legacy")
     cfg = directory / "smoke.json"
     cfg.write_text(json.dumps(config))
     words, features, offsets = [], [], [0]
@@ -83,9 +84,22 @@ def smoke(directory):
                sentence_id=np.arange(18), sample_id=np.array([str(s) for s in range(18)]), fixations=np.ones(len(words)))
     lexicon = directory / "fixture.tsv"
     lexicon.write_text("\n".join(lexicon_lines))
-    command = [sys.executable, str(ROOT / "main.py"), "--thesis-root", str(directory), "--config", str(cfg), "--lexicon", str(lexicon)]
+    command = [sys.executable, str(ROOT / "main.py"), "--thesis-root", str(directory), "--config", str(cfg)]
+    if prepared:
+        annotations = []
+        for sid in range(18):
+            tokens = words[sid*3:(sid+1)*3]
+            for j, label in enumerate(['negative','neutral','positive']):
+                annotations.append({'sentence_key':sentence_key(tokens), 'word_index':j, 'word':tokens[j],
+                    'lexical_class':label, 'contextual_class':label, 'annotation_flags':'', 'annotation_note':'synthetic fixture',
+                    'annotation_status':'synthetic_fixture', 'sentence_id_original':sid, 'tasks':'SR', 'alignment_warning':''})
+        annotation_file = directory / 'fixture_annotations.csv'
+        pd.DataFrame(annotations).to_csv(annotation_file,index=False)
+        command += ['--annotations',str(annotation_file)]
+    else:
+        command += ['--lexicon',str(lexicon)]
     subprocess.run(command, check=True)
-    run = directory / "Results/word_sentiment_eeg/smoke"
+    run = directory / "Results/word_sentiment_eeg" / config['run_tag']
     assert (run / "REPORT.md").exists()
     assert json.loads((run / "manifest.json").read_text())["status"] == "completed"
     assert len(pd.read_csv(run / "all_words.csv.gz")) == len(words)
@@ -100,7 +114,8 @@ with tempfile.TemporaryDirectory() as tmp:
     directory = Path(tmp)
     check_raw_schemas(directory)
     smoke(directory)
-    if os.environ.get("GITHUB_ACTIONS") == "true":
+    smoke(directory, prepared=True)
+    if os.environ.get("GITHUB_ACTIONS") == "true" and os.environ.get('CHECK_NRC_SOURCE') == '1':
         # Read the real external schema in a cloud runtime, never on the Mac.
         request = urllib.request.Request(NRC_URL, headers={"User-Agent": "word-sentiment-eeg/research"})
         with urllib.request.urlopen(request, timeout=90) as response:

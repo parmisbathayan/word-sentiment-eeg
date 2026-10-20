@@ -1,0 +1,50 @@
+{
+  "status": "complete",
+  "reviewed_sentences": 1037,
+  "total_sentences": 1037,
+  "reviewed_word_rows": 20458,
+  "missing_sentence_ordinals": [],
+  "output": "word_labels.csv",
+  "source_sha256": "64e8619ae362fc0aba6c1ca304a7db4506a928d0fdbab58bea1dc8b69dd081e8",
+  "decision_sha256": "a88923568c111d1efb8ea7bb6c6e8b8e4e181f9c7f413c060d05ea0869a7c4c9",
+  "policy_sha256": "1ce70d9ab9a01231d38875f090998f33e7ada707fcddb58821ec28f3f605d9c7",
+  "task_unique_sentences": {
+    "SR": 400,
+    "NR": 300,
+    "TSR": 386
+  },
+  "task_contextual_word_counts": {
+    "SR": {
+      "positive": 499,
+      "negative": 462,
+      "neutral": 6050,
+      "uncertain": 118
+    },
+    "NR": {
+      "positive": 74,
+      "negative": 72,
+      "neutral": 6423,
+      "uncertain": 19
+    },
+    "TSR": {
+      "positive": 129,
+      "negative": 77,
+      "neutral": 7547,
+      "uncertain": 16
+    }
+  },
+  "labels": {
+    "lexical_class": {
+      "positive": 832,
+      "negative": 626,
+      "neutral": 18894,
+      "uncertain": 106
+    },
+    "contextual_class": {
+      "positive": 682,
+      "negative": 605,
+      "neutral": 19021,
+      "uncertain": 150
+    }
+  }
+}
