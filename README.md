@@ -1,5 +1,61 @@
 # Word sentiment EEG — prepared agent annotations
 
+## Current run: word onsets and class ERPs
+
+The short notebook now runs **`run_erp.py`**, using the already-prepared labels.
+Open the existing [Drive Colab notebook](https://colab.research.google.com/drive/1HD4kcRI-6dOG07PYqeIi-bWgIuQjMIHg),
+select a CPU runtime, and choose **Runtime → Run all**. Allow Drive and the
+existing `GITHUB_TOKEN` secret. No annotation adjudication or code editing is
+required. The older feature/classification runner remains `main.py`; it is not
+run by the short notebook.
+
+- Covers SR, NR and TSR separately. Uncertain labels, lexical/context
+  disagreements, and alignment warnings are excluded automatically.
+- Locates the **first stored fixation** in `sentenceData.rawData`, validating
+  the entire segment against all 105 channels. A rejected first fixation is
+  never silently replaced by a later one. Nonunique/unmatched segments are
+  excluded. Exact matching and constant per-channel offsets are recorded.
+- Saves onsets relative to sentence EEG (zero-based samples and milliseconds),
+  with original word positions, sentence text, class, event IDs and exclusions.
+- Epochs: **−200 to +800 ms**, 500 Hz, average reference, 30 Hz zero-phase
+  low-pass applied to the whole sentence, −200..0 ms baseline correction,
+  rejection above ±100 µV after baseline correction. Source EEG is already
+  preprocessed by ZuCo; these are not acquisition-raw recordings.
+- Saves per-class trial EEG, all-channel reader averages and equal-reader
+  grand averages. The same readers (≥5 accepted epochs in **each** class) are
+  used for all three comparison curves. Tasks are not pooled.
+
+The authors' original [SR](https://osf.io/download/369ur/),
+[NR](https://osf.io/download/gan9v/), and [TSR](https://osf.io/download/mksxg/)
+MATLAB scripts slice word EEG from fixation event latency to latency+duration.
+The stored fixation duration is in **samples**, not milliseconds; segment
+length is duration+1 because MATLAB bounds are inclusive. We use the actual
+segment position and sampling rate, not a cache field named `ffd_ms`, to time
+these epochs. First-fixation onset is not sentence stimulus onset.
+
+Existing `.mat` files under the three configured `Thesis/Data/zuco_*_raw`
+folders are reused. Missing sources download in Colab from the authors' OSF
+inventory (`configs/zuco1_sources.json`), one file at a time, with expected-size
+validation. Temporary downloads are deleted after extraction. Original Drive
+files are never deleted. **No downloads or installations run on the Mac.**
+
+Small results: `Thesis/Results/word_sentiment_eeg/v3_word_erp/` contains
+`REPORT.md`, `manifest.json`, `provenance.json`, `class_counts.csv`,
+`class_erp_roi.csv`, task grand-average NPZ files and class plots. Trial epochs
+and onset tables: `Thesis/CachedArtifacts/word_sentiment_eeg/v3_word_erp/`,
+under a code/annotation fingerprint and task/reader folders. Trial epoch NPZ
+arrays have `eeg_uV[trial,channel,time]`, `event_id`, `times_ms`, `channel_names`
+and `sfreq_hz`; the onset table maps event IDs to `epoch_index_in_class_file`.
+The full first run may take hours and the persistent trial epochs may occupy
+tens of GB. Completed readers are reused on reruns. Files without usable EEG
+and download failures are explicit in the report; failed downloads can be
+retried by running the same notebook again.
+
+These are descriptive **fixation-related potentials (FRPs)**. Adjacent
+fixations overlap, and this version does not deconvolve that overlap or prove
+a sentiment-specific response. ±1 SEM shading is across readers, not trials;
+no significance tests are claimed. Real ERP results await the user's Colab run.
+
 The requested annotation pass is complete: **1,037 distinct English sentences,
 20,458 source word occurrences**, across **all three ZuCo 1.0 tasks**. Labels
 were assigned by Codex reading the sentences and recording token decisions.

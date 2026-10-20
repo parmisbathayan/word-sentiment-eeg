@@ -1,0 +1,257 @@
+{
+  "source": "ZuCo 1.0 authors' OSF inventory https://osf.io/q3zws/",
+  "files": [
+    {
+      "subject": "ZAB",
+      "task": "SR",
+      "filename": "resultsZAB_SR.mat",
+      "bytes": 846202463,
+      "url": "https://osf.io/download/gwmxd/"
+    },
+    {
+      "subject": "ZDM",
+      "task": "SR",
+      "filename": "resultsZDM_SR.mat",
+      "bytes": 753672978,
+      "url": "https://osf.io/download/2p8zc/"
+    },
+    {
+      "subject": "ZDN",
+      "task": "SR",
+      "filename": "resultsZDN_SR.mat",
+      "bytes": 477113329,
+      "url": "https://osf.io/download/wghqs/"
+    },
+    {
+      "subject": "ZGW",
+      "task": "SR",
+      "filename": "resultsZGW_SR.mat",
+      "bytes": 1086361570,
+      "url": "https://osf.io/download/npj7s/"
+    },
+    {
+      "subject": "ZJM",
+      "task": "SR",
+      "filename": "resultsZJM_SR.mat",
+      "bytes": 1088724287,
+      "url": "https://osf.io/download/uvx3y/"
+    },
+    {
+      "subject": "ZJN",
+      "task": "SR",
+      "filename": "resultsZJN_SR.mat",
+      "bytes": 1403632523,
+      "url": "https://osf.io/download/ax9em/"
+    },
+    {
+      "subject": "ZJS",
+      "task": "SR",
+      "filename": "resultsZJS_SR.mat",
+      "bytes": 711818581,
+      "url": "https://osf.io/download/xbhry/"
+    },
+    {
+      "subject": "ZKB",
+      "task": "SR",
+      "filename": "resultsZKB_SR.mat",
+      "bytes": 931356715,
+      "url": "https://osf.io/download/mxvq5/"
+    },
+    {
+      "subject": "ZKH",
+      "task": "SR",
+      "filename": "resultsZKH_SR.mat",
+      "bytes": 941417242,
+      "url": "https://osf.io/download/2s7v4/"
+    },
+    {
+      "subject": "ZKW",
+      "task": "SR",
+      "filename": "resultsZKW_SR.mat",
+      "bytes": 1184341195,
+      "url": "https://osf.io/download/ap6cr/"
+    },
+    {
+      "subject": "ZMG",
+      "task": "SR",
+      "filename": "resultsZMG_SR.mat",
+      "bytes": 747660212,
+      "url": "https://osf.io/download/d7wk6/"
+    },
+    {
+      "subject": "ZPH",
+      "task": "SR",
+      "filename": "resultsZPH_SR.mat",
+      "bytes": 829656549,
+      "url": "https://osf.io/download/dgfw4/"
+    },
+    {
+      "subject": "ZAB",
+      "task": "NR",
+      "filename": "resultsZAB_NR.mat",
+      "bytes": 666425687,
+      "url": "https://osf.io/download/uzve3/"
+    },
+    {
+      "subject": "ZDM",
+      "task": "NR",
+      "filename": "resultsZDM_NR.mat",
+      "bytes": 659355241,
+      "url": "https://osf.io/download/8xzbc/"
+    },
+    {
+      "subject": "ZDN",
+      "task": "NR",
+      "filename": "resultsZDN_NR.mat",
+      "bytes": 529878452,
+      "url": "https://osf.io/download/pc9hk/"
+    },
+    {
+      "subject": "ZGW",
+      "task": "NR",
+      "filename": "resultsZGW_NR.mat",
+      "bytes": 923423902,
+      "url": "https://osf.io/download/4b7dm/"
+    },
+    {
+      "subject": "ZJM",
+      "task": "NR",
+      "filename": "resultsZJM_NR.mat",
+      "bytes": 1091852017,
+      "url": "https://osf.io/download/5p4yd/"
+    },
+    {
+      "subject": "ZJN",
+      "task": "NR",
+      "filename": "resultsZJN_NR.mat",
+      "bytes": 1382518984,
+      "url": "https://osf.io/download/jn7x9/"
+    },
+    {
+      "subject": "ZJS",
+      "task": "NR",
+      "filename": "resultsZJS_NR.mat",
+      "bytes": 378063605,
+      "url": "https://osf.io/download/qwzr3/"
+    },
+    {
+      "subject": "ZKB",
+      "task": "NR",
+      "filename": "resultsZKB_NR.mat",
+      "bytes": 1001713609,
+      "url": "https://osf.io/download/pfdh5/"
+    },
+    {
+      "subject": "ZKH",
+      "task": "NR",
+      "filename": "resultsZKH_NR.mat",
+      "bytes": 814857725,
+      "url": "https://osf.io/download/9s6az/"
+    },
+    {
+      "subject": "ZKW",
+      "task": "NR",
+      "filename": "resultsZKW_NR.mat",
+      "bytes": 1421554292,
+      "url": "https://osf.io/download/m7afd/"
+    },
+    {
+      "subject": "ZMG",
+      "task": "NR",
+      "filename": "resultsZMG_NR.mat",
+      "bytes": 676766949,
+      "url": "https://osf.io/download/cnakr/"
+    },
+    {
+      "subject": "ZPH",
+      "task": "NR",
+      "filename": "resultsZPH_NR.mat",
+      "bytes": 800279943,
+      "url": "https://osf.io/download/gsf56/"
+    },
+    {
+      "subject": "ZAB",
+      "task": "TSR",
+      "filename": "resultsZAB_TSR.mat",
+      "bytes": 565339233,
+      "url": "https://osf.io/download/58mfb/"
+    },
+    {
+      "subject": "ZDM",
+      "task": "TSR",
+      "filename": "resultsZDM_TSR.mat",
+      "bytes": 577357708,
+      "url": "https://osf.io/download/a5tdx/"
+    },
+    {
+      "subject": "ZDN",
+      "task": "TSR",
+      "filename": "resultsZDN_TSR.mat",
+      "bytes": 520640649,
+      "url": "https://osf.io/download/u5mtw/"
+    },
+    {
+      "subject": "ZGW",
+      "task": "TSR",
+      "filename": "resultsZGW_TSR.mat",
+      "bytes": 571754950,
+      "url": "https://osf.io/download/e7agv/"
+    },
+    {
+      "subject": "ZJM",
+      "task": "TSR",
+      "filename": "resultsZJM_TSR.mat",
+      "bytes": 1092222587,
+      "url": "https://osf.io/download/83vjz/"
+    },
+    {
+      "subject": "ZJN",
+      "task": "TSR",
+      "filename": "resultsZJN_TSR.mat",
+      "bytes": 1168646502,
+      "url": "https://osf.io/download/cukde/"
+    },
+    {
+      "subject": "ZJS",
+      "task": "TSR",
+      "filename": "resultsZJS_TSR.mat",
+      "bytes": 490149158,
+      "url": "https://osf.io/download/np5jf/"
+    },
+    {
+      "subject": "ZKB",
+      "task": "TSR",
+      "filename": "resultsZKB_TSR.mat",
+      "bytes": 392685767,
+      "url": "https://osf.io/download/rp5vc/"
+    },
+    {
+      "subject": "ZKH",
+      "task": "TSR",
+      "filename": "resultsZKH_TSR.mat",
+      "bytes": 911843087,
+      "url": "https://osf.io/download/p2s9g/"
+    },
+    {
+      "subject": "ZKW",
+      "task": "TSR",
+      "filename": "resultsZKW_TSR.mat",
+      "bytes": 1066798462,
+      "url": "https://osf.io/download/q5kp7/"
+    },
+    {
+      "subject": "ZMG",
+      "task": "TSR",
+      "filename": "resultsZMG_TSR.mat",
+      "bytes": 648787976,
+      "url": "https://osf.io/download/dywc2/"
+    },
+    {
+      "subject": "ZPH",
+      "task": "TSR",
+      "filename": "resultsZPH_TSR.mat",
+      "bytes": 368773059,
+      "url": "https://osf.io/download/963s7/"
+    }
+  ]
+}
