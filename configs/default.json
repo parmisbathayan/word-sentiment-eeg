@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "run_tag": "v1_lexical_audit",
+  "tasks": ["SR", "NR", "TSR"],
+  "measure": "TRT",
+  "label_thresholds": {"negative_max": 0.35, "neutral_min": 0.45, "neutral_max": 0.55, "positive_min": 0.65},
+  "exclude_context_flagged": true,
+  "protocols": ["sentence", "sentence_word_form"],
+  "folds": 5,
+  "seed": 42,
+  "ridge_alpha": 100.0,
+  "permutations": 99,
+  "minimum_train_per_class": 20,
+  "minimum_test_per_class": 5,
+  "minimum_train_word_forms_per_class": 5,
+  "max_eeg_components": 64,
+  "cache_relative_paths": {
+    "SR": "CachedArtifacts/zuco_multimodal_sentiment/word_eeg/TRT",
+    "NR": "CachedArtifacts/zuco_multimodal_sentiment/word_eeg/TRT_NR",
+    "TSR": "CachedArtifacts/zuco_multimodal_sentiment/word_eeg/TRT_TSR"
+  }
+}

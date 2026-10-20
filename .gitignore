@@ -1,0 +1,15 @@
+__pycache__/
+*.py[cod]
+.DS_Store
+.pytest_cache/
+.venv/
+data/
+results/
+artifacts/
+*.npz
+*.npy
+*.mat
+*.zip
+*.log
+.env*
+!.env.example
