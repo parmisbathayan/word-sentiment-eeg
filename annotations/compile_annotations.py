@@ -68,7 +68,7 @@ def compile_reviews(partial=False):
     output = ROOT / ('word_labels.PARTIAL.csv' if missing else 'word_labels.csv')
     if rows:
         with output.open('w', newline='') as stream:
-            writer = csv.DictWriter(stream, fieldnames=list(rows[0]))
+            writer = csv.DictWriter(stream, fieldnames=list(rows[0]), lineterminator='\n')
             writer.writeheader()
             writer.writerows(rows)
         if not missing:
@@ -76,7 +76,7 @@ def compile_reviews(partial=False):
                 ('uncertain_words.csv', [r for r in rows if 'uncertain' in (r['lexical_class'],r['contextual_class'])]),
                 ('lexical_context_differences.csv', [r for r in rows if r['lexical_class'] != r['contextual_class']])]:
                 with (ROOT / name).open('w', newline='') as stream:
-                    writer = csv.DictWriter(stream, fieldnames=list(rows[0])); writer.writeheader(); writer.writerows(subset)
+                    writer = csv.DictWriter(stream, fieldnames=list(rows[0]), lineterminator='\n'); writer.writeheader(); writer.writerows(subset)
     summary = {'status': 'partial' if missing else 'complete', 'reviewed_sentences': len(decisions),
                'total_sentences': len(sentences), 'reviewed_word_rows': len(rows),
                'missing_sentence_ordinals': missing, 'output': output.name,
