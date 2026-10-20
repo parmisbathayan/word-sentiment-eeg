@@ -83,6 +83,12 @@ class LabelsTests(unittest.TestCase):
             path.write_text("bad\t0.1\t0.5\t0.5\ngood\t0.9\t0.5\t0.5\n")
             self.assertEqual(set(load_lexicon(path)), {"bad", "good"})
 
+    def test_literal_words_are_not_converted_to_missing_values(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "lexicon.tsv"
+            path.write_text("null\t0.4\t0.5\t0.5\nNA\t0.5\t0.5\t0.5\n")
+            self.assertEqual(set(load_lexicon(path)), {"null", "na"})
+
 
 class SplitsTests(unittest.TestCase):
     def test_all_readers_of_sentence_stay_together(self):

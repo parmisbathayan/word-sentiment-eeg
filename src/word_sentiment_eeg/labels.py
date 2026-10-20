@@ -66,7 +66,8 @@ def load_lexicon(path):
     # The official v1 English file is headerless. Also accept a named-column
     # copy without dropping its first real word (pandas' default header inference).
     columns = ["word", "valence", "arousal", "dominance"]
-    table = pd.read_csv(path, sep="\t", encoding="utf-8-sig", header=None, names=columns)
+    table = pd.read_csv(path, sep="\t", encoding="utf-8-sig", header=None, names=columns,
+                        keep_default_na=False, dtype={"word": str})
     if len(table) and str(table.iloc[0]["word"]).strip().lower() == "word":
         if [str(v).strip().lower() for v in table.iloc[0]] == columns:
             table = table.iloc[1:].copy()
