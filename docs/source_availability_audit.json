@@ -1,0 +1,240 @@
+{
+  "verified_date_utc": "2026-10-20",
+  "new_cloud_audit_run": "https://github.com/parmisbathayan/word-sentiment-eeg/actions/runs/39455869451",
+  "new_cloud_samples": [
+    {
+      "task": "NR",
+      "subject": "ZJS",
+      "source_url": "https://osf.io/download/qwzr3/",
+      "source_bytes": 378063605,
+      "scope": "first 10 readable sentences; not a complete reader audit",
+      "sentences_inspected": 10,
+      "words_inspected": 230,
+      "finite_word_fixation_segments": 108,
+      "match_results": {
+        "exact": 99,
+        "unmatched": 9
+      },
+      "examples": [
+        {
+          "sentence_position": 50,
+          "word_index": 0,
+          "word": "They",
+          "fixation_index": 0,
+          "word_eeg_shape": [
+            105,
+            98
+          ],
+          "onset_sample_sentence_0based": 162,
+          "match_method": "exact"
+        },
+        {
+          "sentence_position": 50,
+          "word_index": 1,
+          "word": "were",
+          "fixation_index": 0,
+          "word_eeg_shape": [
+            105,
+            67
+          ],
+          "onset_sample_sentence_0based": 270,
+          "match_method": "exact"
+        },
+        {
+          "sentence_position": 50,
+          "word_index": 3,
+          "word": "of",
+          "fixation_index": 0,
+          "word_eeg_shape": [
+            105,
+            73
+          ],
+          "onset_sample_sentence_0based": 348,
+          "match_method": "exact"
+        }
+      ],
+      "sentence_eeg_shape": [
+        105,
+        1008
+      ],
+      "verified_word_segments_and_sentence_eeg": true
+    },
+    {
+      "task": "TSR",
+      "subject": "ZPH",
+      "source_url": "https://osf.io/download/963s7/",
+      "source_bytes": 368773059,
+      "scope": "first 10 readable sentences; not a complete reader audit",
+      "sentences_inspected": 10,
+      "words_inspected": 275,
+      "finite_word_fixation_segments": 304,
+      "match_results": {
+        "exact": 297,
+        "unmatched": 7
+      },
+      "examples": [
+        {
+          "sentence_position": 0,
+          "word_index": 1,
+          "word": "won",
+          "fixation_index": 0,
+          "word_eeg_shape": [
+            105,
+            62
+          ],
+          "onset_sample_sentence_0based": 343,
+          "match_method": "exact"
+        },
+        {
+          "sentence_position": 0,
+          "word_index": 1,
+          "word": "won",
+          "fixation_index": 1,
+          "word_eeg_shape": [
+            105,
+            56
+          ],
+          "onset_sample_sentence_0based": 414,
+          "match_method": "exact"
+        },
+        {
+          "sentence_position": 0,
+          "word_index": 1,
+          "word": "won",
+          "fixation_index": 2,
+          "word_eeg_shape": [
+            105,
+            142
+          ],
+          "onset_sample_sentence_0based": 3517,
+          "match_method": "exact"
+        }
+      ],
+      "sentence_eeg_shape": [
+        105,
+        6121
+      ],
+      "verified_word_segments_and_sentence_eeg": true
+    }
+  ],
+  "prior_SR_audit": {
+    "source_report": "parmis-thesis-eeg-sentiment-review/saved_results/followup_frp_extraction/frp_extraction/frp_extraction.json",
+    "source_sha256": "fb10629280ea4cc928854c3be412280017c8ac0db6a8ebc77b1334e6056206a9",
+    "subjects": {
+      "ZAB": {
+        "fixation_counts": {
+          "exact": 6990,
+          "unmatched": 346,
+          "raw_unreadable": 8
+        },
+        "match_rate": 0.952835332606325,
+        "first_sentence_eeg_shape": [
+          105,
+          3341
+        ]
+      },
+      "ZDM": {
+        "fixation_counts": {
+          "exact": 6049,
+          "unmatched": 349,
+          "raw_unreadable": 16
+        },
+        "match_rate": 0.945451703657393,
+        "first_sentence_eeg_shape": [
+          105,
+          4172
+        ]
+      },
+      "ZJN": {
+        "fixation_counts": {
+          "exact": 9898,
+          "unmatched": 337,
+          "raw_unreadable": 16
+        },
+        "match_rate": 0.9670737664875427,
+        "first_sentence_eeg_shape": [
+          105,
+          5090
+        ]
+      },
+      "ZJS": {
+        "fixation_counts": {
+          "raw_unreadable": 62,
+          "exact": 4899,
+          "unmatched": 312
+        },
+        "match_rate": 0.9401266551525619,
+        "first_sentence_eeg_shape": [
+          105,
+          3178
+        ]
+      },
+      "ZKB": {
+        "fixation_counts": {
+          "exact": 8216,
+          "unmatched": 374,
+          "raw_unreadable": 1
+        },
+        "match_rate": 0.9564610011641443,
+        "first_sentence_eeg_shape": [
+          105,
+          5002
+        ]
+      },
+      "ZKH": {
+        "fixation_counts": {
+          "exact": 6738,
+          "unmatched": 359,
+          "raw_unreadable": 8
+        },
+        "match_rate": 0.9494152458785402,
+        "first_sentence_eeg_shape": [
+          105,
+          3165
+        ]
+      },
+      "ZKW": {
+        "fixation_counts": {
+          "exact": 9200,
+          "unmatched": 360,
+          "raw_unreadable": 1
+        },
+        "match_rate": 0.9623430962343096,
+        "first_sentence_eeg_shape": [
+          105,
+          9464
+        ]
+      },
+      "ZMG": {
+        "fixation_counts": {
+          "exact": 5843,
+          "unmatched": 339,
+          "raw_unreadable": 14
+        },
+        "match_rate": 0.9451633775477192,
+        "first_sentence_eeg_shape": [
+          105,
+          4243
+        ]
+      },
+      "ZPH": {
+        "fixation_counts": {
+          "exact": 6859,
+          "unmatched": 355,
+          "raw_unreadable": 7
+        },
+        "match_rate": 0.9507901303021902,
+        "first_sentence_eeg_shape": [
+          105,
+          4603
+        ]
+      }
+    },
+    "missing_word_rawEEG_subjects": [
+      "ZDN",
+      "ZGW",
+      "ZJM"
+    ]
+  },
+  "scope_limit": "NR and TSR: one reader and 10 readable sentences each. All 36 task-reader files have NOT been newly audited."
+}

@@ -2,6 +2,12 @@
 
 ## Current run: word onsets and class ERPs
 
+Real source data have now been checked: the prior SR audit verified word
+waveforms for 9 readers, and a fresh cloud sample verified word segments and
+onset recovery in NR and TSR. Three SR readers lacked `word.rawEEG`. See
+[verified availability and scope](docs/DATA_AVAILABILITY.md); this is not a
+claim that every task/reader has usable waveforms.
+
 The short notebook now runs **`run_erp.py`**, using the already-prepared labels.
 Open the existing [Drive Colab notebook](https://colab.research.google.com/drive/1HD4kcRI-6dOG07PYqeIi-bWgIuQjMIHg),
 select a CPU runtime, and choose **Runtime → Run all**. Allow Drive and the
