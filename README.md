@@ -1,5 +1,7 @@
 # Word sentiment EEG — prepared agent annotations
 
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/parmisbathayan/word-sentiment-eeg/blob/main/notebooks/short.ipynb)
+
 ## Current run: word onsets and class ERPs
 
 Real source data have now been checked: the prior SR audit verified word
@@ -9,10 +11,12 @@ onset recovery in NR and TSR. Three SR readers lacked `word.rawEEG`. See
 claim that every task/reader has usable waveforms.
 
 The short notebook now runs **`run_erp.py`**, using the already-prepared labels.
-Open the existing [Drive Colab notebook](https://colab.research.google.com/drive/1HD4kcRI-6dOG07PYqeIi-bWgIuQjMIHg),
-select a CPU runtime, and choose **Runtime → Run all**. Allow Drive and the
-existing `GITHUB_TOKEN` secret. No annotation adjudication or code editing is
-required. The older feature/classification runner remains `main.py`; it is not
+Open the [GitHub notebook in Colab](https://colab.research.google.com/github/parmisbathayan/word-sentiment-eeg/blob/main/notebooks/short.ipynb),
+select a CPU runtime, and choose **Runtime → Run all**. Allow Drive mounting.
+The repository is public: **no GitHub token or Colab secret is required**.
+No annotation adjudication or code editing is required. Code stays on GitHub
+and in Colab's temporary runtime; only results and reusable EEG outputs are
+saved to Drive. The older feature/classification runner remains `main.py`; it is not
 run by the short notebook.
 
 - Covers SR, NR and TSR separately. Uncertain labels, lexical/context
@@ -123,22 +127,14 @@ conservative subset avoids mixing negated positives into a straightforward
 positive-word class. It is not a claim that the excluded words have no useful
 EEG. All original annotations remain available for later separate analyses.
 
-## Run EEG analysis
+## Optional legacy feature/classification analysis
 
-1. Open `notebooks/short.ipynb` in Colab, or the copy in your existing Colab
-   Notebooks folder. A CPU runtime is sufficient.
-2. Allow the existing `GITHUB_TOKEN` Colab secret to read this private repository.
-   A restricted token needs Contents: read access for `parmisbathayan/word-sentiment-eeg`.
-3. Choose Runtime → Run all and allow Drive mounting.
+The current short notebook runs `run_erp.py`, as described above. The older
+`main.py` runner is available separately for band-power feature exports and
+controlled classification probes using existing SR/NR/TSR word caches. It is
+not launched by Run all in the current notebook.
 
-No manual annotation or source-file upload is needed. The notebook obtains
-code and the prepared CSV, reads existing SR/NR/TSR word EEG caches in place,
-validates annotation alignment, exports class EEG and runs controlled probes.
-No lexicon/model/EEG download is part of the normal v2 run. Dependencies install
-only in the disposable cloud runtime. Nothing is installed on the Mac.
-
-The small notebook calls `main.py`; scientific code remains in Python files.
-The default run tag is `v2_agent_annotated`. Identical completed runs are reused;
+The legacy default run tag is `v2_agent_annotated`. Identical completed runs are reused;
 changed sources/labels/code/config require a new tag. Logs and stages save to
 Drive. Prepared labels can be inspected now, without running any EEG analysis.
 
