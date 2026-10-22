@@ -1,0 +1,23 @@
+{
+  "source": "resultsZJS_NR.mat",
+  "source_url": "https://osf.io/download/qwzr3/",
+  "source_sha256": "ee156114b0a8f48007a74de02b13a72a0611af1590b0062eeb2a95bd36ea2d1c",
+  "scope": "10 real readable NR/ZJS sentences, not all readers",
+  "old_runner_reference": "https://raw.githubusercontent.com/parmisbathayan/word-sentiment-eeg/c0d40db/run_erp.py",
+  "sentences": 10,
+  "word_rows": 230,
+  "accepted_epochs": {
+    "negative": 1,
+    "neutral": 62,
+    "positive": 0
+  },
+  "trial_waveforms_bitwise_identical": true,
+  "onsets_labels_exclusions_identical": true,
+  "max_mean_rounding_difference_uV": 4.76837158203125e-07,
+  "missing_neutral_chunk_repaired_identically": true,
+  "existing_files_unchanged": true,
+  "user_drive_modified": false,
+  "status": "passed",
+  "workflow_run": "https://github.com/parmisbathayan/word-sentiment-eeg/actions/runs/39768612919",
+  "date_utc": "2026-10-22"
+}
