@@ -215,7 +215,7 @@ def summarize(items, run, channels, expected, failures, fingerprint, require_tri
               ('- Each cached task/reader folder: `epochs_index.json`, per-class epoch chunks (or preserved legacy `*_epochs.npz` files), `word_onsets.csv.gz`, `class_means.npz`, `manifest.json`.' if require_trials else
                '- `readers/<task>/<reader>/`: `word_onsets.csv.gz`, `class_means.npz`, `manifest.json`. Trial indices identify the order for regeneration; they do not refer to saved trial files in compact mode.'),
               'The word-onset table records each event_id, class, onset and automatic exclusion.', '',
-              f'Cached epochs: `{items[0]["output_dir"] if items else "no usable files"}`', '',
+              f'Reader results: `{items[0]["output_dir"] if items else "no usable files"}`', '',
               '## Missing / failed files', *[f'- {f["task"]}/{f["subject"]}: {f["reason"]}' for f in failures]]
     (run/'REPORT.md').write_text('\n'.join(report)+'\n')
     write_json(run/'manifest.json', {'status':state,'fingerprint':fingerprint,'expected_files':len(expected),

@@ -10,14 +10,27 @@ onset recovery in NR and TSR. Three SR readers lacked `word.rawEEG`. See
 [verified availability and scope](docs/DATA_AVAILABILITY.md); this is not a
 claim that every task/reader has usable waveforms.
 
-The short notebook now runs **`run_erp.py`**, using the already-prepared labels.
+The short notebook now runs **`run_compact_erp.py`**, using the already-prepared labels.
 Open the [GitHub notebook in Colab](https://colab.research.google.com/github/parmisbathayan/word-sentiment-eeg/blob/main/notebooks/short.ipynb),
 select a CPU runtime, and choose **Runtime → Run all**. Allow Drive mounting.
 The repository is public: **no GitHub token or Colab secret is required**.
 No annotation adjudication or code editing is required. Code stays on GitHub
-and in Colab's temporary runtime; only results and reusable EEG outputs are
+and in Colab's temporary runtime; onset tables and class ERP results are
 saved to Drive. The older feature/classification runner remains `main.py`; it is not
 run by the short notebook.
+
+After the Drive storage limit was reached, the default notebook switched to
+compact storage: it keeps per-word onsets/labels/exclusions and full 105-channel
+class averages, without archiving individual EEG trial arrays. It reuses valid
+old analyses and leaves all original caches untouched. Outputs are isolated in
+`Thesis/Results/word_sentiment_eeg/v4_word_erp_compact/`, including the portable
+`compact_results.zip`. Estimated additional storage is 100–200 MB including
+the ZIP. The notebook stops if mounted Drive space is below 1 GiB. Pending
+uploads can consume recently freed space. See [compact run details](docs/COMPACT_RUN.md).
+
+The original full-trial mode remains available in `notebooks/full_trials.ipynb`
+and `run_erp.py`; its larger storage requirements and repair behavior are
+described below.
 
 The extraction cell explicitly streams live command output into Colab. During
 quiet stages, it prints an elapsed-time/status message every 30 seconds and
@@ -40,9 +53,10 @@ next start/resume rather than interrupting a healthy run just for the display.
   low-pass applied to the whole sentence, −200..0 ms baseline correction,
   rejection above ±100 µV after baseline correction. Source EEG is already
   preprocessed by ZuCo; these are not acquisition-raw recordings.
-- Saves per-class trial EEG, all-channel reader averages and equal-reader
+- Saves all-channel reader averages and equal-reader
   grand averages. The same readers (≥5 accepted epochs in **each** class) are
-  used for all three comparison curves. Tasks are not pooled.
+  used for all three comparison curves. Tasks are not pooled. Individual trial
+  EEG is saved only in the separate full-trial mode.
 
 The authors' original [SR](https://osf.io/download/369ur/),
 [NR](https://osf.io/download/gan9v/), and [TSR](https://osf.io/download/mksxg/)
@@ -58,7 +72,7 @@ inventory (`configs/zuco1_sources.json`), one file at a time, with expected-size
 validation. Temporary downloads are deleted after extraction. Original Drive
 files are never deleted. **No downloads or installations run on the Mac.**
 
-Small results: `Thesis/Results/word_sentiment_eeg/v3_word_erp/` contains
+In full-trial mode, small results: `Thesis/Results/word_sentiment_eeg/v3_word_erp/` contains
 `REPORT.md`, `manifest.json`, `provenance.json`, `class_counts.csv`,
 `class_erp_roi.csv`, task grand-average NPZ files and class plots. Trial epochs
 and onset tables: `Thesis/CachedArtifacts/word_sentiment_eeg/v3_word_erp/`,
