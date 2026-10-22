@@ -160,4 +160,33 @@ with tempfile.TemporaryDirectory() as tmp:
     assert 'STAGE ' not in again.stdout,again.stdout
     for p,sha in recovered_hashes.items():
         assert file_digest(p)==sha,p
+    # Compact output reuses full-run analyses without requiring source files or
+    # copying any large trial data. It is independently resumable.
+    compact_command=[sys.executable,str(ROOT/'run_compact_erp.py'),'--thesis-root',str(directory),
+                     '--annotations',str(ann),'--source-manifest',str(manifest)]
+    compact=subprocess.run(compact_command,check=True,capture_output=True,text=True)
+    compact_run=directory/'Results/word_sentiment_eeg/v4_word_erp_compact'
+    compact_state=json.loads((compact_run/'manifest.json').read_text())
+    assert compact_state['status']=='completed' and compact_state['processed_files']==2,compact_state
+    assert compact_state['output_policy']=='onsets_and_class_averages'
+    assert not list(compact_run.rglob('*_epochs*'))
+    assert (compact_run/'compact_results.zip').exists()
+    compact_again=subprocess.run(compact_command,check=True,capture_output=True,text=True)
+    assert 'EXTRACT ' not in compact_again.stdout,compact_again.stdout
+    for p,sha in recovered_hashes.items():
+        assert file_digest(p)==sha,p
+    # Fresh compact extraction uses exactly the same accepted events and ERP
+    # means as full extraction, but writes no individual EEG trial archives.
+    source.write_bytes(source_bytes);hdf.write_bytes(hdf_bytes)
+    fresh_command=compact_command+['--run-tag','fresh_compact','--reuse-run-tag','no_old_cache']
+    fresh=subprocess.run(fresh_command,check=True,capture_output=True,text=True)
+    fresh_run=directory/'Results/word_sentiment_eeg/fresh_compact'
+    fresh_state=json.loads((fresh_run/'manifest.json').read_text())
+    assert fresh_state['status']=='completed',fresh_state
+    assert not list(fresh_run.rglob('*_epochs*'))
+    for old_item,new_item in zip(recovered_state['files'],fresh_state['files']):
+        with np.load(Path(old_item['output_dir'])/'class_means.npz') as old_mean, np.load(Path(new_item['output_dir'])/'class_means.npz') as new_mean:
+            np.testing.assert_array_equal(old_mean['mean_uV'],new_mean['mean_uV'])
+        pd.testing.assert_frame_equal(pd.read_csv(Path(old_item['output_dir'])/'word_onsets.csv.gz'),
+                                      pd.read_csv(Path(new_item['output_dir'])/'word_onsets.csv.gz'))
 print('ERP v5/v7.3 extraction, first-fixation exclusions, onset samples, averaging and resume verified.')

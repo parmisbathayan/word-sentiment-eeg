@@ -120,6 +120,33 @@ class ResumeTests(unittest.TestCase):
         with patch.object(run_erp.shutil,'disk_usage',return_value=type(usage)(50*1024**3,10*1024**3,40*1024**3)):
             self.assertEqual(run_erp.check_output_space(self.tmp.name).free,40*1024**3)
 
+    def test_compact_average_matches_full_without_storing_trial_arrays(self):
+        target=Path(self.tmp.name)/'compact'
+        writer=cp.EpochChunks(target,self.channels,save_trials=False)
+        for cls in CLASSES:
+            for event,value in zip(self.ids[cls],self.values[cls]):
+                writer.add(cls,value,event)
+        means,counts=writer.finish()
+        self.assertEqual(counts,[3,3,3])
+        self.assertFalse(target.exists())
+        self.assertTrue(all(not b for b in writer.blocks.values()))
+        for i,cls in enumerate(CLASSES):
+            expected=np.stack(self.values[cls]).sum(axis=0,dtype=np.float64)/3
+            np.testing.assert_array_equal(means[i],expected.astype(np.float32))
+
+    def test_compact_validation_does_not_require_or_read_trial_files(self):
+        for cls in CLASSES:
+            (self.target/f'{cls}_epochs.npz').unlink()
+        with patch.object(cp,'class_parts',side_effect=AssertionError('no trial files should be read')):
+            saved=cp.inspect_checkpoint(self.target,self.record,{'old-compatible'},self.channels,check_trials=False)
+        self.assertTrue(saved['item']['analysis_ready'])
+        self.assertEqual(saved['item']['trial_export_validation'],'not_requested')
+        state=run_erp.save_run_state(Path(self.tmp.name)/'compact_run',[saved['item']],
+                                     [self.record],[],'compatible','finished',require_trials=False)
+        self.assertEqual(state['status'],'completed')
+        self.assertEqual(state['pending_trial_repairs'],[])
+        self.assertEqual(state['complete_trial_export_files'],0)
+
     def test_global_count_includes_all_saved_readers_before_work(self):
         items=[{**self.item,'subject':f'Z{i}','trial_exports_complete':i==0} for i in range(5)]
         expected=[{'task':'SR','subject':f'Z{i}'} for i in range(6)]

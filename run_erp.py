@@ -46,18 +46,19 @@ def cache_fingerprints(annotations, source_manifest):
     return current,legacy
 
 
-def save_run_state(run,items,expected,failures,fingerprint,stage):
+def save_run_state(run,items,expected,failures,fingerprint,stage,require_trials=True):
     ready={(i['task'],i['subject']) for i in items}
     if len(ready)!=len(items):
         raise ValueError('Duplicate reader/task in run state; refusing double-counted results')
     complete=[i for i in items if i.get('trial_exports_complete',False)]
-    done=len(items)==len(expected) and len(complete)==len(expected) and not failures
+    done=len(items)==len(expected) and (not require_trials or len(complete)==len(expected)) and not failures
     state={'status':'completed' if done else 'incomplete','stage':stage,
            'updated_at_utc':datetime.now(timezone.utc).isoformat(),'fingerprint':fingerprint,
            'expected_files':len(expected),'processed_files':len(items),
            'analysis_ready_files':len(items),'complete_trial_export_files':len(complete),
+           'output_policy':'full_trials' if require_trials else 'onsets_and_class_averages',
            'pending_new_readers':[f"{r['task']}/{r['subject']}" for r in expected if (r['task'],r['subject']) not in ready],
-           'pending_trial_repairs':[f"{i['task']}/{i['subject']}" for i in items if not i.get('trial_exports_complete')],
+           'pending_trial_repairs':[f"{i['task']}/{i['subject']}" for i in items if require_trials and not i.get('trial_exports_complete')],
            'files':items,'failures':failures}
     write_json(run/'manifest.json',state)
     return state
@@ -87,11 +88,11 @@ def cloud_download(record, target):
             time.sleep(min(15 * 2**attempt, 60))
 
 
-def process_file(path, record, annotations, output, fingerprint, channels):
+def process_file(path, record, annotations, output, fingerprint, channels, save_trials=True):
     task, subject = record['task'], record['subject']
     output.mkdir(parents=True, exist_ok=True)
     lookup = {(r.sentence_key, int(r.word_index)):r for r in annotations.itertuples() if task in r.tasks.split(';')}
-    writer=EpochChunks(output,channels)
+    writer=EpochChunks(output,channels,save_trials=save_trials)
     audit = []
     n_sentences = 0
     for position, words, raw, per_word in iter_sentences(path):
@@ -148,13 +149,13 @@ def process_file(path, record, annotations, output, fingerprint, channels):
             'sentences':n_sentences,'word_rows':len(frame),'epochs_per_class':dict(zip(CLASSES,counts)),
             'status_counts':{str(k):int(v) for k,v in frame.status.value_counts().items()},
             'status':'completed' if sum(counts) else 'no_usable_epochs',
-            'analysis_ready':True,'trial_exports_complete':True,'missing_trial_classes':[],
-            'missing_trial_chunks':0,'epoch_storage':'bounded_chunks_v2'}
+            'analysis_ready':True,'trial_exports_complete':save_trials,'missing_trial_classes':[],
+            'missing_trial_chunks':0,'epoch_storage':'bounded_chunks_v2' if save_trials else 'averages_only'}
     write_json(output / 'manifest.json', item)
     return item
 
 
-def summarize(items, run, channels, expected, failures, fingerprint):
+def summarize(items, run, channels, expected, failures, fingerprint, require_trials=True):
     import matplotlib
     matplotlib.use('Agg')
     import matplotlib.pyplot as plt
@@ -194,7 +195,7 @@ def summarize(items, run, channels, expected, failures, fingerprint):
         ax.legend(); fig.tight_layout(); fig.savefig(plotdir/f'{task}_class_erp.png',dpi=170); plt.close(fig)
     pd.DataFrame(rows).to_csv(run/'class_counts.csv',index=False)
     pd.DataFrame(roi_rows).to_csv(run/'class_erp_roi.csv',index=False)
-    all_processed = len(items) == len(expected) and all(i.get('trial_exports_complete') for i in items) and not failures
+    all_processed = len(items) == len(expected) and (not require_trials or all(i.get('trial_exports_complete') for i in items)) and not failures
     any_epochs = any(sum(i['epochs_per_class'].values()) for i in items)
     state = 'completed' if all_processed and any_epochs else 'incomplete'
     report = ['# Word sentiment: onsets and fixation-related ERPs', '', f'Run status: **{state}**.', '',
@@ -204,14 +205,16 @@ def summarize(items, run, channels, expected, failures, fingerprint):
               'Only the original first fixation is used; a rejected first fixation never becomes a later fixation. Every onset is verified by full-segment, all-channel matching.', '',
               '## Coverage', *coverage, '',
               f"Analyses/onset tables ready: {len(items)}/{len(expected)}. Complete trial EEG exports: {sum(i.get('trial_exports_complete',False) for i in items)}/{len(expected)}.",
-              'Saved analyses remain counted during restarts. Missing trial exports are repaired from stored onsets, without repeating label assignment or onset matching.', '',
+              ('Saved analyses remain counted during restarts. Missing trial exports are repaired from stored onsets, without repeating label assignment or onset matching.' if require_trials else
+               'Compact output: per-word onset tables, exclusions and full 105-channel class averages are saved. Individual trial EEG arrays are not archived in this run; they can be regenerated using the source files, saved onsets and source hashes.'), '',
               'Grand averages use the same readers in all classes (≥5 epochs per class), with equal reader weights. Shading is ±1 reader SEM, not a significance test. Classes have unequal word counts.',
               'These are descriptive fixation-related potentials (FRPs). Adjacent fixations overlap in time; this run does not deconvolve overlap or establish a sentiment-specific neural response.', '',
               '## Files', '- `class_counts.csv`: accepted epochs and readers.',
               '- `class_erp_roi.csv`, `plots/*_class_erp.png`: class curves.',
               '- `*_grand_average.npz`: all 105 channels, per-reader and grand class means.',
-              '- Each cached task/reader folder: `epochs_index.json`, per-class epoch chunks (or preserved legacy `*_epochs.npz` files), `word_onsets.csv.gz`, `class_means.npz`, `manifest.json`.',
-              'The epoch index lists each class file and its global start/stop row. The word-onset table links each accepted event_id to that global class row and records every automatic exclusion.', '',
+              ('- Each cached task/reader folder: `epochs_index.json`, per-class epoch chunks (or preserved legacy `*_epochs.npz` files), `word_onsets.csv.gz`, `class_means.npz`, `manifest.json`.' if require_trials else
+               '- `readers/<task>/<reader>/`: `word_onsets.csv.gz`, `class_means.npz`, `manifest.json`. Trial indices identify the order for regeneration; they do not refer to saved trial files in compact mode.'),
+              'The word-onset table records each event_id, class, onset and automatic exclusion.', '',
               f'Cached epochs: `{items[0]["output_dir"] if items else "no usable files"}`', '',
               '## Missing / failed files', *[f'- {f["task"]}/{f["subject"]}: {f["reason"]}' for f in failures]]
     (run/'REPORT.md').write_text('\n'.join(report)+'\n')

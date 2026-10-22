@@ -57,7 +57,7 @@ def class_parts(target, cls, ids, channels):
     return parts, missing
 
 
-def inspect_checkpoint(target, record, fingerprints, channels):
+def inspect_checkpoint(target, record, fingerprints, channels, check_trials=True):
     """Return a reusable analysis even when some individual trial files are absent."""
     done=target/'manifest.json'
     if not done.exists():
@@ -94,6 +94,10 @@ def inspect_checkpoint(target, record, fingerprints, channels):
         ids[cls]=accepted.loc[accepted.contextual_class==cls,'event_id'].astype(str).tolist()
         if len(ids[cls])!=item['epochs_per_class'][cls]:
             raise ValueError(f'Saved onset counts disagree for {cls}')
+    if not check_trials:
+        item.update(output_dir=str(target),analysis_ready=True,
+                    trial_exports_complete=False,trial_export_validation='not_requested')
+        return {'item':item,'events':events,'ids':ids,'parts':{},'missing':{}}
     parts,missing={},{}
     for cls in CLASSES:
         logging.info('Validate trial export %s/%s/%s',record['task'],record['subject'],cls)
@@ -106,8 +110,9 @@ def inspect_checkpoint(target, record, fingerprints, channels):
 
 
 class EpochChunks:
-    def __init__(self,target,channels):
+    def __init__(self,target,channels,save_trials=True):
         self.target=Path(target)
+        self.save_trials=save_trials
         self.channels=channels
         self.blocks={c:[] for c in CLASSES}
         self.ids={c:[] for c in CLASSES}
@@ -118,9 +123,11 @@ class EpochChunks:
     def add(self,cls,value,event_id):
         index=self.counts[cls]
         self.counts[cls]+=1
+        self.sums[cls]+=value
+        if not self.save_trials:
+            return index
         self.blocks[cls].append(value)
         self.ids[cls].append(event_id)
-        self.sums[cls]+=value
         if len(self.blocks[cls])>=CHUNK_TRIALS:
             self.flush(cls)
         return index
@@ -139,8 +146,9 @@ class EpochChunks:
             self.flush(cls)
         means=np.stack([(self.sums[c]/self.counts[c]).astype(np.float32) if self.counts[c]
                         else np.full((105,len(TIMES_MS)),np.nan,np.float32) for c in CLASSES])
-        write_json(self.target/'epochs_index.json',{'schema_version':2,'classes':self.parts,
-                    'counts':self.counts,'chunk_trials':CHUNK_TRIALS})
+        if self.save_trials:
+            write_json(self.target/'epochs_index.json',{'schema_version':2,'classes':self.parts,
+                        'counts':self.counts,'chunk_trials':CHUNK_TRIALS})
         return means,[self.counts[c] for c in CLASSES]
 
 
