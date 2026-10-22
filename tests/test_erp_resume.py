@@ -2,6 +2,7 @@ import json
 from pathlib import Path
 import sys
 import tempfile
+import shutil
 import unittest
 from unittest.mock import patch
 import numpy as np
@@ -110,6 +111,14 @@ class ResumeTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError,'Duplicate reader/task'):
             run_erp.save_run_state(Path(self.tmp.name)/'run',[self.item,self.item],
                                    [self.record],[],'compatible','audit')
+
+    def test_full_drive_stops_before_extraction(self):
+        usage=shutil.disk_usage(self.tmp.name)
+        with patch.object(run_erp.shutil,'disk_usage',return_value=type(usage)(15*1024**3,15*1024**3,0)):
+            with self.assertRaisesRegex(OSError,'Drive uploads may be pending'):
+                run_erp.check_output_space(self.tmp.name)
+        with patch.object(run_erp.shutil,'disk_usage',return_value=type(usage)(50*1024**3,10*1024**3,40*1024**3)):
+            self.assertEqual(run_erp.check_output_space(self.tmp.name).free,40*1024**3)
 
     def test_global_count_includes_all_saved_readers_before_work(self):
         items=[{**self.item,'subject':f'Z{i}','trial_exports_complete':i==0} for i in range(5)]

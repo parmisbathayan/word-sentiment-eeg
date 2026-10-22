@@ -24,6 +24,19 @@ from word_sentiment_eeg.erp_checkpoint import EpochChunks, MissingAnalysisArtifa
 LEGACY_RUNNER_SHA256 = 'b6d73b12a6a29e7ea7f972bfe63ac77dd247e53b6e739f7df1b3b5a663c2f572'
 
 
+def check_output_space(root):
+    """DriveFS may acknowledge cached writes before cloud uploads complete."""
+    usage=shutil.disk_usage(root)
+    if usage.free < 1024**3:
+        raise OSError(
+            f'Output storage has only {usage.free / 1024**3:.2f} GiB free. '
+            'Stopping before more EEG writes. Free storage or choose a smaller '
+            'output policy before resuming. Do not reset the runtime while '
+            'Drive uploads may be pending. The 1 GiB check is minimum headroom, '
+            'not an estimate of space needed for all trial exports.')
+    return usage
+
+
 def cache_fingerprints(annotations, source_manifest):
     science={str(f.relative_to(ROOT)):file_digest(f) for f in
              [ROOT/'src/word_sentiment_eeg/erp.py',ROOT/'src/word_sentiment_eeg/raw_export.py',ROOT/'assets/zuco_chanlocs.csv']}
@@ -220,6 +233,9 @@ def main():
     args = p.parse_args()
     if Path(args.run_tag).name != args.run_tag:
         p.error('run-tag must be one folder name')
+    # Check the mounted destination, not Colab's unrelated temporary disk.
+    # Do this before opening log/report files or changing existing run metadata.
+    check_output_space(args.thesis_root)
     run = args.thesis_root/'Results/word_sentiment_eeg'/args.run_tag
     run.mkdir(parents=True,exist_ok=True)
     logging.basicConfig(level=logging.INFO,format='%(asctime)s %(message)s',handlers=[logging.StreamHandler(sys.stdout),logging.FileHandler(run/'run.log')])
@@ -317,6 +333,7 @@ def main():
         save_run_state(run,items,expected,failures,fingerprint,stage)
         logging.info('STAGE %s | analyses saved %d/%d',stage,len(items),len(expected))
         try:
+            check_output_space(args.thesis_root)
             if path is None:
                 if not args.allow_cloud_download:
                     raise FileNotFoundError('Source MATLAB file absent; use the Colab runner for cloud download')
