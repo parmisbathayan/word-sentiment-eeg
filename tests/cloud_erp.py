@@ -173,6 +173,27 @@ with tempfile.TemporaryDirectory() as tmp:
     assert (compact_run/'compact_results.zip').exists()
     compact_again=subprocess.run(compact_command,check=True,capture_output=True,text=True)
     assert 'EXTRACT ' not in compact_again.stdout,compact_again.stdout
+    # Audit actual saved bytes, annotation/event identity, unique observations,
+    # and ZIP consistency without reopening source EEG or altering results.
+    sys.path.insert(0,str(ROOT/'scripts'))
+    from audit_subject_erps import audit
+    audit_originals={p:file_digest(p) for p in compact_run.rglob('*') if p.is_file()}
+    checked=audit(compact_run,make_plots=False)
+    assert checked['status']=='passed' and checked['reader_task_records']==2,checked
+    for p,sha in audit_originals.items():
+        assert file_digest(p)==sha,p
+    onset_file=compact_run/'readers/SR/ZAB/word_onsets.csv.gz'
+    onset_bytes=onset_file.read_bytes()
+    corrupt=pd.read_csv(onset_file)
+    corrupt.loc[1,'event_id']=corrupt.loc[0,'event_id']
+    corrupt.to_csv(onset_file,index=False,compression='gzip')
+    try:
+        audit(compact_run,make_plots=False)
+    except ValueError as error:
+        assert 'duplicate event IDs' in str(error),error
+    else:
+        raise AssertionError('Audit accepted duplicate event IDs')
+    onset_file.write_bytes(onset_bytes)
     for p,sha in recovered_hashes.items():
         assert file_digest(p)==sha,p
     # Fresh compact extraction uses exactly the same accepted events and ERP
