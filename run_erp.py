@@ -18,7 +18,7 @@ import numpy as np
 import pandas as pd
 from word_sentiment_eeg.common import atomic_npz, digest, file_digest, sentence_key, write_json
 from word_sentiment_eeg.erp import CLASSES, TIMES_MS, ROI, SFREQ, eligible, epoch, iter_sentences, locate, preprocess
-from word_sentiment_eeg.erp_checkpoint import EpochChunks, inspect_checkpoint, repair_trial_exports
+from word_sentiment_eeg.erp_checkpoint import EpochChunks, MissingAnalysisArtifact, inspect_checkpoint, repair_trial_exports
 
 # Recognize legacy checkpoints without tying scientific identity to logging/I/O.
 LEGACY_RUNNER_SHA256 = 'b6d73b12a6a29e7ea7f972bfe63ac77dd247e53b6e739f7df1b3b5a663c2f572'
@@ -35,6 +35,8 @@ def cache_fingerprints(annotations, source_manifest):
 
 def save_run_state(run,items,expected,failures,fingerprint,stage):
     ready={(i['task'],i['subject']) for i in items}
+    if len(ready)!=len(items):
+        raise ValueError('Duplicate reader/task in run state; refusing double-counted results')
     complete=[i for i in items if i.get('trial_exports_complete',False)]
     done=len(items)==len(expected) and len(complete)==len(expected) and not failures
     state={'status':'completed' if done else 'incomplete','stage':stage,
@@ -252,6 +254,7 @@ def main():
     source_roots=[args.raw_dir] if args.raw_dir else [args.thesis_root/'Data/zuco_og_raw',args.thesis_root/'Data/zuco_nr_raw',args.thesis_root/'Data/zuco_tsr_raw']
     existing={f.name:f for root in source_roots if root.exists() for f in root.rglob('results*_*.mat')}
     items,failures,plans=[],[],[]
+    recoveries={}
     logging.info('RESUME AUDIT: checking all %d reader checkpoints before extraction',len(expected))
     for audit_index,record in enumerate(expected,1):
         target=cache/record['task']/record['subject']
@@ -259,9 +262,23 @@ def main():
         current_target=cache_root/fingerprint[:16]/record['task']/record['subject']
         if (current_target/'manifest.json').exists():
             target=current_target
+        recovery_target=cache_root/fingerprint[:16]/'recovered'/record['task']/record['subject']
+        # A recovered analysis is the sole active checkpoint for this reader.
+        # The original incomplete folder remains untouched for inspection.
+        if (recovery_target/'manifest.json').exists():
+            target=recovery_target
         try:
             logging.info('CHECK %d/%d saved checkpoint %s/%s',audit_index,len(expected),record['task'],record['subject'])
             cp=inspect_checkpoint(target,record,{fingerprint,legacy},channels)
+        except MissingAnalysisArtifact as error:
+            recoveries[(record['task'],record['subject'])]={
+                'reader':record['task']+'/'+record['subject'],
+                'original_dir':str(target),'output_dir':str(recovery_target),
+                'source_sha256':error.item['source_sha256'],'reason':str(error)}
+            plans.append((record,recovery_target,None))
+            logging.warning('REBUILD %s/%s: %s; preserve original files and verify source hash before rebuilding',
+                            record['task'],record['subject'],error)
+            continue
         except Exception as error:
             logging.exception('Checkpoint validation failed %s/%s; preserving existing files',record['task'],record['subject'])
             failures.append({'task':record['task'],'subject':record['subject'],'reason':'checkpoint validation: '+str(error)})
@@ -276,22 +293,26 @@ def main():
         else:
             plans.append((record,target,None))
     full=sum(i['trial_exports_complete'] for i in items)
-    new=sum(cp is None for _,_,cp in plans)
-    logging.info('RESUME PLAN: %d/%d analyses already saved; %d full trial exports; %d need export-only repair; %d new readers',
-                 len(items),len(expected),full,len(items)-full,new)
+    new=sum(cp is None and (r['task'],r['subject']) not in recoveries for r,_,cp in plans)
+    logging.info('RESUME PLAN: %d/%d analyses already saved; %d full trial exports; %d need export-only repair; %d new readers; %d missing analyses to rebuild',
+                 len(items),len(expected),full,len(items)-full,new,len(recoveries))
     write_json(run/'resume_plan.json',{'fingerprint':fingerprint,'analysis_ready':len(items),
         'full_trial_exports':full,'saved_reader_ids':[i['task']+'/'+i['subject'] for i in items],
-        'new_readers':[r['task']+'/'+r['subject'] for r,_,cp in plans if cp is None],
+        'new_readers':[r['task']+'/'+r['subject'] for r,_,cp in plans if cp is None and (r['task'],r['subject']) not in recoveries],
+        'analysis_rebuilds':list(recoveries.values()),
         'trial_repairs':[{'reader':i['task']+'/'+i['subject'],'classes':i['missing_trial_classes'],
                          'chunks':i['missing_trial_chunks']} for i in items if not i['trial_exports_complete']],
         'validation_failures':failures})
+    write_json(run/'recovery_plan.json',{'readers':list(recoveries.values()),
+               'policy':'Keep valid readers. Rebuild compatible checkpoints missing analysis files in recovered/; preserve originals.'})
     save_run_state(run,items,expected,failures,fingerprint,'resume_audit_complete')
     # Advance new readers first. Missing trial exports are repaired afterwards,
     # using old onsets; saved readers never go through the onset matcher again.
     plans.sort(key=lambda plan: plan[2] is not None)
     for record,target,cp in plans:
         path=existing.get(record['filename']);downloaded=False
-        action='repair_trial_exports' if cp else 'extract_new_reader'
+        recovery=recoveries.get((record['task'],record['subject']))
+        action='repair_trial_exports' if cp else ('rebuild_missing_analysis' if recovery else 'extract_new_reader')
         stage=f"{action} {record['task']}/{record['subject']}"
         save_run_state(run,items,expected,failures,fingerprint,stage)
         logging.info('STAGE %s | analyses saved %d/%d',stage,len(items),len(expected))
@@ -306,6 +327,8 @@ def main():
                 updated=repair_trial_exports(path,cp,channels,file_digest(path))
                 items=[updated if (i['task'],i['subject'])==(record['task'],record['subject']) else i for i in items]
             else:
+                if recovery and file_digest(path)!=recovery['source_sha256']:
+                    raise ValueError('Source changed since original checkpoint; refusing incompatible rebuild')
                 item=process_file(path,record,annotations,target,fingerprint,channels)
                 verified=inspect_checkpoint(target,record,{fingerprint,legacy},channels)
                 if not verified or not verified['item']['trial_exports_complete']:
@@ -325,6 +348,10 @@ def main():
     logging.info('Results: %s',run)
     lock.close()
     if final['status']!='completed':
+        logging.error('INCOMPLETE: %d/%d analyses; %d/%d full trial exports. Failures:',
+                      len(items),len(expected),sum(i['trial_exports_complete'] for i in items),len(expected))
+        for failure in failures:
+            logging.error('  %s/%s: %s',failure['task'],failure['subject'],failure['reason'])
         raise SystemExit('Run incomplete. Saved analyses are retained; see resume_plan.json/manifest.json for missing readers or trial exports.')
 
 

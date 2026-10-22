@@ -43,3 +43,26 @@ every old archive byte has been read and checked. Startup validation checks
 schema, channel/time axes, event IDs and counts; the source hash is checked for
 repairs. Any inconsistent checkpoint is reported and preserved rather than
 silently overwritten. The full real-data run remains to be completed in Colab.
+
+## Recovery after the 15:17 UTC run
+
+The Colab log ended with 29/36 validated analyses and 29/36 complete trial
+exports. The seven remaining legacy checkpoints were missing required analysis
+files: NR/ZKH (onset table), NR/ZKW, NR/ZMG, NR/ZPH, TSR/ZAB, TSR/ZDM and
+TSR/ZDN (class means). The previous runner preserved these folders but skipped
+them, so another unchanged run could not finish them.
+
+The runner now schedules compatible checkpoints with missing analysis files for
+rebuilding in `<current fingerprint>/recovered/<task>/<reader>/`. It verifies
+the original source SHA-256 before extraction. Every surviving original file
+remains untouched; the recovered folder becomes the sole active analysis for
+that reader on subsequent runs. A reader/task can occur only once in the run
+state. Changed settings, mismatched identity, or inconsistent saved data still
+fail validation rather than being silently accepted. `recovery_plan.json` and
+`resume_plan.json` identify the rebuilds. The final console output lists any
+remaining failures directly.
+
+The cloud integration test reproduces missing means and missing onsets across
+both MATLAB formats, verifies that surviving files retain their hashes, checks
+that rebuilt EEG matches the prior EEG, and reruns without source files to
+confirm that each recovered reader is reused exactly once.

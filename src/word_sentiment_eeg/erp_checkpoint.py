@@ -15,6 +15,14 @@ from .erp import CLASSES, TIMES_MS, SFREQ, epoch, iter_sentences, preprocess
 CHUNK_TRIALS = 64  # ~13.5 MB uncompressed per chunk, rather than a 0.5–1 GB file
 
 
+class MissingAnalysisArtifact(FileNotFoundError):
+    """A compatible reader manifest exists but its analysis is incomplete."""
+
+    def __init__(self, target, item, missing):
+        self.item = item
+        super().__init__(f"Missing analysis artifacts in {target}: {', '.join(missing)}")
+
+
 def epoch_file_valid(path, event_ids, channels):
     """Check ZIP structure, EEG header and small alignment arrays, not full EEG."""
     try:
@@ -59,6 +67,10 @@ def inspect_checkpoint(target, record, fingerprints, channels):
         raise ValueError('Checkpoint belongs to different extraction settings/labels; refusing silent replacement')
     if (item.get('task'),item.get('subject')) != (record['task'],record['subject']):
         raise ValueError('Checkpoint reader/task identity mismatch')
+    missing=[name for name in ('class_means.npz','word_onsets.csv.gz')
+             if not (target/name).is_file()]
+    if missing:
+        raise MissingAnalysisArtifact(target,item,missing)
     with np.load(target/'class_means.npz',allow_pickle=False) as data:
         counts=[item['epochs_per_class'][c] for c in CLASSES]
         if (data['mean_uV'].shape != (3,105,len(TIMES_MS))

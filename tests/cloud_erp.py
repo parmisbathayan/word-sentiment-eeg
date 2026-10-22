@@ -66,6 +66,7 @@ with tempfile.TemporaryDirectory() as tmp:
         rd=f.create_dataset('raw',data=raw.T)
         sd.create_dataset('rawData',data=np.array([rd.ref],dtype=h5py.ref_dtype))
     parsed=list(iter_sentences(hdf))
+    hdf_bytes=hdf.read_bytes()
     assert parsed[0][3][5][0] is None
     assert parsed[0][3][5][1].shape==(105,70)
     records=[{'task':'SR','subject':'ZAB','filename':source.name,'bytes':source.stat().st_size,'url':'fixture'},
@@ -131,4 +132,32 @@ with tempfile.TemporaryDirectory() as tmp:
     np.testing.assert_array_equal(load_class_epochs(target,'neutral'),neutral_before)
     final=json.loads((run/'manifest.json').read_text())
     assert final['status']=='completed' and final['complete_trial_export_files']==2,final
+    # Reproduce the real failure: compatible manifests but missing averages or
+    # onset tables. Preserve every surviving old file, rebuild each reader once
+    # in a separate deterministic location, then reuse that location on rerun.
+    old_nr=cache/legacy[:16]/'NR/ZDM'
+    (target/'class_means.npz').unlink()
+    (old_nr/'word_onsets.csv.gz').unlink()
+    survivors={p:file_digest(p) for folder in (target,old_nr)
+               for p in folder.rglob('*') if p.is_file()}
+    hdf.write_bytes(hdf_bytes)
+    recovered=subprocess.run(command,check=True,capture_output=True,text=True)
+    assert recovered.stdout.count('STAGE rebuild_missing_analysis')==2,recovered.stdout
+    recovered_state=json.loads((run/'manifest.json').read_text())
+    assert recovered_state['status']=='completed',recovered_state
+    assert recovered_state['processed_files']==2 and recovered_state['complete_trial_export_files']==2
+    assert len({(i['task'],i['subject']) for i in recovered_state['files']})==2
+    for p,sha in survivors.items():
+        assert file_digest(p)==sha,p
+    for entry in recovered_state['files']:
+        assert '/recovered/' in entry['output_dir'],entry
+    np.testing.assert_array_equal(load_class_epochs(recovered_state['files'][0]['output_dir'],'neutral'),neutral_before)
+    recovered_hashes={p:file_digest(p) for entry in recovered_state['files']
+                      for p in Path(entry['output_dir']).rglob('*') if p.is_file()}
+    source.unlink();hdf.unlink()
+    again=subprocess.run(command,check=True,capture_output=True,text=True)
+    assert '2/2 analyses already saved' in again.stdout,again.stdout
+    assert 'STAGE ' not in again.stdout,again.stdout
+    for p,sha in recovered_hashes.items():
+        assert file_digest(p)==sha,p
 print('ERP v5/v7.3 extraction, first-fixation exclusions, onset samples, averaging and resume verified.')

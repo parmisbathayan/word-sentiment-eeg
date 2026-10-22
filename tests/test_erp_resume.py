@@ -96,6 +96,21 @@ class ResumeTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             cp.inspect_checkpoint(self.target,self.record,{'different-settings'},self.channels)
 
+    def test_missing_analysis_is_recoverable_only_after_identity_checks(self):
+        (self.target/'word_onsets.csv.gz').unlink()
+        with self.assertRaises(cp.MissingAnalysisArtifact) as caught:
+            self.inspect()
+        self.assertEqual(caught.exception.item['source_sha256'],'verified-source')
+        with self.assertRaises(ValueError):
+            cp.inspect_checkpoint(self.target,self.record,{'different-settings'},self.channels)
+        with self.assertRaises(ValueError):
+            cp.inspect_checkpoint(self.target,{'task':'SR','subject':'ZDM'},{'old-compatible'},self.channels)
+
+    def test_duplicate_reader_cannot_enter_summary(self):
+        with self.assertRaisesRegex(ValueError,'Duplicate reader/task'):
+            run_erp.save_run_state(Path(self.tmp.name)/'run',[self.item,self.item],
+                                   [self.record],[],'compatible','audit')
+
     def test_global_count_includes_all_saved_readers_before_work(self):
         items=[{**self.item,'subject':f'Z{i}','trial_exports_complete':i==0} for i in range(5)]
         expected=[{'task':'SR','subject':f'Z{i}'} for i in range(6)]
