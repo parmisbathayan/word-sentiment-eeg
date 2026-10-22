@@ -8,7 +8,31 @@
 use CPU, and choose **Runtime → Run all**. It audits the 36 saved reader/task
 records and portable ZIP, then makes subject-specific plots from the saved
 class averages. It does not download source EEG or rerun extraction. New
-outputs go beside the existing results under `audit/` and `plots/`.
+outputs go beside the existing results under `audit/` and `plots/`. This also
+exports a word-selection table with both labels, sentence context and actual EEG
+inclusion counts, and adds six fixed geometric scalp regions with a sensor map.
+These regions describe scalp measurements, not localized cortical generators.
+
+**See the labels now:** [master word-label CSV](annotations/word_labels.csv)
+(20,458 word occurrences; includes the whole sentence, lexical/contextual labels,
+notes and alignment flags). After the review notebook completes,
+`audit/word_selection.csv` adds actual accepted EEG counts, while
+`audit/accepted_word_labels.csv` contains words with at least one accepted event.
+
+**Persian TeCo:** [input-preflight notebook](https://colab.research.google.com/github/parmisbathayan/word-sentiment-eeg/blob/main/notebooks/teco_preflight.ipynb)
+reads existing private Drive files in Colab and exports token/structure reports.
+It is not an ERP analysis: `TRT_total` is time-collapsed, and usable raw word
+timing, sampling rate and Persian-context labels must be verified first. It
+inspects one existing multi-GB raw pickle; no dataset is downloaded or copied.
+Persian texts and research files are not committed to this public repository.
+
+The existing neutral class means neutral **words in their local context**, pooled
+across sentence contexts. It is not restricted to globally neutral sentences.
+A neutral-word/neutral-sentence control is a separate analysis that needs
+sentence-context annotation and new averages from source epochs; the existing
+pooled means cannot be filtered back into that subset. NR/TSR task membership is
+not itself a neutral-sentence label. Context must be matched or stratified for
+all classes to avoid changing only the neutral group's sentence context.
 
 Real source data have now been checked: the prior SR audit verified word
 waveforms for 9 readers, and a fresh cloud sample verified word segments and

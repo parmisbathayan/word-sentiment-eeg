@@ -180,6 +180,21 @@ with tempfile.TemporaryDirectory() as tmp:
     audit_originals={p:file_digest(p) for p in compact_run.rglob('*') if p.is_file()}
     checked=audit(compact_run,make_plots=False)
     assert checked['status']=='passed' and checked['reader_task_records']==2,checked
+    selected=pd.read_csv(compact_run/'audit/word_selection.csv')
+    assert selected.accepted_eeg_observations.sum()==checked['accepted_epochs']
+    assert (selected.loc[selected.accepted_eeg_observations>0,'label_eligible']).all()
+    assert not selected.loc[selected.word=='negated0','label_eligible'].any()
+    from review_regions import review_regions, REGIONS
+    mapping,regional=review_regions(compact_run,make_plots=True)
+    assert len(mapping)==105 and set(mapping.region)==set(REGIONS)
+    with np.load(compact_run/'SR_grand_average.npz') as saved:
+        channels=mapping.index[mapping.region=='anterior'].tolist()
+        expected=saved['subject_means_uV'][:,:,channels,:].mean(axis=2)
+        np.testing.assert_allclose(regional['SR'][1]['anterior'][0],expected)
+    assert (compact_run/'plots/regions/SR_regions.png').stat().st_size>1000
+    assert (compact_run/'plots/regions/subjects/SR_ZAB.png').stat().st_size>1000
+    region_table=pd.read_csv(compact_run/'audit/regions/subject_window_means.csv')
+    assert len(region_table)==2*6*3*4
     for p,sha in audit_originals.items():
         assert file_digest(p)==sha,p
     onset_file=compact_run/'readers/SR/ZAB/word_onsets.csv.gz'

@@ -12,14 +12,14 @@ from threading import Thread
 import time
 
 
-def run_with_progress(command, status_path, heartbeat_seconds=30):
+def run_with_progress(command, status_path, heartbeat_seconds=30, activity='word EEG extraction'):
     if heartbeat_seconds <= 0:
         raise ValueError('heartbeat_seconds must be positive')
     status_path = Path(status_path)
     started = time.monotonic()
     last_output_clock=started
     state = {'status':'starting', 'started_at_utc':datetime.now(timezone.utc).isoformat(),
-             'last_output':'Waiting for extraction output', 'last_output_at_utc':None}
+             'activity':activity, 'last_output':'Waiting for command output', 'last_output_at_utc':None}
 
     # Drive/FUSE can block rather than raise OSError. Keep it off the
     # thread that relays logs and prints heartbeats into the notebook.
@@ -52,7 +52,7 @@ def run_with_progress(command, status_path, heartbeat_seconds=30):
             pass
         pending.put_nowait(dict(state))
 
-    print('Starting word EEG extraction. Live logs follow; a status message appears every 30 seconds during quiet stages.', flush=True)
+    print(f'Starting {activity}. Live logs follow; a status message appears every 30 seconds during quiet stages.', flush=True)
     save('starting')
     process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
                                text=True, bufsize=1)
@@ -85,14 +85,14 @@ def run_with_progress(command, status_path, heartbeat_seconds=30):
             if time.monotonic() >= next_heartbeat:
                 minutes = (time.monotonic()-started)/60
                 print(f'[Still running | {minutes:.1f} min elapsed] Last log: {state["last_output"]}', flush=True)
-                print(f'  No new log for {time.monotonic()-last_output_clock:.0f}s. A live child is not proof of advancing extraction.', flush=True)
+                print(f'  No new log for {time.monotonic()-last_output_clock:.0f}s. A live child is not proof of advancing computation.', flush=True)
                 save('running' if process.poll() is None else 'finishing', process)
                 next_heartbeat = time.monotonic()+heartbeat_seconds
         code = process.wait()
         save('completed' if code==0 else 'failed', process)
         if code:
             raise subprocess.CalledProcessError(code, command)
-        print('Extraction command finished successfully. The next cell displays the saved report and figures.', flush=True)
+        print(f'{activity.capitalize()} finished successfully.', flush=True)
     except KeyboardInterrupt:
         process.terminate()
         try:
@@ -101,7 +101,7 @@ def run_with_progress(command, status_path, heartbeat_seconds=30):
             process.kill()
             process.wait()
         save('interrupted', process)
-        print('Run interrupted. Completed reader checkpoints remain saved.', flush=True)
+        print('Command interrupted. Previously saved results remain on Drive.', flush=True)
         raise
     finally:
         reader.join(timeout=1)

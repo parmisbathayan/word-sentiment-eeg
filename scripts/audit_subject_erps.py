@@ -1,5 +1,6 @@
 """Audit saved compact results and plot individual readers; never extract EEG."""
 import argparse
+from collections import Counter, defaultdict
 from datetime import datetime, timezone
 import hashlib
 import json
@@ -80,6 +81,7 @@ def audit(run,make_plots=True):
     required=[run/n for n in ('manifest.json','provenance.json','word_labels.csv','zuco_chanlocs.csv',
                               'class_counts.csv','class_erp_roi.csv','REPORT.md')]
     means_by_pair={};curves={};rows=[];seen=set();accepted_total=word_rows=0
+    word_status=defaultdict(Counter);word_readers=defaultdict(set)
     max_baseline=0.
     for item in items:
         task,subject=item['task'],item['subject'];pair=(task,subject)
@@ -110,7 +112,10 @@ def audit(run,make_plots=True):
         for row in events.itertuples():
             require(row.event_id==digest([task,subject,int(row.raw_sentence_position),row.sentence_key,int(row.word_index)])[:24],
                     f'{pair}: event identity does not match source positions')
+            key=(task,row.sentence_key,int(row.word_index))
+            word_status[key][row.status]+=1
             if row.status=='accepted':
+                word_readers[key].add(subject)
                 label=labels.get((row.sentence_key,int(row.word_index)))
                 require(label is not None and eligible(label) and label.word==row.word
                         and label.contextual_class==row.contextual_class and task in label.tasks.split(';'),
@@ -163,6 +168,29 @@ def audit(run,make_plots=True):
                     h.update(block)
             require(h.hexdigest()==file_digest(path),f'Portable ZIP differs from current file: {relative}')
     output=run/'audit';output.mkdir(exist_ok=True)
+    selection=[]
+    for label in label_frame.itertuples():
+        for task in label.tasks.split(';'):
+            key=(task,label.sentence_key,int(label.word_index))
+            statuses=word_status[key]
+            accepted=statuses.get('accepted',0)
+            selection.append({
+                'task':task,'sentence_key':label.sentence_key,'word_index':int(label.word_index),
+                'word':label.word,'sentence':getattr(label,'sentence',''),
+                'lexical_class':label.lexical_class,'contextual_class':label.contextual_class,
+                'label_eligible':eligible(label),'accepted_eeg_observations':accepted,
+                'readers_with_accepted_eeg':len(word_readers[key]),
+                'observed_eeg_word_rows':sum(statuses.values()),
+                'eeg_status_counts':json.dumps(dict(statuses),sort_keys=True),
+                'annotation_flags':getattr(label,'annotation_flags',''),
+                'annotation_note':getattr(label,'annotation_note',''),
+                'alignment_warning':label.alignment_warning,
+                'annotation_status':label.annotation_status})
+    selection_frame=pd.DataFrame(selection)
+    require(int(selection_frame.accepted_eeg_observations.sum())==accepted_total,
+            'Word selection export does not account for every accepted EEG event')
+    selection_frame.to_csv(output/'word_selection.csv',index=False)
+    selection_frame[selection_frame.accepted_eeg_observations>0].to_csv(output/'accepted_word_labels.csv',index=False)
     pd.DataFrame(rows).to_csv(output/'subject_window_means.csv',index=False)
     report={'status':'passed','checked_at_utc':datetime.now(timezone.utc).isoformat(),
             'reader_task_records':len(pairs),'unique_readers':len({s for _,s in pairs}),
@@ -187,6 +215,7 @@ def audit(run,make_plots=True):
         '- `plots/*_class_erp.png`: task grand averages.\n'
         '- `plots/subject_grids/`: all 12 readers separately for each task.\n'
         '- `plots/subjects/`: one three-task figure per reader.\n'
+        '- After the region-review cell, `plots/regions/` contains the sensor map, six-region task plots and individual-reader plots.\n'
         '- `readers/<task>/<reader>/class_means.npz`: 3 classes × 105 channels × 501 time samples, counts and axes.\n'
         '- `readers/<task>/<reader>/word_onsets.csv.gz`: all word occurrences, labels, first-fixation onset and exclusion status.\n'
         '- `readers/<task>/<reader>/manifest.json`: source checksum, settings and accepted counts.\n'
@@ -195,6 +224,9 @@ def audit(run,make_plots=True):
         '- `audit/integrity.json`: saved-file audit results and explicit limits.\n'
         '- `audit/file_checksums.json`: hashes of the original result files.\n'
         '- `audit/subject_window_means.csv`: descriptive per-reader window measurements; no significance tests.\n'
+        '- `audit/word_selection.csv`: every annotated word/task with context, both labels, eligibility and actual EEG inclusion counts.\n'
+        '- `audit/accepted_word_labels.csv`: words with at least one accepted EEG observation; not independent trials.\n'
+        '- After region review, `audit/regions/` contains channel assignments, curves, per-reader measurements and paired contrasts.\n'
         '- `word_labels.csv`, `zuco_chanlocs.csv`, `provenance.json`: labels, channel mapping, source inventory and settings.\n'
         '- `compact_results.zip`: portable copy of the extraction result; subject plots and audit added later remain beside it.\n\n'
         'Compact storage omits individual trial EEG arrays. New plots/ROIs/windows of the saved averages need no extraction. '
