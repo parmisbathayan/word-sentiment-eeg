@@ -4,6 +4,12 @@
 
 ## Current run: word onsets and class ERPs
 
+**Review an already completed run:** open [the saved-results review notebook](https://colab.research.google.com/github/parmisbathayan/word-sentiment-eeg/blob/main/notebooks/review.ipynb),
+use CPU, and choose **Runtime → Run all**. It audits the 36 saved reader/task
+records and portable ZIP, then makes subject-specific plots from the saved
+class averages. It does not download source EEG or rerun extraction. New
+outputs go beside the existing results under `audit/` and `plots/`.
+
 Real source data have now been checked: the prior SR audit verified word
 waveforms for 9 readers, and a fresh cloud sample verified word segments and
 onset recovery in NR and TSR. Three SR readers lacked `word.rawEEG`. See
