@@ -4,6 +4,7 @@ from pathlib import Path
 import subprocess
 import sys
 import tempfile
+import shutil
 import h5py
 import numpy as np
 import pandas as pd
@@ -12,6 +13,10 @@ ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/'src'))
 from word_sentiment_eeg.common import sentence_key
 from word_sentiment_eeg.erp import iter_sentences
+from word_sentiment_eeg.erp_checkpoint import load_class_epochs
+from word_sentiment_eeg.common import file_digest, write_json
+sys.path.insert(0,str(ROOT))
+from run_erp import cache_fingerprints
 
 
 with tempfile.TemporaryDirectory() as tmp:
@@ -38,6 +43,7 @@ with tempfile.TemporaryDirectory() as tmp:
     rawdir=directory/'Data/zuco_og_raw';rawdir.mkdir(parents=True)
     source=rawdir/'resultsZAB_SR.mat'
     savemat(source,{'sentenceData':sentences})
+    source_bytes=source.read_bytes()
     ann=directory/'labels.csv';pd.DataFrame(annotations).to_csv(ann,index=False)
     # Additional v7.3 reference schema, including invalid first cell.
     hdf=rawdir/'resultsZDM_NR.mat'
@@ -82,8 +88,47 @@ with tempfile.TemporaryDirectory() as tmp:
     assert means['mean_uV'].shape==(3,105,501)
     # Same first fixation in a different MATLAB format produces identical epochs.
     nr=result['files'][1]
-    a=np.load(Path(sr['output_dir'])/'positive_epochs.npz')['eeg_uV'][0]
-    b=np.load(Path(nr['output_dir'])/'positive_epochs.npz')['eeg_uV'][0]
+    a=load_class_epochs(sr['output_dir'],'positive')[0]
+    b=load_class_epochs(nr['output_dir'],'positive')[0]
     np.testing.assert_allclose(a,b)
-    subprocess.run(command,check=True)  # checkpoint reuse, no download
+    # Restart skips every saved reader: no raw MATLAB source is required.
+    for path in rawdir.glob('*.mat'):
+        path.unlink()
+    resumed=subprocess.run(command,check=True,capture_output=True,text=True)
+    assert '2/2 analyses already saved' in resumed.stdout,resumed.stdout
+    assert 'extract_new_reader' not in resumed.stdout,resumed.stdout
+    assert json.loads((run/'manifest.json').read_text())['processed_files']==2
+    # Recognize the old cache namespace/fingerprint rather than starting a new
+    # extraction when orchestration code changes.
+    current,legacy=cache_fingerprints(ann,manifest)
+    cache=directory/'CachedArtifacts/word_sentiment_eeg/v3_word_erp'
+    shutil.move(str(cache/current[:16]),str(cache/legacy[:16]))
+    for entry in result['files']:
+        target=cache/legacy[:16]/entry['task']/entry['subject']
+        saved=json.loads((target/'manifest.json').read_text())
+        saved['fingerprint']=legacy
+        write_json(target/'manifest.json',saved)
+    migrated=subprocess.run(command,check=True,capture_output=True,text=True)
+    assert '2/2 analyses already saved' in migrated.stdout
+    assert 'extract_new_reader' not in migrated.stdout
+    # Rebuild only a missing neutral export using cached onset samples. The
+    # original source bytes are restored, since repair verifies source identity.
+    target=cache/legacy[:16]/'SR/ZAB'
+    neutral_before=load_class_epochs(target,'neutral').copy()
+    preserved=[target/'class_means.npz',target/'word_onsets.csv.gz',
+               *list((target/'positive_epochs').glob('*.npz')),
+               *list((target/'negative_epochs').glob('*.npz'))]
+    before={str(p):file_digest(p) for p in preserved}
+    missing=next((target/'neutral_epochs').glob('*.npz'))
+    missing.unlink()
+    source.write_bytes(source_bytes)
+    repaired=subprocess.run(command,check=True,capture_output=True,text=True)
+    assert 'repair_trial_exports SR/ZAB' in repaired.stdout,repaired.stdout
+    assert 'extract_new_reader' not in repaired.stdout,repaired.stdout
+    assert '2/2 analyses already saved' in repaired.stdout
+    for path,sha in before.items():
+        assert file_digest(path)==sha,path
+    np.testing.assert_array_equal(load_class_epochs(target,'neutral'),neutral_before)
+    final=json.loads((run/'manifest.json').read_text())
+    assert final['status']=='completed' and final['complete_trial_export_files']==2,final
 print('ERP v5/v7.3 extraction, first-fixation exclusions, onset samples, averaging and resume verified.')

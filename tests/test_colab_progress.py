@@ -7,6 +7,9 @@ import subprocess
 import sys
 import tempfile
 import unittest
+import time
+from threading import Event
+from unittest.mock import patch
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]/'scripts'))
 from colab_progress import run_with_progress
@@ -50,6 +53,23 @@ class ProgressTests(unittest.TestCase):
                 run_with_progress([sys.executable,'-u','-c','print("extraction continued")'],path)
             self.assertIn('Progress-file update unavailable',out.getvalue())
             self.assertIn('extraction continued',out.getvalue())
+
+    def test_slow_drive_write_does_not_block_live_output(self):
+        release=Event();observed=[];start=time.monotonic()
+        class Output(io.StringIO):
+            def write(self,text):
+                if 'live-child-output' in text:
+                    observed.append(time.monotonic()-start)
+                    release.set()
+                return super().write(text)
+        original=Path.write_text
+        def slow_write(path,*args,**kwargs):
+            release.wait(timeout=1)
+            return original(path,*args,**kwargs)
+        with tempfile.TemporaryDirectory() as directory,patch.object(Path,'write_text',slow_write),redirect_stdout(Output()):
+            run_with_progress([sys.executable,'-u','-c','print("live-child-output")'],Path(directory)/'progress.json')
+        self.assertTrue(observed)
+        self.assertLess(observed[0],.8)
 
 
 if __name__=='__main__':

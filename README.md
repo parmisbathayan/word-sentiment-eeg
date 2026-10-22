@@ -23,8 +23,8 @@ The extraction cell explicitly streams live command output into Colab. During
 quiet stages, it prints an elapsed-time/status message every 30 seconds and
 updates `progress.json` in the results folder on Drive. A heartbeat confirms
 the child process is alive, not that it has completed another reader or that a
-particular percentage is finished. The wrapper does not change extraction
-parameters or the epoch-cache fingerprint. Already-running notebook cells do
+particular percentage is finished. Drive heartbeat writes use a separate thread
+so a blocked upload cannot stop notebook log streaming. Already-running cells do
 not acquire this display change automatically; use the updated notebook on the
 next start/resume rather than interrupting a healthy run just for the display.
 
@@ -62,13 +62,37 @@ Small results: `Thesis/Results/word_sentiment_eeg/v3_word_erp/` contains
 `REPORT.md`, `manifest.json`, `provenance.json`, `class_counts.csv`,
 `class_erp_roi.csv`, task grand-average NPZ files and class plots. Trial epochs
 and onset tables: `Thesis/CachedArtifacts/word_sentiment_eeg/v3_word_erp/`,
-under a code/annotation fingerprint and task/reader folders. Trial epoch NPZ
-arrays have `eeg_uV[trial,channel,time]`, `event_id`, `times_ms`, `channel_names`
-and `sfreq_hz`; the onset table maps event IDs to `epoch_index_in_class_file`.
+under a scientific-processing/annotation fingerprint and task/reader folders.
+New trial epochs are split into chunks of at most **64 trials** (~13.5 MB
+uncompressed), instead of one very large file per class. `epochs_index.json`
+lists each class's files and global start/stop rows. Valid older `*_epochs.npz`
+files are reused directly. Arrays have `eeg_uV[trial,channel,time]`, `event_id`,
+`times_ms`, `channel_names` and `sfreq_hz`; the onset table's
+`epoch_index_in_class_file` is the global class row across the listed chunks.
 The full first run may take hours and the persistent trial epochs may occupy
 tens of GB. Completed readers are reused on reruns. Files without usable EEG
 and download failures are explicit in the report; failed downloads can be
 retried by running the same notebook again.
+
+On restart, the runner audits **all** existing reader checkpoints before new
+extraction and saves `resume_plan.json`. It reports two separate counts:
+analyses/onset tables already computed, and readers with complete trial exports.
+The saved-analysis count never resets merely because a new session starts.
+If a reader's means/onsets are valid but some trial files are absent, its
+analysis is kept. Only missing trial chunks are reconstructed from the saved
+onset samples, with source-hash validation; labels and fixation onsets are not
+recomputed and valid positive/negative/neutral files are not overwritten.
+New readers run first; export-only repairs follow. Completed repair chunks are
+reused after a disconnect. Figures/grand averages are built once at the end,
+rather than repeatedly while walking saved readers.
+
+The original `a49719ea0d6626bc…` cache remains compatible when its annotation,
+scientific-code, source-inventory and montage hashes match. Changes to resume,
+logging or storage orchestration do not require repeating scientific extraction.
+Streaming means use float64 accumulation, stored as float32; this can differ
+from old float32 batch means only at numerical rounding precision. Existing
+saved means are kept byte-for-byte. The runner refuses to silently overwrite
+a checkpoint with incompatible settings or inconsistent means/onset counts.
 
 These are descriptive **fixation-related potentials (FRPs)**. Adjacent
 fixations overlap, and this version does not deconvolve that overlap or prove
