@@ -194,7 +194,10 @@ with tempfile.TemporaryDirectory() as tmp:
     assert (compact_run/'plots/regions/SR_regions.png').stat().st_size>1000
     assert (compact_run/'plots/regions/subjects/SR_ZAB.png').stat().st_size>1000
     region_table=pd.read_csv(compact_run/'audit/regions/subject_window_means.csv')
-    assert len(region_table)==2*6*3*4
+    # The fixture's NR reader has <5 accepted epochs/class and must remain
+    # excluded from comparable group curves, exactly as in the original run.
+    assert set(regional)=={'SR'}
+    assert len(region_table)==len(regional)*6*3*4
     for p,sha in audit_originals.items():
         assert file_digest(p)==sha,p
     onset_file=compact_run/'readers/SR/ZAB/word_onsets.csv.gz'
