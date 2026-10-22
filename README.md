@@ -19,6 +19,15 @@ and in Colab's temporary runtime; only results and reusable EEG outputs are
 saved to Drive. The older feature/classification runner remains `main.py`; it is not
 run by the short notebook.
 
+The extraction cell explicitly streams live command output into Colab. During
+quiet stages, it prints an elapsed-time/status message every 30 seconds and
+updates `progress.json` in the results folder on Drive. A heartbeat confirms
+the child process is alive, not that it has completed another reader or that a
+particular percentage is finished. The wrapper does not change extraction
+parameters or the epoch-cache fingerprint. Already-running notebook cells do
+not acquire this display change automatically; use the updated notebook on the
+next start/resume rather than interrupting a healthy run just for the display.
+
 - Covers SR, NR and TSR separately. Uncertain labels, lexical/context
   disagreements, and alignment warnings are excluded automatically.
 - Locates the **first stored fixation** in `sentenceData.rawData`, validating
