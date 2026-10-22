@@ -20,10 +20,15 @@ notes and alignment flags). After the review notebook completes,
 `audit/accepted_word_labels.csv` contains words with at least one accepted event.
 
 **Persian TeCo:** [input-preflight notebook](https://colab.research.google.com/github/parmisbathayan/word-sentiment-eeg/blob/main/notebooks/teco_preflight.ipynb)
-reads existing private Drive files in Colab and exports token/structure reports.
-It is not an ERP analysis: `TRT_total` is time-collapsed, and usable raw word
-timing, sampling rate and Persian-context labels must be verified first. It
-inspects one existing multi-GB raw pickle; no dataset is downloaded or copied.
+follows the user's existing TeCo notebooks and native schema. Native sentence
+EEG is `raw_data` (126 channels, documented 1200 Hz); per-fixation waveforms are
+`word.rawEEG`. A bounded check of existing files matched **240/240 sampled first
+fixations exactly across all 12 readers** and joined all 165 sentence texts per
+reader. See [implementation trace and evidence limits](docs/TECO_IMPLEMENTATION_TRACE.md).
+The notebook exports token/structure reports and repeats a bounded native-onset
+check on one Drive file. It is not an ERP analysis or Persian word annotation.
+`TRT_total` remains time-collapsed; full onset validation and Persian-context
+labels are still needed for class ERPs. No dataset is downloaded or copied.
 Persian texts and research files are not committed to this public repository.
 
 The existing neutral class means neutral **words in their local context**, pooled
