@@ -18,3 +18,4 @@ jobs:
       - run: python tests/cloud_zuco_followups.py
       - run: python tests/cloud_zuco_covariates.py
       - run: python tests/cloud_zuco_context.py
+      - run: python tests/cloud_all_plots.py

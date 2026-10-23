@@ -2,6 +2,19 @@
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/parmisbathayan/word-sentiment-eeg/blob/main/notebooks/short.ipynb)
 
+## All overall and regional plots — separate notebooks
+
+For completed runs, use **CPU → Runtime → Run all**:
+
+- [ZuCo: overall + original 12-channel ROI + GFP + six regions + every reader](https://colab.research.google.com/github/parmisbathayan/word-sentiment-eeg/blob/main/notebooks/zuco_plots.ipynb)
+- [TeCo: overall + GFP + six regions + every reader, including both neutral controls](https://colab.research.google.com/github/parmisbathayan/word-sentiment-eeg/blob/main/notebooks/teco_plots.ipynb)
+
+These read saved compact averages, without repeating EEG extraction. All new
+figures and tables stay under the corresponding run's `analysis/all_plots_v1/`.
+A true whole-head signed mean is near zero after average reference. GFP is
+shown separately, and the previous ZuCo 12-channel overview remains explicitly
+labeled as an ROI. See [gallery definitions and output structure](docs/ALL_PLOTS.md).
+
 ## Current run: word onsets and class ERPs
 
 **Review an already completed run:** open [the saved-results review notebook](https://colab.research.google.com/github/parmisbathayan/word-sentiment-eeg/blob/main/notebooks/review.ipynb),
