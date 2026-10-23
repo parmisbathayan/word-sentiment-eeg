@@ -187,6 +187,8 @@ def render_panels(metrics,groups,times,units,path,title,keys,channel_counts,grou
                 ax.fill_between(times,mean[gi]-sem[gi],mean[gi]+sem[gi],color=COLORS[group],alpha=.14)
         if key=='whole_scalp_gfp':
             ax.set_ylim(bottom=0)
+        elif key=='original_12_channel_roi' and len(keys)==1:
+            pass  # Restore the original overview's own autoscaled mean/SEM view.
         else:
             ax.set_ylim(-signed_bound*1.1,signed_bound*1.1)
         extra=f' · {channel_counts[key]} channels' if key in REGIONS else ''
