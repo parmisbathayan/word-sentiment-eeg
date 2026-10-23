@@ -10,7 +10,7 @@ The ZuCo notebook creates a missing saved-file audit first; an existing audit
 is reused and source-average checksums are checked again.
 
 Each notebook shows group overall plots, group regional plots, the sensor map,
-and every reader's combined overall/regional plot. ZuCo keeps SR, NR and TSR
+and every reader's overall/regional plots in one horizontal row. ZuCo keeps SR, NR and TSR
 separate. TeCo shows pooled neutral, strict neutral-context and source-rated
 neutral comparisons with separate matched-reader rosters. All panels within a
 comparison use the same readers and equal reader weights; counts are not used
@@ -44,6 +44,16 @@ Thesis/Results/word_sentiment_eeg/
 ├── v4_word_erp_compact/analysis/all_plots_v1/
 └── teco_v1_word_erp_compact/analysis/all_plots_v1/
 ```
+
+The ZuCo notebook separates output into cells: overall means for all tasks,
+regional group means, GFP, sensor map, then one reader-specific cell for each
+of SR, NR and TSR. The overall cell contains both a standalone true whole-head
+mean per task and the original 12-channel ROI overview with ±1 SEM. Each reader
+is one row with nine columns: whole-head mean, original ROI, GFP, anterior,
+central, posterior, occipital, left lateral and right lateral. A single
+horizontal scroll container preserves readable column widths for all readers
+in a task; rows do not shrink nine plots into the notebook's page width. TeCo
+uses the same row layout with eight columns (no original ZuCo ROI).
 
 Each gallery contains `group/`, `subjects/`, `sensor_regions.png`,
 `group_curves.csv.gz`, `reader_class_counts.csv`, `channel_regions.csv`,

@@ -1,8 +1,11 @@
 """Saved-plot integration: reference cancellation, GFP, rosters, immutability."""
 import json
+import os
+import shutil
 from pathlib import Path
 import sys
 import tempfile
+import struct
 
 import numpy as np
 import pandas as pd
@@ -10,10 +13,17 @@ import pandas as pd
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/'scripts'))
 import plot_saved_erps as plots
+import notebook_plot_display as display_plots
 from word_sentiment_eeg.common import file_digest,write_json
 
 
 def check_metrics():
+    mean,sem=plots.mean_and_sem(np.array([[1.],[3.],[5.]]))
+    np.testing.assert_allclose(mean,[3.])
+    np.testing.assert_allclose(sem,[2/np.sqrt(3)])
+    assert plots.mean_and_sem(np.array([[1.]]))[1] is None
+    assert plots.panel_layout(9,horizontal=True)[:2]==(1,9)
+    assert plots.panel_layout(1)[:2]==(1,1)
     # Opposite reader topographies cancel in the grand average, but GFP of
     # each reader's class-average signal remains positive. No trial weighting.
     values=np.array([[[[-1.,-2.],[1.,2.]]],[[[1.,2.],[-1.,-2.]]]])
@@ -78,8 +88,24 @@ def main():
             run=Path(temp)/dataset;run.mkdir();fixture(run,dataset)
             before={p:file_digest(p) for p in run.rglob('*') if p.is_file()}
             saved,out,gallery=plots.plot_collection(run,dataset,make_plots=False)
-            assert len(gallery)==(42 if dataset=='zuco' else 18)
+            assert len(gallery)==(48 if dataset=='zuco' else 18)
             assert len({x['path'] for x in gallery})==len(gallery)
+            rows=[x for x in gallery if x['kind']=='subject']
+            assert all(x['layout']=='one_reader_per_row' for x in rows)
+            assert all(len(x['columns'])==(9 if dataset=='zuco' else 8) for x in rows)
+            if dataset=='zuco':
+                assert len([x for x in gallery if x.get('view')=='original_overview'])==3
+                assert len([x for x in gallery if x.get('view')=='overall'])==3
+                assert all(x['measures']==['whole_scalp_signed_mean'] for x in gallery if x.get('view')=='overall')
+            # A task cell contains that task's readers only; all rows share the
+            # same horizontal viewport rather than shrinking nine plots.
+            reader_task=rows[0]['task']
+            for item in rows:
+                path=out/item['path'];path.parent.mkdir(parents=True,exist_ok=True);path.write_bytes(b'synthetic-png-for-html-test')
+            rendered=display_plots.task_reader_rows_html(gallery,out,reader_task)
+            assert rendered.count('<figure ')==12
+            assert 'overflow-x:auto' in rendered and 'max-width:none' in rendered
+            assert 'base64,' in rendered
             rosters=json.loads((out/'comparison_rosters.json').read_text())
             if dataset=='teco':
                 assert len(rosters['task1/strict_neutral']['readers'])==11
@@ -93,14 +119,36 @@ def main():
                 count={r:int(saved.montage.region.eq(r).sum()) for r in plots.REGIONS}
                 for name,keys in [('overall',list(metrics)[:3 if dataset=='zuco' else 2]),('regions',list(plots.REGIONS)),('combined',list(metrics))]:
                     path=out/(name+'.png')
-                    plots.render_panels(metrics,groups,saved.times,saved.units,path,'Synthetic '+dataset,keys,count,False)
+                    plots.render_panels(metrics,groups,saved.times,saved.units,path,'Synthetic '+dataset,keys,count,False,horizontal=(name=='combined'))
                     assert path.stat().st_size>1000
+                    if name=='combined':
+                        width,height=struct.unpack('>II',path.read_bytes()[16:24])
+                        assert width/height>len(keys)*.75
+                path=out/'single-overall.png'
+                plots.render_panels(metrics,groups,saved.times,saved.units,path,'Group mean ±1 SEM',
+                                    ['whole_scalp_signed_mean'],count,True)
+                assert path.stat().st_size>1000
+                if dataset=='zuco':
+                    two=np.stack([r.means for r in saved.records if r.task==record.task][:2])
+                    group_metrics=plots.summaries(two,saved.montage,saved.channels,True)
+                    plots.render_panels(group_metrics,groups,saved.times,saved.units,out/'original-overview.png',
+                                        'Original ZuCo ROI · equal reader mean ±1 SEM',
+                                        ['original_12_channel_roi'],count,True)
+                    if os.environ.get('PLOT_PREVIEW_DIR'):
+                        preview=Path(os.environ['PLOT_PREVIEW_DIR']);preview.mkdir(parents=True,exist_ok=True)
+                        for filename in ('combined.png','original-overview.png','single-overall.png'):
+                            shutil.copyfile(out/filename,preview/filename)
             # Never silently plot corrupt or repeated reader checkpoints.
             victim=next(p for p in before if p.name=='class_means.npz')
             victim.write_bytes(b'corrupt file')
             try:plots.load_saved(run,dataset)
             except ValueError as error:assert 'checksum' in str(error)
             else:raise AssertionError('Corrupt saved means were accepted')
-    print('All-plot checks passed: true full-head mean, per-reader GFP, equal weighting, strict-neutral roster, source preservation and corrupt-checkpoint rejection')
+    for dataset,tasks in [('zuco',('SR','NR','TSR')),('teco',('task1',))]:
+        book=json.loads((ROOT/'notebooks'/f'{dataset}_plots.ipynb').read_text())
+        for task in tasks:
+            task_cells=[c for c in book['cells'] if c['metadata'].get('id')=='reader-rows-'+task]
+            assert len(task_cells)==1 and f"'{task}'" in ''.join(task_cells[0]['source'])
+    print('All-plot checks passed: standalone group overviews, SEM not SD, true whole-head mean, horizontal reader rows, separate task cells, GFP, roster and source preservation')
 
 if __name__=='__main__':main()

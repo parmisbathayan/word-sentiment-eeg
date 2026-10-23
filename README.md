@@ -9,6 +9,10 @@ For completed runs, use **CPU → Runtime → Run all**:
 - [ZuCo: overall + original 12-channel ROI + GFP + six regions + every reader](https://colab.research.google.com/github/parmisbathayan/word-sentiment-eeg/blob/main/notebooks/zuco_plots.ipynb)
 - [TeCo: overall + GFP + six regions + every reader, including both neutral controls](https://colab.research.google.com/github/parmisbathayan/word-sentiment-eeg/blob/main/notebooks/teco_plots.ipynb)
 
+The ZuCo notebook has separate category cells and a reader-specific cell per task.
+Each reader is one horizontal row, with whole-head mean, original ROI, GFP and
+six regions as columns. Original task overviews with ±1 SEM are standalone plots.
+
 These read saved compact averages, without repeating EEG extraction. All new
 figures and tables stay under the corresponding run's `analysis/all_plots_v1/`.
 A true whole-head signed mean is near zero after average reference. GFP is
