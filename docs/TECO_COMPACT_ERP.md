@@ -9,7 +9,7 @@ Inputs:
 - Native reader pickles discovered under `Thesis/Data/teco_pickles`, the original
   `pickle_files_acc3/acc5` layouts or `TeCo/task1_with_total`. A complete canonical
   roster of 12 readers is required. Alternate copies are logged, not counted.
-- Private `Thesis/Data/word_sentiment_eeg/teco/gpt uploaded files/word_labels.csv`.
+- Private `Thesis/gpt uploaded files/word_sentiment_eeg/teco/word_labels.csv`.
 - The original generic 126-channel montage, ordered exactly as source arrays.
   `assets/teco_montage.txt` is copied from the existing project montage.
 

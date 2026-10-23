@@ -43,7 +43,7 @@ All 165 Persian sentences / 3,016 word occurrences now have lexical, contextual,
 and sentence-context labels, followed by an independent agent quality review and
 corrections. These are agent judgments, not human gold labels. Exact annotation
 joins were checked against 34,295 available reader-token instances across all 12 readers.
-Private labels belong at `Thesis/Data/word_sentiment_eeg/teco/gpt uploaded files/word_labels.csv`;
+Private labels belong at `Thesis/gpt uploaded files/word_sentiment_eeg/teco/word_labels.csv`;
 Persian text and annotations are deliberately excluded from this public repository.
 After excluding controls and ambiguous/context-disagreeing labels, the source pool
 has 160 positive, 98 negative and 2,440 neutral word occurrences before fixation/EEG quality checks.

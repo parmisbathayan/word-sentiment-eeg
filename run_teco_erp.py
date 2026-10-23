@@ -155,7 +155,7 @@ def main():
     args=parser.parse_args()
     if Path(args.run_tag).name!=args.run_tag:
         parser.error('Run tag must be one folder name')
-    annotations=args.annotations or args.thesis_root/'Data/word_sentiment_eeg/teco/gpt uploaded files/word_labels.csv'
+    annotations=args.annotations or args.thesis_root/'gpt uploaded files/word_sentiment_eeg/teco/word_labels.csv'
     if not annotations.is_file():
         raise SystemExit(f'Private Persian labels not present: {annotations}. Do not substitute English labels.')
     labels,lookup=load_labels(annotations)
