@@ -1,0 +1,43 @@
+{
+  "status": "all_source_sentences_explicitly_reviewed",
+  "annotation_status": "agent_reviewed_not_human_gold",
+  "not_human_consensus": true,
+  "sentence_count": 1037,
+  "counts": {
+    "mixed": 111,
+    "positive": 217,
+    "negative": 236,
+    "uncertain": 57,
+    "neutral": 416
+  },
+  "task_counts": {
+    "SR": {
+      "mixed": 95,
+      "positive": 112,
+      "negative": 161,
+      "uncertain": 30,
+      "neutral": 2
+    },
+    "NR": {
+      "neutral": 199,
+      "positive": 39,
+      "negative": 40,
+      "uncertain": 14,
+      "mixed": 8
+    },
+    "TSR": {
+      "neutral": 248,
+      "negative": 38,
+      "positive": 76,
+      "mixed": 10,
+      "uncertain": 14
+    }
+  },
+  "policy": "sentence_context_POLICY.md",
+  "policy_sha256": "b1136f9d99a351caa78b68599d55b69e81102b00a990e10b082c18437f140d6e",
+  "source_sha256": "64e8619ae362fc0aba6c1ca304a7db4506a928d0fdbab58bea1dc8b69dd081e8",
+  "decisions_sha256": "16c60b3d879b5177fb5dd330aefa88baec89e265e221f494eedcdbcd06f0b076",
+  "output_sha256": "9bcf54da4cb353bbf2a2adf5cfde1c99aee79353953ad5372bbb0bcbe3709f87",
+  "scope": "Affective/evaluative context of the supplied sentence; not reviewer recommendation, discourse sentiment, or measured reader emotion",
+  "coverage_note": "Task counts overlap where a source sentence is shared by tasks"
+}

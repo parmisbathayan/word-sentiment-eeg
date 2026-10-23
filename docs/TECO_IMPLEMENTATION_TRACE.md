@@ -52,6 +52,7 @@ reference; an acquisition header was not independently recovered here.
 4. Writes only small reports/inventories and sample onset rows to
    `Thesis/Results/word_sentiment_eeg/teco_preflight/`.
 
-Next work is Persian word/context annotation, then a compact native TeCo ERP
-runner with exhaustive onset checks, explicit control handling and a verified
-126-channel montage. None of those outputs is claimed complete by this check.
+The subsequent compact extraction implementation is documented in
+`docs/TECO_COMPACT_ERP.md`: `run_teco_erp.py` and `notebooks/teco.ipynb` use this
+native route and private Persian word/context annotations. Code preparation and
+synthetic tests do not establish that a full native TeCo extraction has run.

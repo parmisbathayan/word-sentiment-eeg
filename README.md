@@ -19,25 +19,43 @@ notes and alignment flags). After the review notebook completes,
 `audit/word_selection.csv` adds actual accepted EEG counts, while
 `audit/accepted_word_labels.csv` contains words with at least one accepted event.
 
-**Persian TeCo:** [input-preflight notebook](https://colab.research.google.com/github/parmisbathayan/word-sentiment-eeg/blob/main/notebooks/teco_preflight.ipynb)
-follows the user's existing TeCo notebooks and native schema. Native sentence
-EEG is `raw_data` (126 channels, documented 1200 Hz); per-fixation waveforms are
-`word.rawEEG`. A bounded check of existing files matched **240/240 sampled first
-fixations exactly across all 12 readers** and joined all 165 sentence texts per
-reader. See [implementation trace and evidence limits](docs/TECO_IMPLEMENTATION_TRACE.md).
-The notebook exports token/structure reports and repeats a bounded native-onset
-check on one Drive file. It is not an ERP analysis or Persian word annotation.
-`TRT_total` remains time-collapsed; full onset validation and Persian-context
-labels are still needed for class ERPs. No dataset is downloaded or copied.
-Persian texts and research files are not committed to this public repository.
+**New follow-ups:** the [review notebook](https://colab.research.google.com/github/parmisbathayan/word-sentiment-eeg/blob/main/notebooks/review.ipynb)
+now adds paired-reader contrasts, corrected exploratory tests, direction/leave-one-reader-out checks,
+and word-length/fixation balance tables using existing saved files. Results go under
+`analysis/paired_reader_contrasts/` and `analysis/covariate_balance/` inside the same completed run.
+See [follow-up methods and priorities](docs/ZUCO_FOLLOWUPS.md).
 
-The existing neutral class means neutral **words in their local context**, pooled
-across sentence contexts. It is not restricted to globally neutral sentences.
-A neutral-word/neutral-sentence control is a separate analysis that needs
-sentence-context annotation and new averages from source epochs; the existing
-pooled means cannot be filtered back into that subset. NR/TSR task membership is
-not itself a neutral-sentence label. Context must be matched or stratified for
-all classes to avoid changing only the neutral group's sentence context.
+**Neutral words in neutral sentences:** use the separate
+[context-controls notebook](https://colab.research.google.com/github/parmisbathayan/word-sentiment-eeg/blob/main/notebooks/context_controls.ipynb).
+It reconstructs selected source epochs from the original saved accepted word onsets,
+while preserving the existing pooled averages. All new outputs stay under the
+same run's `analysis/neutral_context_v1/`. It distinguishes source-rated neutral SR
+reviews (137 of 400) from strictly neutral agent-reviewed contexts (2 SR sentences).
+The 1,037 sentence-context labels cover the complete English stimulus collection;
+NR and TSR are not automatically assumed neutral. Sparse within-context comparisons
+produce coverage reports rather than misleading curves. Comparing emotional words
+in emotional contexts against neutral words in neutral contexts still changes both
+word and sentence properties; this control alone does not isolate a word effect.
+
+**Persian TeCo:** [compact TeCo notebook](https://colab.research.google.com/github/parmisbathayan/word-sentiment-eeg/blob/main/notebooks/teco.ipynb)
+uses native `raw_data` and `word.rawEEG`: 126 channels at documented 1200 Hz.
+All 165 Persian sentences / 3,016 word occurrences now have lexical, contextual,
+and sentence-context labels, followed by an independent agent quality review and
+corrections. These are agent judgments, not human gold labels. Exact annotation
+joins were checked against 34,295 available reader-token instances across all 12 readers.
+Private labels belong at `Thesis/Data/word_sentiment_eeg/teco/word_labels.csv`;
+Persian text and annotations are deliberately excluded from this public repository.
+After excluding controls and ambiguous/context-disagreeing labels, the source pool
+has 160 positive, 98 negative and 2,440 neutral word occurrences before fixation/EEG quality checks.
+The strict neutral-context pool has only 31 eligible neutral words; original source-neutral
+sentences provide a separate baseline. The native signal runner saves five group
+means, exact onsets, exclusions, per-reader checksums and six scalp-region/subject plots.
+It reads existing private EEG in Colab one reader at a time, with no trial-array archive.
+No full TeCo class-ERP extraction has been completed merely by preparing this code.
+See [TeCo compact pipeline](docs/TECO_COMPACT_ERP.md) and
+[implementation trace](docs/TECO_IMPLEMENTATION_TRACE.md).
+The older [preflight notebook](https://colab.research.google.com/github/parmisbathayan/word-sentiment-eeg/blob/main/notebooks/teco_preflight.ipynb)
+remains a bounded structure/onset check, not the full analysis.
 
 Real source data have now been checked: the prior SR audit verified word
 waveforms for 9 readers, and a fresh cloud sample verified word segments and
@@ -146,7 +164,7 @@ a checkpoint with incompatible settings or inconsistent means/onset counts.
 These are descriptive **fixation-related potentials (FRPs)**. Adjacent
 fixations overlap, and this version does not deconvolve that overlap or prove
 a sentiment-specific response. ±1 SEM shading is across readers, not trials;
-no significance tests are claimed. Real ERP results await the user's Colab run.
+the original extraction plots do not carry significance tests. The separate review notebook now provides explicitly exploratory paired-reader tests with declared correction families.
 
 The requested annotation pass is complete: **1,037 distinct English sentences,
 20,458 source word occurrences**, across **all three ZuCo 1.0 tasks**. Labels

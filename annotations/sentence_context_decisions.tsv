@@ -1,0 +1,1038 @@
+# All 1037 source sentences read directly; no word-label/EEG-derived rules. Ordinal, class decision, note.
+0	class=mixed	note=Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.
+1	class=positive	note=Favorable evaluation, approval, enjoyment or beneficial outcome.
+2	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+3	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+4	class=negative	note=Unfavorable empty/unsatisfying evaluation; corrupted token does not make sentence neutral.
+5	class=positive	note=Favorable evaluation, approval, enjoyment or beneficial outcome.
+6	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+7	class=positive	note=Favorable evaluation, approval, enjoyment or beneficial outcome.
+8	class=mixed	note=Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.
+9	class=mixed	note=Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.
+10	class=mixed	note=Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.
+11	class=positive	note=Favorable evaluation, approval, enjoyment or beneficial outcome.
+12	class=positive	note=Favorable evaluation, approval, enjoyment or beneficial outcome.
+13	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+14	class=positive	note=Implicitly favorable claim that the needed ingredients are present.
+15	class=positive	note=Favorable evaluation, approval, enjoyment or beneficial outcome.
+16	class=mixed	note=Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.
+17	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+18	class=mixed	note=Favorable deeper realization is expressed through loss/inability themes.
+19	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+20	class=positive	note=Favorable evaluation, approval, enjoyment or beneficial outcome.
+21	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+22	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+23	class=positive	note=Favorable evaluation, approval, enjoyment or beneficial outcome.
+24	class=mixed	note=Good time with a shapelessness criticism.
+25	class=mixed	note=Explicit better/worse contrast; ambivalent overall.
+26	class=positive	note=Favorable evaluation, approval, enjoyment or beneficial outcome.
+27	class=mixed	note=Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.
+28	class=positive	note=Favorable evaluation, approval, enjoyment or beneficial outcome.
+29	class=mixed	note=Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.
+30	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+31	class=mixed	note=Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.
+32	class=uncertain	note=Fragment, irony, genre convention or insufficient discourse makes global valence uncertain.
+33	class=mixed	note=Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.
+34	class=positive	note=Favorable evaluation, approval, enjoyment or beneficial outcome.
+35	class=mixed	note=Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.
+36	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+37	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+38	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+39	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+40	class=positive	note=Favorable evaluation, approval, enjoyment or beneficial outcome.
+41	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+42	class=positive	note=Favorable evaluation, approval, enjoyment or beneficial outcome.
+43	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+44	class=positive	note=Favorable evaluation, approval, enjoyment or beneficial outcome.
+45	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+46	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+47	class=positive	note=Favorable evaluation, approval, enjoyment or beneficial outcome.
+48	class=uncertain	note=Fragment, irony, genre convention or insufficient discourse makes global valence uncertain.
+49	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+50	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+51	class=mixed	note=Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.
+52	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+53	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+54	class=mixed	note=Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.
+55	class=positive	note=Favorable evaluation, approval, enjoyment or beneficial outcome.
+56	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+57	class=mixed	note=Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.
+58	class=uncertain	note=Fragment, irony, genre convention or insufficient discourse makes global valence uncertain.
+59	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+60	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+61	class=positive	note=Favorable evaluation, approval, enjoyment or beneficial outcome.
+62	class=mixed	note=Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.
+63	class=positive	note=Favorable evaluation, approval, enjoyment or beneficial outcome.
+64	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+65	class=mixed	note=Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.
+66	class=mixed	note=Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.
+67	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+68	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+69	class=negative	note=Mass murder and violent imagery despite comic framing.
+70	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+71	class=mixed	note=Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.
+72	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+73	class=positive	note=Favorable evaluation, approval, enjoyment or beneficial outcome.
+74	class=mixed	note=Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.
+75	class=uncertain	note=Fragment, irony, genre convention or insufficient discourse makes global valence uncertain.
+76	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+77	class=mixed	note=Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.
+78	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+79	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+80	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+81	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+82	class=mixed	note=Praise of film alongside explicit Holocaust subject matter.
+83	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+84	class=mixed	note=Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.
+85	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+86	class=positive	note=Favorable evaluation, approval, enjoyment or beneficial outcome.
+87	class=positive	note=Favorable evaluation, approval, enjoyment or beneficial outcome.
+88	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+89	class=positive	note=Favorable evaluation, approval, enjoyment or beneficial outcome.
+90	class=mixed	note=Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.
+91	class=positive	note=Favorable evaluation, approval, enjoyment or beneficial outcome.
+92	class=mixed	note=Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.
+93	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+94	class=uncertain	note=Fragment, irony, genre convention or insufficient discourse makes global valence uncertain.
+95	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+96	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+97	class=mixed	note=Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.
+98	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+99	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+100	class=mixed	note=Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.
+101	class=mixed	note=Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.
+102	class=positive	note=Favorable evaluation, approval, enjoyment or beneficial outcome.
+103	class=positive	note=Favorable evaluation, approval, enjoyment or beneficial outcome.
+104	class=positive	note=Favorable evaluation, approval, enjoyment or beneficial outcome.
+105	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+106	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+107	class=positive	note=Favorable evaluation, approval, enjoyment or beneficial outcome.
+108	class=positive	note=Favorable evaluation, approval, enjoyment or beneficial outcome.
+109	class=mixed	note=Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.
+110	class=positive	note=Favorable evaluation, approval, enjoyment or beneficial outcome.
+111	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+112	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+113	class=positive	note=Favorable evaluation, approval, enjoyment or beneficial outcome.
+114	class=uncertain	note=Fragment, irony, genre convention or insufficient discourse makes global valence uncertain.
+115	class=positive	note=Favorable evaluation, approval, enjoyment or beneficial outcome.
+116	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+117	class=positive	note=Favorable evaluation, approval, enjoyment or beneficial outcome.
+118	class=mixed	note=Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.
+119	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+120	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+121	class=positive	note=Favorable evaluation, approval, enjoyment or beneficial outcome.
+122	class=positive	note=Favorable evaluation, approval, enjoyment or beneficial outcome.
+123	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+124	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+125	class=positive	note=Favorable evaluation, approval, enjoyment or beneficial outcome.
+126	class=positive	note=Favorable evaluation, approval, enjoyment or beneficial outcome.
+127	class=uncertain	note=Fragment, irony, genre convention or insufficient discourse makes global valence uncertain.
+128	class=positive	note=Favorable evaluation, approval, enjoyment or beneficial outcome.
+129	class=mixed	note=Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.
+130	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+131	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+132	class=positive	note=Favorable evaluation, approval, enjoyment or beneficial outcome.
+133	class=uncertain	note=Fragment, irony, genre convention or insufficient discourse makes global valence uncertain.
+134	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+135	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+136	class=uncertain	note=Fragment, irony, genre convention or insufficient discourse makes global valence uncertain.
+137	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+138	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+139	class=mixed	note=Health/energy contrasted with approaching death.
+140	class=positive	note=Favorable evaluation, approval, enjoyment or beneficial outcome.
+141	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+142	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+143	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+144	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+145	class=positive	note=Favorable evaluation, approval, enjoyment or beneficial outcome.
+146	class=mixed	note=Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.
+147	class=mixed	note=Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.
+148	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+149	class=positive	note=Favorable evaluation, approval, enjoyment or beneficial outcome.
+150	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+151	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+152	class=positive	note=Favorable evaluation, approval, enjoyment or beneficial outcome.
+153	class=mixed	note=Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.
+154	class=positive	note=Favorable evaluation, approval, enjoyment or beneficial outcome.
+155	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+156	class=positive	note=Favorable evaluation, approval, enjoyment or beneficial outcome.
+157	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+158	class=positive	note=Favorable evaluation, approval, enjoyment or beneficial outcome.
+159	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+160	class=mixed	note=Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.
+161	class=mixed	note=Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.
+162	class=positive	note=Favorable evaluation, approval, enjoyment or beneficial outcome.
+163	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+164	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+165	class=positive	note=Favorable evaluation, approval, enjoyment or beneficial outcome.
+166	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+167	class=mixed	note=Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.
+168	class=mixed	note=Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.
+169	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+170	class=positive	note=Favorable evaluation, approval, enjoyment or beneficial outcome.
+171	class=positive	note=Favorable evaluation, approval, enjoyment or beneficial outcome.
+172	class=positive	note=Favorable evaluation, approval, enjoyment or beneficial outcome.
+173	class=mixed	note=Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.
+174	class=uncertain	note=Fragment, irony, genre convention or insufficient discourse makes global valence uncertain.
+175	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+176	class=mixed	note=Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.
+177	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+178	class=mixed	note=Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.
+179	class=positive	note=Favorable evaluation, approval, enjoyment or beneficial outcome.
+180	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+181	class=uncertain	note=Fragment, irony, genre convention or insufficient discourse makes global valence uncertain.
+182	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+183	class=uncertain	note=Fragment, irony, genre convention or insufficient discourse makes global valence uncertain.
+184	class=positive	note=Favorable evaluation, approval, enjoyment or beneficial outcome.
+185	class=positive	note=Favorable evaluation, approval, enjoyment or beneficial outcome.
+186	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+187	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+188	class=positive	note=Favorable evaluation, approval, enjoyment or beneficial outcome.
+189	class=mixed	note=Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.
+190	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+191	class=positive	note=Favorable evaluation, approval, enjoyment or beneficial outcome.
+192	class=uncertain	note=Fragment, irony, genre convention or insufficient discourse makes global valence uncertain.
+193	class=positive	note=Favorable evaluation, approval, enjoyment or beneficial outcome.
+194	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+195	class=positive	note=Favorable evaluation, approval, enjoyment or beneficial outcome.
+196	class=mixed	note=Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.
+197	class=mixed	note=Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.
+198	class=neutral	note=Bare genre/subject description; no clear opinion in this supplied fragment.
+199	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+200	class=positive	note=Favorable evaluation, approval, enjoyment or beneficial outcome.
+201	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+202	class=positive	note=Favorable evaluation, approval, enjoyment or beneficial outcome.
+203	class=mixed	note=Accomplishment metaphor alongside rage/obsession/discord; mixed affective material.
+204	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+205	class=positive	note=Favorable evaluation, approval, enjoyment or beneficial outcome.
+206	class=mixed	note=Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.
+207	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+208	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+209	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+210	class=positive	note=Favorable evaluation, approval, enjoyment or beneficial outcome.
+211	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+212	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+213	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+214	class=uncertain	note=Missing antecedent of never is prevents a confident global polarity.
+215	class=positive	note=Favorable evaluation, approval, enjoyment or beneficial outcome.
+216	class=mixed	note=Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.
+217	class=mixed	note=Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.
+218	class=positive	note=Favorable evaluation, approval, enjoyment or beneficial outcome.
+219	class=mixed	note=Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.
+220	class=mixed	note=Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.
+221	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+222	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+223	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+224	class=positive	note=Favorable evaluation, approval, enjoyment or beneficial outcome.
+225	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+226	class=positive	note=Favorable evaluation, approval, enjoyment or beneficial outcome.
+227	class=positive	note=Favorable evaluation, approval, enjoyment or beneficial outcome.
+228	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+229	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+230	class=mixed	note=Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.
+231	class=positive	note=Favorable evaluation, approval, enjoyment or beneficial outcome.
+232	class=mixed	note=Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.
+233	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+234	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+235	class=mixed	note=Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.
+236	class=uncertain	note=Fragment, irony, genre convention or insufficient discourse makes global valence uncertain.
+237	class=uncertain	note=Fragment, irony, genre convention or insufficient discourse makes global valence uncertain.
+238	class=mixed	note=Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.
+239	class=uncertain	note=Fragment, irony, genre convention or insufficient discourse makes global valence uncertain.
+240	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+241	class=uncertain	note=Fragment, irony, genre convention or insufficient discourse makes global valence uncertain.
+242	class=positive	note=Favorable evaluation, approval, enjoyment or beneficial outcome.
+243	class=mixed	note=Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.
+244	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+245	class=positive	note=Favorable evaluation, approval, enjoyment or beneficial outcome.
+246	class=positive	note=Favorable evaluation, approval, enjoyment or beneficial outcome.
+247	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+248	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+249	class=positive	note=Favorable evaluation, approval, enjoyment or beneficial outcome.
+250	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+251	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+252	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+253	class=positive	note=Favorable evaluation, approval, enjoyment or beneficial outcome.
+254	class=positive	note=Favorable evaluation, approval, enjoyment or beneficial outcome.
+255	class=positive	note=Favorable evaluation, approval, enjoyment or beneficial outcome.
+256	class=positive	note=Favorable evaluation, approval, enjoyment or beneficial outcome.
+257	class=mixed	note=Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.
+258	class=mixed	note=Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.
+259	class=mixed	note=Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.
+260	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+261	class=uncertain	note=Fragment, irony, genre convention or insufficient discourse makes global valence uncertain.
+262	class=positive	note=Favorable evaluation, approval, enjoyment or beneficial outcome.
+263	class=uncertain	note=Fragment, irony, genre convention or insufficient discourse makes global valence uncertain.
+264	class=mixed	note=Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.
+265	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+266	class=positive	note=Favorable evaluation, approval, enjoyment or beneficial outcome.
+267	class=uncertain	note=Fragment, irony, genre convention or insufficient discourse makes global valence uncertain.
+268	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+269	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+270	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+271	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+272	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+273	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+274	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+275	class=mixed	note=Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.
+276	class=positive	note=Favorable evaluation, approval, enjoyment or beneficial outcome.
+277	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+278	class=positive	note=Favorable evaluation, approval, enjoyment or beneficial outcome.
+279	class=positive	note=Favorable evaluation, approval, enjoyment or beneficial outcome.
+280	class=mixed	note=Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.
+281	class=mixed	note=Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.
+282	class=mixed	note=Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.
+283	class=positive	note=Favorable evaluation, approval, enjoyment or beneficial outcome.
+284	class=positive	note=Favorable evaluation, approval, enjoyment or beneficial outcome.
+285	class=positive	note=Favorable evaluation, approval, enjoyment or beneficial outcome.
+286	class=uncertain	note=Fragment, irony, genre convention or insufficient discourse makes global valence uncertain.
+287	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+288	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+289	class=mixed	note=Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.
+290	class=uncertain	note=Fragment, irony, genre convention or insufficient discourse makes global valence uncertain.
+291	class=positive	note=Favorable evaluation, approval, enjoyment or beneficial outcome.
+292	class=positive	note=Favorable evaluation, approval, enjoyment or beneficial outcome.
+293	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+294	class=uncertain	note=Fragment, irony, genre convention or insufficient discourse makes global valence uncertain.
+295	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+296	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+297	class=mixed	note=Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.
+298	class=uncertain	note=Fragment, irony, genre convention or insufficient discourse makes global valence uncertain.
+299	class=positive	note=Favorable evaluation, approval, enjoyment or beneficial outcome.
+300	class=uncertain	note=Fragment, irony, genre convention or insufficient discourse makes global valence uncertain.
+301	class=positive	note=Favorable evaluation, approval, enjoyment or beneficial outcome.
+302	class=mixed	note=Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.
+303	class=mixed	note=Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.
+304	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+305	class=mixed	note=Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.
+306	class=mixed	note=Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.
+307	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+308	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+309	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+310	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+311	class=mixed	note=Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.
+312	class=mixed	note=Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.
+313	class=positive	note=Favorable evaluation, approval, enjoyment or beneficial outcome.
+314	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+315	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+316	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+317	class=mixed	note=Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.
+318	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+319	class=positive	note=Favorable evaluation, approval, enjoyment or beneficial outcome.
+320	class=neutral	note=Reported bilingual speech examples; no clear valenced assertion.
+321	class=uncertain	note=Fragment, irony, genre convention or insufficient discourse makes global valence uncertain.
+322	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+323	class=positive	note=Favorable evaluation, approval, enjoyment or beneficial outcome.
+324	class=mixed	note=Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.
+325	class=mixed	note=Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.
+326	class=positive	note=Favorable evaluation, approval, enjoyment or beneficial outcome.
+327	class=mixed	note=Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.
+328	class=positive	note=Favorable evaluation, approval, enjoyment or beneficial outcome.
+329	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+330	class=uncertain	note=Fragment, irony, genre convention or insufficient discourse makes global valence uncertain.
+331	class=mixed	note=Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.
+332	class=mixed	note=Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.
+333	class=mixed	note=Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.
+334	class=mixed	note=Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.
+335	class=mixed	note=Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.
+336	class=positive	note=Favorable evaluation, approval, enjoyment or beneficial outcome.
+337	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+338	class=uncertain	note=Fragment, irony, genre convention or insufficient discourse makes global valence uncertain.
+339	class=positive	note=Favorable evaluation, approval, enjoyment or beneficial outcome.
+340	class=mixed	note=Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.
+341	class=positive	note=Favorable evaluation, approval, enjoyment or beneficial outcome.
+342	class=mixed	note=Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.
+343	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+344	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+345	class=mixed	note=Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.
+346	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+347	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+348	class=mixed	note=Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.
+349	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+350	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+351	class=positive	note=Favorable evaluation, approval, enjoyment or beneficial outcome.
+352	class=positive	note=Favorable evaluation, approval, enjoyment or beneficial outcome.
+353	class=positive	note=Favorable evaluation, approval, enjoyment or beneficial outcome.
+354	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+355	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+356	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+357	class=mixed	note=Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.
+358	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+359	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+360	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+361	class=positive	note=Favorable evaluation, approval, enjoyment or beneficial outcome.
+362	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+363	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+364	class=mixed	note=Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.
+365	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+366	class=mixed	note=Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.
+367	class=uncertain	note=Fragment, irony, genre convention or insufficient discourse makes global valence uncertain.
+368	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+369	class=positive	note=Favorable evaluation, approval, enjoyment or beneficial outcome.
+370	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+371	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+372	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+373	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+374	class=positive	note=Favorable evaluation, approval, enjoyment or beneficial outcome.
+375	class=positive	note=Favorable evaluation, approval, enjoyment or beneficial outcome.
+376	class=mixed	note=Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.
+377	class=positive	note=Favorable evaluation, approval, enjoyment or beneficial outcome.
+378	class=positive	note=Favorable evaluation, approval, enjoyment or beneficial outcome.
+379	class=mixed	note=Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.
+380	class=positive	note=Favorable evaluation, approval, enjoyment or beneficial outcome.
+381	class=positive	note=Favorable evaluation, approval, enjoyment or beneficial outcome.
+382	class=mixed	note=Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.
+383	class=positive	note=Favorable evaluation, approval, enjoyment or beneficial outcome.
+384	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+385	class=positive	note=Favorable evaluation, approval, enjoyment or beneficial outcome.
+386	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+387	class=mixed	note=Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.
+388	class=mixed	note=Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.
+389	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+390	class=positive	note=Favorable evaluation, approval, enjoyment or beneficial outcome.
+391	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+392	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+393	class=positive	note=Favorable evaluation, approval, enjoyment or beneficial outcome.
+394	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+395	class=positive	note=Favorable evaluation, approval, enjoyment or beneficial outcome.
+396	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+397	class=mixed	note=Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.
+398	class=negative	note=Unfavorable evaluation, harm, distress or adverse outcome.
+399	class=negative	note=Being harmed/royally screwed; character name Martyr is not the basis of the label.
+400	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+401	class=positive	note=Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.
+402	class=negative	note=Harm, loss, conflict, failure, death, discrimination or an unfavorable judgment, even in factual prose.
+403	class=positive	note=Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.
+404	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+405	class=positive	note=Prosperous farm is a favorable material circumstance, not a neutral descriptor for this strict context control.
+406	class=negative	note=Support for the Nazi regime; explicit harmful political context.
+407	class=negative	note=Financial backing of Hitler; harmful political context.
+408	class=negative	note=Aid to the National Socialist movement; harmful political context.
+409	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+410	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+411	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+412	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+413	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+414	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+415	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+416	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+417	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+418	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+419	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+420	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+421	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+422	class=negative	note=Infamy and sexual abuse/pedophilia context.
+423	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+424	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+425	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+426	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+427	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+428	class=positive	note=Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.
+429	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+430	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+431	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+432	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+433	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+434	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+435	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+436	class=negative	note=Undisclosed paid promotion conveys deceptive conduct.
+437	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+438	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+439	class=negative	note=Active military action in revolution; exclude war-event context from strict neutral baseline.
+440	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+441	class=negative	note=Harm, loss, conflict, failure, death, discrimination or an unfavorable judgment, even in factual prose.
+442	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+443	class=negative	note=Harm, loss, conflict, failure, death, discrimination or an unfavorable judgment, even in factual prose.
+444	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+445	class=uncertain	note=Unauthorized dissident status is perspectival; insufficient context to assign one valence confidently.
+446	class=negative	note=Harm, loss, conflict, failure, death, discrimination or an unfavorable judgment, even in factual prose.
+447	class=negative	note=Harm, loss, conflict, failure, death, discrimination or an unfavorable judgment, even in factual prose.
+448	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+449	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+450	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+451	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+452	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+453	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+454	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+455	class=negative	note=Harm, loss, conflict, failure, death, discrimination or an unfavorable judgment, even in factual prose.
+456	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+457	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+458	class=positive	note=Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.
+459	class=positive	note=Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.
+460	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+461	class=positive	note=Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.
+462	class=positive	note=Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.
+463	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+464	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+465	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+466	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+467	class=uncertain	note=Illegitimate is socially stigmatizing but a historical status description; flag rather than treating as strict neutral.
+468	class=negative	note=Harm, loss, conflict, failure, death, discrimination or an unfavorable judgment, even in factual prose.
+469	class=mixed	note=Excelling and receiving a diploma coexist with failure and setback.
+470	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+471	class=negative	note=Harm, loss, conflict, failure, death, discrimination or an unfavorable judgment, even in factual prose.
+472	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+473	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+474	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+475	class=uncertain	note=Villain is a fictional casting role, not a personal judgment; conservative exclusion from strict neutral context.
+476	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+477	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+478	class=positive	note=Oscar-winning parent invokes recognition/achievement in an otherwise factual family statement.
+479	class=positive	note=Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.
+480	class=positive	note=Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.
+481	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+482	class=positive	note=Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.
+483	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+484	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+485	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+486	class=positive	note=Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.
+487	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+488	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+489	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+490	class=negative	note=Close friendship and funeral/bereavement; adverse final event dominates.
+491	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+492	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+493	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+494	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+495	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+496	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+497	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+498	class=negative	note=Explicit death/burial event; corrupted punctuation retained as provenance.
+499	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+500	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+501	class=positive	note=Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.
+502	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+503	class=positive	note=Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.
+504	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+505	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+506	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+507	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+508	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+509	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+510	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+511	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+512	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+513	class=negative	note=Harm, loss, conflict, failure, death, discrimination or an unfavorable judgment, even in factual prose.
+514	class=positive	note=Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.
+515	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+516	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+517	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+518	class=positive	note=Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.
+519	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+520	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+521	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+522	class=positive	note=Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.
+523	class=positive	note=Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.
+524	class=mixed	note=Civil-rights reform/nonviolence benefit alongside protest against adverse social conditions.
+525	class=negative	note=Harm, loss, conflict, failure, death, discrimination or an unfavorable judgment, even in factual prose.
+526	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+527	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+528	class=negative	note=Rejected application is an adverse outcome despite later graduation.
+529	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+530	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+531	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+532	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+533	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+534	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+535	class=negative	note=Harm, loss, conflict, failure, death, discrimination or an unfavorable judgment, even in factual prose.
+536	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+537	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+538	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+539	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+540	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+541	class=positive	note=Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.
+542	class=positive	note=Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.
+543	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+544	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+545	class=negative	note=Harm, loss, conflict, failure, death, discrimination or an unfavorable judgment, even in factual prose.
+546	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+547	class=positive	note=Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.
+548	class=neutral	note=Famous identifies a mathematical curve rather than expressing admiration; otherwise factual.
+549	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+550	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+551	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+552	class=positive	note=Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.
+553	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+554	class=positive	note=Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.
+555	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+556	class=positive	note=Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.
+557	class=positive	note=Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.
+558	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+559	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+560	class=mixed	note=Electoral losses and eventual victory are both explicit.
+561	class=uncertain	note=Borderline affect, war/controversy context, stigma, incomplete text or unavailable discourse; exclude from strict neutral context.
+562	class=negative	note=Harm, loss, conflict, failure, death, discrimination or an unfavorable judgment, even in factual prose.
+563	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+564	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+565	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+566	class=mixed	note=Winning election and death both stated.
+567	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+568	class=positive	note=Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.
+569	class=mixed	note=Great novels and dehumanising themes are both explicit.
+570	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+571	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+572	class=positive	note=Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.
+573	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+574	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+575	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+576	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+577	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+578	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+579	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+580	class=uncertain	note=Borderline affect, war/controversy context, stigma, incomplete text or unavailable discourse; exclude from strict neutral context.
+581	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+582	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+583	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+584	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+585	class=positive	note=Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.
+586	class=negative	note=Harm, loss, conflict, failure, death, discrimination or an unfavorable judgment, even in factual prose.
+587	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+588	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+589	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+590	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+591	class=negative	note=Harm, loss, conflict, failure, death, discrimination or an unfavorable judgment, even in factual prose.
+592	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+593	class=negative	note=Harm, loss, conflict, failure, death, discrimination or an unfavorable judgment, even in factual prose.
+594	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+595	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+596	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+597	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+598	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+599	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+600	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+601	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+602	class=positive	note=Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.
+603	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+604	class=uncertain	note=Military service during World War I without a specified harmful event; conservatively uncertain rather than strict neutral.
+605	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+606	class=negative	note=Harm, loss, conflict, failure, death, discrimination or an unfavorable judgment, even in factual prose.
+607	class=negative	note=Harm, loss, conflict, failure, death, discrimination or an unfavorable judgment, even in factual prose.
+608	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+609	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+610	class=negative	note=Harm, loss, conflict, failure, death, discrimination or an unfavorable judgment, even in factual prose.
+611	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+612	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+613	class=uncertain	note=Weapons supply in World War I; strict neutral-context status uncertain.
+614	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+615	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+616	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+617	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+618	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+619	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+620	class=negative	note=Harm, loss, conflict, failure, death, discrimination or an unfavorable judgment, even in factual prose.
+621	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+622	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+623	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+624	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+625	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+626	class=positive	note=Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.
+627	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+628	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+629	class=negative	note=Harm, loss, conflict, failure, death, discrimination or an unfavorable judgment, even in factual prose.
+630	class=uncertain	note=Borderline affect, war/controversy context, stigma, incomplete text or unavailable discourse; exclude from strict neutral context.
+631	class=neutral	note=Royal names and epithets such as Ivan the Terrible do not themselves impose sentence valence.
+632	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+633	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+634	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+635	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+636	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+637	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+638	class=positive	note=Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.
+639	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+640	class=negative	note=Harm, loss, conflict, failure, death, discrimination or an unfavorable judgment, even in factual prose.
+641	class=positive	note=Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.
+642	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+643	class=uncertain	note=Borderline affect, war/controversy context, stigma, incomplete text or unavailable discourse; exclude from strict neutral context.
+644	class=uncertain	note=Borderline affect, war/controversy context, stigma, incomplete text or unavailable discourse; exclude from strict neutral context.
+645	class=uncertain	note=Borderline affect, war/controversy context, stigma, incomplete text or unavailable discourse; exclude from strict neutral context.
+646	class=negative	note=Harm, loss, conflict, failure, death, discrimination or an unfavorable judgment, even in factual prose.
+647	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+648	class=uncertain	note=Known corrupted/alignment-discrepant source sentence; excluded from strict neutral control.
+649	class=neutral	note=Cold Comfort Farm is a work title, not an assertion of discomfort.
+650	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+651	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+652	class=mixed	note=Both favorable achievement/benefit and adverse event/evaluation are stated; exclude from strict neutral context.
+653	class=positive	note=Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.
+654	class=positive	note=Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.
+655	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+656	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+657	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+658	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+659	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+660	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+661	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+662	class=uncertain	note=Borderline affect, war/controversy context, stigma, incomplete text or unavailable discourse; exclude from strict neutral context.
+663	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+664	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+665	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+666	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+667	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+668	class=negative	note=Analysis of bombers in a military setting; explicit destructive-event context.
+669	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+670	class=negative	note=Harm, loss, conflict, failure, death, discrimination or an unfavorable judgment, even in factual prose.
+671	class=negative	note=Harm, loss, conflict, failure, death, discrimination or an unfavorable judgment, even in factual prose.
+672	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+673	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+674	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+675	class=negative	note=Harm, loss, conflict, failure, death, discrimination or an unfavorable judgment, even in factual prose.
+676	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+677	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+678	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+679	class=mixed	note=Opposition to slavery combines a beneficial stance with an explicitly harmful institution.
+680	class=uncertain	note=Borderline affect, war/controversy context, stigma, incomplete text or unavailable discourse; exclude from strict neutral context.
+681	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+682	class=mixed	note=Misjudgment contrasts with endurance and achievement.
+683	class=positive	note=Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.
+684	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+685	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+686	class=negative	note=Harm, loss, conflict, failure, death, discrimination or an unfavorable judgment, even in factual prose.
+687	class=negative	note=Harm, loss, conflict, failure, death, discrimination or an unfavorable judgment, even in factual prose.
+688	class=negative	note=Harm, loss, conflict, failure, death, discrimination or an unfavorable judgment, even in factual prose.
+689	class=positive	note=Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.
+690	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+691	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+692	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+693	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+694	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+695	class=positive	note=Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.
+696	class=positive	note=Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.
+697	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+698	class=negative	note=Harm, loss, conflict, failure, death, discrimination or an unfavorable judgment, even in factual prose.
+699	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+700	class=positive	note=Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.
+701	class=mixed	note=Heroic recognition is paired with injuries and a downed radio man.
+702	class=positive	note=Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.
+703	class=positive	note=Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.
+704	class=positive	note=Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.
+705	class=positive	note=Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.
+706	class=positive	note=Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.
+707	class=positive	note=Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.
+708	class=positive	note=Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.
+709	class=negative	note=Harm, loss, conflict, failure, death, discrimination or an unfavorable judgment, even in factual prose.
+710	class=positive	note=Medal of Honor is positive recognition; parenthetical lifetime dates alone are metadata.
+711	class=positive	note=Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.
+712	class=positive	note=Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.
+713	class=positive	note=Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.
+714	class=positive	note=Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.
+715	class=negative	note=Harm, loss, conflict, failure, death, discrimination or an unfavorable judgment, even in factual prose.
+716	class=positive	note=Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.
+717	class=positive	note=Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.
+718	class=positive	note=Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.
+719	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+720	class=positive	note=Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.
+721	class=positive	note=Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.
+722	class=positive	note=Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.
+723	class=positive	note=Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.
+724	class=positive	note=Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.
+725	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+726	class=positive	note=Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.
+727	class=mixed	note=Cavalry battle/charge and posthumous award combine adverse and favorable content.
+728	class=mixed	note=Peace mediation/award alongside an explicitly named war; mixed affective subject matter.
+729	class=positive	note=Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.
+730	class=positive	note=Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.
+731	class=positive	note=Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.
+732	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+733	class=positive	note=Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.
+734	class=positive	note=Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.
+735	class=positive	note=Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.
+736	class=positive	note=Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.
+737	class=negative	note=Harm, loss, conflict, failure, death, discrimination or an unfavorable judgment, even in factual prose.
+738	class=positive	note=Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.
+739	class=positive	note=Highly recruited athlete and exceptional choice; favorable recognition rather than merely enrolment.
+740	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+741	class=negative	note=Prison context prevents strict neutral classification despite education/religious study.
+742	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+743	class=negative	note=Harm, loss, conflict, failure, death, discrimination or an unfavorable judgment, even in factual prose.
+744	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+745	class=negative	note=Harm, loss, conflict, failure, death, discrimination or an unfavorable judgment, even in factual prose.
+746	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+747	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+748	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+749	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+750	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+751	class=positive	note=Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.
+752	class=uncertain	note=Borderline affect, war/controversy context, stigma, incomplete text or unavailable discourse; exclude from strict neutral context.
+753	class=positive	note=Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.
+754	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+755	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+756	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+757	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+758	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+759	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+760	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+761	class=positive	note=Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.
+762	class=uncertain	note=Villain is a fictional role; conservative exclusion from strict neutral rather than negative judgment of actor.
+763	class=positive	note=Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.
+764	class=uncertain	note=Unfinished degree without clear success/failure stance; borderline context.
+765	class=positive	note=Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.
+766	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+767	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+768	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+769	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+770	class=uncertain	note=Boycott fragment lacks the cause or outcome; conservatively uncertain.
+771	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+772	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+773	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+774	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+775	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+776	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+777	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+778	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+779	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+780	class=negative	note=Quoted working contrasts with dozing/eating; implicit disapproval/satire of laziness.
+781	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+782	class=neutral	note=Political opposition is described as a stance; no independent party ideology valence imposed.
+783	class=uncertain	note=Family connections facilitating employment could imply favoritism; uncertain rather than strict neutral.
+784	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+785	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+786	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+787	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+788	class=negative	note=Harm, loss, conflict, failure, death, discrimination or an unfavorable judgment, even in factual prose.
+789	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+790	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+791	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+792	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+793	class=positive	note=Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.
+794	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+795	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+796	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+797	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+798	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+799	class=negative	note=Harm, loss, conflict, failure, death, discrimination or an unfavorable judgment, even in factual prose.
+800	class=positive	note=Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.
+801	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+802	class=negative	note=Harm, loss, conflict, failure, death, discrimination or an unfavorable judgment, even in factual prose.
+803	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+804	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+805	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+806	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+807	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+808	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+809	class=positive	note=Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.
+810	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+811	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+812	class=negative	note=Harm, loss, conflict, failure, death, discrimination or an unfavorable judgment, even in factual prose.
+813	class=uncertain	note=After-war setting but no harmful event specified; conservative context exclusion.
+814	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+815	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+816	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+817	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+818	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+819	class=positive	note=Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.
+820	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+821	class=positive	note=Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.
+822	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+823	class=positive	note=Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.
+824	class=positive	note=Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.
+825	class=positive	note=Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.
+826	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+827	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+828	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+829	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+830	class=positive	note=Approval of universal human rights is a beneficial social outcome.
+831	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+832	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+833	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+834	class=neutral	note=Poor Ladies is an order name and poverty/celibacy are chosen religious vows; no automatic negative judgment.
+835	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+836	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+837	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+838	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+839	class=positive	note=Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.
+840	class=positive	note=Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.
+841	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+842	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+843	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+844	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+845	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+846	class=neutral	note=Naval War College is an institution name rather than an asserted war event.
+847	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+848	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+849	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+850	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+851	class=negative	note=Accusations of rule violations and resignation; adverse scandal context.
+852	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+853	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+854	class=positive	note=Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.
+855	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+856	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+857	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+858	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+859	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+860	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+861	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+862	class=positive	note=Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.
+863	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+864	class=negative	note=Fatal accident is explicit adverse content.
+865	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+866	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+867	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+868	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+869	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+870	class=positive	note=Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.
+871	class=mixed	note=Heroic fame paired with Civil War commands; mixed achievement and conflict.
+872	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+873	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+874	class=uncertain	note=Pacific Theater military commands imply war but no specified harm; conservative uncertainty.
+875	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+876	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+877	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+878	class=uncertain	note=Borderline affect, war/controversy context, stigma, incomplete text or unavailable discourse; exclude from strict neutral context.
+879	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+880	class=mixed	note=Repeated electoral victories and opponents defeats; mixed participant perspectives.
+881	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+882	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+883	class=positive	note=Philanthropist/abolitionist express beneficial social roles beyond bare office identification.
+884	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+885	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+886	class=uncertain	note=Iran-Contra Affair is a named controversy without explanation in the supplied sentence; uncertain context.
+887	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+888	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+889	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+890	class=positive	note=Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.
+891	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+892	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+893	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+894	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+895	class=positive	note=Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.
+896	class=negative	note=Harm, loss, conflict, failure, death, discrimination or an unfavorable judgment, even in factual prose.
+897	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+898	class=negative	note=Harm, loss, conflict, failure, death, discrimination or an unfavorable judgment, even in factual prose.
+899	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+900	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+901	class=positive	note=Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.
+902	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+903	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+904	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+905	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+906	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+907	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+908	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+909	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+910	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+911	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+912	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+913	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+914	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+915	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+916	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+917	class=positive	note=Highly regarded trilogy is explicit favorable evaluation.
+918	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+919	class=negative	note=Harm, loss, conflict, failure, death, discrimination or an unfavorable judgment, even in factual prose.
+920	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+921	class=negative	note=Convicted perjurer explicitly denotes wrongdoing and conviction.
+922	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+923	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+924	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+925	class=uncertain	note=Joke about youngest ex-governor lacks evaluative direction.
+926	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+927	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+928	class=positive	note=Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.
+929	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+930	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+931	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+932	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+933	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+934	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+935	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+936	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+937	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+938	class=positive	note=Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.
+939	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+940	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+941	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+942	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+943	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+944	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+945	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+946	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+947	class=negative	note=Harm, loss, conflict, failure, death, discrimination or an unfavorable judgment, even in factual prose.
+948	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+949	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+950	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+951	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+952	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+953	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+954	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+955	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+956	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+957	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+958	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+959	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+960	class=positive	note=Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.
+961	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+962	class=negative	note=Harm, loss, conflict, failure, death, discrimination or an unfavorable judgment, even in factual prose.
+963	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+964	class=positive	note=Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.
+965	class=negative	note=Poverty is an explicitly adverse material circumstance even in factual literary description.
+966	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+967	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+968	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+969	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+970	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+971	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+972	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+973	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+974	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+975	class=positive	note=Electrified supporters conveys favorable excitement, without assigning sentiment to party membership.
+976	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+977	class=negative	note=Harm, loss, conflict, failure, death, discrimination or an unfavorable judgment, even in factual prose.
+978	class=uncertain	note=Running away/seeking new start combines ambiguous circumstances; insufficient discourse.
+979	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+980	class=positive	note=Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.
+981	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+982	class=negative	note=Harm, loss, conflict, failure, death, discrimination or an unfavorable judgment, even in factual prose.
+983	class=positive	note=Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.
+984	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+985	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+986	class=mixed	note=Rescue of citizens paired with reported involvement in assassination.
+987	class=negative	note=Harm, loss, conflict, failure, death, discrimination or an unfavorable judgment, even in factual prose.
+988	class=uncertain	note=Fame contrasted with acting reputation; evaluative implication unclear.
+989	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+990	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+991	class=negative	note=Failure to complete degree and intervening war; adverse context.
+992	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+993	class=negative	note=Explicit Nazi-party affiliation; harmful ideological context rather than assigning valence to ordinary party membership.
+994	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+995	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+996	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+997	class=negative	note=Harm, loss, conflict, failure, death, discrimination or an unfavorable judgment, even in factual prose.
+998	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+999	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+1000	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+1001	class=negative	note=Marriage followed by divorce; adverse relationship dissolution.
+1002	class=negative	note=Marriage followed by divorce; adverse relationship dissolution.
+1003	class=negative	note=Marriage followed by divorce; adverse relationship dissolution.
+1004	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+1005	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+1006	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+1007	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+1008	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+1009	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+1010	class=mixed	note=Anti-slavery stance is beneficial but slavery is explicitly adverse subject matter.
+1011	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+1012	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+1013	class=positive	note=Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.
+1014	class=positive	note=Universal health coverage is a beneficial intended outcome; not a judgment of party politics.
+1015	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+1016	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+1017	class=negative	note=Harm, loss, conflict, failure, death, discrimination or an unfavorable judgment, even in factual prose.
+1018	class=positive	note=Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.
+1019	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+1020	class=negative	note=Harm, loss, conflict, failure, death, discrimination or an unfavorable judgment, even in factual prose.
+1021	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+1022	class=mixed	note=Mediocre grades contrast with lasting friendships.
+1023	class=positive	note=Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.
+1024	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+1025	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+1026	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+1027	class=uncertain	note=Apology suggests a problem but missing comment leaves its affective direction uncertain.
+1028	class=negative	note=Marriage opposed by mother; explicit interpersonal conflict.
+1029	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+1030	class=negative	note=Harm, loss, conflict, failure, death, discrimination or an unfavorable judgment, even in factual prose.
+1031	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+1032	class=negative	note=Children and explicit deaths; adverse event content beyond parenthetical lifetime metadata.
+1033	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+1034	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+1035	class=neutral	note=Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.
+1036	class=negative	note=Marriage followed rapidly by divorce; adverse relationship dissolution.

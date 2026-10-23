@@ -1,0 +1,17 @@
+{
+  "status": "preserved_existing_original_source_ratings",
+  "sentence_count": 400,
+  "class_counts": {
+    "neutral": 137,
+    "positive": 140,
+    "negative": 123
+  },
+  "source": "parmis-thesis-eeg-sentiment-review/saved_results/eeg_to_text_v4_continuous/v4/sentences.csv",
+  "source_sha256": "bcee526eb557677e850ade925ffa9128880208f6145d2153eef51a6090081490",
+  "output_sha256": "5d48fc3a9c3d3f746d688dabc5d5eaa75edc2250745e5020e75bd6f530654156",
+  "join_validation": "All 400 English SR IDs, sentence texts and source word boundaries match exactly",
+  "label_mapping": "Old src/config.py LABEL_TO_ID={-1:0,0:1,1:2}; old src/eeg2text/data.py maps original trial labels to saved corpus labels",
+  "scope": "Original overall sentence/review judgment; not strict affect-free context, not word polarity, not measured reader emotion",
+  "not_freshly_downloaded_or_human_readjudicated": true,
+  "nr_tsr_rating": "unknown; never inherited from SR or assumed neutral"
+}

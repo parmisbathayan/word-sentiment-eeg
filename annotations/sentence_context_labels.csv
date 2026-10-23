@@ -1,0 +1,1038 @@
+sentence_key,sentence_context_class,sentence_context_note,annotation_status
+5b1e2d74d81342cf7213299a,mixed,Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.,agent_reviewed_not_human_gold
+53704ca0f5d9b7fb763e7ccf,positive,"Favorable evaluation, approval, enjoyment or beneficial outcome.",agent_reviewed_not_human_gold
+c5949bfbc89066104e1d0362,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+5a1ff71605517cc3f8d398b4,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+5861cd255bfc24a36d8530fb,negative,Unfavorable empty/unsatisfying evaluation; corrupted token does not make sentence neutral.,agent_reviewed_not_human_gold
+bbdc17a36795a741a324bb43,positive,"Favorable evaluation, approval, enjoyment or beneficial outcome.",agent_reviewed_not_human_gold
+6ed4e0b2f4d97c47c2aa1eb7,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+8d01fc07a4faae9f49c85869,positive,"Favorable evaluation, approval, enjoyment or beneficial outcome.",agent_reviewed_not_human_gold
+59c8f9a54864bed47a998d9d,mixed,Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.,agent_reviewed_not_human_gold
+bd97d0a457048accb5a050b7,mixed,Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.,agent_reviewed_not_human_gold
+b15ac2fcfd7f6ef629620793,mixed,Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.,agent_reviewed_not_human_gold
+de704792c77f9cb9181fed2e,positive,"Favorable evaluation, approval, enjoyment or beneficial outcome.",agent_reviewed_not_human_gold
+d1274220d9fe0283c5efd598,positive,"Favorable evaluation, approval, enjoyment or beneficial outcome.",agent_reviewed_not_human_gold
+d6e96e82320fddde102a874c,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+c15bfb39698a326c4ba55c7c,positive,Implicitly favorable claim that the needed ingredients are present.,agent_reviewed_not_human_gold
+9bb8411b17d57655bcb881e4,positive,"Favorable evaluation, approval, enjoyment or beneficial outcome.",agent_reviewed_not_human_gold
+12ebe924212dbf0e2dc6b785,mixed,Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.,agent_reviewed_not_human_gold
+a9a2c81077cdba8f3dd93286,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+7becd66e9d7ccdf05f7f09b1,mixed,Favorable deeper realization is expressed through loss/inability themes.,agent_reviewed_not_human_gold
+0e3adccda18cdb34ef1f1f0a,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+523b4469e95878f385192e69,positive,"Favorable evaluation, approval, enjoyment or beneficial outcome.",agent_reviewed_not_human_gold
+04d27b52d3f8bec302cbae4e,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+c22c02ee4ac1d562622b542f,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+0c859c5af42489c14f031c5d,positive,"Favorable evaluation, approval, enjoyment or beneficial outcome.",agent_reviewed_not_human_gold
+d82ddd20d5c4631f8863cb32,mixed,Good time with a shapelessness criticism.,agent_reviewed_not_human_gold
+8dc34c98f99017238f202f8f,mixed,Explicit better/worse contrast; ambivalent overall.,agent_reviewed_not_human_gold
+6598367c8518dd8b85532bfc,positive,"Favorable evaluation, approval, enjoyment or beneficial outcome.",agent_reviewed_not_human_gold
+88058e97babb92e677895c04,mixed,Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.,agent_reviewed_not_human_gold
+6cf5b8fb907718045444c351,positive,"Favorable evaluation, approval, enjoyment or beneficial outcome.",agent_reviewed_not_human_gold
+58cbce7b45c8e5d7c0541b7a,mixed,Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.,agent_reviewed_not_human_gold
+28e0317a4d972becbe09e1d6,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+ea34914c39a71d17e56c08b9,mixed,Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.,agent_reviewed_not_human_gold
+c6eb35822b76bcef40c2e878,uncertain,"Fragment, irony, genre convention or insufficient discourse makes global valence uncertain.",agent_reviewed_not_human_gold
+8e920f71cff817f8f5577080,mixed,Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.,agent_reviewed_not_human_gold
+d771c501da91eb7ecd649f3a,positive,"Favorable evaluation, approval, enjoyment or beneficial outcome.",agent_reviewed_not_human_gold
+87c6b61003365bbb3625eeab,mixed,Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.,agent_reviewed_not_human_gold
+3eba603ab3e574b623b50512,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+834324d1d094d1649c02dc1d,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+3691d69a31ed33b4c9d07948,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+deb8a20e93ea496a1f6a6cb1,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+8926a90e5965886155eb57a8,positive,"Favorable evaluation, approval, enjoyment or beneficial outcome.",agent_reviewed_not_human_gold
+7ecf3dca37299a144d97f82d,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+b545258d22ef1fcdaec2b985,positive,"Favorable evaluation, approval, enjoyment or beneficial outcome.",agent_reviewed_not_human_gold
+5890d87c24d685b440c86d5c,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+7a1684c98dc4b4304b7d595a,positive,"Favorable evaluation, approval, enjoyment or beneficial outcome.",agent_reviewed_not_human_gold
+0f74273acb1cf8bebb058e95,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+21411e62306d2a99b56400b6,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+b664c8f62ca63e460e6c4f12,positive,"Favorable evaluation, approval, enjoyment or beneficial outcome.",agent_reviewed_not_human_gold
+5a03170738b9964318c62b72,uncertain,"Fragment, irony, genre convention or insufficient discourse makes global valence uncertain.",agent_reviewed_not_human_gold
+bd4e83e00f52d7c28a7f8fcd,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+dcbaf65be7cfd2e597174ce9,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+8e3d01e5e28643affa355e53,mixed,Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.,agent_reviewed_not_human_gold
+9358b5ef2a19709bcca82590,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+56fda4c3261f9f65a57bfd24,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+2051c2743fac745a3c53eb3c,mixed,Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.,agent_reviewed_not_human_gold
+061d17cf2d2d9dcf368ee4f0,positive,"Favorable evaluation, approval, enjoyment or beneficial outcome.",agent_reviewed_not_human_gold
+868e4c7756f4baed1ecd13b1,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+15839470d06dc70c1b955635,mixed,Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.,agent_reviewed_not_human_gold
+29b2c3d1769ab59d66032ae5,uncertain,"Fragment, irony, genre convention or insufficient discourse makes global valence uncertain.",agent_reviewed_not_human_gold
+91e5c55b69c419302b41582e,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+024d2c3f4903aff69ddedcc3,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+a26ce08e9bab53344e837543,positive,"Favorable evaluation, approval, enjoyment or beneficial outcome.",agent_reviewed_not_human_gold
+9566b9c864900f8c920400c7,mixed,Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.,agent_reviewed_not_human_gold
+cee065165cf8051b43ecc9bf,positive,"Favorable evaluation, approval, enjoyment or beneficial outcome.",agent_reviewed_not_human_gold
+cb2ec0e085dff5c5a66e6d78,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+85f648c8395a6d564ddcfedb,mixed,Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.,agent_reviewed_not_human_gold
+4b320b05cbc05bd09f06cee6,mixed,Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.,agent_reviewed_not_human_gold
+16e6b51cfa504eb474664a24,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+d65bb30d2077aeef8c86b0e6,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+a0aa3547f370870375bec869,negative,Mass murder and violent imagery despite comic framing.,agent_reviewed_not_human_gold
+c50de33fdb7caec42edce99b,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+b2be2a87d60b174d867786ad,mixed,Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.,agent_reviewed_not_human_gold
+3b0389b4dc9418567384acb1,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+a1fa3afdff16b033abce90d4,positive,"Favorable evaluation, approval, enjoyment or beneficial outcome.",agent_reviewed_not_human_gold
+f72db0940c2d801f18ddbc66,mixed,Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.,agent_reviewed_not_human_gold
+0fbd8b34818b2f815c1dff37,uncertain,"Fragment, irony, genre convention or insufficient discourse makes global valence uncertain.",agent_reviewed_not_human_gold
+5d26ffc1810c278387f76d86,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+1747f8cfb60f8b12236473e6,mixed,Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.,agent_reviewed_not_human_gold
+db7f97e4bb00656eb2b4eb49,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+1603394c9b2a7546280da354,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+602c1bccb9d12ae0c7ca6ed7,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+b018b0f1712ef39d54fb7785,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+64ddf7e824604d4e7e39d059,mixed,Praise of film alongside explicit Holocaust subject matter.,agent_reviewed_not_human_gold
+fd4247908700de517dae115d,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+55477c40f5b26f906addf1ec,mixed,Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.,agent_reviewed_not_human_gold
+ca4976cd2c7ed75b7bc90243,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+19ad22fbe4c2075a322d8a90,positive,"Favorable evaluation, approval, enjoyment or beneficial outcome.",agent_reviewed_not_human_gold
+8d0136bd24a697bb3fdb8069,positive,"Favorable evaluation, approval, enjoyment or beneficial outcome.",agent_reviewed_not_human_gold
+8f56aeb56459cd9eeff1fa57,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+06a9e81a4d8b164de30e9ce9,positive,"Favorable evaluation, approval, enjoyment or beneficial outcome.",agent_reviewed_not_human_gold
+dd6f95dfa4e458f704f292c1,mixed,Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.,agent_reviewed_not_human_gold
+a1c5cb972810bf1fe0fcbace,positive,"Favorable evaluation, approval, enjoyment or beneficial outcome.",agent_reviewed_not_human_gold
+2bf143841944f6934d02d394,mixed,Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.,agent_reviewed_not_human_gold
+194e3155c76c7800266761ae,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+d247d14f89e169c96751cc7f,uncertain,"Fragment, irony, genre convention or insufficient discourse makes global valence uncertain.",agent_reviewed_not_human_gold
+cedf077fb129e1f7fac3d3cc,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+a1f79323e376f55f68460c3a,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+ab1e3e8c1f44e7b3f386e76b,mixed,Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.,agent_reviewed_not_human_gold
+97166630e748a774186ad64c,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+bb836664476a3d8ba0791b52,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+d9d1286222ca305bad944c35,mixed,Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.,agent_reviewed_not_human_gold
+dd4451e1c27ea4916863be2a,mixed,Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.,agent_reviewed_not_human_gold
+7b91efdcdf8a6741ccc09711,positive,"Favorable evaluation, approval, enjoyment or beneficial outcome.",agent_reviewed_not_human_gold
+1f309e3062e46650ca0dcd0e,positive,"Favorable evaluation, approval, enjoyment or beneficial outcome.",agent_reviewed_not_human_gold
+793c41a1cb8931545c60bb19,positive,"Favorable evaluation, approval, enjoyment or beneficial outcome.",agent_reviewed_not_human_gold
+fa603c56a144f0811818d0f7,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+42d81dc9216c167a62caa53c,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+15e6cc47188d23b49de6f736,positive,"Favorable evaluation, approval, enjoyment or beneficial outcome.",agent_reviewed_not_human_gold
+7549f9e866fdc01cf4b25412,positive,"Favorable evaluation, approval, enjoyment or beneficial outcome.",agent_reviewed_not_human_gold
+f8a842e8286e878f76a285c7,mixed,Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.,agent_reviewed_not_human_gold
+8a4e0cd5f7eb117bc930fcbb,positive,"Favorable evaluation, approval, enjoyment or beneficial outcome.",agent_reviewed_not_human_gold
+86d02c748f7f07ec2f7d432b,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+2544096467b69c21ceed4e1a,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+8100ad86855fdd507c64cf32,positive,"Favorable evaluation, approval, enjoyment or beneficial outcome.",agent_reviewed_not_human_gold
+aa2014aa69fd897d5b15448e,uncertain,"Fragment, irony, genre convention or insufficient discourse makes global valence uncertain.",agent_reviewed_not_human_gold
+c6316d7bf19c25eee649cddc,positive,"Favorable evaluation, approval, enjoyment or beneficial outcome.",agent_reviewed_not_human_gold
+e0f449627c50d03d4677fa6a,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+dfdc1b96dd043fdbfaaf3964,positive,"Favorable evaluation, approval, enjoyment or beneficial outcome.",agent_reviewed_not_human_gold
+6638a41d1804e0df0e6f37de,mixed,Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.,agent_reviewed_not_human_gold
+1ff58890e7bcd1938417758f,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+ac1632ece10aafde0baa6789,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+ecbb686f3f07c93855bd7994,positive,"Favorable evaluation, approval, enjoyment or beneficial outcome.",agent_reviewed_not_human_gold
+9846d8ba7ae1a03b86a37a6f,positive,"Favorable evaluation, approval, enjoyment or beneficial outcome.",agent_reviewed_not_human_gold
+b2341871d4e3560a677ae10d,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+6999a372c9098674e1b444e5,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+8a581349605de6031d52b86c,positive,"Favorable evaluation, approval, enjoyment or beneficial outcome.",agent_reviewed_not_human_gold
+b2fd6b3e5fa4ee7210f52c18,positive,"Favorable evaluation, approval, enjoyment or beneficial outcome.",agent_reviewed_not_human_gold
+38e8f8a4dcec303fbf7f5600,uncertain,"Fragment, irony, genre convention or insufficient discourse makes global valence uncertain.",agent_reviewed_not_human_gold
+b6a4bfe218c2d38c3ea71a96,positive,"Favorable evaluation, approval, enjoyment or beneficial outcome.",agent_reviewed_not_human_gold
+312ae3710a7a0d3bfe97fc85,mixed,Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.,agent_reviewed_not_human_gold
+ac5009e256755cc3c43b4100,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+36dc278de31d6e02d4944bd2,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+2e0dfe2b0710cfc95ef14447,positive,"Favorable evaluation, approval, enjoyment or beneficial outcome.",agent_reviewed_not_human_gold
+5c05da8d3d4e69af98dac430,uncertain,"Fragment, irony, genre convention or insufficient discourse makes global valence uncertain.",agent_reviewed_not_human_gold
+2dd0cae97e1df1ac42ef3a67,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+2c7f2aa8ee104a3abacd00ef,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+1758e800c0058876ce70967a,uncertain,"Fragment, irony, genre convention or insufficient discourse makes global valence uncertain.",agent_reviewed_not_human_gold
+c653db841a33b81e0ffe48df,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+260eaa2bcae0a4c00a0a10f6,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+1e57148c49de370a663f0356,mixed,Health/energy contrasted with approaching death.,agent_reviewed_not_human_gold
+5876f1b73cec2e14c5d5b381,positive,"Favorable evaluation, approval, enjoyment or beneficial outcome.",agent_reviewed_not_human_gold
+396b077e772aa02b17642d94,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+341d1777900962bc2209f731,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+9730dec5ae664a7dd3f8456f,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+2633b50828ff02e34fc55162,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+1db8d9861647c65d0c020e9c,positive,"Favorable evaluation, approval, enjoyment or beneficial outcome.",agent_reviewed_not_human_gold
+a6aec3a9b59f22a4128fa932,mixed,Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.,agent_reviewed_not_human_gold
+5c72a8673896e4a78de345db,mixed,Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.,agent_reviewed_not_human_gold
+7c058d65abbf24c6b71445fa,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+715cf4b14bac4ee0bb791ee7,positive,"Favorable evaluation, approval, enjoyment or beneficial outcome.",agent_reviewed_not_human_gold
+1ded59fe4f8b74bea831259b,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+1aa5e85317e920b7e768e516,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+b39b78ee79abc407ae629603,positive,"Favorable evaluation, approval, enjoyment or beneficial outcome.",agent_reviewed_not_human_gold
+5b619b1b9e248a831474a877,mixed,Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.,agent_reviewed_not_human_gold
+544bf010343430218883f8df,positive,"Favorable evaluation, approval, enjoyment or beneficial outcome.",agent_reviewed_not_human_gold
+b007669b6966e46482ce6c3f,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+9e2dcfd1084e412230e77b94,positive,"Favorable evaluation, approval, enjoyment or beneficial outcome.",agent_reviewed_not_human_gold
+0a6a8f7efc1ce8e3ba5d83f0,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+e60037a09e88b0c3cb61d379,positive,"Favorable evaluation, approval, enjoyment or beneficial outcome.",agent_reviewed_not_human_gold
+61d4eec7fea06c6274e540b7,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+789b02f3adf1565af8582975,mixed,Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.,agent_reviewed_not_human_gold
+2c401ef5f4826fc7f086bdf3,mixed,Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.,agent_reviewed_not_human_gold
+03016770dde90ec52d30e793,positive,"Favorable evaluation, approval, enjoyment or beneficial outcome.",agent_reviewed_not_human_gold
+dd48a17d257195db90f95475,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+e331790501ff918e15c21e14,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+df5ca30ffb4ecede3dcbe9b7,positive,"Favorable evaluation, approval, enjoyment or beneficial outcome.",agent_reviewed_not_human_gold
+fb47105458b1424d6d6cb290,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+de30b8cb7fd9e4a48741549a,mixed,Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.,agent_reviewed_not_human_gold
+e3db9be54f65d8710d07af6b,mixed,Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.,agent_reviewed_not_human_gold
+a1729990d7735883d61b28b8,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+de1c1e77080ce51f618465c8,positive,"Favorable evaluation, approval, enjoyment or beneficial outcome.",agent_reviewed_not_human_gold
+e87139b82df8954e8378371a,positive,"Favorable evaluation, approval, enjoyment or beneficial outcome.",agent_reviewed_not_human_gold
+f9f63b82d8f9ed71f4ba4fa7,positive,"Favorable evaluation, approval, enjoyment or beneficial outcome.",agent_reviewed_not_human_gold
+848df46b518eb9fc90259ef5,mixed,Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.,agent_reviewed_not_human_gold
+b2195bf52b1a64be2bf364a1,uncertain,"Fragment, irony, genre convention or insufficient discourse makes global valence uncertain.",agent_reviewed_not_human_gold
+54e80fa22f859a14061c5922,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+6dbb3f1ef192f5df80e2a154,mixed,Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.,agent_reviewed_not_human_gold
+3805c9b940378ab2975f5680,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+cb30a098d56a228eb9166026,mixed,Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.,agent_reviewed_not_human_gold
+94d898d71fc813ae98643524,positive,"Favorable evaluation, approval, enjoyment or beneficial outcome.",agent_reviewed_not_human_gold
+34f5440f63dfbcd36de4a3ca,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+ffd1ae44dbc1d0615ac0311f,uncertain,"Fragment, irony, genre convention or insufficient discourse makes global valence uncertain.",agent_reviewed_not_human_gold
+dc6761e55735784ee0286042,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+fed635ce12cbcf85baa32ee4,uncertain,"Fragment, irony, genre convention or insufficient discourse makes global valence uncertain.",agent_reviewed_not_human_gold
+7e50512d82dc98d042378b26,positive,"Favorable evaluation, approval, enjoyment or beneficial outcome.",agent_reviewed_not_human_gold
+51e436287e52c0527c91f5cb,positive,"Favorable evaluation, approval, enjoyment or beneficial outcome.",agent_reviewed_not_human_gold
+c68a84874b1073f07afa0876,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+d0666a09c44ba95ae2dec36f,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+ee77731488e0577ed846d482,positive,"Favorable evaluation, approval, enjoyment or beneficial outcome.",agent_reviewed_not_human_gold
+35cde3870b607e0c66b63903,mixed,Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.,agent_reviewed_not_human_gold
+d3f5986d2f9755f731b8e526,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+70dada02847df94fc5b3038b,positive,"Favorable evaluation, approval, enjoyment or beneficial outcome.",agent_reviewed_not_human_gold
+f22ea737794a5b941a7b7b11,uncertain,"Fragment, irony, genre convention or insufficient discourse makes global valence uncertain.",agent_reviewed_not_human_gold
+548e0284d10f014c9b180f23,positive,"Favorable evaluation, approval, enjoyment or beneficial outcome.",agent_reviewed_not_human_gold
+cf7fe02652592702ebfa05c7,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+63079423b20678b301867b55,positive,"Favorable evaluation, approval, enjoyment or beneficial outcome.",agent_reviewed_not_human_gold
+247ec5f297c5cef73fe87d75,mixed,Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.,agent_reviewed_not_human_gold
+fa17809f49f067a3ca92ea9a,mixed,Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.,agent_reviewed_not_human_gold
+3d43e4789490662c87c1d7fa,neutral,Bare genre/subject description; no clear opinion in this supplied fragment.,agent_reviewed_not_human_gold
+d957a6d42019587e4b18a1bb,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+abbe54f2d898c0734b884f44,positive,"Favorable evaluation, approval, enjoyment or beneficial outcome.",agent_reviewed_not_human_gold
+585785b048cda991562abcaf,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+fb135873cb564b59365b650a,positive,"Favorable evaluation, approval, enjoyment or beneficial outcome.",agent_reviewed_not_human_gold
+4318635c35cb0d48048947e4,mixed,Accomplishment metaphor alongside rage/obsession/discord; mixed affective material.,agent_reviewed_not_human_gold
+854d6b3b2dfee62d6045b14b,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+b6d21657283e1ab12ac300cf,positive,"Favorable evaluation, approval, enjoyment or beneficial outcome.",agent_reviewed_not_human_gold
+ae441b0c95e9d7f831634067,mixed,Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.,agent_reviewed_not_human_gold
+3b8d603cb83978226fe41692,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+d4c909aa66f7638e1fd40345,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+b1c9ee73b1ffbb2a6f758001,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+e3928eb5122cdd1b53530c8d,positive,"Favorable evaluation, approval, enjoyment or beneficial outcome.",agent_reviewed_not_human_gold
+3ec416dec41c7da66365f186,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+f3b6d12a7a4c20814c2852dd,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+e8e38b6fb3999dc7195935eb,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+862492ac6a874003d5d09f85,uncertain,Missing antecedent of never is prevents a confident global polarity.,agent_reviewed_not_human_gold
+e702fc39244c63c241bde596,positive,"Favorable evaluation, approval, enjoyment or beneficial outcome.",agent_reviewed_not_human_gold
+61d7e3a1f930dbb7f12599f1,mixed,Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.,agent_reviewed_not_human_gold
+8bacc839155d2aeb0239dbac,mixed,Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.,agent_reviewed_not_human_gold
+8cb272c90e3ca9db594fcb29,positive,"Favorable evaluation, approval, enjoyment or beneficial outcome.",agent_reviewed_not_human_gold
+40561c217453120c2583ab5b,mixed,Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.,agent_reviewed_not_human_gold
+52c43f71a3f527251dbada94,mixed,Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.,agent_reviewed_not_human_gold
+97562e123225dee37ae027ba,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+c9bf0ee7f4a228343cf1bbcb,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+6131d8bada7b9516592170c3,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+a59792b842ae72c24aed9573,positive,"Favorable evaluation, approval, enjoyment or beneficial outcome.",agent_reviewed_not_human_gold
+3eef0b29f6fdb28426aed47a,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+41e397dffaa4b8b0ec65e563,positive,"Favorable evaluation, approval, enjoyment or beneficial outcome.",agent_reviewed_not_human_gold
+ef67b61bdb972d0d6b7ec366,positive,"Favorable evaluation, approval, enjoyment or beneficial outcome.",agent_reviewed_not_human_gold
+088f986f65733095629f1250,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+bc810eb6d1d350b6a8928fe3,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+acbdf5bd6a5cf39f856d81e1,mixed,Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.,agent_reviewed_not_human_gold
+2c1ce76360748d6491ebeced,positive,"Favorable evaluation, approval, enjoyment or beneficial outcome.",agent_reviewed_not_human_gold
+92583d82e4b493e9e87b6426,mixed,Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.,agent_reviewed_not_human_gold
+a266a441ee1634c88c99fc76,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+64271841d6b6e8c7a2821326,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+ae752a56aade82fe6f922e13,mixed,Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.,agent_reviewed_not_human_gold
+98fef6628693293821d26276,uncertain,"Fragment, irony, genre convention or insufficient discourse makes global valence uncertain.",agent_reviewed_not_human_gold
+16c59d462d5ae9a3430eac15,uncertain,"Fragment, irony, genre convention or insufficient discourse makes global valence uncertain.",agent_reviewed_not_human_gold
+8d966c2ad49a4ed7ee7b4310,mixed,Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.,agent_reviewed_not_human_gold
+1ccc47c0775a865a5a4f2b12,uncertain,"Fragment, irony, genre convention or insufficient discourse makes global valence uncertain.",agent_reviewed_not_human_gold
+a86250c292c72f0585bb4bd6,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+876701356b0dd31d8a38287c,uncertain,"Fragment, irony, genre convention or insufficient discourse makes global valence uncertain.",agent_reviewed_not_human_gold
+e524b9f169ac32f8e0078041,positive,"Favorable evaluation, approval, enjoyment or beneficial outcome.",agent_reviewed_not_human_gold
+92284cf04b257a2b5ee37952,mixed,Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.,agent_reviewed_not_human_gold
+383df0162e1e80bc4d791602,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+facd44db5bc8e23b054f53fd,positive,"Favorable evaluation, approval, enjoyment or beneficial outcome.",agent_reviewed_not_human_gold
+1eceb475af638ca96d079942,positive,"Favorable evaluation, approval, enjoyment or beneficial outcome.",agent_reviewed_not_human_gold
+2b5b71c5fcb303ad876875e7,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+ff61c041aec5e0a3a8effdcb,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+7574fa9f4f164db3374b987a,positive,"Favorable evaluation, approval, enjoyment or beneficial outcome.",agent_reviewed_not_human_gold
+db03eac90d1431b97b375616,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+34b3b11642bfcc4f634b457a,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+a0eb4fc7b87a1a6d91ee547a,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+96217c4b49342eabeb0e9785,positive,"Favorable evaluation, approval, enjoyment or beneficial outcome.",agent_reviewed_not_human_gold
+489666a0ab27abfd2a7b2587,positive,"Favorable evaluation, approval, enjoyment or beneficial outcome.",agent_reviewed_not_human_gold
+60bf3d3cecc40c4cb924640a,positive,"Favorable evaluation, approval, enjoyment or beneficial outcome.",agent_reviewed_not_human_gold
+1afe289742e1f4a7f3eec0a2,positive,"Favorable evaluation, approval, enjoyment or beneficial outcome.",agent_reviewed_not_human_gold
+9c14d62dca345a82723082fc,mixed,Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.,agent_reviewed_not_human_gold
+a02fc054cb53267a423a372a,mixed,Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.,agent_reviewed_not_human_gold
+e2b89d18a244fdadc65355e6,mixed,Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.,agent_reviewed_not_human_gold
+0136ab05108c624f359ad1ac,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+223b8f92702d69e7b947f996,uncertain,"Fragment, irony, genre convention or insufficient discourse makes global valence uncertain.",agent_reviewed_not_human_gold
+a57f9b057376f956dc0088e8,positive,"Favorable evaluation, approval, enjoyment or beneficial outcome.",agent_reviewed_not_human_gold
+9bf6967944e08ddd8110a5f5,uncertain,"Fragment, irony, genre convention or insufficient discourse makes global valence uncertain.",agent_reviewed_not_human_gold
+f7bc0107967c3ffdefcd7fba,mixed,Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.,agent_reviewed_not_human_gold
+25c01f73ff0e096587cb4812,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+884bb3fc196cf826a04b1704,positive,"Favorable evaluation, approval, enjoyment or beneficial outcome.",agent_reviewed_not_human_gold
+26674e4ad4680bfc1289b2bd,uncertain,"Fragment, irony, genre convention or insufficient discourse makes global valence uncertain.",agent_reviewed_not_human_gold
+1eeb6e6fda74056384b3d28b,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+bb0c8526a5bf58b66aeefdcd,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+36b9471aa3283a2a2ca7c16a,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+060e56258425976761ebeacc,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+897190ff96429c620c7b2e01,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+391c06b8f1ee712ac8244917,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+a1839cb27d7e4ef1e03c5cbe,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+9287d26abce64ab051d1f7bc,mixed,Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.,agent_reviewed_not_human_gold
+925b9b2f1f9f2a08991c6f61,positive,"Favorable evaluation, approval, enjoyment or beneficial outcome.",agent_reviewed_not_human_gold
+be005e31a49138c975c312d9,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+d08739214521c70acfb7db22,positive,"Favorable evaluation, approval, enjoyment or beneficial outcome.",agent_reviewed_not_human_gold
+3ea9e71bca646b9b91563315,positive,"Favorable evaluation, approval, enjoyment or beneficial outcome.",agent_reviewed_not_human_gold
+98739a5f605a4230139a3a4d,mixed,Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.,agent_reviewed_not_human_gold
+270e3d87132aa9821dc1c227,mixed,Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.,agent_reviewed_not_human_gold
+241b1a379bba46fdf04711c3,mixed,Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.,agent_reviewed_not_human_gold
+b89621948f725f383d7fcb5d,positive,"Favorable evaluation, approval, enjoyment or beneficial outcome.",agent_reviewed_not_human_gold
+454e240ddbce7e1d15268873,positive,"Favorable evaluation, approval, enjoyment or beneficial outcome.",agent_reviewed_not_human_gold
+d0b7440098715c6b0a4dbc4c,positive,"Favorable evaluation, approval, enjoyment or beneficial outcome.",agent_reviewed_not_human_gold
+ddd6dd0d4a0dc48fe4399211,uncertain,"Fragment, irony, genre convention or insufficient discourse makes global valence uncertain.",agent_reviewed_not_human_gold
+81dd9f2a730baee34e2e9029,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+7bf577254a4466bb4cd704e0,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+99d9a67c801fb745dbcecd37,mixed,Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.,agent_reviewed_not_human_gold
+93fabc4bc4c2ae8db5ba4662,uncertain,"Fragment, irony, genre convention or insufficient discourse makes global valence uncertain.",agent_reviewed_not_human_gold
+52b2ab350d04c8f8870ea818,positive,"Favorable evaluation, approval, enjoyment or beneficial outcome.",agent_reviewed_not_human_gold
+71efd4059ab054996aad9d2a,positive,"Favorable evaluation, approval, enjoyment or beneficial outcome.",agent_reviewed_not_human_gold
+e78feb6372bc25c71373d515,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+5065571a43c0588ad258f05a,uncertain,"Fragment, irony, genre convention or insufficient discourse makes global valence uncertain.",agent_reviewed_not_human_gold
+7f63012b83eb13ffe74cef7b,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+e898c04a6e6047cb702a05e0,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+0ff8e8d81bac8bad09444b9e,mixed,Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.,agent_reviewed_not_human_gold
+edc3aa85cae9ed7e7d5b76c9,uncertain,"Fragment, irony, genre convention or insufficient discourse makes global valence uncertain.",agent_reviewed_not_human_gold
+2c1e8693e5f9e1ccbe27392a,positive,"Favorable evaluation, approval, enjoyment or beneficial outcome.",agent_reviewed_not_human_gold
+b5f2625127be5bb07242ba6f,uncertain,"Fragment, irony, genre convention or insufficient discourse makes global valence uncertain.",agent_reviewed_not_human_gold
+0f013fe2175ea4aa42143122,positive,"Favorable evaluation, approval, enjoyment or beneficial outcome.",agent_reviewed_not_human_gold
+fcd7b5cf564413b75d0b0cc2,mixed,Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.,agent_reviewed_not_human_gold
+aa6145f364cde826a99e4f70,mixed,Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.,agent_reviewed_not_human_gold
+08610ee2e3021efc9175188f,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+103cb8cbc06c6cea14c5c60a,mixed,Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.,agent_reviewed_not_human_gold
+2e522f3257ca2a1d2f96254a,mixed,Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.,agent_reviewed_not_human_gold
+2a2f4d0b8883cb763b50a44b,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+2300dd14bc17532b3aa26c0b,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+058b4dad1086f428bc096f81,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+df497bc33e9018ad6980f80b,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+55c71b5407e7e8c09262951e,mixed,Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.,agent_reviewed_not_human_gold
+d4917e0f531981730f9cc12f,mixed,Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.,agent_reviewed_not_human_gold
+1977e107706675a3e7206fbb,positive,"Favorable evaluation, approval, enjoyment or beneficial outcome.",agent_reviewed_not_human_gold
+d906a4864c8c32cc56ef16c6,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+b2e4bd6f91c0dcc275e98edf,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+7ecd65edefa1ca887ef90030,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+9a15b9a2ed1bbce138fc9bbd,mixed,Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.,agent_reviewed_not_human_gold
+3379a7f05bfe2ee2508c295f,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+c56abcb7d83641ea18bf377a,positive,"Favorable evaluation, approval, enjoyment or beneficial outcome.",agent_reviewed_not_human_gold
+bf2f9d454c7796780ef4b393,neutral,Reported bilingual speech examples; no clear valenced assertion.,agent_reviewed_not_human_gold
+1f38a1214442221db7208638,uncertain,"Fragment, irony, genre convention or insufficient discourse makes global valence uncertain.",agent_reviewed_not_human_gold
+4bf845c79dba6805dd8e3e36,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+ff8163e166cf2f90169c2b1c,positive,"Favorable evaluation, approval, enjoyment or beneficial outcome.",agent_reviewed_not_human_gold
+ce8aef3958749346fe63d9f0,mixed,Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.,agent_reviewed_not_human_gold
+2a6ff69a1290f1e54306e1a7,mixed,Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.,agent_reviewed_not_human_gold
+853cae96746609d44bc4e02b,positive,"Favorable evaluation, approval, enjoyment or beneficial outcome.",agent_reviewed_not_human_gold
+0d2604bc95a4d6a29f9788a5,mixed,Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.,agent_reviewed_not_human_gold
+9d0ce61276100187e5489d41,positive,"Favorable evaluation, approval, enjoyment or beneficial outcome.",agent_reviewed_not_human_gold
+24f042a03d47d62e7e32695b,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+3f5fa54e0216f51fff7e59f8,uncertain,"Fragment, irony, genre convention or insufficient discourse makes global valence uncertain.",agent_reviewed_not_human_gold
+ae73b7ad8904703d8f1e278e,mixed,Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.,agent_reviewed_not_human_gold
+08125561cd9fd7802ee6c692,mixed,Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.,agent_reviewed_not_human_gold
+3d5bbd5e65cdb79eb3fab477,mixed,Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.,agent_reviewed_not_human_gold
+9520356572f661a064fb31f2,mixed,Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.,agent_reviewed_not_human_gold
+41a5b8791415aff793cb1882,mixed,Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.,agent_reviewed_not_human_gold
+48868ade8e281ebec4e8692f,positive,"Favorable evaluation, approval, enjoyment or beneficial outcome.",agent_reviewed_not_human_gold
+899928d514c61b6646ed62da,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+c9f9a81e5aac78019a38de15,uncertain,"Fragment, irony, genre convention or insufficient discourse makes global valence uncertain.",agent_reviewed_not_human_gold
+a39767f2cc952e60fb2a8720,positive,"Favorable evaluation, approval, enjoyment or beneficial outcome.",agent_reviewed_not_human_gold
+41aa303db182b8ba1aca82ea,mixed,Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.,agent_reviewed_not_human_gold
+93a0063e2a1ec62031e6cc47,positive,"Favorable evaluation, approval, enjoyment or beneficial outcome.",agent_reviewed_not_human_gold
+aaee03eeb79244db7ad994e3,mixed,Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.,agent_reviewed_not_human_gold
+4d7286c27b1be0615d5e5000,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+90dfe9fecddecee4c91e044b,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+4f1f932c9c950593d669350e,mixed,Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.,agent_reviewed_not_human_gold
+396fa5954dc4a7d8b42dc62e,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+7d13161b86d6f84caddb1fec,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+77240db2752841d03d74a9d0,mixed,Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.,agent_reviewed_not_human_gold
+92940831443f3b3f0e6bb4e2,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+7b98df3cf7a5ba2abfedcaef,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+64b61beb0e13d597cb7a8e98,positive,"Favorable evaluation, approval, enjoyment or beneficial outcome.",agent_reviewed_not_human_gold
+c5bc418a74941e96e3914c39,positive,"Favorable evaluation, approval, enjoyment or beneficial outcome.",agent_reviewed_not_human_gold
+5ac843f10bbbe524b6323f62,positive,"Favorable evaluation, approval, enjoyment or beneficial outcome.",agent_reviewed_not_human_gold
+e1ef69f2723829139d20b320,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+241983cce8a30428ced0f4ca,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+40e904008d55f493125fd7e3,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+88933e50387d8a7a53a7cfda,mixed,Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.,agent_reviewed_not_human_gold
+0dc5d08c6e4b7e1396324b36,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+3f818767e5e7cdddd7b1b5da,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+83d6db1a4da98474483b24ae,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+aeb9eb58d69ae82663a00a0e,positive,"Favorable evaluation, approval, enjoyment or beneficial outcome.",agent_reviewed_not_human_gold
+1a85ba06dcae600c30e2a0ac,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+193e5d49931306419636d0bb,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+fa61bab1555f4b271919f834,mixed,Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.,agent_reviewed_not_human_gold
+427b941a462a613ed2077cbf,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+59fb53de261dcd0bf469733a,mixed,Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.,agent_reviewed_not_human_gold
+e4a32e8df2b13e974566a146,uncertain,"Fragment, irony, genre convention or insufficient discourse makes global valence uncertain.",agent_reviewed_not_human_gold
+9a7c1bd83662fd9a2a0e1bd0,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+d20ed1d9a508c6156d0abc3b,positive,"Favorable evaluation, approval, enjoyment or beneficial outcome.",agent_reviewed_not_human_gold
+31fd2ef7a47db4707e6f0745,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+0baf5df3e329ea7b8d267aa4,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+3f89c764e2f0d235d450bdbc,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+68ec99e082e353514781554d,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+62581777fac59878fa571a9f,positive,"Favorable evaluation, approval, enjoyment or beneficial outcome.",agent_reviewed_not_human_gold
+773ebfc5ab24d53170cdc407,positive,"Favorable evaluation, approval, enjoyment or beneficial outcome.",agent_reviewed_not_human_gold
+b821d0fb932ad76bd026f049,mixed,Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.,agent_reviewed_not_human_gold
+869d004d58a6882e95f6a142,positive,"Favorable evaluation, approval, enjoyment or beneficial outcome.",agent_reviewed_not_human_gold
+3e3109f5a2956420bc79a134,positive,"Favorable evaluation, approval, enjoyment or beneficial outcome.",agent_reviewed_not_human_gold
+eab44bd755abb33da4fdb538,mixed,Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.,agent_reviewed_not_human_gold
+640a397fc60ba9b1d2e9c2b0,positive,"Favorable evaluation, approval, enjoyment or beneficial outcome.",agent_reviewed_not_human_gold
+da535943590cb0cf2c26611b,positive,"Favorable evaluation, approval, enjoyment or beneficial outcome.",agent_reviewed_not_human_gold
+4e6c86c438344d8e1d5f3401,mixed,Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.,agent_reviewed_not_human_gold
+aa48cdede11368ab794a73ae,positive,"Favorable evaluation, approval, enjoyment or beneficial outcome.",agent_reviewed_not_human_gold
+5802588e1aa0007878ce7182,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+5314e659996e83504aec02d7,positive,"Favorable evaluation, approval, enjoyment or beneficial outcome.",agent_reviewed_not_human_gold
+10124ea5938061abc66c78dd,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+e95cfd0597f83b38ba9ea062,mixed,Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.,agent_reviewed_not_human_gold
+8e4e3b9b0ce7c26beb3a8f44,mixed,Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.,agent_reviewed_not_human_gold
+fcad957455f204a45765f5c1,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+423503afd675b3c4546ecc54,positive,"Favorable evaluation, approval, enjoyment or beneficial outcome.",agent_reviewed_not_human_gold
+94b627fc2393d8932119ddb5,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+0f18ceee15c9cc53b6463f2d,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+92eb99ca9620ac8dcb4a2ac9,positive,"Favorable evaluation, approval, enjoyment or beneficial outcome.",agent_reviewed_not_human_gold
+e54f920b8a59d55b075c9c2e,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+71939b9e8e2a6a7c1d5059bd,positive,"Favorable evaluation, approval, enjoyment or beneficial outcome.",agent_reviewed_not_human_gold
+830a9de7903d543b14d7841c,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+5354f66edc740317d1b14808,mixed,Co-present favorable and adverse evaluations/themes; exclude from strict neutral context.,agent_reviewed_not_human_gold
+2aa8c5f1ed9468fd6af44a73,negative,"Unfavorable evaluation, harm, distress or adverse outcome.",agent_reviewed_not_human_gold
+0de0cd1a20d36d43af6b2003,negative,Being harmed/royally screwed; character name Martyr is not the basis of the label.,agent_reviewed_not_human_gold
+8f28c4a32ddabee4a2ef90e3,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+98fd8b8514c46d2368936a76,positive,"Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.",agent_reviewed_not_human_gold
+6aa94830462320a1b8326a33,negative,"Harm, loss, conflict, failure, death, discrimination or an unfavorable judgment, even in factual prose.",agent_reviewed_not_human_gold
+ac9b23ebb8d025cf009cd4e9,positive,"Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.",agent_reviewed_not_human_gold
+c52c2789300d9d306660adca,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+d3c10c18cedd9512846dda90,positive,"Prosperous farm is a favorable material circumstance, not a neutral descriptor for this strict context control.",agent_reviewed_not_human_gold
+ee0ab257f260565cd26763c1,negative,Support for the Nazi regime; explicit harmful political context.,agent_reviewed_not_human_gold
+9b3bd4e64a2448d6e21ea100,negative,Financial backing of Hitler; harmful political context.,agent_reviewed_not_human_gold
+34d37e9301cfb20be433bcf0,negative,Aid to the National Socialist movement; harmful political context.,agent_reviewed_not_human_gold
+2372695e9b67d2275873357d,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+451df386265537a61c12f5b5,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+6cdea782f4433edcd8e8d2f2,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+67dfcf9df76c0409736448c3,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+21d46609de1436f27b86a63a,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+0a9806c3430b35711bab6bc6,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+71a4b7e30969bc1b0528bcf5,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+f846de1a7d736ae58301e4ad,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+328f2ea72c70e401be4518b9,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+54d5e10011afaf3ad924bc9f,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+d8739b43a9e04887c62405a3,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+6a3bdd702d97fb8bdabdf4b8,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+84aa6b859345acfdd87bbb04,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+e6876ee576aeaec64bbdf7cc,negative,Infamy and sexual abuse/pedophilia context.,agent_reviewed_not_human_gold
+9dff9c5cc71cbe6de48eb5c4,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+53368bb95104c2e03e5010c7,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+7fd8d0b8469c7de75070e673,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+e161ae9922742fee3df607df,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+8b0c503ecb08a6497edf82dc,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+839b7220942321628779e58a,positive,"Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.",agent_reviewed_not_human_gold
+07c19e32bd115cb939799ecd,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+87ac2b7c48b691e7d16f68d3,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+d099be914cf8424591b13f5d,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+24e6cb0dec542a7f70fbbc78,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+ead4abe2d77bcb90b28e1ff8,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+e8d16b7d16ff68a70d6a9b73,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+4e1f27a1e0f6205cd9f3d979,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+777a7d9b950b64917cbe56b1,negative,Undisclosed paid promotion conveys deceptive conduct.,agent_reviewed_not_human_gold
+22f465acdcaf277a304150d8,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+1411fcf573ecf8b07e30b63b,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+aedb5c0ec917ef1a6d6b6b3c,negative,Active military action in revolution; exclude war-event context from strict neutral baseline.,agent_reviewed_not_human_gold
+9817b2eac384fd5d3a3e430f,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+1111501be2d7866bee50398a,negative,"Harm, loss, conflict, failure, death, discrimination or an unfavorable judgment, even in factual prose.",agent_reviewed_not_human_gold
+abe592d7b5b6dd797e2300ad,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+efba943989dcab04792c2c92,negative,"Harm, loss, conflict, failure, death, discrimination or an unfavorable judgment, even in factual prose.",agent_reviewed_not_human_gold
+1005de92520691f5cf769e80,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+53d3dc0b7c701619aa1a666b,uncertain,Unauthorized dissident status is perspectival; insufficient context to assign one valence confidently.,agent_reviewed_not_human_gold
+ec1fdc8f0a26ad7828e27dd8,negative,"Harm, loss, conflict, failure, death, discrimination or an unfavorable judgment, even in factual prose.",agent_reviewed_not_human_gold
+e1218324d4254a01cc8b42d7,negative,"Harm, loss, conflict, failure, death, discrimination or an unfavorable judgment, even in factual prose.",agent_reviewed_not_human_gold
+3ef5e24526683b73be4d83b5,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+9a98090785c60d91566c5f71,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+567af3690678ee898dab6a69,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+05c91d9d1d594848b92215b7,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+618ffa4cc40c1ebcc57af397,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+a7b99c517a13eb339aee06dc,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+0ef98b13627788d6e500f2bf,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+8c911073e5094ed15924f5fd,negative,"Harm, loss, conflict, failure, death, discrimination or an unfavorable judgment, even in factual prose.",agent_reviewed_not_human_gold
+32cdf0882270248f630de50c,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+4ea4651bf43b5a93a22d35a6,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+cadafc68eccea7e5dda4975b,positive,"Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.",agent_reviewed_not_human_gold
+2983582036cbb8ddbaa2079c,positive,"Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.",agent_reviewed_not_human_gold
+6dea89c911867d47aa44d488,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+c3fa716fb3adb209b213394c,positive,"Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.",agent_reviewed_not_human_gold
+b50214bc7b0a8498b3c26654,positive,"Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.",agent_reviewed_not_human_gold
+42d77d67e315177e21bce391,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+ce2aaf4ad2e7b5bab2f5d727,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+642771333b9b554e154838f4,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+b68d48b360f88f9da535d57f,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+18e2f5ec3dd91555eb295263,uncertain,Illegitimate is socially stigmatizing but a historical status description; flag rather than treating as strict neutral.,agent_reviewed_not_human_gold
+016bf559a6c63d0c35cc6830,negative,"Harm, loss, conflict, failure, death, discrimination or an unfavorable judgment, even in factual prose.",agent_reviewed_not_human_gold
+4fcd64f1739979a81a49ffb1,mixed,Excelling and receiving a diploma coexist with failure and setback.,agent_reviewed_not_human_gold
+5b943013c2a1b41c1ff54163,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+e27f9bdc07471ce901e7e053,negative,"Harm, loss, conflict, failure, death, discrimination or an unfavorable judgment, even in factual prose.",agent_reviewed_not_human_gold
+3f7cfe9b9526e83b107264fa,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+a62fbe1e9b7323bdcbf7b3c8,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+1879eb35fd5791ccca8f5e24,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+5b1adb0edf8c74a6fe00a4f5,uncertain,"Villain is a fictional casting role, not a personal judgment; conservative exclusion from strict neutral context.",agent_reviewed_not_human_gold
+e1245556749f91bf9a8b0856,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+1b0b44524bf88a0929dd2543,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+207dc33c849dbe1e21308906,positive,Oscar-winning parent invokes recognition/achievement in an otherwise factual family statement.,agent_reviewed_not_human_gold
+41e69b60b76b893593c63ff7,positive,"Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.",agent_reviewed_not_human_gold
+d8bc35d4acc15af5ca6300fd,positive,"Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.",agent_reviewed_not_human_gold
+517cbe13a50aa3cb354ab5d0,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+366b6186f239f8cd8ae26072,positive,"Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.",agent_reviewed_not_human_gold
+f23fd8c00110102d316e7918,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+7d3adec716a26ea8e967c57e,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+a8db350c7a2893221a69de0f,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+dd3dbecdc8883b11b8aaaac5,positive,"Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.",agent_reviewed_not_human_gold
+9b634660369ad1bd5c370623,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+a5e1f214734b9f52c468c7d7,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+980a1f38d0923a995d10794d,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+5cbd980ca6fdbf30ba5d95d8,negative,Close friendship and funeral/bereavement; adverse final event dominates.,agent_reviewed_not_human_gold
+54ccb6b1a35b3ce6d1941548,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+84fd2eeaef13d498e4027da7,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+f0c35f9ed46fc626a3cdb578,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+5a8bf1ccdab629c54d81c959,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+7ae0e14e2d9f39bfce1640b6,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+f68eeabf558c77c6b20b17c6,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+ae7878bd4c70bea7e4347f9a,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+854d620ee514456ca5aa4f56,negative,Explicit death/burial event; corrupted punctuation retained as provenance.,agent_reviewed_not_human_gold
+103e28e317c0c0544cb6da25,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+65e6f33071c7242c6bd96107,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+4aa75430315397e4826cb561,positive,"Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.",agent_reviewed_not_human_gold
+92a1e64c4ee8d1b4904bf40e,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+b921e11516fd06c28d547cc6,positive,"Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.",agent_reviewed_not_human_gold
+86e048711feca94e6cdfc527,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+3501fd75d4216d3d9030a683,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+485ad364de87d60323bd3480,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+a0598706fe0658213ce92074,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+1ec55d79ba53b007c979a564,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+969dead9ab54663a22e77c8b,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+4f31536b167ccc3793b53a21,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+e01a4eadfb7fdf137d4476f4,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+62a5f6e3b116cd832cc41438,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+078c34a619ae7d716a8b58e9,negative,"Harm, loss, conflict, failure, death, discrimination or an unfavorable judgment, even in factual prose.",agent_reviewed_not_human_gold
+a5a1a1f3b82afe75e1a735e7,positive,"Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.",agent_reviewed_not_human_gold
+de3ad8b64b7ae14a9a618a39,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+34462a43e0aa559bfdc844a5,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+d5eb4057a720385340dd795e,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+23cebe5bbd9a08a123a428a6,positive,"Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.",agent_reviewed_not_human_gold
+015f688abb45f9e8df7d4b8d,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+5e7d61a939402b1d01372818,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+0d5d1b525f92572103cb11d6,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+3dfc720e96feaeffc9ecbf74,positive,"Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.",agent_reviewed_not_human_gold
+6eaffc0f875664b6e2ccf4d4,positive,"Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.",agent_reviewed_not_human_gold
+f522fa55be19116843380ec2,mixed,Civil-rights reform/nonviolence benefit alongside protest against adverse social conditions.,agent_reviewed_not_human_gold
+29308495647af39a50e348fd,negative,"Harm, loss, conflict, failure, death, discrimination or an unfavorable judgment, even in factual prose.",agent_reviewed_not_human_gold
+df04931ac66a2396cdc04283,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+9573963b7b3cbb1014619e96,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+8a1db705ac533953cb7faae0,negative,Rejected application is an adverse outcome despite later graduation.,agent_reviewed_not_human_gold
+925f85f237813aaf5aaa555c,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+90134d9f3c73380c71db0da5,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+0e3fe72bb1a0bbaaa432902e,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+3f6fdb604556b20a97ea85de,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+bd1051108f01421467a75a92,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+8ef20524c15b9bde2344af9a,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+337787cc4341cbf1b3133a09,negative,"Harm, loss, conflict, failure, death, discrimination or an unfavorable judgment, even in factual prose.",agent_reviewed_not_human_gold
+ff2ab1d14dcb747a1247499a,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+4cde04673b0c01d351a7af4f,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+bdb3f4bdd58423c9cf8fa229,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+ec8c326934b92573387bc212,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+4393daf58dcc9839b1d91279,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+567ed8e9acf663c6442336ee,positive,"Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.",agent_reviewed_not_human_gold
+6a8403d04080e3edb1feb240,positive,"Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.",agent_reviewed_not_human_gold
+909caf15e7fe90f273567f28,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+05169fb1c5b2edac45606b70,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+9c5cacd06a2a0f7bc9339c03,negative,"Harm, loss, conflict, failure, death, discrimination or an unfavorable judgment, even in factual prose.",agent_reviewed_not_human_gold
+1a533fd0d601514c1aee79fa,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+9cd142ae76faacdab9b638b3,positive,"Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.",agent_reviewed_not_human_gold
+022c664c72a452fff1602534,neutral,Famous identifies a mathematical curve rather than expressing admiration; otherwise factual.,agent_reviewed_not_human_gold
+c38757e6441bccc7df62591b,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+a732d29361df5a5f0d1ba106,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+4b72cd66bad986aa21ec636a,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+c0c1d8df16f76b1f4b00080f,positive,"Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.",agent_reviewed_not_human_gold
+70be164f242fc63a76ea75b7,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+2bac6f1d1a7053858189d85c,positive,"Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.",agent_reviewed_not_human_gold
+9a262f4846395b7065756e04,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+2710f725f17dd925e6c889af,positive,"Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.",agent_reviewed_not_human_gold
+a4381891ae69135effcb2842,positive,"Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.",agent_reviewed_not_human_gold
+94ea6788bd7b8102079acbf2,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+d1f2b45a6a8dffd064cdd32c,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+7209f456a11f59f690e853eb,mixed,Electoral losses and eventual victory are both explicit.,agent_reviewed_not_human_gold
+12655c37857d1b451db99ab3,uncertain,"Borderline affect, war/controversy context, stigma, incomplete text or unavailable discourse; exclude from strict neutral context.",agent_reviewed_not_human_gold
+23f79410462b872da313aad5,negative,"Harm, loss, conflict, failure, death, discrimination or an unfavorable judgment, even in factual prose.",agent_reviewed_not_human_gold
+39afd2eeb6e17d8eaddb2e0a,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+2123f8508aa34709952b9e05,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+956d4ef0098ac10648648cb9,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+3acd5d5a62ed5e2c32f46e98,mixed,Winning election and death both stated.,agent_reviewed_not_human_gold
+26376782fdb31e382dbcf050,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+a60c180559fb3f728038fac6,positive,"Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.",agent_reviewed_not_human_gold
+2f4552db3ef0fd6fd33ac9a6,mixed,Great novels and dehumanising themes are both explicit.,agent_reviewed_not_human_gold
+338ee1dd8a0737b2dc6e78ba,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+f8886104459cef2af6c89f03,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+503e62a2a957259474c60a03,positive,"Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.",agent_reviewed_not_human_gold
+4998ccec2d5d4ad54be82741,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+e302bb5044192a1ced3eb2fb,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+cb735c6e401ae90db167129d,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+762c61433c52d7742b6793bb,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+cbf11919c574adecc7e2149e,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+75dc6d53cb96475437863170,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+b37b06a3b1577d93f0b8c855,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+e4c47a69d7439a3768a94880,uncertain,"Borderline affect, war/controversy context, stigma, incomplete text or unavailable discourse; exclude from strict neutral context.",agent_reviewed_not_human_gold
+b0013c01c1ebc5072cc8e0f6,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+7ac23c7012ad9381d5b58514,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+6a2ae8d9eb1a324c41f1e446,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+f2e5c313e4d3285f586a51b2,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+0d8f8efa6d145a438993b530,positive,"Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.",agent_reviewed_not_human_gold
+5a69869fbf509e0b1b3be019,negative,"Harm, loss, conflict, failure, death, discrimination or an unfavorable judgment, even in factual prose.",agent_reviewed_not_human_gold
+22ec3fa3bd3c533a2a9a769d,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+80a6fb6ec5f9210a243e69f9,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+140037812e7f742aef5133d4,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+9ec3b9544ff26fb7e1b8b12a,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+adbeddfcaa38509b2d1df9dd,negative,"Harm, loss, conflict, failure, death, discrimination or an unfavorable judgment, even in factual prose.",agent_reviewed_not_human_gold
+0e807bf01e2d13cbe151c2bc,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+4a2e8b8db6c321e6e5fd550b,negative,"Harm, loss, conflict, failure, death, discrimination or an unfavorable judgment, even in factual prose.",agent_reviewed_not_human_gold
+039833016988e88c42473692,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+219dabeac6c42b26d7a228b4,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+74431dc76673cfb7a4f16318,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+b2c19f62ef0709f564548389,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+bfbcf511c3cad220c2cfb34c,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+211c73523e55c7ffa5931289,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+9d7b04bf90b9747c28c91d37,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+039f54aeee47cc14e31cba49,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+906f87b46d99f6ccf0804d1b,positive,"Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.",agent_reviewed_not_human_gold
+adf647f646115edf556e5a34,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+87e04dd723cd9d5138917d39,uncertain,Military service during World War I without a specified harmful event; conservatively uncertain rather than strict neutral.,agent_reviewed_not_human_gold
+7205bb5c079537c0d975d2ab,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+87670d856b32252a89a9f5e3,negative,"Harm, loss, conflict, failure, death, discrimination or an unfavorable judgment, even in factual prose.",agent_reviewed_not_human_gold
+23efbb42047d5d91955148fe,negative,"Harm, loss, conflict, failure, death, discrimination or an unfavorable judgment, even in factual prose.",agent_reviewed_not_human_gold
+0b4fc426aeeb5dd4cda990c4,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+2487d62915f100afd4b853e1,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+080e33813985ecf6779c2691,negative,"Harm, loss, conflict, failure, death, discrimination or an unfavorable judgment, even in factual prose.",agent_reviewed_not_human_gold
+ce25c67e5b2525bac1db6285,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+c7f0b926e28b88a9a6cdad47,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+1637dde83a6c4aface81fd6a,uncertain,Weapons supply in World War I; strict neutral-context status uncertain.,agent_reviewed_not_human_gold
+2b2534b584c2f8afcd1dddcf,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+0dc4f596c1a41ac8b60ff565,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+e418945f7cedaea1600c8bff,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+9cf024d9872319b0cc1deebd,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+99095fbf2f7387f2fde9512f,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+a9d5cdae660588411ed9b1c4,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+2cd59d4e87a7f381ebf7fa20,negative,"Harm, loss, conflict, failure, death, discrimination or an unfavorable judgment, even in factual prose.",agent_reviewed_not_human_gold
+3375375c7f5a3af4f8a22381,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+77c3f420b4aacfe78782f6ca,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+a2c29d482ad1bea96fad58f3,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+89d23a05651856c29f158728,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+8f6a29287046056b6c87ddf9,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+29efeefe48302d2ad40a1b22,positive,"Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.",agent_reviewed_not_human_gold
+baa568e3918fd1a06b925f93,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+ee94b7fa18224c736b79753a,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+d1b378349dc33c77bdc31e72,negative,"Harm, loss, conflict, failure, death, discrimination or an unfavorable judgment, even in factual prose.",agent_reviewed_not_human_gold
+965096c1ced8c0e845a56445,uncertain,"Borderline affect, war/controversy context, stigma, incomplete text or unavailable discourse; exclude from strict neutral context.",agent_reviewed_not_human_gold
+f3ecd607bd9df5c261519165,neutral,Royal names and epithets such as Ivan the Terrible do not themselves impose sentence valence.,agent_reviewed_not_human_gold
+120793a0c6b41649605d128d,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+8b5dc6f74880444f204cddde,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+ce33ee877943fc6ff9c7c4b8,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+f1577feb132a3410b0948025,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+b3cefba048e5941d39cd2a31,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+5ac7c0bc32df5b94bf936a60,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+26b948a36788e8c695365814,positive,"Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.",agent_reviewed_not_human_gold
+92a0da712b0ad58ed8004432,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+d464a4b7c9f9b1dc6dd8b86b,negative,"Harm, loss, conflict, failure, death, discrimination or an unfavorable judgment, even in factual prose.",agent_reviewed_not_human_gold
+adbe239c8d98b1593b5fc4e0,positive,"Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.",agent_reviewed_not_human_gold
+4ab427b382afe9c8309a2832,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+09083e68b11acfc8cb9adece,uncertain,"Borderline affect, war/controversy context, stigma, incomplete text or unavailable discourse; exclude from strict neutral context.",agent_reviewed_not_human_gold
+a59f2995edfb9571da5fcf6f,uncertain,"Borderline affect, war/controversy context, stigma, incomplete text or unavailable discourse; exclude from strict neutral context.",agent_reviewed_not_human_gold
+24b755628ce2ea07a442c000,uncertain,"Borderline affect, war/controversy context, stigma, incomplete text or unavailable discourse; exclude from strict neutral context.",agent_reviewed_not_human_gold
+21f8ac0fcfb2feb7818d5386,negative,"Harm, loss, conflict, failure, death, discrimination or an unfavorable judgment, even in factual prose.",agent_reviewed_not_human_gold
+2e6e6cd9a8f7dc17acd7afaa,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+3607f97cf74a8f429399155c,uncertain,Known corrupted/alignment-discrepant source sentence; excluded from strict neutral control.,agent_reviewed_not_human_gold
+383eb7ff57aed0e0cfcf4b8c,neutral,"Cold Comfort Farm is a work title, not an assertion of discomfort.",agent_reviewed_not_human_gold
+6afe15081a1a5344e3d8baf1,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+40e586b70faa6de9e00c9b18,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+79903771db13813dcca538a1,mixed,Both favorable achievement/benefit and adverse event/evaluation are stated; exclude from strict neutral context.,agent_reviewed_not_human_gold
+1865a47b00c63e6b8f2ee5ea,positive,"Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.",agent_reviewed_not_human_gold
+aae8700a5ffbb0849583dd20,positive,"Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.",agent_reviewed_not_human_gold
+f69aca31303cd7360772009b,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+bec30e4f28fdd74b97f451ce,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+124457408bb37030b1d447d9,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+c90704529aebc3b600b767ee,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+dfd23c006b3d2d42965a3f96,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+6bbbbf7e9a9f1b8538c71659,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+0b743cb7d9adc9ec7c9342eb,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+b0f05491eaee0b4f5b81999c,uncertain,"Borderline affect, war/controversy context, stigma, incomplete text or unavailable discourse; exclude from strict neutral context.",agent_reviewed_not_human_gold
+8a4151d3f1b5af704073ecf0,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+a7c2c769b7f7c48c2ab98ff4,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+f4d666056ac776d6a2d7e9d7,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+1589211514a9344514463258,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+88fcf11d0081f30e1449b220,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+3e6f4f5645db641ea87f957c,negative,Analysis of bombers in a military setting; explicit destructive-event context.,agent_reviewed_not_human_gold
+89f1f201e9258cfef30934d5,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+b4036e7dc2e1ec8ec9a2281a,negative,"Harm, loss, conflict, failure, death, discrimination or an unfavorable judgment, even in factual prose.",agent_reviewed_not_human_gold
+eeca35f2a0f6be08e743a27c,negative,"Harm, loss, conflict, failure, death, discrimination or an unfavorable judgment, even in factual prose.",agent_reviewed_not_human_gold
+74b10d95ede141a526278b79,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+d5d3e3921c674eb43ff8d118,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+489873786c423aca459f577a,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+f129e73d1348b6aba5dfb5c4,negative,"Harm, loss, conflict, failure, death, discrimination or an unfavorable judgment, even in factual prose.",agent_reviewed_not_human_gold
+43c8a6fd919c95be71dbb49d,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+239a2fa314c3d19b1f7f3a4e,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+85972fdd0505e7c343d748fb,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+9aed1c241ad6e3b3cafd9bbd,mixed,Opposition to slavery combines a beneficial stance with an explicitly harmful institution.,agent_reviewed_not_human_gold
+22a538a102bffe2cd37e2c64,uncertain,"Borderline affect, war/controversy context, stigma, incomplete text or unavailable discourse; exclude from strict neutral context.",agent_reviewed_not_human_gold
+0e5bacf618b96c3ba2f13f8b,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+be66a0f4ccda07443556d5b3,mixed,Misjudgment contrasts with endurance and achievement.,agent_reviewed_not_human_gold
+bd8e3d8ceedb191a1af2a134,positive,"Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.",agent_reviewed_not_human_gold
+78c285a2da5dcbbf06b8d809,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+cee76a0702d68cc3ded4425f,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+85bc21a065a61084be40d338,negative,"Harm, loss, conflict, failure, death, discrimination or an unfavorable judgment, even in factual prose.",agent_reviewed_not_human_gold
+27219f6e47259ca2a6d2a7b3,negative,"Harm, loss, conflict, failure, death, discrimination or an unfavorable judgment, even in factual prose.",agent_reviewed_not_human_gold
+5a84477183bb49828254f5d4,negative,"Harm, loss, conflict, failure, death, discrimination or an unfavorable judgment, even in factual prose.",agent_reviewed_not_human_gold
+255530af3c917b39438ff679,positive,"Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.",agent_reviewed_not_human_gold
+d8824b309d2a15ec90812649,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+cf4d8380554755bfe97ba79a,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+b7c0f859825de2cef54c5d9e,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+9800fddfa418ceb18a9b6a3f,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+3c75fe095bc8603dfb9a9839,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+1082d829649c64df5a16730e,positive,"Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.",agent_reviewed_not_human_gold
+03c047af65cb250d978e3125,positive,"Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.",agent_reviewed_not_human_gold
+e1e29f2cd9aa85739282c92d,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+138f760daa8f0d2a02ee959e,negative,"Harm, loss, conflict, failure, death, discrimination or an unfavorable judgment, even in factual prose.",agent_reviewed_not_human_gold
+620f1cbc036f8e613bca4fcc,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+d5f1bf740a3a4ab28ea01d70,positive,"Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.",agent_reviewed_not_human_gold
+1addc0095f10b32ebef58449,mixed,Heroic recognition is paired with injuries and a downed radio man.,agent_reviewed_not_human_gold
+783e88a59ba3de236cc70854,positive,"Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.",agent_reviewed_not_human_gold
+714f77874d0663ec185de168,positive,"Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.",agent_reviewed_not_human_gold
+e1bc274d40ec71632e22b578,positive,"Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.",agent_reviewed_not_human_gold
+7310fed228735131fba8b4e6,positive,"Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.",agent_reviewed_not_human_gold
+bdf6387163277985c5e0880b,positive,"Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.",agent_reviewed_not_human_gold
+7cd46d2eeecf32e3a54406c3,positive,"Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.",agent_reviewed_not_human_gold
+229894d594c6e6c6498fde87,positive,"Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.",agent_reviewed_not_human_gold
+7629a8950e9b5eb56e74cdd8,negative,"Harm, loss, conflict, failure, death, discrimination or an unfavorable judgment, even in factual prose.",agent_reviewed_not_human_gold
+41bde1f5f0691a8069ab62ff,positive,Medal of Honor is positive recognition; parenthetical lifetime dates alone are metadata.,agent_reviewed_not_human_gold
+1ca95f09d74e14d8edbaf0f1,positive,"Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.",agent_reviewed_not_human_gold
+00e933b0545aa44ccbefd8e4,positive,"Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.",agent_reviewed_not_human_gold
+3a8cd390d2a3e921dde7253a,positive,"Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.",agent_reviewed_not_human_gold
+bd3637c1d102f89bf49f9607,positive,"Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.",agent_reviewed_not_human_gold
+5cbd99d38412564ac2aadeb6,negative,"Harm, loss, conflict, failure, death, discrimination or an unfavorable judgment, even in factual prose.",agent_reviewed_not_human_gold
+d1b8cdf24c857b2600a8d698,positive,"Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.",agent_reviewed_not_human_gold
+f715bfdcf5aa4c78e06b462a,positive,"Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.",agent_reviewed_not_human_gold
+4debcbc5089f6da14ce49e2d,positive,"Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.",agent_reviewed_not_human_gold
+2db81aec84878b07bff4bcc1,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+6c885d72ce29ec75caa11a59,positive,"Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.",agent_reviewed_not_human_gold
+75082a0c6637a8a5d8610895,positive,"Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.",agent_reviewed_not_human_gold
+2844466f712b5adc64ddcfb4,positive,"Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.",agent_reviewed_not_human_gold
+66527debe7779c146d55f103,positive,"Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.",agent_reviewed_not_human_gold
+25fb8f985787a064c3cd8a5a,positive,"Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.",agent_reviewed_not_human_gold
+c64689a5fa8a4b30191d3721,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+b416699defc50680cad42149,positive,"Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.",agent_reviewed_not_human_gold
+c3516145c13cd55bd301634d,mixed,Cavalry battle/charge and posthumous award combine adverse and favorable content.,agent_reviewed_not_human_gold
+4be5f52de7c6ccea7fe5898c,mixed,Peace mediation/award alongside an explicitly named war; mixed affective subject matter.,agent_reviewed_not_human_gold
+bd60d0b2a0b1495d31205f5a,positive,"Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.",agent_reviewed_not_human_gold
+39f3e0500407db07ba0ad3fe,positive,"Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.",agent_reviewed_not_human_gold
+4fda8d698baf276421bd4431,positive,"Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.",agent_reviewed_not_human_gold
+ace2537658c22ab0764ec111,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+a3fd70918fff8d75e611b4bc,positive,"Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.",agent_reviewed_not_human_gold
+8ec40839a324436a674e9f4d,positive,"Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.",agent_reviewed_not_human_gold
+0bf0ab172ea9aef6946aedfe,positive,"Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.",agent_reviewed_not_human_gold
+22abd4652bd79db93f7a5201,positive,"Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.",agent_reviewed_not_human_gold
+f93668a3d9a1e13367881455,negative,"Harm, loss, conflict, failure, death, discrimination or an unfavorable judgment, even in factual prose.",agent_reviewed_not_human_gold
+2be4901eec3a747728376c13,positive,"Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.",agent_reviewed_not_human_gold
+121ee36be83517828f6fb04f,positive,Highly recruited athlete and exceptional choice; favorable recognition rather than merely enrolment.,agent_reviewed_not_human_gold
+9ed5d747c28973dec6eb2a5e,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+eb27b5eceef75b9914e5db7a,negative,Prison context prevents strict neutral classification despite education/religious study.,agent_reviewed_not_human_gold
+4cf9a9ddd4c8cfeaf2c3aab9,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+744582d00e05c5404fb907e5,negative,"Harm, loss, conflict, failure, death, discrimination or an unfavorable judgment, even in factual prose.",agent_reviewed_not_human_gold
+5023e2d6f404d7d27b4be07a,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+598ab95b8a7a7673d1f2218d,negative,"Harm, loss, conflict, failure, death, discrimination or an unfavorable judgment, even in factual prose.",agent_reviewed_not_human_gold
+457cc06b66d5b41fab0350a9,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+2ea12bef6abadaebcc15163a,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+7a928fe03abee828079be7e8,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+0ce8ca4be4dea262267442d6,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+eff5e60b9cf69180343de6f2,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+a4649a15eee34ed8767a9fbe,positive,"Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.",agent_reviewed_not_human_gold
+ecd0e87bdb97e2769b6d0bbe,uncertain,"Borderline affect, war/controversy context, stigma, incomplete text or unavailable discourse; exclude from strict neutral context.",agent_reviewed_not_human_gold
+1c781d1011bc26f33a7d9e1b,positive,"Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.",agent_reviewed_not_human_gold
+82e15f9af64ad035d93c62c8,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+1978c95a2fa1031c017e1850,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+88e7d5271264993e006d5e57,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+c8712ae8b119e4c8bb050bfe,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+9a44f6a26d58e91a3db0ad29,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+79199f3d9afc688056bfdee8,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+6526832c5d10bfeb93c5ec50,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+65a6497e2c45961042b94c50,positive,"Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.",agent_reviewed_not_human_gold
+fee63f3d81d61c06b813dbe5,uncertain,Villain is a fictional role; conservative exclusion from strict neutral rather than negative judgment of actor.,agent_reviewed_not_human_gold
+2956526d4e217aaa687ca7ed,positive,"Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.",agent_reviewed_not_human_gold
+a2781448c3334c5e567d3ca4,uncertain,Unfinished degree without clear success/failure stance; borderline context.,agent_reviewed_not_human_gold
+04f549f0971e0fb49999bdd1,positive,"Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.",agent_reviewed_not_human_gold
+cd21e5b52eec9230572ddcf2,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+84d25b7291ab84d98fa61fba,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+39675af4c31c2c49999a2ea1,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+a571ef27add2dfd792c07ebf,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+f86e315d1257d7ca53e385c4,uncertain,Boycott fragment lacks the cause or outcome; conservatively uncertain.,agent_reviewed_not_human_gold
+a5dcb51df9aacd275f2990a5,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+81877b9d1502ed95c1956539,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+3995bbbf303dce7fe46e7134,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+69a2d122129af90f8914e0aa,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+6edce59092a1c5b8f0175fcf,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+38c21fc9de74e047247fc23d,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+95939dd03e371f807ee99808,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+bdc4d72952740e6962409401,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+c7d9a07d7960fc2f78e7e7eb,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+1a615eea738d7e51bfd91f8f,negative,Quoted working contrasts with dozing/eating; implicit disapproval/satire of laziness.,agent_reviewed_not_human_gold
+77ec070e272be8a6ff2d0743,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+408e5cbc62bf23eb427bbf8e,neutral,Political opposition is described as a stance; no independent party ideology valence imposed.,agent_reviewed_not_human_gold
+03402c1ebef2ae006d3f38e2,uncertain,Family connections facilitating employment could imply favoritism; uncertain rather than strict neutral.,agent_reviewed_not_human_gold
+0d4dfac232f79dc21c3cfe1c,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+c44af1204392c06067326c04,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+80e9ba8e138b6006eab5b143,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+7f6db4848f7bd6f44c5f1c5b,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+5205373560b5ec1bed02b5c1,negative,"Harm, loss, conflict, failure, death, discrimination or an unfavorable judgment, even in factual prose.",agent_reviewed_not_human_gold
+2a9c0761de31e5da9ca944b4,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+3cea9022d374078e6ab6a265,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+0f447781e1af606b9baa6e76,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+694ff18eba3aaa4d038c2790,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+6921f43e1417647751f9a14a,positive,"Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.",agent_reviewed_not_human_gold
+0c8699c195c7850a20db0182,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+8c6b97050a51646a517bc9bb,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+d20f4e5d28f01dc34e78842f,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+f677e3b3d621a33ef0ac3b10,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+63e684c0fb82f4202d61da6c,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+c0c388635ebbd6391b1ca66c,negative,"Harm, loss, conflict, failure, death, discrimination or an unfavorable judgment, even in factual prose.",agent_reviewed_not_human_gold
+5516f88086df84f756b8a3fc,positive,"Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.",agent_reviewed_not_human_gold
+cf90f7e1d102b266873dfd26,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+55b5d2276774e76030e207e6,negative,"Harm, loss, conflict, failure, death, discrimination or an unfavorable judgment, even in factual prose.",agent_reviewed_not_human_gold
+2802a9792c7911a9d357ef5b,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+a829042cb1445aa0bf738f88,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+6066c3a9eb2e44d28282f8b7,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+1f974fecbc3105a03c7b16e0,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+013aeda2063a323a00d0b03d,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+0e03bf1c5a7ff31c325eebba,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+8a2a31943c0b7b85b73ad9c3,positive,"Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.",agent_reviewed_not_human_gold
+d8cf01eacdeb14bee1c399b8,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+0271bb15bbd712357f0edaef,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+161e5deb356cd7c7c1a14514,negative,"Harm, loss, conflict, failure, death, discrimination or an unfavorable judgment, even in factual prose.",agent_reviewed_not_human_gold
+ae746236ad8cc901dcba0c2f,uncertain,After-war setting but no harmful event specified; conservative context exclusion.,agent_reviewed_not_human_gold
+33e3294913a4dd3a70f12766,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+085d84c0d124ccfddda07e5c,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+183cc23cda9dc31a98c89e49,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+cc045d75bff3d709dc61f048,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+42ba1bb40633a56904521316,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+921b8426c64e92f746985da7,positive,"Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.",agent_reviewed_not_human_gold
+0e2107813a5174cdd468b4e4,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+8b76ec1c8c048f5bc0cf03d2,positive,"Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.",agent_reviewed_not_human_gold
+ec3922d1550bb20f40f5d3b9,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+8b743c4c74c113c546bec4f8,positive,"Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.",agent_reviewed_not_human_gold
+cf1de1a9c39e6e3dd2da4ff5,positive,"Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.",agent_reviewed_not_human_gold
+096fbf121a95a3ff266d714f,positive,"Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.",agent_reviewed_not_human_gold
+077a4b7ba7e997d427a9bffd,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+4cd2fbf592d1bd4b8c9d8a89,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+dee796420f278a83fb707ef9,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+46c6a54fabfdecb270568820,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+6b88f1791a48c2a4c44e4038,positive,Approval of universal human rights is a beneficial social outcome.,agent_reviewed_not_human_gold
+69f90202155e0d36c7f077b3,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+849449272ca0ad96182b6edf,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+d0e70b9b419f728d745667a9,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+832caafe4a9eafc170918830,neutral,Poor Ladies is an order name and poverty/celibacy are chosen religious vows; no automatic negative judgment.,agent_reviewed_not_human_gold
+700c7d3c34ed197981212103,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+66e365ce4039536a9a19dae8,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+6bc2ba2d2f598a267a18a56e,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+d0557fad30dbbc989fe91954,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+7ed1d1c33c9f73c4d36190fc,positive,"Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.",agent_reviewed_not_human_gold
+488bbe28c4a3a399f8d08749,positive,"Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.",agent_reviewed_not_human_gold
+9176428878662ac47d453d66,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+024d35320893a6913dcb82ae,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+fbe3784a3837f91b0f73a5fc,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+4568663e212e50835d5acf87,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+20776a32d99f1e73597c68ec,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+854b8fb4e6a8cdb2be0407e9,neutral,Naval War College is an institution name rather than an asserted war event.,agent_reviewed_not_human_gold
+0ae5501a490a539450846e19,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+560224333b405e20828608fd,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+00aa59134b113e1c8f442f4a,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+eb3c18e9d883192a07cf9f16,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+9f75fe74ad2fb4218a0ef9b6,negative,Accusations of rule violations and resignation; adverse scandal context.,agent_reviewed_not_human_gold
+332522e8b84cf965f9bfa8ea,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+ba47c5758b92f3a23849062d,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+44fa0dd74d637f8376c69cf5,positive,"Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.",agent_reviewed_not_human_gold
+886df1a78f7cc732b4b17de6,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+aa9ed79ed578bf8a4fe25de6,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+a803957099fae9a8cc6af919,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+786fd7a971391bec95601c6e,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+bb2838775209927dd954c0ce,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+2cd5cfc1783d72452d037547,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+f77510d999977cf624fe6cc8,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+8afd08f5e5d1abe3d8f5e666,positive,"Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.",agent_reviewed_not_human_gold
+948752f4e0ac5106de7df558,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+9d94d78c3aadbe4d924af2c1,negative,Fatal accident is explicit adverse content.,agent_reviewed_not_human_gold
+491771eee2bd48929aa54923,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+e98522e2076d86c176f69db6,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+85bca83677c65081141048c4,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+88b342b7d481414a6654e843,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+7b48ddba860f453e187f287c,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+74c5edb8fcb80489ba55b6bf,positive,"Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.",agent_reviewed_not_human_gold
+0ea618875ad02fb7b595e2a2,mixed,Heroic fame paired with Civil War commands; mixed achievement and conflict.,agent_reviewed_not_human_gold
+4e5208075fe57831c7922c6a,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+f5a71cdde8f355c45f68f7bb,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+2483f20ffa8ae7747b1a8f93,uncertain,Pacific Theater military commands imply war but no specified harm; conservative uncertainty.,agent_reviewed_not_human_gold
+2c655f25da4f98a040d9720b,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+745c59dfec923679d5be5a4e,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+49d32a489dfa55eaa96e8695,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+6e16d277f2c0264daebb8ee7,uncertain,"Borderline affect, war/controversy context, stigma, incomplete text or unavailable discourse; exclude from strict neutral context.",agent_reviewed_not_human_gold
+4e87224f8a1c21093eca9d0d,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+36af8f9b7b4ff033b6213721,mixed,Repeated electoral victories and opponents defeats; mixed participant perspectives.,agent_reviewed_not_human_gold
+abe0da12c132136f6cc5e2d4,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+5e1a981c2997498ff8139aca,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+27173de0590db137f9d297f9,positive,Philanthropist/abolitionist express beneficial social roles beyond bare office identification.,agent_reviewed_not_human_gold
+d2594af9179ee549703390a2,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+39e56a4dc2cc64d4dd1f08d3,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+19516b4fb3bc580e66112708,uncertain,Iran-Contra Affair is a named controversy without explanation in the supplied sentence; uncertain context.,agent_reviewed_not_human_gold
+34b23209e85e11319ef3ca2c,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+013f03c15e7f1393e0489189,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+71fefcd6edb50049c874f116,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+5fd1c26670ff3346a224bae4,positive,"Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.",agent_reviewed_not_human_gold
+a62ec43fc6291027adc7e23c,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+4ccea3d2fe278d06805a3f8e,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+0108f0fa7ed2847d7a2aa6fa,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+58f5de0d16c44daa3288a3a1,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+2acf1b78f0fecd311565cc22,positive,"Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.",agent_reviewed_not_human_gold
+e3574d498adbd0fa01d9e8e6,negative,"Harm, loss, conflict, failure, death, discrimination or an unfavorable judgment, even in factual prose.",agent_reviewed_not_human_gold
+51db59de7d8e0198b338c625,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+aeab3ee5c85f6d0612c34fab,negative,"Harm, loss, conflict, failure, death, discrimination or an unfavorable judgment, even in factual prose.",agent_reviewed_not_human_gold
+58c79a079c936c317ca5c44d,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+680e41e56b6c6467b4aacae7,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+ad58d13246513c728269da9b,positive,"Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.",agent_reviewed_not_human_gold
+99d7cfb38585e54de3d1babf,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+c04e9b5b157899e52cc231a5,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+f5c2513d51fd7eefc9773c90,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+d9df24319baff7c750bbf82c,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+6ed20ad380f5a1a840993676,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+8b47820dd5d07351b818231e,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+f8eed2cd5f84545ee6d36b9f,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+57522ce1b76be83c7d4fabca,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+6594dbece2f968c7fabab31b,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+495c31ea30bd6159e34bce05,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+4a34d3b11c2a1898f6bca519,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+56a8a2995784a21857eaeec7,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+e1c19799cd07342cdfd20298,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+12e9191925e284ff6bc750a4,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+b374601126a4e87ecf754ada,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+23b6da0d40fc5072c011776d,positive,Highly regarded trilogy is explicit favorable evaluation.,agent_reviewed_not_human_gold
+7e3de9f51b1fa3cabad00ea9,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+72044d19533f75ec718948da,negative,"Harm, loss, conflict, failure, death, discrimination or an unfavorable judgment, even in factual prose.",agent_reviewed_not_human_gold
+0ec72ef2bf99c894cc7a4854,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+ce4b698d0ce52e856fdc4c8d,negative,Convicted perjurer explicitly denotes wrongdoing and conviction.,agent_reviewed_not_human_gold
+ac744d02cecc56e119b44b63,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+b3a4c65fa2b4b3ccb24ca440,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+2545818798cad2b94c85f83a,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+38e25bf14ac06712ced0781c,uncertain,Joke about youngest ex-governor lacks evaluative direction.,agent_reviewed_not_human_gold
+97b27710a02a24dd3e2dbd38,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+bbcda38d8ea040c66f87012a,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+eb0109c895a6a2c61befa775,positive,"Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.",agent_reviewed_not_human_gold
+831b05fc6a570528d8ac7d96,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+2a9bc841704c3aaecb213f13,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+03f09cf51c3833cc36b5c68f,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+7ce8560666c8bf8dc3ccb748,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+24afefb183a6cf1ab17d81eb,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+ad8100c952891f528dc7a654,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+afaabbee3fbc8989cac29723,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+afbcc0365d4c706f67db088a,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+6259f4a25476c14a2a4214ee,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+4169fb94309120755252c485,positive,"Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.",agent_reviewed_not_human_gold
+d83ef1431e811adb36f08140,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+9dcb9da80f0e459f0a54364c,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+da0572e29610a510ed0cedb9,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+e179a79e8de0c01eae7eb660,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+7107b037b04e17b45593a3e5,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+367878631c930e027a52303b,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+385eb40cb72e43b36d86bc99,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+74c2981254946e9b47c4fbef,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+5cdf27fe35a51d27cda73afd,negative,"Harm, loss, conflict, failure, death, discrimination or an unfavorable judgment, even in factual prose.",agent_reviewed_not_human_gold
+7c264405b0c070852bc1752e,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+2bb3046b92f94401a98192bd,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+ddac3cdcf597738aab7dcc00,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+40ac63ba4861fe6a70e9214f,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+a813d057ba9ad5a31990bf92,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+1d000a02ea9065600ab3c38c,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+dcb0ec3a8e5cf47c26fe2775,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+98c80df2b3344749d3d3b759,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+a27cc0db5069a7b5b51bdcc6,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+b9f426926e6382061aec3323,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+dde8c47cacb8a165b603c4af,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+2de5759c5fdab941ffdb8a2c,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+b606bc792a7c9056be59848a,positive,"Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.",agent_reviewed_not_human_gold
+3da32f455c169e97fe5f11f6,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+5b82fde0bbeb61ba06b18ef3,negative,"Harm, loss, conflict, failure, death, discrimination or an unfavorable judgment, even in factual prose.",agent_reviewed_not_human_gold
+c0e85d4ee63b16a5efc426c7,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+08d10d19d273b30d168da345,positive,"Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.",agent_reviewed_not_human_gold
+e37ef3aefbbbb88298292163,negative,Poverty is an explicitly adverse material circumstance even in factual literary description.,agent_reviewed_not_human_gold
+f65fe4bd89acaf32deb638d1,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+8161686ff5c78ce831908e47,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+6915b58e5926aca55341c78f,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+7560a91862d8f88522c31198,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+4e595907721211280070b298,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+99ae3757fc2c3847c865fd46,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+b4c583bbd91c1ab48752edfd,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+b1046ac1025493e9e985efc3,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+8bea0dfffa9cc8f415ea3a8a,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+70974b76fc44c442c36ce31d,positive,"Electrified supporters conveys favorable excitement, without assigning sentiment to party membership.",agent_reviewed_not_human_gold
+a6eda72e1dafb06654291871,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+e0e79ce3a47cf7b520b241fc,negative,"Harm, loss, conflict, failure, death, discrimination or an unfavorable judgment, even in factual prose.",agent_reviewed_not_human_gold
+e3b5c8e6c1408880fc73e3de,uncertain,Running away/seeking new start combines ambiguous circumstances; insufficient discourse.,agent_reviewed_not_human_gold
+f7901e823e663c5e08ce73a9,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+2b4bedc557ab1784e18eafa3,positive,"Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.",agent_reviewed_not_human_gold
+4501abee11105fcb80e01718,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+1316ad432fa5b863450da228,negative,"Harm, loss, conflict, failure, death, discrimination or an unfavorable judgment, even in factual prose.",agent_reviewed_not_human_gold
+f3d19b8cbb6daf38ac3abd91,positive,"Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.",agent_reviewed_not_human_gold
+4cf6d16a964c534d7f33923c,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+533958c42b29e5bcf79f0505,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+942a369ce3348fd047df96cd,mixed,Rescue of citizens paired with reported involvement in assassination.,agent_reviewed_not_human_gold
+5a6ce5f4f06ff6687533375b,negative,"Harm, loss, conflict, failure, death, discrimination or an unfavorable judgment, even in factual prose.",agent_reviewed_not_human_gold
+57b3f827e7d5673620cc1c75,uncertain,Fame contrasted with acting reputation; evaluative implication unclear.,agent_reviewed_not_human_gold
+6f7899e0609e54e11f5863a1,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+2d4162e60ddd74d269213c25,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+35624129c9402b745eeb8dd3,negative,Failure to complete degree and intervening war; adverse context.,agent_reviewed_not_human_gold
+cedb8d638847a260a31f9da2,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+d7b310d6a6aecc3779f348f1,negative,Explicit Nazi-party affiliation; harmful ideological context rather than assigning valence to ordinary party membership.,agent_reviewed_not_human_gold
+0458b59d2dc72e7963b2a21b,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+fe487e0bb431abdf369b0365,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+23bd30e8bc381ed80d940083,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+ab0e6174c416616df6079254,negative,"Harm, loss, conflict, failure, death, discrimination or an unfavorable judgment, even in factual prose.",agent_reviewed_not_human_gold
+9c72550e0ec489f66ed64b90,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+4498af65feab0dee833f916d,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+6a30d3bf0660f1785cf3b157,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+777cb8f299f79e9a5fc39d4c,negative,Marriage followed by divorce; adverse relationship dissolution.,agent_reviewed_not_human_gold
+220ad4471164d28f8697681f,negative,Marriage followed by divorce; adverse relationship dissolution.,agent_reviewed_not_human_gold
+0da31298e7babba2d6e46d91,negative,Marriage followed by divorce; adverse relationship dissolution.,agent_reviewed_not_human_gold
+442c4139c7eb1c046c76e51c,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+2a240a18b01a8a9c47af6333,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+e3fe23587a619c49f55111c5,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+2b096c38247d03038b451930,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+a43f0ec355aa58e3b09b7b0a,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+da541baec332f433a9b61131,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+a35e869b3475ff14eb5fd7c7,mixed,Anti-slavery stance is beneficial but slavery is explicitly adverse subject matter.,agent_reviewed_not_human_gold
+5a463cf2cec2acd6329c7e43,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+565309524cee540577f11d9e,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+b84d26888bd02e3984535e5a,positive,"Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.",agent_reviewed_not_human_gold
+87800e4a13af427d2b63d893,positive,Universal health coverage is a beneficial intended outcome; not a judgment of party politics.,agent_reviewed_not_human_gold
+ee521cc0a3c6ca9cce4b459c,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+0bea63be8e619ce113bea35a,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+b7b69cef1cfacc072b9ace18,negative,"Harm, loss, conflict, failure, death, discrimination or an unfavorable judgment, even in factual prose.",agent_reviewed_not_human_gold
+7117abc01d71d5cb47cdfb5a,positive,"Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.",agent_reviewed_not_human_gold
+4b12be7c911b0268e2a195b0,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+c1dfef71c6dd426c2d4916ed,negative,"Harm, loss, conflict, failure, death, discrimination or an unfavorable judgment, even in factual prose.",agent_reviewed_not_human_gold
+30b3c76434ffd02f57f3e12d,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+108bc3780601563523fc5bfb,mixed,Mediocre grades contrast with lasting friendships.,agent_reviewed_not_human_gold
+2111fd107050a1a039425486,positive,"Achievement, recognition, praise, affection, benefit or explicitly favorable outcome, even in factual prose.",agent_reviewed_not_human_gold
+0851816b16ecb76a17fbf09b,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+df1c1bf013f13dd4f143a0bb,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+1921d20d4a20da02b06f0456,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+04bf59278cff571f05b31f9a,uncertain,Apology suggests a problem but missing comment leaves its affective direction uncertain.,agent_reviewed_not_human_gold
+f092dc0e229bf7ef24e53247,negative,Marriage opposed by mother; explicit interpersonal conflict.,agent_reviewed_not_human_gold
+ef1ab7e7b6226c40434001a8,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+43b0ef2f9e712823bb1d368a,negative,"Harm, loss, conflict, failure, death, discrimination or an unfavorable judgment, even in factual prose.",agent_reviewed_not_human_gold
+e4e25554cfde468741789ed4,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+5fe4ba6f36b3c4424f33e498,negative,Children and explicit deaths; adverse event content beyond parenthetical lifetime metadata.,agent_reviewed_not_human_gold
+ebfb3c0faac1a4019a8692d2,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+87d4e97b6eca4b15f6e2d9cf,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+513e590ae913e0700c05215f,neutral,"Factual identity, relationship, education, role, location or chronology; no clear valenced event/evaluation in the proposition.",agent_reviewed_not_human_gold
+1219c1867e042c17bc5a71f9,negative,Marriage followed rapidly by divorce; adverse relationship dissolution.,agent_reviewed_not_human_gold
