@@ -6,11 +6,10 @@ This is a separate data-preparation step. Classification/correlation are next.
 
 ## What is preserved
 
-Each usable word occurrence retains a float32 **all-channel, native-rate**
-first-stored-fixation epoch: ZuCo 105 × 501 at 500 Hz; TeCo 126 × 1201 at
-1200 Hz. There is no averaging over trials/channels or time-bin feature selection.
+Each usable word occurrence retains a float32 **all-channel, 125-Hz**
+first-stored-fixation epoch: ZuCo 105 × 126; TeCo 126 × 126 (8-ms time intervals). There is no averaging over trials/channels or time-bin feature selection.
 Processing: average reference, fourth-order zero-phase 40-Hz low-pass on the
-whole sentence, −200…800 ms inclusive, baseline −200…0 excluding time zero.
+whole sentence, event-aligned anti-alias polyphase resampling to 125 Hz, −200…800 ms inclusive, baseline −200…0 excluding time zero.
 Baseline per channel is stored separately, so subtraction can be reversed.
 40 Hz follows the user's requested setting for future reconstruction; the
 completed 30-Hz analyses remain a separate historical condition.
@@ -35,7 +34,7 @@ Drive. No Persian text or signal is committed publicly.
 
 ## Storage and resuming
 
-Output: `Thesis/Results/word_sentiment_eeg/trial_archive_40hz/`.
+Output: `Thesis/Results/word_sentiment_eeg/trial_archive_125hz/`.
 
 - `protocol.json`, `preflight.json`, `manifest.json`, `reader_coverage.csv`.
 - `{zuco,teco}_channel_regions.csv` and private annotation snapshots.
@@ -50,9 +49,8 @@ until source word accounting reconciles to the historical inventory.
 
 The notebook checks actual Google Drive quota and verifies that the API account
 owns a probe created through the mounted output folder. It budgets uncompressed
-candidate epochs plus headroom; compression is not assumed. Insufficient or
-unverified capacity stops before source extraction. This takes tens of GB and
-can take hours. Do not run two instances concurrently. Sources absent from
+125-Hz candidate epochs plus metadata and 0.5-GB headroom; compression is not assumed. Insufficient or
+unverified capacity stops before source extraction. The archive has a 9-decimal-GB cap, with no silent event downsampling if a bound exceeds the cap. Expected size is about 8–9 GB before compression. It can take hours. Do not run two instances concurrently. Sources absent from
 Drive may be downloaded temporarily in Colab, one at a time, then removed.
 Completed archives can resume/validate without redownloading missing sources.
 
@@ -84,3 +82,21 @@ After preparation, use one fixed classification/similarity notebook:
   separately from unseen-word generalization. Never train/test the same event.
 
 Those are planned analyses, not results or implemented models in this notebook.
+
+## 10-GB storage policy
+
+Source sampling is still 500/1200Hz; retained signals are 125Hz with all channels.
+Resample with scipy.signal.resample_poly (zero-phase anti-alias FIR), after
+whole-sentence 40Hz filtering. The resampling segment starts 400ms before each
+fixation; trim its first25 output samples to preserve the requested −200…800ms
+epoch and exactly place time0 at sample25. Extra200ms context surrounds both
+epoch edges. Only unavailable context outside the sentence uses reflection,
+recorded per event; whole-sentence filtering remains unchanged. Baseline is
+computed from the25 stored pre-onset samples. Native-rate 40Hz epoch amplitude
+is flagged before downsampling, and stored-signal peak is recorded separately.
+No float16 quantization, channel removal, trial averaging or class downsampling.
+
+The 8ms grid supports the planned 40Hz FRP/classification comparisons but does
+not preserve native sample precision. The resampling adds an anti-alias filter,
+so it must be reported, not described as lossless preservation of native EEG.
+NPZ compression itself is lossless for the stored float32 arrays.

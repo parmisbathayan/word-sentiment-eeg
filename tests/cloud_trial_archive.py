@@ -1,4 +1,4 @@
-"""Full native MATLAB/Persian-pickle trial export and interrupted resume."""
+"""All-channel 125Hz MATLAB/Persian-pickle trial export and interrupted resume."""
 import hashlib
 import json
 from pathlib import Path
@@ -77,9 +77,9 @@ def main():
             assert events.loc[events.word_index==0,'status'].eq('archived').all(),'High amplitude silently dropped'
             assert len(events.query("onset_method == 'cached_exact'"))==2
             for b in state['blocks']:
-                ta.inspect_block(out,b,channels,np.arange(-int(.2*hz),int(.8*hz)+1)*1000/hz)
+                ta.inspect_block(out,b,channels,ta.TIMES_MS)
                 for name in b['epoch_files']:
-                    with np.load(out/name) as a:assert a['eeg_uV'].shape[1:]==(nch,hz+1)
+                    with np.load(out/name) as a:assert a['eeg_uV'].shape[1:]==(nch,126)
             for p,sha in committed.items():assert file_digest(p)==sha
             for p,sha in oldhashes.items():assert file_digest(p)==sha
             assert file_digest(source)==sourcehash
@@ -88,7 +88,22 @@ def main():
             with patch.object(ta,'source_sentences',side_effect=AssertionError('must not re-extract')):
                 state=ta.prepare_reader(source,dataset,'SR','reader',old,ann,out,{},channels)
             assert state['epochs']==6
-    print('Full native trial archives passed: MATLAB and TeCo pickle; complete channels/time, control/function/disagreement/amplitude preservation, first slot, corruption checks and interrupted resume.')
+    # Native time zero need not lie on the sentence's resampled grid. Anchor
+    # each resampling segment to the fixation instead; an impulse at onset is
+    # exactly sample25 at either native rate, with no 4ms rounding shift.
+    for hz in [500,1200]:
+        onset=1703;signal=np.zeros((2,4500),np.float32);signal[0,onset]=10
+        value,base,status=ta.make_epoch(signal,onset,hz)
+        assert status=='archived' and value.shape==(2,126)
+        assert np.argmax(value[0])==25 and ta.TIMES_MS[25]==0
+        t=(np.arange(4500)-onset)/hz
+        wave=np.stack([np.sin(2*np.pi*10*t),np.sin(2*np.pi*100*t)]).astype(np.float32)
+        value,base,status=ta.make_epoch(wave,onset,hz)
+        assert np.std(value[1,10:-10])<.02*np.std(value[0,10:-10]),'Anti-alias filter failed'
+        for edge in [int(.2*hz),4500-int(.8*hz)-1]:
+            v,_,status=ta.make_epoch(wave,edge,hz)
+            assert status=='archived' and v.shape==(2,126) and np.isfinite(v).all()
+    print('All-channel 125Hz trial archives passed: MATLAB and TeCo pickle; complete channels/time, control/function/disagreement/amplitude preservation, first slot, corruption checks and interrupted resume.')
 
 
 if __name__=='__main__':main()

@@ -10,17 +10,26 @@ import numpy as np
 import pandas as pd
 
 ROOT=Path(__file__).resolve().parents[1]
-sys.path.insert(0,str(ROOT/'src'))
+sys.path.insert(0,str(ROOT/'src'));sys.path.insert(0,str(ROOT))
 from word_sentiment_eeg import trial_archive as ta
 from word_sentiment_eeg.common import file_digest,write_json
 
 
 class TrialArchiveTests(unittest.TestCase):
+    def setUp(self):
+        # Local tests do not install SciPy. The cloud integration exercises the
+        # actual polyphase filter, attenuation and native-rate event alignment.
+        def interpolate(value,up,down):
+            x=np.arange(int(np.ceil(value.shape[1]*up/down)))*down/up
+            return np.stack([np.interp(x,np.arange(value.shape[1]),r) for r in value])
+        self.resampler=patch.object(ta,'_resample',side_effect=interpolate)
+        self.resampler.start();self.addCleanup(self.resampler.stop)
+
     def test_baseline_and_amplitude_are_reversible_and_retained(self):
         raw=np.arange(6*1500,dtype=np.float32).reshape(6,1500)
         value,base,status=ta.make_epoch(raw,250,500)
-        self.assertEqual(status,'archived');self.assertEqual(value.shape,(6,501))
-        np.testing.assert_allclose(value+base[:,None],raw[:,150:651])
+        self.assertEqual(status,'archived');self.assertEqual(value.shape,(6,126))
+        np.testing.assert_allclose(value+base[:,None],raw[:,150:651:4])
         self.assertGreater(np.abs(value).max(),100)
         self.assertEqual(ta.make_epoch(raw,20,500)[2],'sentence_boundary')
 
@@ -96,6 +105,18 @@ class TrialArchiveTests(unittest.TestCase):
             source.write_bytes(b'changed')
             with self.assertRaisesRegex(ValueError,'Source hash'):
                 ta.prepare_reader(source,'zuco','SR','R',old,ann,out,{},list('ABCDEF'))
+
+    def test_storage_cap_stops_before_signal_writes(self):
+        from prepare_trial_archive import StorageBudget
+        with tempfile.TemporaryDirectory() as tmp:
+            root=Path(tmp);budget=StorageBudget(root,1000)
+            writer=ta.ArchiveWriter(root/'reader',dict(dataset='test',task='t',subject='r'),['A','B'],ta.TIMES_MS,budget)
+            writer.add(dict(event_id='new',status='archived',epoch_file='',epoch_row=''),
+                       np.zeros((2,126),np.float32),np.zeros(2,np.float32))
+            with self.assertRaisesRegex(OSError,'storage cap'):
+                writer.flush(1,1,True)
+            self.assertFalse(list(root.rglob('*.npz')))
+            self.assertFalse((root/'reader/checkpoint.json').exists())
 
     def test_unicode_word_identity(self):
         self.assertEqual(ta.word_identity(' فیلم '),'فیلم')

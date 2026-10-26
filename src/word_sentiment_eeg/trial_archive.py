@@ -1,6 +1,6 @@
 """Label-independent, resumable full-channel trial archive; no model training.
 
-Native-rate 40-Hz epochs are saved, not class means or selected features.
+All-channel 125-Hz, 40-Hz-low-pass epochs are saved, not class means or selected features.
 Every source word has a metadata outcome. Finite in-bounds epochs survive
 regardless of labels, function-word/control status or amplitude flags.
 """
@@ -17,7 +17,9 @@ from .common import atomic_npz, digest, file_digest, sentence_key, write_json
 from .erp import locate
 from .three_level_erp import source_sentences, preprocess40
 
-VERSION='full_word_trials_40hz_v1'
+VERSION='full_word_trials_40hz_125sps_v1'
+OUTPUT_HZ=125
+TIMES_MS=np.arange(-25,101,dtype=np.float64)*8
 CHUNK=32
 LAYERS=('lexical_class','contextual_word_class','sentence_context_class')
 
@@ -67,14 +69,30 @@ def cached_onset(raw,segment,old):
     return locate(raw,segment)
 
 
+def _resample(value,up,down):
+    from scipy.signal import resample_poly
+    return resample_poly(value,up,down,axis=1,padtype='line')
+
+
 def make_epoch(filtered,onset,hz):
+    # The input is already whole-sentence 40-Hz filtered. Use actual sentence
+    # context around the epoch for the additional anti-alias resampling FIR.
+    # Starting 200 ms before the target epoch makes onset exactly sample25 at
+    # 125Hz, regardless of its position on the native sentence sampling grid.
+    from math import gcd
     pre,post=int(.2*hz),int(.8*hz)
     if onset<pre or onset+post>=filtered.shape[1]:return None,None,'sentence_boundary'
-    value=filtered[:,onset-pre:onset+post+1].copy()
-    baseline=value[:,:pre].mean(axis=1,dtype=np.float64).astype(np.float32)
+    margin=int(.2*hz);start=onset-pre-margin;stop=onset+post+margin+1
+    value=filtered[:,max(0,start):min(filtered.shape[1],stop)]
+    left=max(0,-start);right=max(0,stop-filtered.shape[1])
+    if left or right:value=np.pad(value,((0,0),(left,right)),mode='reflect')
+    common=gcd(hz,OUTPUT_HZ)
+    sampled=_resample(value,OUTPUT_HZ//common,hz//common)
+    value=sampled[:,25:25+len(TIMES_MS)].astype(np.float32)
+    if value.shape[1]!=len(TIMES_MS):raise ValueError('Resampled epoch time grid differs')
+    baseline=value[:,:25].mean(axis=1,dtype=np.float64).astype(np.float32)
     value-=baseline[:,None]
     if not np.isfinite(value).all():return None,None,'nonfinite_epoch'
-    # Above-threshold trials remain in the archive with a quality flag.
     return value,baseline,'archived'
 
 
@@ -106,9 +124,9 @@ def inspect_block(root,block,channels,times):
 
 
 class ArchiveWriter:
-    def __init__(self,out,identity,channels,times):
+    def __init__(self,out,identity,channels,times,budget=None):
         self.out=Path(out);self.out.mkdir(parents=True,exist_ok=True)
-        self.channels=list(channels);self.times=times;self.identity=identity
+        self.channels=list(channels);self.times=times;self.identity=identity;self.budget=budget
         self.rows=[];self.values=[];self.baselines=[];self.stored=[]
         self.state={'identity':identity,'blocks':[],'next_sentence_position':0,'source_sentences_seen':0,'status':'incomplete'}
         path=self.out/'checkpoint.json'
@@ -135,7 +153,12 @@ class ArchiveWriter:
         # Deterministic uncommitted paths are safe to rewrite after interruption.
         # Already committed blocks are validated and never rewritten.
         rel=Path('blocks')/f"block-{len(self.state['blocks']):06d}"
-        folder=self.out/rel;folder.mkdir(parents=True,exist_ok=True)
+        folder=self.out/rel
+        previous=sum(p.stat().st_size for p in folder.rglob('*') if p.is_file()) if folder.exists() else 0
+        if self.budget:
+            estimate=sum(v.nbytes for v in self.values)+sum(v.nbytes for v in self.baselines)+sum(len(str(r).encode()) for r in self.rows)+1024**2
+            self.budget.reserve(estimate)
+        folder.mkdir(parents=True,exist_ok=True)
         files=[]
         for start in range(0,len(self.values),CHUNK):
             rows=self.stored[start:start+CHUNK]
@@ -150,6 +173,7 @@ class ArchiveWriter:
         block={'events':events_rel,'epoch_files':files,'word_rows':len(self.rows),'epoch_count':len(self.values),
                'next_sentence_position':next_position,'checksums':{n:file_digest(self.out/n) for n in [events_rel,*files]}}
         inspect_block(self.out,block,self.channels,self.times)
+        if self.budget:self.budget.used+=sum(p.stat().st_size for p in folder.rglob('*') if p.is_file())-previous
         self.state['blocks'].append(block);self.state.update(next_sentence_position=next_position,source_sentences_seen=sentence_count)
         write_json(self.out/'checkpoint.json',self.state)
         print(f"COMMIT {self.identity['dataset']}/{self.identity['task']}/{self.identity['subject']}: "
@@ -172,15 +196,15 @@ class ArchiveWriter:
         return self.state
 
 
-def prepare_reader(path,dataset,task,subject,old_folder,annotations,out,protocol,channels,progress=None):
+def prepare_reader(path,dataset,task,subject,old_folder,annotations,out,protocol,channels,progress=None,budget=None):
     _,old_events,old_lookup,expected=read_historical(old_folder,dataset)
     print(f'HASH SOURCE {dataset}/{task}/{subject}',flush=True)
     sha=file_digest(path) if Path(path).is_file() else expected
     if sha!=expected:raise ValueError('Source hash differs from historical onset source')
-    hz=500 if dataset=='zuco' else 1200;times=np.arange(-int(.2*hz),int(.8*hz)+1)*1000/hz
+    hz=500 if dataset=='zuco' else 1200;times=TIMES_MS.copy()
     identity={'dataset':dataset,'task':task,'subject':subject,'source_sha256':sha,
               'historical_onsets_sha256':file_digest(Path(old_folder)/'word_onsets.csv.gz'),'protocol_sha256':digest(protocol)}
-    writer=ArchiveWriter(out,identity,channels,times)
+    writer=ArchiveWriter(out,identity,channels,times,budget)
     if writer.state['status']=='completed':
         if file_digest(Path(out)/'events.csv.gz')!=writer.state['events_sha256']:raise ValueError('Final metadata corrupt')
         return writer.state
@@ -213,7 +237,7 @@ def prepare_reader(path,dataset,task,subject,old_folder,annotations,out,protocol
                      annotation_status=field('annotation_status'),annotation_alignment_warning=field('alignment_warning',''),
                      historical_status=getattr(old,'status','not_in_historical_inventory'),historical_accepted_30hz=bool(old and old.status=='accepted'),
                      onset_sample_sentence_0based='',onset_method='',first_fixation_duration_ms='',next_word_first_fixation_ms='',
-                     under_100ms='',blink_predecessor='unknown',epoch_file='',epoch_row='',max_abs_uV='',amplitude_over_100_uV='',status=raw_status)
+                     under_100ms='',blink_predecessor='unknown',epoch_file='',epoch_row='',max_abs_uV='',max_abs_stored_uV='',amplitude_over_100_uV='',resample_reflect_padding=False,status=raw_status)
             value=baseline=None
             if raw_status=='available':
                 if segment is None or segment.ndim!=2 or segment.shape[0]!=len(channels) or segment.shape[1]<3 or not np.isfinite(segment).all():
@@ -229,9 +253,15 @@ def prepare_reader(path,dataset,task,subject,old_folder,annotations,out,protocol
                             except ValueError:filtered=False
                         if filtered is False:row['status']='sentence_too_short_for_filter'
                         else:
+                            pre,post=int(.2*hz),int(.8*hz)
+                            native_peak=None
+                            if onset>=pre and onset+post<filtered.shape[1]:
+                                native=filtered[:,onset-pre:onset+post+1]
+                                native_peak=float(np.abs(native-native[:,:pre].mean(axis=1,keepdims=True)).max())
+                                row['resample_reflect_padding']=onset-2*pre<0 or onset+post+pre>=filtered.shape[1]
                             value,baseline,row['status']=make_epoch(filtered,onset,hz)
                             if value is not None:
-                                peak=float(np.abs(value).max());row.update(max_abs_uV=peak,amplitude_over_100_uV=peak>100)
+                                row.update(max_abs_uV=native_peak,max_abs_stored_uV=float(np.abs(value).max()),amplitude_over_100_uV=native_peak>100)
             sentence_rows.append((row,value,baseline))
         first_onsets=sorted({r['onset_sample_sentence_0based'] for r,_,_ in sentence_rows if r['onset_sample_sentence_0based']!=''})
         for row,value,baseline in sentence_rows:

@@ -14,9 +14,18 @@ ROOT=Path(__file__).resolve().parent
 sys.path.insert(0,str(ROOT/'src'))
 import pandas as pd
 from word_sentiment_eeg.common import digest,file_digest,write_json
-from word_sentiment_eeg.trial_archive import VERSION,CHUNK,prepare_reader
+from word_sentiment_eeg.trial_archive import VERSION,CHUNK,OUTPUT_HZ,prepare_reader
 from word_sentiment_eeg.teco import find_raw_files
 from run_three_level_erp import montage
+
+class StorageBudget:
+    def __init__(self,root,limit):
+        self.used=sum(p.stat().st_size for p in root.rglob('*') if p.is_file())
+        self.limit=limit
+    def reserve(self,size):
+        if self.used+size>self.limit:
+            raise OSError('Archive storage cap reached before next block. Committed data retained; no trials silently dropped.')
+
 
 RUNS={'zuco':'v4_word_erp_compact','teco':'teco_v1_word_erp_compact'}
 
@@ -52,7 +61,7 @@ def inventory(thesis,datasets):
             candidates=int((known|not_previously_searched).sum())
             records.append(dict(dataset=dataset,task=task,subject=subject,path=str(path),historical_folder=str(old),
                                 source_record=source,word_rows=n,candidate_epoch_upper_bound=candidates,source_bytes=size,
-                                epoch_bytes=channels*(int(hz)+1)*4+channels*4))
+                                epoch_bytes=channels*126*4+channels*4))
     return records,alternates
 
 
@@ -60,13 +69,14 @@ def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--thesis-root',type=Path,required=True)
     parser.add_argument('--datasets',nargs='+',choices=RUNS,default=['zuco','teco'])
+    parser.add_argument('--max-output-bytes',type=int,default=9000000000,help='Archive cap, default 9 decimal GB')
     parser.add_argument('--plan-only',action='store_true')
     parser.add_argument('--allow-cloud-download',action='store_true')
     parser.add_argument('--free-drive-bytes',type=int,help='Verified Google Drive account free bytes, supplied by Colab preflight')
     args=parser.parse_args()
     logging.basicConfig(level=logging.INFO,format='%(asctime)s %(message)s')
     if len(set(args.datasets))!=len(args.datasets):parser.error('Duplicate dataset')
-    run=args.thesis_root/'Results/word_sentiment_eeg/trial_archive_40hz'
+    run=args.thesis_root/'Results/word_sentiment_eeg/trial_archive_125hz'
     records,alternates=inventory(args.thesis_root,args.datasets)
     plan={'version':VERSION,'reader_recordings':len(records),'datasets':args.datasets,
           'upper_bound_uncompressed_bytes':sum(r['candidate_epoch_upper_bound']*r['epoch_bytes'] for r in records),
@@ -79,7 +89,7 @@ def main():
     run.mkdir(parents=True,exist_ok=True);write_json(run/'preflight.json',plan)
     write_json(run/'alternate_teco_copies.json',alternates)
     if args.plan_only:return
-    if args.free_drive_bytes is None:raise SystemExit('Run the notebook Drive-quota preflight first. Full native trial EEG needs tens of GB.')
+    if args.free_drive_bytes is None:raise SystemExit('Run the notebook Drive-quota preflight first. The 125Hz archive requires verified free space before extraction.')
     # Conservative: budget for all words, without assuming compression or dropping classes.
     committed_upper=0
     for r in records:
@@ -88,8 +98,13 @@ def main():
             state=json.loads(cp.read_text())
             committed_upper+=sum(b['epoch_count'] for b in state['blocks'])*r['epoch_bytes']
     remaining=max(0,plan['upper_bound_uncompressed_bytes']-committed_upper)
-    if args.free_drive_bytes<remaining+2*1024**3:
-        raise SystemExit(f'Insufficient verified Drive quota for conservative full-trial budget: need up to {(remaining+2*1024**3)/1024**3:.1f} GiB, free {args.free_drive_bytes/1024**3:.1f} GiB. No source extraction started. Do not delete original EEG or historical results.')
+    metadata_allowance=256*1024**2
+    total_bound=plan['upper_bound_uncompressed_bytes']+metadata_allowance
+    if total_bound>args.max_output_bytes:
+        raise SystemExit(f'Conservative archive bound {total_bound/1e9:.2f} GB exceeds the {args.max_output_bytes/1e9:.2f} GB cap. No extraction started; do not silently remove trials.')
+    reserve=500000000
+    if args.free_drive_bytes<remaining+metadata_allowance+reserve:
+        raise SystemExit(f'Insufficient verified Drive quota for conservative full-trial budget: need up to {(remaining+metadata_allowance+reserve)/1024**3:.1f} GiB, free {args.free_drive_bytes/1024**3:.1f} GiB. No source extraction started. Do not delete original EEG or historical results.')
     if not Path('/content').is_dir():raise SystemExit('Full source preparation is intended for Colab, not this Mac.')
     lockpath=Path(tempfile.gettempdir())/('trial-archive-'+digest(str(run))[:16]+'.lock')
     lock=lockpath.open('a+');fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB)
@@ -104,11 +119,13 @@ def main():
         label_sha[d]=file_digest(path) if path.is_file() else None
     protocol=dict(version=VERSION,lowpass_hz=40,filter='Butterworth order4 zero-phase, whole sentence',
                   epoch_ms=[-200,800],baseline_ms='[-200,0)',reference='average of all retained native EEG channels',
-                  storage='all channels, native sampling, float32 EEG + per-channel baseline, bounded lossless NPZ chunks',
-                  sample_rates_hz={'zuco':500,'teco':1200},channels={'zuco':105,'teco':126},chunk_trials=CHUNK,
+                  storage='all channels, 125Hz samples, float32 EEG + per-channel baseline, bounded lossless NPZ chunks',
+                  output_sample_rate_hz=125,resampling='polyphase anti-alias FIR, event-aligned; 200ms sentence context each side, reflect only at sentence edges',
+                  resampling_time_grid_ms='-200:8:800; fixation onset at sample25 (0 based)',
+                  source_sample_rates_hz={'zuco':500,'teco':1200},channels={'zuco':105,'teco':126},chunk_trials=CHUNK,
                   source_population='all stored word occurrences; no label/grammar/control/negation selection',
                   fixation='first stored fixation only; no later substitution',
-                  amplitude='>100 native assumed µV flagged, retained; filtering/rejection at classification time',
+                  amplitude='>100 native-rate 40Hz baseline-corrected assumed µV flagged before resampling, retained; stored peak also recorded',
                   upstream_blink_screen='unknown; no new blink exclusion',duration='short first fixations flagged, not dropped',
                   annotations_sha256=label_sha,annotation_status='agent annotations, not human consensus gold',
                   source_units='ZuCo stored µV; TeCo native µV assumed and not independently calibrated',
@@ -122,6 +139,7 @@ def main():
         if label_paths[d].is_file():
             dest=run/'annotations'/f'{d}_word_labels.csv';dest.parent.mkdir(exist_ok=True)
             if not dest.exists():shutil.copyfile(label_paths[d],dest)
+    budget=StorageBudget(run,args.max_output_bytes-metadata_allowance)
     items=[];failures=[]
     def state(stage,active=None):
         write_json(run/'manifest.json',{'status':'completed' if stage=='finished' and len(items)==len(records) and not failures else 'incomplete',
@@ -142,7 +160,7 @@ def main():
                 from run_erp import cloud_download
                 path=Path('/content/word-trial-archive-source')/r['source_record']['filename']
                 cloud_download(r['source_record'],path);temporary=True
-            result=prepare_reader(path,d,task,subject,Path(r['historical_folder']),frames[d],out,protocol,montage(d).channel.tolist(),progress)
+            result=prepare_reader(path,d,task,subject,Path(r['historical_folder']),frames[d],out,protocol,montage(d).channel.tolist(),progress,budget)
             items.append(dict(dataset=d,task=task,subject=subject,output_dir=str(out),epochs=result['epochs'],
                               source_word_rows=result['source_word_rows'],outcomes=result['outcomes'],source_sha256=result['identity']['source_sha256']))
         except Exception as error:
@@ -153,14 +171,18 @@ def main():
             if temporary:path.unlink(missing_ok=True)
         state('preparing')
     counts=pd.DataFrame(items);counts.to_csv(run/'reader_coverage.csv',index=False)
+    actual_bytes=sum(p.stat().st_size for p in run.rglob('*') if p.is_file())
+    if actual_bytes+1024**2>args.max_output_bytes:
+        state('storage_cap_reached');raise OSError('Archive reached its cap; no completion claimed, all committed blocks retained.')
     state('finished')
     (run/'README.md').write_text('''# Reusable full word-trial archive at 40 Hz
 
 This is data preparation only. No classifier or correlation result has run.
-All finite, in-bounds first-stored-fixation epochs are archived with all native
-channels and time samples; no averaging across trials, channels or time bins.
-ZuCo: 105 × 501 samples at 500 Hz. TeCo task1: 126 × 1201 at 1200 Hz.
-Average reference and whole-sentence 40-Hz low-pass precede epoching.
+All finite, in-bounds first-stored-fixation epochs are archived with all
+channels and 125Hz time courses; no averaging across trials/channels or feature-window summaries.
+ZuCo: 105 × 126 samples. TeCo task1: 126 × 126. Samples are 8ms apart.
+Average reference and whole-sentence 40-Hz low-pass precede polyphase anti-alias resampling.
+Native sentence context surrounds each event; time zero remains exactly aligned.
 Epoch −200…800 ms; baseline −200…0 excluding zero. Per-channel baseline is
 stored separately, allowing reversal of baseline subtraction at this filter.
 
@@ -174,7 +196,7 @@ No blink/predecessor screen or overlap deconvolution is claimed.
 Each reader has events.csv.gz plus blocks/block-N/events.csv.gz and bounded
 epochs-N.npz files. event_id, epoch_file and epoch_row give a one-to-one join.
 NPZ keys: eeg_uV [trial,channel,time], baseline_uV [trial,channel], event_id,
-time_ms (stored as times_ms) and channel_names. checkpoint.json lists hashes,
+times_ms and channel_names. checkpoint.json lists hashes,
 counts and the next source sentence. Committed chunks are never appended twice.
 Rerunning verifies committed chunks and resumes remaining source sentences.
 A completed manifest requires every expected reader, not merely an ended cell.
@@ -182,7 +204,7 @@ A completed manifest requires every expected reader, not merely an ended cell.
 Historical 30-Hz averages and original source files stay unchanged. These new
 40-Hz signals are a different preprocessing condition, not the old trial data.
 They support many later time-domain and within-band spectral features, but a
-new epoch window, frequencies removed by upstream/40-Hz filtering, later
+new epoch window, sub-8ms timing requirements, frequencies removed by upstream/40-Hz filtering, later
 fixations or continuous-data deconvolution can still require original sources.
 This archive is not a promise that all future EEG work can avoid source reads.
 ''')
