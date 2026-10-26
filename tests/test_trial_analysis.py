@@ -29,6 +29,10 @@ class TrialAnalysisTests(unittest.TestCase):
         self.assertEqual(a.selected(m,'contextual_content','binary')[1].tolist(),['positive','negative'])
         self.assertEqual(a.selected(m,'sentence_content','binary')[1].tolist(),['negative','negative'])
 
+    def test_known_legacy_alignment_failure_stays_excluded(self):
+        m=rows();m['historical_status']='accepted';m.loc[0,'historical_status']='excluded_text_alignment'
+        self.assertEqual(a.selected(m,'word_agreement','three_class')[0].tolist(),[2])
+
     def test_window_features_have_no_label_information(self):
         times=np.arange(-25,101)*8
         x=np.stack([np.repeat(times[None],6,axis=0),np.repeat((times+2)[None],6,axis=0)]).astype(np.float32)

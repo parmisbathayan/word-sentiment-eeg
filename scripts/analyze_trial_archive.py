@@ -156,6 +156,8 @@ def selected(meta,policy,target):
     quality=~boolean(meta.amplitude_over_100_uV)
     alignment=meta.annotation_alignment_warning.astype(str).isin(['','nan'])
     quality &= alignment
+    if 'historical_status' in meta:
+        quality &=~meta.historical_status.isin(['excluded_text_alignment','annotation_alignment_warning','annotation_not_reviewed','excluded_annotation_alignment','excluded_annotation_not_reviewed'])
     lex=meta.lexical_class.astype(str);ctx=meta.contextual_word_class.astype(str);sent=meta.sentence_context_class.astype(str)
     if policy=='word_agreement':labels=ctx;keep=quality & lex.eq(ctx)
     else:
@@ -277,20 +279,29 @@ def similarity_pairs(meta,X,y,max_pairs=300):
             for b in CLASSES[ai:]:
                 left=ix[y[ix]==a];right=ix[y[ix]==b]
                 if not len(left) or not len(right):continue
+                lcounts=pd.Series(sent[left]).value_counts();rcounts=pd.Series(sent[right]).value_counts()
+                if a==b:possible=len(left)*(len(left)-1)//2-int(((lcounts*(lcounts-1))//2).sum())
+                else:possible=len(left)*len(right)-sum(int(n)*int(rcounts.get(s,0)) for s,n in lcounts.items())
+                target=min(max_pairs,possible)
+                if target<1:continue
                 seen=set();count=0
-                for _ in range(max_pairs*30):
+                for _ in range(target*30):
                     i=int(rng.choice(left));j=int(rng.choice(right));pair=tuple(sorted((i,j)))
                     if i==j or sent[i]==sent[j] or pair in seen:continue
                     seen.add(pair);count+=1
                     records.append(dict(subject=reader,class_a=a,class_b=b,event_a=meta.iloc[i].event_id,event_b=meta.iloc[j].event_id,
                                         correlation=float(z[i]@z[j]),same_word=bool(words[i]==words[j])))
-                    if count>=max_pairs:break
+                    if count>=target:break
         groups=defaultdict(list)
         for i in ix:groups[(words[i],y[i])].append(i)
         eligible=[v for v in groups.values() if len({sent[i] for i in v})>=2]
-        seen=set()
-        for _ in range(5000):
-            if not eligible or len(seen)>=500:break
+        possible=0
+        for group in eligible:
+            counts=pd.Series(sent[group]).value_counts()
+            possible+=len(group)*(len(group)-1)//2-int(((counts*(counts-1))//2).sum())
+        target=min(500,possible);seen=set()
+        for _ in range(max(1,min(5000,target*40))):
+            if not eligible or len(seen)>=target:break
             group=eligible[int(rng.integers(len(eligible)))];i,j=map(int,rng.choice(group,2,replace=False));pair=tuple(sorted((i,j)))
             if sent[i]==sent[j] or pair in seen:continue
             # Same reader, same sentiment and similar word length, different
@@ -414,7 +425,7 @@ def plots(meta,X,y,scores,pairs,repeated,out):
         for b in range(3):
             if np.isfinite(mat[a,b]):axes[0].text(b,a,f'{mat[a,b]:.2f}',ha='center',va='center')
     if len(pairs):
-        p=pairs.assign(pair_kind=np.where(pairs.class_a==pairs.class_b,'Same class','Different class')).groupby(['subject','pair_kind']).correlation.mean().unstack()
+        p=grouped.assign(pair_kind=np.where(grouped.class_a==grouped.class_b,'Same class','Different class')).groupby(['subject','pair_kind']).correlation.mean().unstack()
         for _,r in p.iterrows():axes[1].plot([0,1],[r.get('Same class',np.nan),r.get('Different class',np.nan)],'o-',alpha=.6)
     axes[1].set_xticks([0,1],['Same class','Different class']);axes[1].set(ylim=(-1,1),ylabel='Mean pattern correlation',title='One line per reader')
     if len(repeated):
@@ -473,10 +484,15 @@ def reader_and_policy_plots(out):
 def main():
     p=argparse.ArgumentParser(description=__doc__);p.add_argument('--thesis-root',type=Path,required=True)
     p.add_argument('--max-output-mb',type=int,default=400);args=p.parse_args()
+    import fcntl,tempfile
+    lock_path=Path(tempfile.gettempdir())/('word-trial-analysis-'+digest(str(args.thesis_root))[:16]+'.lock')
+    lock=lock_path.open('a+');fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB)
     archive=args.thesis_root/'Results/word_sentiment_eeg/trial_archive_125hz'
     out=args.thesis_root/'Results/word_sentiment_eeg/classification_similarity'
     records,archive_protocol=load_completed(archive);out.mkdir(parents=True,exist_ok=True)
-    protocol={'version':VERSION,'feature_spec':FEATURE_SPEC,'seed':SEED,'max_folds':3,'model_settings':'C1 balanced logistic; auto-shrinkage LDA uniform priors; prior dummy',
+    import importlib.metadata
+    versions={name:importlib.metadata.version(name) for name in ['numpy','pandas','scipy','scikit-learn']}
+    protocol={'software_versions':versions,'version':VERSION,'feature_spec':FEATURE_SPEC,'seed':SEED,'max_folds':3,'model_settings':'C1 balanced logistic; auto-shrinkage LDA uniform priors; prior dummy',
               'archive_manifest_sha256':file_digest(archive/'manifest.json'),'archive_protocol_sha256':digest(archive_protocol),
               'code_sha256':file_digest(Path(__file__)),'control_reading':'included','function_words':'primary includes; four auxiliary policies require known content grammar',
               'neutral_downsampling':False,'amplitude_rule':'exclude native-rate 40Hz peak >100 assumed µV, recorded in archive',
@@ -539,7 +555,7 @@ word-first interval and control status. These are separate predictors, not mixed
 into the main EEG classifier. The source archive remains intact for other features.
 
 Primary population: lexical and contextual-word labels agree, alignment has no
-warning, finite archived EEG, native40Hz peak <=100 assumed µV. Function words
+warning and no known historical text/annotation alignment failure, finite archived EEG, native40Hz peak <=100 assumed µV. Function words
 and control reading are retained here. Neutral is not downsampled.
 Four auxiliary content-word policies: all three agree, lexical only, contextual
 word only, sentence only. Unknown grammar/labels do not become invented labels;
@@ -566,7 +582,7 @@ Fold dependence and correlated word/reader events preclude treating folds or
 all trials as independent statistical replicates. No significance claim is made.
 
 Pre-onset and nuisance models diagnose baseline/class confounding; pre-onset
-performance is not automatically proof of leakage (anticipation/context/overlap
+performance is not automatically proof of leakage (anticipation/context/overlap or zero-phase-filter smearing
 can contribute). Region-specific binary logistic models share sentence folds;
 these exploratory comparisons are not independent tests or a selected winner.
 
