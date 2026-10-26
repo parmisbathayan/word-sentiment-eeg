@@ -10,7 +10,7 @@ The first new experiment requires all three labels to agree. The three follow-up
 
 Primary new analyses use content words. Function and uncertain grammatical labels remain in the annotation table and are reported as exclusions, not deleted. Grammar is an operational agent/screen label, not validated POS gold. The English revision inherits existing lexical/contextual sentiment labels; it is not a fresh complete independent sentiment reannotation. Persian revision reread all165 sentences and3016 positions. All annotations are agent annotations, not human-consensus gold.
 
-All-three content-only source counts: ZuCo SR positive274/negative291/neutral13; NR45/48/2207; TSR86/53/2503. TeCo116/77/11. These are source positions, not accepted reader epochs. Sparse strict-neutral coverage must be reported without forced balancing.
+All-three content-only source counts: ZuCo SR positive274/negative291/neutral13; NR45/48/2207; TSR86/53/2503. TeCo116/77/11. These are source word occurrences, not accepted reader epochs. Sparse strict-neutral coverage must be reported without forced balancing. The user flagged 13 neutral word occurrences as potentially too few on 2026-10-26. Reconsider all-three agreement as the primary comparison before a new long run. Use “word occurrences” in presentation prose.
 
 TeCo's15 CONTROL sentences are included for reading EEG in the new adapter. Never use answer_data for these FRPs. The historical TeCo run excluded controls; do not relabel its results as control-inclusive. Current native adapter covers task1 only; task2/3 EEG access remains to establish.
 
