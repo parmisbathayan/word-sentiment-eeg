@@ -61,6 +61,8 @@ def main():
             if dataset=='zuco':savemat(source,dict(sentenceData=sentences))
             else:
                 with source.open('wb') as handle:pickle.dump(native,handle)
+            if dataset=='zuco':
+                labels[6]['word']='deliberate tokenization mismatch'
             labels_path=folder/f'{dataset}_labels.csv';pd.DataFrame(labels).to_csv(labels_path,index=False)
             ann=load_annotations(labels_path,dataset)
             m=montage(dataset);task='SR' if dataset=='zuco' else 'task1'
@@ -75,7 +77,9 @@ def main():
             assert (table.all_three_status=='accepted').sum()==15
             assert (table.loc[table.is_control.astype(str).str.lower()=='true','all_three_status']=='accepted').all()
             assert (table.loc[table.word_index==5,'all_three_status']!='accepted').all()
-            assert (table.loc[table.word_index==6,'all_three_status']=='excluded_function_or_uncertain_grammar').all()
+            grammar_statuses=table.loc[table.word_index==6,'all_three_status'].tolist()
+            assert grammar_statuses.count('excluded_function_or_uncertain_grammar')==(2 if dataset=='zuco' else 3)
+            if dataset=='zuco':assert grammar_statuses.count('excluded_text_alignment')==1
             assert not table.event_id.duplicated().any()
             assert len(pd.read_csv(out/'event_window_features.csv.gz'))==15
             assert resume(out,'fixture',source) is not None

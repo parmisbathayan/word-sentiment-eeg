@@ -119,7 +119,12 @@ def process_reader(path,dataset,task,subject,annotations,out,fingerprint,channel
             lookup_key=(key,index) if dataset=='zuco' else (sid,key,index,word)
             label=lookup.get(lookup_key)
             if label is None or label.word!=word:
-                raise ValueError(f'{task}/{subject}: source word lacks exact annotation ({position},{index})')
+                if dataset=='teco':
+                    raise ValueError(f'{task}/{subject}: source word lacks exact annotation ({position},{index})')
+                # ZuCo exports include known text/tokenization discrepancies.
+                # Preserve each source event with an explicit exclusion; do not
+                # guess its class or abandon all other words from this reader.
+                label=None
             event_id=digest([dataset,task,subject,position,key,index])[:32]
             if event_id in seen:
                 raise ValueError('Duplicate word event')
@@ -127,9 +132,9 @@ def process_reader(path,dataset,task,subject,annotations,out,fingerprint,channel
             chosen=[selection(label,e) for e in experiments]
             row=dict(event_id=event_id,task=task,subject=subject,sentence_position=position,sentence_key=key,
                      word_index=index,word=word,sentence_id_teco='' if sid is None else sid,
-                     is_control=str(getattr(label,'is_control',False)),grammatical_class=label.grammatical_class,
-                     lexical_class=label.lexical_class,contextual_word_class=label.contextual_word_class,
-                     sentence_context_class=label.sentence_context_class,onset_sample_sentence_0based='',match_method='',word_segment_samples='')
+                     is_control=str(getattr(label,'is_control',False)),grammatical_class=getattr(label,'grammatical_class','unmatched'),
+                     lexical_class=getattr(label,'lexical_class','unmatched'),contextual_word_class=getattr(label,'contextual_word_class','unmatched'),
+                     sentence_context_class=getattr(label,'sentence_context_class','unmatched'),onset_sample_sentence_0based='',match_method='',word_segment_samples='')
             for ei,(cls,status) in enumerate(chosen):
                 if cls is not None:candidates[ei,CLASSES.index(cls)]+=1
             value=None;status='not_selected';onset=None
