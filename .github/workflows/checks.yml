@@ -18,6 +18,10 @@ jobs:
       - run: python tests/cloud_zuco_followups.py
       - run: python tests/cloud_zuco_covariates.py
       - run: python tests/cloud_zuco_context.py
+      - run: python tests/cloud_three_level_labels.py
+      - run: python tests/cloud_exclusion_flow.py
+      - run: python tests/cloud_input_inventory.py
+      - run: python tests/cloud_three_level_erp.py
       - run: python tests/cloud_all_plots.py
         env:
           PLOT_PREVIEW_DIR: artifacts/plot_test_previews

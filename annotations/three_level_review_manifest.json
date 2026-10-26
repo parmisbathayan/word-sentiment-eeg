@@ -1,0 +1,218 @@
+{
+  "status": "complete_join_not_new_full_rereview",
+  "dataset": "ZuCo 1.0 English",
+  "sentence_items": 1037,
+  "word_occurrences": 20458,
+  "inherited_sentiment_review_sentences": 1037,
+  "new_full_sentiment_rereview_sentences_this_revision": 0,
+  "targeted_grammar_review_forms": [
+    "can",
+    "like",
+    "may",
+    "must",
+    "well",
+    "will"
+  ],
+  "targeted_grammar_review_word_occurrences": 109,
+  "sentiment_changes_from_historical_word_labels": 0,
+  "new_independent_human_validation": false,
+  "grammar_limitations": "Open-class candidate screening is not complete POS gold. Ambiguous unresolved roles explicitly uncertain. Function/content assignment is distinct from sentiment.",
+  "counts": {
+    "lexical_class": {
+      "neutral": 18894,
+      "positive": 832,
+      "negative": 626,
+      "uncertain": 106
+    },
+    "contextual_word_class": {
+      "neutral": 19021,
+      "positive": 682,
+      "negative": 605,
+      "uncertain": 150
+    },
+    "sentence_context_class": {
+      "mixed": 2575,
+      "positive": 4374,
+      "negative": 4390,
+      "uncertain": 1043,
+      "neutral": 8076
+    },
+    "grammatical_class": {
+      "content": 11076,
+      "function": 7703,
+      "uncertain": 1679
+    },
+    "grammatical_annotation_method": {
+      "open_class_candidate_screen": 11044,
+      "closed_class_screen": 7626,
+      "conservative_grammar_screen": 1679,
+      "targeted_agent_context_review": 109
+    }
+  },
+  "task_experiment_source_word_counts": {
+    "SR": {
+      "all_three": {
+        "candidate_words": {
+          "negative": 292,
+          "neutral": 22,
+          "positive": 274
+        },
+        "content_candidate_words": {
+          "negative": 291,
+          "neutral": 13,
+          "positive": 274
+        }
+      },
+      "lexical_only": {
+        "candidate_words": {
+          "negative": 462,
+          "neutral": 6040,
+          "positive": 552
+        },
+        "content_candidate_words": {
+          "negative": 461,
+          "neutral": 2634,
+          "positive": 552
+        }
+      },
+      "contextual_only": {
+        "candidate_words": {
+          "negative": 462,
+          "neutral": 6050,
+          "positive": 499
+        },
+        "content_candidate_words": {
+          "negative": 461,
+          "neutral": 2645,
+          "positive": 498
+        }
+      },
+      "sentence_only": {
+        "candidate_words": {
+          "negative": 2786,
+          "neutral": 22,
+          "positive": 1862
+        },
+        "content_candidate_words": {
+          "negative": 1454,
+          "neutral": 13,
+          "positive": 1016
+        }
+      }
+    },
+    "NR": {
+      "all_three": {
+        "candidate_words": {
+          "negative": 48,
+          "neutral": 3968,
+          "positive": 45
+        },
+        "content_candidate_words": {
+          "negative": 48,
+          "neutral": 2207,
+          "positive": 45
+        }
+      },
+      "lexical_only": {
+        "candidate_words": {
+          "negative": 84,
+          "neutral": 6355,
+          "positive": 116
+        },
+        "content_candidate_words": {
+          "negative": 84,
+          "neutral": 3454,
+          "positive": 116
+        }
+      },
+      "contextual_only": {
+        "candidate_words": {
+          "negative": 72,
+          "neutral": 6409,
+          "positive": 74
+        },
+        "content_candidate_words": {
+          "negative": 72,
+          "neutral": 3508,
+          "positive": 74
+        }
+      },
+      "sentence_only": {
+        "candidate_words": {
+          "negative": 915,
+          "neutral": 4026,
+          "positive": 1005
+        },
+        "content_candidate_words": {
+          "negative": 498,
+          "neutral": 2265,
+          "positive": 553
+        }
+      }
+    },
+    "TSR": {
+      "all_three": {
+        "candidate_words": {
+          "negative": 53,
+          "neutral": 4585,
+          "positive": 86
+        },
+        "content_candidate_words": {
+          "negative": 53,
+          "neutral": 2503,
+          "positive": 86
+        }
+      },
+      "lexical_only": {
+        "candidate_words": {
+          "negative": 86,
+          "neutral": 7463,
+          "positive": 191
+        },
+        "content_candidate_words": {
+          "negative": 86,
+          "neutral": 3937,
+          "positive": 191
+        }
+      },
+      "contextual_only": {
+        "candidate_words": {
+          "negative": 77,
+          "neutral": 7533,
+          "positive": 129
+        },
+        "content_candidate_words": {
+          "negative": 77,
+          "neutral": 4007,
+          "positive": 129
+        }
+      },
+      "sentence_only": {
+        "candidate_words": {
+          "negative": 748,
+          "neutral": 4637,
+          "positive": 1779
+        },
+        "content_candidate_words": {
+          "negative": 388,
+          "neutral": 2555,
+          "positive": 972
+        }
+      }
+    }
+  },
+  "source_hashes": {
+    "word_labels.csv": "218104d2b168629aaed1c5eb0ae3625c22eca260cac4d9121f85c38044a0f7c1",
+    "sentence_context_labels.csv": "9bcf54da4cb353bbf2a2adf5cfde1c99aee79353953ad5372bbb0bcbe3709f87",
+    "source_sentence_ratings.csv": "5d48fc3a9c3d3f746d688dabc5d5eaa75edc2250745e5020e75bd6f530654156",
+    "POLICY.md": "1ce70d9ab9a01231d38875f090998f33e7ada707fcddb58821ec28f3f605d9c7",
+    "sentence_context_POLICY.md": "b1136f9d99a351caa78b68599d55b69e81102b00a990e10b082c18437f140d6e",
+    "three_level_POLICY.md": "2b60ed996c9d3cfabac716f1ea2c41155b2dce598f7f85218e7fd3bcb1c17df9",
+    "three_level_compile.py": "18baa112500a58983d06a4c82b4d38f35e37c323a10090ebf4110b4e23858e63"
+  },
+  "output": "word_labels_three_level.csv",
+  "output_sha256": "b9f22692bdfa76a25cf70a2fd0d5029f9b3af83c9e1533cb64731ac166011574",
+  "no_missing_labels_imputed": true,
+  "original_files_modified": false,
+  "count_unit": "Unique source word positions by task, before reader availability/fixation/EEG rejection; not accepted EEG counts."
+}
