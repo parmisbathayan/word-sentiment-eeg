@@ -22,6 +22,7 @@ jobs:
       - run: python tests/cloud_exclusion_flow.py
       - run: python tests/cloud_input_inventory.py
       - run: python tests/cloud_three_level_erp.py
+      - run: python tests/cloud_trial_archive.py
       - run: python tests/cloud_all_plots.py
         env:
           PLOT_PREVIEW_DIR: artifacts/plot_test_previews
