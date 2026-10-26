@@ -88,7 +88,7 @@ def main():
             run=Path(temp)/dataset;run.mkdir();fixture(run,dataset)
             before={p:file_digest(p) for p in run.rglob('*') if p.is_file()}
             saved,out,gallery=plots.plot_collection(run,dataset,make_plots=False)
-            assert len(gallery)==(48 if dataset=='zuco' else 18)
+            assert len(gallery)==(51 if dataset=='zuco' else 19)
             assert len({x['path'] for x in gallery})==len(gallery)
             rows=[x for x in gallery if x['kind']=='subject']
             assert all(x['layout']=='one_reader_per_row' for x in rows)
@@ -97,15 +97,24 @@ def main():
                 assert len([x for x in gallery if x.get('view')=='original_overview'])==3
                 assert len([x for x in gallery if x.get('view')=='overall'])==3
                 assert all(x['measures']==['whole_scalp_signed_mean'] for x in gallery if x.get('view')=='overall')
-            # A task cell contains that task's readers only; all rows share the
-            # same horizontal viewport rather than shrinking nine plots.
+            # A task cell shows ONE combined matrix, not twelve reader images.
             reader_task=rows[0]['task']
             for item in rows:
                 path=out/item['path'];path.parent.mkdir(parents=True,exist_ok=True);path.write_bytes(b'synthetic-png-for-html-test')
+            matrices=[x for x in gallery if x['kind']=='subject_matrix']
+            assert len(matrices)==(3 if dataset=='zuco' else 1)
+            for item in matrices:
+                assert item['readers']==sorted(r.subject for r in saved.records if r.task==item['task'])
+                assert item['reader_count']==12 and len(item['columns'])==(9 if dataset=='zuco' else 8)
+                path=out/item['path'];path.parent.mkdir(parents=True,exist_ok=True);path.write_bytes(b'one-combined-matrix')
             rendered=display_plots.task_reader_rows_html(gallery,out,reader_task)
-            assert rendered.count('<figure ')==12
-            assert 'overflow-x:auto' in rendered and 'max-width:none' in rendered
+            assert rendered.count('<img ')==1 and '<figure ' not in rendered
+            assert 'overflow:auto' in rendered and 'max-width:none' in rendered
             assert 'base64,' in rendered
+            assert 'b25lLWNvbWJpbmVkLW1hdHJpeA==' in rendered
+            try:display_plots.task_reader_rows_html(rows,out,reader_task)
+            except ValueError as error:assert 'Combined reader matrix missing' in str(error)
+            else:raise AssertionError('Legacy separate-reader images used instead of matrix')
             rosters=json.loads((out/'comparison_rosters.json').read_text())
             if dataset=='teco':
                 assert len(rosters['task1/strict_neutral']['readers'])==11
@@ -128,6 +137,15 @@ def main():
                 plots.render_panels(metrics,groups,saved.times,saved.units,path,'Group mean ±1 SEM',
                                     ['whole_scalp_signed_mean'],count,True)
                 assert path.stat().st_size>1000
+                matrix_path=out/'reader_matrices'/f'{record.task}_reader_matrix.png'
+                matrix=plots.render_reader_matrix(saved,record.task,matrix_path)
+                assert matrix['reader_count']==12
+                width,height=struct.unpack('>II',matrix_path.read_bytes()[16:24])
+                assert width>3000 and height>2500
+                assert matrix_path.with_suffix('.pdf').read_bytes().startswith(b'%PDF')
+                if os.environ.get('PLOT_PREVIEW_DIR'):
+                    preview=Path(os.environ['PLOT_PREVIEW_DIR']);preview.mkdir(parents=True,exist_ok=True)
+                    shutil.copyfile(matrix_path,preview/f'{dataset}-reader-matrix.png')
                 if dataset=='zuco':
                     two=np.stack([r.means for r in saved.records if r.task==record.task][:2])
                     group_metrics=plots.summaries(two,saved.montage,saved.channels,True)
@@ -149,6 +167,6 @@ def main():
         for task in tasks:
             task_cells=[c for c in book['cells'] if c['metadata'].get('id')=='reader-rows-'+task]
             assert len(task_cells)==1 and f"'{task}'" in ''.join(task_cells[0]['source'])
-    print('All-plot checks passed: standalone group overviews, SEM not SD, true whole-head mean, horizontal reader rows, separate task cells, GFP, roster and source preservation')
+    print('All-plot checks passed: one combined reader matrix per task, PNG/PDF, group overviews, SEM, GFP, roster and source preservation')
 
 if __name__=='__main__':main()

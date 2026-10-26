@@ -204,6 +204,86 @@ def render_panels(metrics,groups,times,units,path,title,keys,channel_counts,grou
     fig.savefig(path,dpi=125);plt.close(fig)
 
 
+def render_reader_matrix(saved,task,path):
+    """One figure: reader rows and measure columns, without re-epoching EEG."""
+    import matplotlib
+    matplotlib.use('Agg')
+    import matplotlib.pyplot as plt
+    from matplotlib.lines import Line2D
+    records=sorted((r for r in saved.records if r.task==task),key=lambda r:r.subject)
+    if not records or len({r.subject for r in records})!=len(records):
+        raise ValueError('A matrix requires a nonempty, unique reader roster')
+    keys=['whole_scalp_signed_mean']
+    if saved.dataset=='zuco':keys.append('original_12_channel_roi')
+    keys+=['whole_scalp_gfp',*REGIONS]
+    titles={'whole_scalp_signed_mean':'Whole-head signed mean',
+            'original_12_channel_roi':'Original 12-channel ROI',
+            'whole_scalp_gfp':'Whole-head GFP'}
+    # One common scale for signed panels within each reader row. GFP is a
+    # separate nonnegative metric. Scales can differ between readers.
+    fig,axes=plt.subplots(len(records),len(keys),squeeze=False,
+                          figsize=(3.5*len(keys)+2.2,2.45*len(records)+1.5),sharex=True)
+    fig.subplots_adjust(left=.075,right=.992,bottom=.045,top=.955,hspace=.52,wspace=.28)
+    short={'negative':'Neg','neutral':'Neu','positive':'Pos',
+           'neutral_in_neutral_sentence':'Strict neu',
+           'neutral_in_source_neutral_sentence':'Source neu'}
+    for ri,record in enumerate(records):
+        valid=np.flatnonzero(record.counts>0)
+        if len(valid):
+            metrics=summaries(record.means[valid][None],saved.montage,saved.channels,saved.dataset=='zuco')
+            bound=max([float(np.abs(metrics[k]).max()) for k in keys if k!='whole_scalp_gfp']+[.01])
+        else:metrics={};bound=.01
+        for ci,key in enumerate(keys):
+            ax=axes[ri,ci]
+            for gi,index in enumerate(valid):
+                group=saved.groups[index]
+                ax.plot(saved.times,metrics[key][0,gi],color=COLORS[group],lw=1)
+            if not len(valid):ax.text(.5,.5,'No accepted epochs',ha='center',transform=ax.transAxes,fontsize=8)
+            ax.axvline(0,color='black',lw=.5);ax.axhline(0,color='grey',lw=.4)
+            ax.set_xlim(saved.times[0],saved.times[-1])
+            ax.set_ylim(bottom=0) if key=='whole_scalp_gfp' else ax.set_ylim(-bound*1.1,bound*1.1)
+            ax.tick_params(labelsize=7)
+            if ri==0:ax.set_title(titles.get(key,key.replace('_',' ').title()),fontsize=10,pad=12)
+            if ri==len(records)-1:ax.set_xlabel('Fixation onset (ms)',fontsize=8)
+        label=record.subject+'\n'+'\n'.join(f'{short[g]}: {int(record.counts[i])}' for i,g in enumerate(saved.groups))
+        axes[ri,0].text(-.26,.5,label,transform=axes[ri,0].transAxes,
+                        ha='right',va='center',fontsize=8,fontweight='bold',clip_on=False)
+    fig.suptitle(f'{saved.dataset.upper()} / {task}: all {len(records)} readers in one matrix',fontsize=15,y=.988)
+    handles=[Line2D([0],[0],color=COLORS[g],label=LABELS[g]) for g in saved.groups]
+    fig.legend(handles=handles,loc='lower center',bbox_to_anchor=(.52,.012),ncol=len(handles),fontsize=9)
+    fig.text(.52,.002,'Individual class means; no SEM band. Signed scales shared within rows, not between readers. '
+             f'Units: {saved.units}. Whole-head signed mean is near zero after average reference.',ha='center',fontsize=9)
+    path=Path(path);path.parent.mkdir(parents=True,exist_ok=True)
+    fig.savefig(path,dpi=110)
+    fig.savefig(path.with_suffix('.pdf'))
+    plt.close(fig)
+    return {'kind':'subject_matrix','task':task,'path':str(path.relative_to(path.parent.parent)),
+            'pdf_path':str(path.with_suffix('.pdf').relative_to(path.parent.parent)),
+            'readers':[r.subject for r in records],'columns':keys,'layout':'reader_by_measure_matrix',
+            'reader_count':len(records),'display_width_px':420*len(keys),
+            'title':f'{task}: readers × plot types'}
+
+
+def write_reader_matrices(saved,out,make_plots=True):
+    items=[]
+    for task in sorted({r.task for r in saved.records}):
+        path=Path(out)/'reader_matrices'/f'{task}_reader_matrix.png'
+        if make_plots:
+            item=render_reader_matrix(saved,task,path)
+        else:
+            keys=['whole_scalp_signed_mean']+(['original_12_channel_roi'] if saved.dataset=='zuco' else [])+['whole_scalp_gfp',*REGIONS]
+            readers=sorted(r.subject for r in saved.records if r.task==task)
+            item={'kind':'subject_matrix','task':task,'path':str(path.relative_to(out)),
+                  'pdf_path':str(path.with_suffix('.pdf').relative_to(out)),
+                  'readers':readers,'columns':keys,'reader_count':len(readers),
+                  'layout':'reader_by_measure_matrix','display_width_px':420*len(keys),
+                  'title':f'{task}: readers × plot types'}
+        items.append(item)
+        print(f'MATRIX {task}: {item["reader_count"]} reader rows × {len(item["columns"])} plot columns',flush=True)
+    write_json(Path(out)/'reader_matrix_gallery.json',items)
+    return items
+
+
 def plot_collection(run,dataset,make_plots=True):
     run=Path(run);saved=load_saved(run,dataset);out=run/'analysis/all_plots_v1';out.mkdir(parents=True,exist_ok=True)
     gallery=[];curves=[];rosters={};count_rows=[]
@@ -250,6 +330,7 @@ def plot_collection(run,dataset,make_plots=True):
             gallery.append({'kind':'subject','task':task,'subject':record.subject,'path':str(rel),'title':f'{task} · {record.subject} · overall + regions','layout':'one_reader_per_row',
                             'columns':overall+list(REGIONS),'display_width_px':420*(len(overall)+len(REGIONS))})
             count_rows.extend({'task':task,'subject':record.subject,'group':g,'accepted_epochs':int(record.counts[i])} for i,g in enumerate(saved.groups))
+    gallery.extend(write_reader_matrices(saved,out,make_plots))
     saved.montage.to_csv(out/'channel_regions.csv',index=False)
     if make_plots:
         import matplotlib.pyplot as plt
@@ -271,13 +352,13 @@ def plot_collection(run,dataset,make_plots=True):
               'gfp':'Population standard deviation across channels of each reader/class-average waveform, then equal-reader average. Not GFP of single trials or of the grand average; not baseline-corrected again.',
               'gfp_limitations':'Class-average GFP depends on signal and residual noise, and unequal accepted trial counts can bias class comparisons. Descriptive only; no sentiment-specific/significance claim.',
               'sem':'Between-reader sample SD divided by sqrt(n); ±1 SEM, matching the original task overview. Absent for single-reader figures and n=1 groups',
-              'subject_layout':'One horizontal row per reader, with overall metrics and scalp regions as columns',
+              'subject_layout':'One combined reader-by-measure matrix per task; PNG and PDF. Individual legacy images also retained.',
               'original_zuco_overview':'Original fixed 12-channel ROI, equal reader means and ±1 SEM; not an all-105-channel mean',
               'regions':'Fixed disjoint geometric scalp partitions, not localized brain sources',
               'units':saved.units,'included':'Existing pooled word classes; TeCo additionally strict and source-neutral baselines. New extraction/context-controls are not run by this plotter.',
               'signed_mean_max_abs':max(float(np.abs(r.means[r.counts>0].mean(axis=1)).max()) for r in saved.records if (r.counts>0).any())}
     write_json(out/'protocol.json',protocol)
-    (out/'REPORT.md').write_text(f'''# {dataset.upper()} — all saved-result plots\n\n{len(saved.records)} saved reader/task records checked. {len(gallery)} figures listed in gallery.json, plus a sensor map.\n\n- Group figures: whole-scalp signed mean, global field power (GFP), six scalp regions{', and the original ZuCo 12-channel ROI' if dataset=='zuco' else ''}. Each comparison uses the same readers in all panels.\n- Subject figures: one horizontal row per reader, with the whole-head mean, original ROI (ZuCo), GFP and six regions in separate columns. Groups with no accepted epochs are omitted; small groups remain descriptive.\n- Whole-scalp signed mean is approximately zero after average reference. A flat curve is expected and does not mean EEG has no activity. Maximum absolute signed channel mean in saved eligible class averages: {protocol['signed_mean_max_abs']:.4g} ({saved.units}).\n- GFP is a different, nonnegative measure: population standard deviation across all channels of each reader's class-average waveform, then averaged across readers. It is not single-trial GFP, signed ERP voltage, a sentiment score or proof of significance. Unequal trial counts/residual noise affect class-average GFP.\n- Group shading is ±1 SEM across readers (sample SD divided by sqrt(reader count)), matching the original task overview. It is not ±1 SD. No uncertainty band is manufactured for one reader.\n- ZuCo includes one standalone original 12-channel overview and one standalone true all-105-channel mean per task.\n- Scalp areas are geometric sensor groups, not localized cortical generators. Overlapping fixation responses have not been deconvolved.\n- Original accepted events, labels and EEG averages are unchanged. Only compact saved means are read; no original EEG, downloads or extraction.\n- group_curves.csv.gz, reader_class_counts.csv, comparison_rosters.json and protocol.json record values, denominators and source hashes. All outputs stay in analysis/all_plots_v1/.\n\nGFP definition: https://mne.tools/stable/auto_tutorials/evoked/30_eeg_erp.html#global-field-power-gfp\n''')
+    (out/'REPORT.md').write_text(f'''# {dataset.upper()} — all saved-result plots\n\n{len(saved.records)} saved reader/task records checked. {len(gallery)} figures listed in gallery.json, plus a sensor map.\n\n- Group figures: whole-scalp signed mean, global field power (GFP), six scalp regions{', and the original ZuCo 12-channel ROI' if dataset=='zuco' else ''}. Each comparison uses the same readers in all panels.\n- Subject matrices: one combined PNG and PDF per task, with readers as rows and whole-head mean, original ROI (ZuCo), GFP and six regions as columns. Legacy separate-reader figures are retained but the notebook displays the combined matrix. Groups with no accepted epochs are omitted; small groups remain descriptive.\n- Whole-scalp signed mean is approximately zero after average reference. A flat curve is expected and does not mean EEG has no activity. Maximum absolute signed channel mean in saved eligible class averages: {protocol['signed_mean_max_abs']:.4g} ({saved.units}).\n- GFP is a different, nonnegative measure: population standard deviation across all channels of each reader's class-average waveform, then averaged across readers. It is not single-trial GFP, signed ERP voltage, a sentiment score or proof of significance. Unequal trial counts/residual noise affect class-average GFP.\n- Group shading is ±1 SEM across readers (sample SD divided by sqrt(reader count)), matching the original task overview. It is not ±1 SD. No uncertainty band is manufactured for one reader.\n- ZuCo includes one standalone original 12-channel overview and one standalone true all-105-channel mean per task.\n- Scalp areas are geometric sensor groups, not localized cortical generators. Overlapping fixation responses have not been deconvolved.\n- Original accepted events, labels and EEG averages are unchanged. Only compact saved means are read; no original EEG, downloads or extraction.\n- group_curves.csv.gz, reader_class_counts.csv, comparison_rosters.json and protocol.json record values, denominators and source hashes. All outputs stay in analysis/all_plots_v1/.\n\nGFP definition: https://mne.tools/stable/auto_tutorials/evoked/30_eeg_erp.html#global-field-power-gfp\n''')
     print(f'ALL PLOTS READY: {out}; {len(gallery)} figures plus sensor map',flush=True)
     return saved,out,gallery
 
@@ -285,7 +366,13 @@ def plot_collection(run,dataset,make_plots=True):
 def main(dataset):
     parser=argparse.ArgumentParser(description=f'Plot all saved {dataset.upper()} class EEG averages; no extraction')
     parser.add_argument('--run-dir',type=Path,required=True)
-    args=parser.parse_args();plot_collection(args.run_dir,dataset)
+    parser.add_argument('--reader-matrices-only',action='store_true',help='Reuse group figures; generate only combined reader matrices')
+    args=parser.parse_args()
+    if args.reader_matrices_only:
+        saved=load_saved(args.run_dir,dataset)
+        out=args.run_dir/'analysis/all_plots_v1';out.mkdir(parents=True,exist_ok=True)
+        write_reader_matrices(saved,out)
+    else:plot_collection(args.run_dir,dataset)
 
 if __name__=='__main__':
     raise SystemExit('Use plot_zuco.py or plot_teco.py')
