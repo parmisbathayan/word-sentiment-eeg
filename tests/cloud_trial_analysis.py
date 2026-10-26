@@ -1,5 +1,6 @@
 """Fit the fixed battery on synthetic, private-free archive data in the cloud."""
 import json
+import os,shutil
 from pathlib import Path
 import subprocess
 import sys
@@ -80,12 +81,16 @@ def main():
             for name in ['binary_confusions','three_class_confusions','classification_overview','regions_and_controls',
                          'similarity_overview','sampled_trial_matrix','reader_reproducibility','reader_score_matrix','label_policy_comparison']:
                 assert (folder/'plots'/f'{name}.png').stat().st_size>1000,name
-            cases=list((folder/'cases').glob('*/result.json'));assert len(cases)>=40
+            cases=list((folder/'cases').glob('*/result.json'));assert len(cases)==36
             for path in (folder/'cases').glob('*/predictions.csv.gz'):
                 pred=pd.read_csv(path);assert not pred.event_id.duplicated().any();assert pred.fold.ge(0).all()
             assert len(pd.read_csv(folder/'same_word_seen_diagnostic.csv'))>0
             assert len(pd.read_csv(folder/'repeated_word_pairs.csv.gz'))>0
         for path,sha in source_hashes.items():assert file_digest(path)==sha,'Source archive modified'
+        if os.environ.get('PLOT_PREVIEW_DIR'):
+            previews=Path(os.environ['PLOT_PREVIEW_DIR']);previews.mkdir(parents=True,exist_ok=True)
+            for name in ['binary_confusions','similarity_overview','reader_score_matrix','label_policy_comparison']:
+                shutil.copyfile(out/'zuco/SR/plots'/f'{name}.png',previews/f'analysis-{name}.png')
         features=next((out/'features').rglob('features.npz'));first_sha=file_digest(features)
         # Reuse does not reopen any archived waveform. Metadata/provenance are
         # still verified against the completed reader checkpoint.

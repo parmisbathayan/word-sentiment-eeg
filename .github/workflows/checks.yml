@@ -24,6 +24,8 @@ jobs:
       - run: python tests/cloud_three_level_erp.py
       - run: python tests/cloud_trial_archive.py
       - run: python tests/cloud_trial_analysis.py
+        env:
+          PLOT_PREVIEW_DIR: artifacts/plot_test_previews
       - run: python tests/cloud_all_plots.py
         env:
           PLOT_PREVIEW_DIR: artifacts/plot_test_previews
