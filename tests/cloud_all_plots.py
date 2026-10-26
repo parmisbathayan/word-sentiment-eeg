@@ -88,13 +88,14 @@ def main():
             run=Path(temp)/dataset;run.mkdir();fixture(run,dataset)
             before={p:file_digest(p) for p in run.rglob('*') if p.is_file()}
             saved,out,gallery=plots.plot_collection(run,dataset,make_plots=False)
-            assert len(gallery)==(51 if dataset=='zuco' else 19)
+            assert len(gallery)==(48 if dataset=='zuco' else 19)
             assert len({x['path'] for x in gallery})==len(gallery)
             rows=[x for x in gallery if x['kind']=='subject']
             assert all(x['layout']=='one_reader_per_row' for x in rows)
-            assert all(len(x['columns'])==(9 if dataset=='zuco' else 8) for x in rows)
+            assert all(len(x['columns'])==8 for x in rows)
             if dataset=='zuco':
-                assert len([x for x in gallery if x.get('view')=='original_overview'])==3
+                assert not any(x.get('view')=='original_overview' for x in gallery)
+                assert all('original_12_channel_roi' not in x.get('columns',[]) for x in gallery)
                 assert len([x for x in gallery if x.get('view')=='overall'])==3
                 assert all(x['measures']==['whole_scalp_signed_mean'] for x in gallery if x.get('view')=='overall')
             # A task cell shows ONE combined matrix, not twelve reader images.
@@ -105,7 +106,7 @@ def main():
             assert len(matrices)==(3 if dataset=='zuco' else 1)
             for item in matrices:
                 assert item['readers']==sorted(r.subject for r in saved.records if r.task==item['task'])
-                assert item['reader_count']==12 and len(item['columns'])==(9 if dataset=='zuco' else 8)
+                assert item['reader_count']==12 and len(item['columns'])==8
                 path=out/item['path'];path.parent.mkdir(parents=True,exist_ok=True);path.write_bytes(b'one-combined-matrix')
             rendered=display_plots.task_reader_rows_html(gallery,out,reader_task)
             assert rendered.count('<img ')==1 and '<figure ' not in rendered
