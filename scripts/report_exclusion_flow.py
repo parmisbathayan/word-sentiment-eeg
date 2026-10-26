@@ -142,6 +142,8 @@ def build(run, dataset, include_words=False, make_plot=True):
     if remaining != totals['accepted']:
         raise ValueError('Aggregate flow does not reconcile')
     protocol = run / 'protocol.json'
+    if not protocol.exists():
+        protocol = run / 'provenance.json'
     report = {'dataset':dataset, 'run_status':state.get('status', 'unknown'),
               'reader_task_recordings':len(readers), 'distinct_readers':len({r['subject'] for r in readers}),
               'totals':totals, 'flow':flow,
