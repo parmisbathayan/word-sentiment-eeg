@@ -83,6 +83,12 @@ def inspect_mat(path):
             return {'format':'matlab_v7.3','schema':schema(handle),
                     'scope':'HDF field/dimension inventory only; events and preprocessing not yet decoded'}
     result={'schema':summarize(data),'event_tables':[]}
+    if 'eyeevent' in data:
+        result['eye_event_headers']={
+            name:[str(x) for x in np.asarray(getattr(data['eyeevent'],name).colheader).reshape(-1)]
+            for name in ['fixations','saccades','blinks']
+        }
+        result['eye_trigger_preview']=np.asarray(data['event'])[:6].tolist()
     def walk(value, name, depth=0):
         if depth>4:return
         if hasattr(value,'_fieldnames'):
