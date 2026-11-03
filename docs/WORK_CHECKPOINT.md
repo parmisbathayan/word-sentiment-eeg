@@ -105,6 +105,17 @@ matching/tuning/stratification details and explicit departures.
 
 ## Resume next, in order
 
+Additional implementation after the first checkpoint:
+`src/word_sentiment_eeg/paper_trials.py` provides per-reader/explicit-stratum
+binary matching with reconciling exclusions and within-reader/class averages
+for requested sizes 1/10/20/40 with exact event-membership tables. Multi-trial
+averages never include two events from the same sentence text. Remainders keep
+their actual counts. Three bundled-runtime synthetic tests passed. No guessed
+word-length/timing bins are built in, and these components are not yet wired
+to original SST/word-bound inputs or used to produce paper decoding results.
+Event membership disjointness does not automatically guarantee disjoint raw
+EEG intervals; preserve that distinction when implementing evaluation.
+
 1. Verify/push the neutral/nonneutral storage-only fix and provide its link.
    Do not force another original analysis/extraction run.
 2. Preserve this checkpoint and the current code commits.
