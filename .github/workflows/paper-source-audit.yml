@@ -9,7 +9,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - run: python -m pip install 'numpy<3' 'scipy<2'
+      - run: python -m pip install 'numpy<3' 'scipy<2' 'h5py<4'
       - run: python scripts/paper_source_audit.py --output artifacts/paper_source_audit.json
       - uses: actions/upload-artifact@v4
         with:

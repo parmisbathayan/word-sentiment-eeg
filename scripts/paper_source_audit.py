@@ -66,7 +66,22 @@ def struct_events(value):
 def inspect_mat(path):
     import numpy as np
     from scipy.io import loadmat
-    data=loadmat(path,squeeze_me=True,struct_as_record=False)
+    try:
+        data=loadmat(path,squeeze_me=True,struct_as_record=False)
+    except NotImplementedError:
+        import h5py
+        def schema(item, depth=0):
+            if isinstance(item,h5py.Group):
+                return {k:schema(v,depth+1) for k,v in item.items() if not k.startswith('#')}
+            result={'shape_on_disk':list(item.shape),'dtype':str(item.dtype)}
+            # MATLAB v7.3 dimensions are reversed; don't interpret signal
+            # orientation here. Header scalars suffice for this audit.
+            if item.size==1 and item.dtype.kind in 'iuf':
+                result['scalar']=float(item[()].reshape(-1)[0])
+            return result
+        with h5py.File(path,'r') as handle:
+            return {'format':'matlab_v7.3','schema':schema(handle),
+                    'scope':'HDF field/dimension inventory only; events and preprocessing not yet decoded'}
     result={'schema':summarize(data),'event_tables':[]}
     def walk(value, name, depth=0):
         if depth>4:return
