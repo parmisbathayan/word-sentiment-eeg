@@ -5,6 +5,7 @@ A heartbeat confirms the child is alive, not that an EEG stage is advancing.
 """
 from datetime import datetime, timezone
 import json
+import re
 from pathlib import Path
 from queue import Empty, Queue
 import subprocess
@@ -12,10 +13,14 @@ from threading import Thread
 import time
 
 
-def run_with_progress(command, status_path, heartbeat_seconds=30, activity='word EEG extraction'):
+def run_with_progress(command, status_path, heartbeat_seconds=30, activity='word EEG extraction', feature_roster=None):
     if heartbeat_seconds <= 0:
         raise ValueError('heartbeat_seconds must be positive')
     status_path = Path(status_path)
+    feature_positions = {
+        f"{r['dataset']}/{r['task']}/{r['subject']}": i
+        for i, r in enumerate(feature_roster or [], 1)
+    }
     started = time.monotonic()
     last_output_clock=started
     state = {'status':'starting', 'started_at_utc':datetime.now(timezone.utc).isoformat(),
@@ -78,6 +83,10 @@ def run_with_progress(command, status_path, heartbeat_seconds=30, activity='word
             if line is None:
                 break
             if line:
+                match = re.match(r'(?:KEEP FEATURES|FEATURES) (\S+):', line)
+                if match and match[1] in feature_positions:
+                    index = feature_positions[match[1]]
+                    line = f'[Recording {index}/{len(feature_positions)} | {index-1} preceding recordings processed] ' + line
                 print(line, end='', flush=True)
                 state['last_output'] = line.strip()
                 state['last_output_at_utc'] = datetime.now(timezone.utc).isoformat()
