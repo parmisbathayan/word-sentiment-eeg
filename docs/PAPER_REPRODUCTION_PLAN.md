@@ -2,7 +2,8 @@
 
 Status 2026-11-03: user selected Colab/Python only, no MATLAB. Source audit,
 Python synchronization, sparse nuisance-GLM library, synthetic tests and a
-one-block engineering runner are implemented. The strict real-data timing
+one-block engineering runner, shared-reader block fitting, original-SST parsing,
+selection, matching, paired epochs and train-only decoding components are implemented. The strict real-data timing
 validation is not passed. The full reproduction is **not implemented or run**. The existing classification
 and neutral/nonneutral follow-up are different experiments and remain unchanged.
 
@@ -26,8 +27,9 @@ The default pilot stops at 2 ms. A separately named explicit engineering option
 permits at most 8 ms (one 125-Hz output sample) for testing the remaining code;
 its report retains `native_one_sample_target_met=false`. Such a diagnostic run
 must never be described as passing the original paper's timing criterion or as
-a sentiment result. No word-bound mapping, original SST join, trial matching,
-FRP inferential statistics or paper decoding has yet been run.
+a sentiment result. Original source bounds and SST text joins have now been audited, and matching,
+paired epoch and decoding components have synthetic tests. No sentiment-specific
+source epochs, FRP inferential statistics or actual paper decoding have run.
 
 The nuisance-model pilot uses the raw eye-event table, preserving the short
 fixations absent from the corrected word-selection export. Word-bound selection
@@ -64,15 +66,15 @@ change the test fraction or claim an exact joint-stratified implementation.
 | Stage | Required implementation / evidence | Current status |
 | --- | --- | --- |
 | Study code | Exact custom scripts, release, dependencies and license | Not located after paper, author GitHub and OSF script inventory checks. No claim of absence. |
-| ZuCo inputs | SR only, 12 original readers, raw block EEG, eye-tracker events, triggers, word bounds, SST word/phrase/sentence labels | OSF block EEG/ET/bounds located. Schema and synchronization need validation. |
+| ZuCo inputs | SR only, 12 original readers, raw block EEG, eye-tracker events, triggers, word bounds, SST word/phrase/sentence labels | Schemas audited; all 400 source word-count/bounds joins pass. Recorded trial→sentence identity remains unresolved (49 versus nominal 50 trials in sampled block). |
 | Preprocessing | Automagic 1.9, 105 scalp + 9 EOG selection, clean_rawdata, PREP/CleanLine, 1–50 Hz EEGLAB FIR, MARA ICA, spline interpolation, quality measures | Not implemented in this reproduction. Corpus preprocessing is not assumed identical. |
-| Synchronization | EYE-EEG trigger-based synchronization, sample-level timing check, 125 Hz resampling | Native block and event schema audit comes first. |
+| Synchronization | EYE-EEG trigger-based synchronization, sample-level timing check, 125 Hz resampling | Implemented; sampled block fails strict 2-ms timing criterion (3.973-ms maximum residual). |
 | Oculomotor cleaning | Unfold fixation intercept/duration, saccade intercept/10-spline amplitude, blink intercept, keypress intercept; −600…1000 ms; subtract modeled contribution | Full event timeline required. No invented zero blink/keypress series; no joining discontinuous sentence signals as continuous. |
-| Selection | Word-associated fixations, not first-only; remove blink-preceded/out-of-bounds/short (<100 ms) fixations, neutral, preceding three-word English negation window | Requires native events and original labels. Maintain sequential exclusion counts and independent flags. Exact blink rule needs verification. |
+| Selection | Word-associated fixations, not first-only; remove blink-preceded/out-of-bounds/short (<100 ms) fixations, neutral, preceding three-word English negation window | Tested selection component and original-SST joins implemented; real event→sentence mapping still needed. Exact blink rule needs verification. |
 | Trial matching | Match conditions per reader on linguistic/oculomotor properties; paper describes word lengths 1–20 and neighboring fixation onset distributions | Exact timing-stratification rules/seed need custom code or documented reconstruction; never call approximate bins exact. |
-| Epochs | −600…1000 ms; reject raw FRP excursions beyond ±90 µV and exclude same IDs from cleaned FRPs | Current −200…800 ms, 40 Hz, first-fixation archive cannot reproduce this stage. Baseline handling must follow source evidence. |
+| Epochs | −600…1000 ms; reject raw FRP excursions beyond ±90 µV and exclude same IDs from cleaned FRPs | Paired epoch component with shared raw rejection implemented/tested; no baseline silently assumed. The old first-fixation archive cannot reproduce this stage. |
 | FRP inference | GFP/time GLMM, electrode/time GLMM, spatial cluster permutations, topographic consistency; raw versus cleaned comparison | Needs paper formulas, adjacency, permutations, random effects and full electrode coordinates; not replaced by uncorrected t-tests. |
-| Decoding | Same-reader/sentiment/similar-length averages 1/10/20/40, 0–500 ms all-channel features, scaler → NCA → SVM/logistic, 100 stratified 95/5 splits | Not implemented here. Training-only tuning (paper says 10-fold inner CV); exact optimization grid and averaging remainder rules require verification. |
+| Decoding | Same-reader/sentiment/similar-length averages 1/10/20/40, 0–500 ms all-channel features, scaler → NCA → SVM/logistic, 100 stratified 95/5 splits | Train-only NCA/SVM/LR and 10-fold nested tuning implemented/tested; grid verified. Remainders, length strata and infeasible joint 95/5 stratification remain explicit reconstruction choices. No actual scores yet. |
 | Controls | Fixation duration, word length/frequency, neighboring fixation onset probabilities | Preserve all events; do not substitute only the next stored word fixation. |
 | Reporting | Original counts/figures and sampling uncertainty; list all departures and ambiguous settings | Paper has a positive/negative count discrepancy between prose and flowchart: preserve it, do not force counts. |
 | TeCo | Validated native continuous EEG + full events; Persian labels/negation rules and correct montage/rate | Native reading pickles located, but full saccade/blink/keypress timing and original preprocessing provenance not validated. This will be an adaptation, not an English replication. |
@@ -97,7 +99,8 @@ Preprocessed, each with reader folders. ZAB raw block 1 has
 ZAB_SR1_EEG.mat (53,488,721 bytes) and ZAB_SR1_ET.mat (813,937 bytes).
 Preprocessed copies include gip_ZAB_SR1_EEG.mat (50,454,745 bytes) and
 ZAB_SR1_corrected_ET.mat (810,904 bytes). Word-bound files are also listed.
-Original labels/word-event associations still need a validated source join.
+Original text/SST parsing and bounds alignment are audited; word-event associations
+still need a validated recorded-trial-to-sentence join.
 
 NEMAR nm000278 is an alternative new BIDS distribution, with published
 fixation/saccade/blink events and original subject IDs. A sampled SR event table
@@ -105,11 +108,24 @@ contains those types and trigger codes, but no word labels or identified keypres
 column. Do not assume its conversion or preprocessing reproduces the 2020 input.
 https://www.nemar.org/dataset/nm000278?v=v1.0.0
 
-## Storage and next action
+## Verified source labels and current next action
 
-Run scripts/paper_source_audit.py in GitHub Actions. It reads public metadata and
-four temporary public sample MAT files (about 106 MB combined), inspects schema,
-and deletes sources. Only a small JSON report is retained in an Actions artifact.
+Both word-bound halves match their respective 250+150 source sentence counts.
+The original 400-sentence pool contains 7,129 word occurrences. Strict SST joins
+match 382 sentences; an explicit original-word-dictionary fallback yields 6,959
+labels and leaves 170 unknown. No agent labels enter this route. These counts
+are source text counts, not accepted EEG trials. See `paper_linguistic_audit.json`.
+The sampled recording has 49 reading intervals versus nominal 50 source trials;
+no missing-trial identity is guessed. Resolve this before sentiment epoching.
+
+The exact verified decoding grid is NCA components 10/20/40/80/160/320/640/1280,
+ten C and gamma values in 1e-7…1e2, ten inner folds. The code explicitly uses
+logarithmic spacing. Full naive search entails 880,200 classifier fits per
+averaging size. It is refused by the default fit budget. A fixed-settings mode
+is a documented cheaper reconstruction, not the paper's recovered optimized run.
+
+Source audits and synthetic/engineering checks run in GitHub Actions with
+temporary public inputs and cached cloud dependencies/SST. Sources are deleted.
 No Mac EEG/dependency downloads, no Drive writes, no existing analysis changes.
 
 Once event schemas and exact label joins are established, stage one reader in

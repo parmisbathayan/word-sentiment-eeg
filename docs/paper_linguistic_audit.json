@@ -14,6 +14,12 @@
       "sha256": "bf62259bd0c7adcdf0baf9c2b05156ffb20babd99900786f187003610eab6956"
     },
     {
+      "name": "wordbounds_SNR2_ZAB.mat",
+      "bytes": 21274,
+      "download": "https://osf.io/download/w2vtf/",
+      "sha256": "380ed668331f7df6eb368af55a1cd265eb83b3c5d9c158011a52d14af97af544"
+    },
+    {
       "name": "ZAB_SR1_ET.mat",
       "bytes": 813937,
       "download": "https://osf.io/download/h7d4s/",
@@ -62,7 +68,13 @@
       76.0,
       167.0,
       90.0
-    ]
+    ],
+    "second_half": {
+      "entries": 150,
+      "source_sentence_offset": 255,
+      "matching_word_counts": 150,
+      "expected_main_sentences": 150
+    }
   },
   "sentences": {
     "total": 600,
@@ -79,7 +91,9 @@
       13,
       16,
       19
-    ]
+    ],
+    "selected_source_sentences": 400,
+    "selected_word_occurrences": 7129
   },
   "bounds_count_alignment_candidates": [
     {

@@ -103,6 +103,53 @@ matching/tuning/stratification details and explicit departures.
   Pilot outputs only betas, small event table, QA means/plot, diagnostics (<5 MB
   expected). No full continuous or epoch cache saved.
 
+## Further implementation and original-source audits
+
+All work below is a Python reconstruction, not verified numerical parity with
+the authors' MATLAB tools. No full paper sentiment results exist yet.
+
+- `paper_labels.py`: original SST trees, word/phrase/sentence labels with strict
+  alignment. Optional original-dictionary lookup is explicit and never invents
+  phrase/sentence labels. Original ZIP SHA256 is pinned; cloud download fallback
+  accepts only the exact Stanford-distributed bytes. No agent-label fallback.
+- `paper_linguistic_audit.py`: native SR entries 5:405 contain 400 sentences and
+  **7,129 source word occurrences**. First-half 250 bounds and second-half 150
+  bounds each match all corresponding sentence word counts. Latest successful
+  audit is Actions run 41669196748; metadata in `paper_linguistic_audit.json`.
+  Strict SST matches 382/400 sentences. Optional dictionary fallback labels
+  6,959 word occurrences (5,832 neutral, 711 positive, 416 negative), leaving
+  170 unknown. These are source counts, not extracted reader EEG trials.
+- Raw ZAB SR1 has 49 sentence start/end pairs versus nominal 50 source bounds.
+  No sentence ID text was found in its eye messages. The missing/omitted trial
+  identity is NOT established. Never assign sentence labels by guessed order.
+  The corpus scripts' eight 50-trial blocks also differ from the paper's block
+  description; source/version reconciliation remains open.
+- `paper_fixations.py`: bounds mapping, explicit blink-predecessor operational
+  rule, short-fixation and original-label selection, three-word negation window,
+  reconciling sequential outcomes. Requires validated sentence/event mapping.
+  Exact paper blink/bounds conventions have not been established.
+- `paper_python.py` now fits a shared duration/spline basis and coefficients
+  across a reader's blocks while keeping block edges separate. A synthetic
+  two-block known-response check passed; a full real reader has not run.
+- `paper_decoding.py`: checkpointed scaler → supervised NCA → RBF SVM/LR,
+  train-only fitting and nested tuning, exact event-membership checks, metrics,
+  per-case checksums, convergence flags and fit-budget preflight. Cloud checks
+  passed in runs 41668102213 and 41668313953. No actual paper scores yet.
+  The paper grid is now verified: NCA 10/20/40/80/160/320/640/1280; ten C and
+  gamma values from 1e-7 to 1e2; ten inner folds. Log spacing is an explicit
+  interpretation. A naive full run is 880,200 classifier fits per averaging
+  size (3,520,800 for all four); it is refused by default. Fixed mode uses the
+  reported median 320 NCA components, NOT a claimed recovered optimal setting.
+  Joint reader×class stratification must be chosen explicitly and fails if
+  infeasible; no silent fallback. Event disjointness does not prove temporal
+  EEG-interval disjointness.
+- `paper_epochs.py`: one-event-at-a-time paired raw/clean epochs after matching,
+  shared raw ±90 µV rejection, block boundaries, nonfinite-data checks, explicit
+  units and baseline policy. Small class means/audit avoid another trial tensor.
+  Extracts the 105×63=6,615 all-channel 0…496 ms samples at 125 Hz. Three new
+  synthetic tests passed locally with the bundled runtime; all 13 lightweight
+  paper tests passed. This component has not processed source sentiment events.
+
 ## Resume next, in order
 
 Additional implementation after the first checkpoint:
@@ -116,21 +163,22 @@ to original SST/word-bound inputs or used to produce paper decoding results.
 Event membership disjointness does not automatically guarantee disjoint raw
 EEG intervals; preserve that distinction when implementing evaluation.
 
-1. Verify/push the neutral/nonneutral storage-only fix and provide its link.
-   Do not force another original analysis/extraction run.
+1. Neutral/nonneutral storage fix is pushed and full cloud tests passed. Link:
+   https://colab.research.google.com/github/parmisbathayan/word-sentiment-eeg/blob/550091a/notebooks/neutral_nonneutral.ipynb
+   User has not yet reported successful completion of that resumed run.
 2. Preserve this checkpoint and the current code commits.
 3. Investigate the native timing discrepancy against EYE-EEG/source versions.
    No discarding anchors or silently loosening a replication criterion to pass.
-4. Validate original word-bound/event and SST joins. Keep all word-associated
+4. Validate the unresolved recorded-trial-to-sentence join (bounds-to-source
+   word counts now pass). Keep all word-associated
    fixations for the paper route, unlike the historical first-fixation pipeline.
 5. Implement paper exclusions/matching with sequential counts, paired raw/clean
    epoch IDs, FRP inference, 1/10/20/40 averages with nonoverlapping membership,
    training-only NCA/tuning and documented evaluation. Unknown original settings
    stay explicit; the 95/5 joint reader×class stratification has a feasibility
    ambiguity for 328 averages (17 test samples versus 24 strata).
-6. Full per-reader nuisance fits should share coefficients across that reader's
-   blocks without pretending discontinuous blocks are contiguous. The current
-   one-block implementation is only an engineering pilot.
+6. Shared reader/block nuisance fitting is implemented and synthetically tested;
+   validate it on a full real reader after source identity/timing gates pass.
 7. Budget persistent outputs before scaling up. Then adapt to TeCo only after
    verifying full saccade/blink/keypress timing, sampling and Persian labels.
    TeCo reading pickles alone have not established a full continuous timeline.
