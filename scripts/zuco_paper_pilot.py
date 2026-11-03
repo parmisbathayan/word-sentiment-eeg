@@ -55,10 +55,10 @@ def normalized_events(eye,codes,latencies,rate,sync,duration_seconds):
             found=[i for i,key in enumerate(keys) if key in aliases]
             if len(found)!=1:raise ValueError(f'Unrecognized/ambiguous {kind} event headers: {columns}; expected {aliases}')
             return array[:,found[0]]
-        start=column({'start','starttime','sttime','sttimestamp','starttimestamp'})
+        start=column({'latency','start','starttime','sttime','sttimestamp','starttimestamp'})
         duration=column({'duration','dur'})
         onsets=eye_to_seconds(start,sync)
-        amplitude=column({'amplitude','amp','ampl','saccamplitude'}) if kind=='saccade' else np.full(len(start),np.nan)
+        amplitude=column({'amplitude','amp','ampl','sacamplitude','saccamplitude'}) if kind=='saccade' else np.full(len(start),np.nan)
         outside[kind]=int(((onsets<0)|(onsets>=duration_seconds)).sum())
         for i,onset in enumerate(onsets):
             if not np.isfinite(onset) or not np.isfinite(duration[i]) or duration[i]<=0:
