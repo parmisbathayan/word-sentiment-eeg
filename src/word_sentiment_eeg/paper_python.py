@@ -7,7 +7,7 @@ import numpy as np
 import pandas as pd
 
 
-def synchronize(eeg_codes, eeg_samples_1based, eye_events, sample_rate):
+def synchronize(eeg_codes, eeg_samples_1based, eye_events, sample_rate, max_error_ms=None):
     """Fit the eye-clock to EEG seconds using an exact common trigger sequence.
 
     Only sentence on/off triggers synchronize clocks, as described in the paper.
@@ -37,8 +37,10 @@ def synchronize(eeg_codes, eeg_samples_1based, eye_events, sample_rate):
     if not .00098<slope<.00102:raise ValueError('Eye timestamps are not a plausible millisecond clock')
     residual=times-((eye_times-origin)*slope+center)
     max_error=float(np.max(np.abs(residual)))
-    if max_error>1/sample_rate+1e-10:
-        error=ValueError(f'Synchronization residual {max_error*1000:.3f} ms exceeds one native sample')
+    tolerance=1/sample_rate if max_error_ms is None else float(max_error_ms)/1000
+    if not 0<tolerance<=.008:raise ValueError('Timing tolerance must be positive and at most one 125-Hz sample')
+    if max_error>tolerance+1e-10:
+        error=ValueError(f'Synchronization residual {max_error*1000:.3f} ms exceeds configured {tolerance*1000:.3f} ms tolerance')
         error.diagnostics=dict(eye_origin_ms=origin,slope_seconds_per_eye_ms=float(slope),
                                eeg_seconds_at_origin=float(center),max_residual_ms=max_error*1000,
                                anchors=[dict(code=int(c),eye_ms=float(e),eeg_seconds=float(t),residual_ms=float(r)*1000)
@@ -46,6 +48,7 @@ def synchronize(eeg_codes, eeg_samples_1based, eye_events, sample_rate):
         raise error
     return dict(eye_origin_ms=origin,slope_seconds_per_eye_ms=float(slope),
                 eeg_seconds_at_origin=float(center),triggers=len(codes),
+                configured_tolerance_ms=tolerance*1000,native_one_sample_target_met=bool(max_error<=1/sample_rate+1e-10),
                 max_residual_ms=max_error*1000,rms_residual_ms=float(np.sqrt(np.mean(residual**2)))*1000)
 
 

@@ -94,6 +94,8 @@ def main():
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument('--output',type=Path,required=True)
     p.add_argument('--channels',type=int,default=105,help='First N channels for engineering QA; full pilot uses all 105')
+    p.add_argument('--engineering-timing-tolerance-ms',type=float,default=None,
+                   help='Explicit diagnostic tolerance, at most 8 ms; default is strict one native sample (2 ms)')
     args=p.parse_args()
     if sys.platform=='darwin':raise SystemExit('Cloud only: never download EEG to the Mac')
     if not 1<=args.channels<=105:raise ValueError('channels must be 1..105')
@@ -102,6 +104,7 @@ def main():
     sources=[next(r for r in audit['samples'] if r['name']==name)
              for name in ['gip_ZAB_SR1_EEG.mat','ZAB_SR1_corrected_ET.mat']]
     protocol={'pilot':'ZAB SR block 1, engineering QA only','channels':args.channels,
+              'engineering_timing_tolerance_ms':args.engineering_timing_tolerance_ms,
               'runner_sha256':file_digest(Path(__file__)),'library_sha256':file_digest(ROOT/'src/word_sentiment_eeg/paper_python.py'),
               'sources':[{k:s[k] for k in ['name','bytes','download','sha256']} for s in sources],
               'scope':'not the full paper reproduction; no sentiment results',
@@ -132,8 +135,10 @@ def main():
             eeg,rate,codes,latencies,names=native_continuous(paths[0])
             from scipy.io import loadmat
             eye=loadmat(paths[1],squeeze_me=True,struct_as_record=False)
-            sync=synchronize(codes,latencies,eye['event'],rate)
+            sync=synchronize(codes,latencies,eye['event'],rate,args.engineering_timing_tolerance_ms)
             print('SYNC:',json.dumps(sync),flush=True)
+            if not sync['native_one_sample_target_met']:
+                print('ENGINEERING ONLY: native 2-ms paper target not met; do not call this a faithful reproduction.',flush=True)
             events,headers,outside=normalized_events(eye,codes,latencies,rate,sync,eeg.shape[1]/rate)
             print('EVENTS:',events.event_type.value_counts().to_dict(),flush=True)
             # Input is the corpus's already average-referenced 105-channel data.

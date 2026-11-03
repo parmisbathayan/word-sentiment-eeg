@@ -23,6 +23,9 @@ def main():
     try:synchronize(codes,noisy,np.column_stack([eye_clock,codes]),500)
     except ValueError:pass
     else:raise AssertionError('Large synchronization error accepted')
+    diagnostic=synchronize(codes,eeg_samples+np.where(np.arange(len(codes))==10,2,0),
+                           np.column_stack([eye_clock,codes]),500,max_error_ms=8)
+    assert not diagnostic['native_one_sample_target_met']
     rng=np.random.default_rng(5);rows=[]
     for kind,n in [('fixation',60),('saccade',60),('blink',15),('keypress',15)]:
         for i,t in enumerate(np.sort(rng.uniform(1,49,n))):
