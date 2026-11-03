@@ -102,7 +102,7 @@ def main():
     out=args.output;out.mkdir(parents=True,exist_ok=True)
     audit=json.loads((ROOT/'docs/paper_source_audit.json').read_text())
     sources=[next(r for r in audit['samples'] if r['name']==name)
-             for name in ['gip_ZAB_SR1_EEG.mat','ZAB_SR1_corrected_ET.mat']]
+             for name in ['gip_ZAB_SR1_EEG.mat','ZAB_SR1_ET.mat']]
     protocol={'pilot':'ZAB SR block 1, engineering QA only','channels':args.channels,
               'engineering_timing_tolerance_ms':args.engineering_timing_tolerance_ms,
               'runner_sha256':file_digest(Path(__file__)),'library_sha256':file_digest(ROOT/'src/word_sentiment_eeg/paper_python.py'),

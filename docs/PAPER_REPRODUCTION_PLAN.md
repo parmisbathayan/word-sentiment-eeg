@@ -29,6 +29,10 @@ must never be described as passing the original paper's timing criterion or as
 a sentiment result. No word-bound mapping, original SST join, trial matching,
 FRP inferential statistics or paper decoding has yet been run.
 
+The nuisance-model pilot uses the raw eye-event table, preserving the short
+fixations absent from the corrected word-selection export. Word-bound selection
+will need separately validated corrected gaze coordinates.
+
 The experimental Colab pilot is `notebooks/zuco_paper_pilot.ipynb`. It is marked
 as not ready for faithful reproduction; do not ask the user to run it as a
 working full reproduction while the strict timing check fails. It downloads
