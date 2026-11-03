@@ -24,6 +24,7 @@ from paper_sst_source import acquire_sst
 
 SOURCES=[dict(name='sentencesSR.mat',bytes=39657,download='https://osf.io/download/qdtvz/'),
          dict(name='wordbounds_SNR1_ZAB.mat',bytes=34529,download='https://osf.io/download/hg38s/'),
+         dict(name='wordbounds_SNR2_ZAB.mat',bytes=21274,download='https://osf.io/download/w2vtf/'),
          dict(name='ZAB_SR1_ET.mat',bytes=813937,download='https://osf.io/download/h7d4s/'),
          dict(name='sentiment_normal_reading.csv',bytes=67617,download='https://osf.io/download/f2z4u/')]
 SST_URL='https://nlp.stanford.edu/~socherr/stanfordSentimentTreebank.zip'
@@ -54,11 +55,19 @@ def main():
         # Native firstLevel_SR.m drops five practice sentences, then pairs bounds
         # by order. Report count agreement before relying on that rule.
         report['sentences']=dict(total=len(text),first_12_word_counts=[len(t.split()) for t in text[:12]])
+        report['sentences']['selected_source_sentences']=len(text[5:405])
+        report['sentences']['selected_word_occurrences']=sum(len(s.split()) for s in text[5:405])
         report['bounds_count_alignment_candidates']=[]
         for offset in range(0,11):
             n=min(250,len(cells),len(text)-offset)
             matches=sum(sizes[i]==len(text[i+offset].split()) for i in range(n))
             report['bounds_count_alignment_candidates'].append(dict(sentence_offset=offset,compared=n,matching_word_counts=matches))
+        second=loadmat(paths['wordbounds_SNR2_ZAB.mat'],squeeze_me=True,struct_as_record=False)
+        second_cells=np.asarray(second['wordbounds'],dtype=object).reshape(-1)
+        second_sizes=[int(np.asarray(c).reshape(-1,4).shape[0]) for c in second_cells]
+        report['word_bounds']['second_half']=dict(entries=len(second_cells),source_sentence_offset=255,
+            matching_word_counts=sum(n==len(text[255+i].split()) for i,n in enumerate(second_sizes)),
+            expected_main_sentences=150)
         sentence_status=Counter();word_status=Counter();labels=Counter();multi=0;unmatched=[]
         for index,sentence in enumerate(text[5:405],5):
             joined=sst.join(sentence.split());sentence_status[joined['status']]+=1
