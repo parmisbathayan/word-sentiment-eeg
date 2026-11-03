@@ -28,18 +28,10 @@
   ],
   "sst_source": "https://nlp.stanford.edu/~socherr/stanfordSentimentTreebank.zip",
   "sst_transport": {
-    "source": "https://data.deepai.org/sst5.zip",
-    "original_url": "https://nlp.stanford.edu/~socherr/stanfordSentimentTreebank.zip",
+    "source": "validated existing cloud cache",
     "sha256": "3f5209483b46bbf129cacbbbe6ae02fe780407034f61cf6342b7833257c3f1db",
     "bytes": 6372817,
-    "transport_bytes": 11911363,
-    "checksum_source": "https://huggingface.co/datasets/stanfordnlp/sst/blob/fb1011170967fbcecfa3327a706b89e3d24cc8f5/dataset_infos.json",
-    "unsuccessful_sources": [
-      {
-        "url": "https://nlp.stanford.edu/~socherr/stanfordSentimentTreebank.zip",
-        "error": "URLError: <urlopen error timed out>"
-      }
-    ]
+    "checksum_source": "https://huggingface.co/datasets/stanfordnlp/sst/blob/fb1011170967fbcecfa3327a706b89e3d24cc8f5/dataset_infos.json"
   },
   "sst_inventory": {
     "sentences": 11855,
@@ -164,13 +156,75 @@
     "multi_leaf_source_words": 941,
     "note": "Counts are source occurrences, not reader EEG trials. Unmatched/ambiguous rows have no invented label."
   },
+  "explicit_dictionary_fallback_audit": {
+    "word_status": {
+      "matched": 6642,
+      "matched_dictionary_only": 317,
+      "missing_original_dictionary_word": 15,
+      "multi_leaf_or_missing_word_label": 155
+    },
+    "label_counts": {
+      "neutral": 5832,
+      "positive": 711,
+      "negative": 416
+    },
+    "methods": {
+      "single lexical leaf (punctuation-only companions permitted)": 6642,
+      "exact_original_dictionary_word": 277,
+      "original_dictionary_word_after_edge_punctuation": 40
+    },
+    "note": "Optional, separate original-SST word-dictionary lookup, no invented phrase/sentence labels; not assumed to reproduce authors unknown mapping code."
+  },
   "experiment_csv": {
-    "rows": 1803,
+    "raw_rows": 1804,
+    "nonempty_rows": 601,
+    "valid_data_rows": 600,
     "columns": [
       "ID",
       "sentence",
       "control"
-    ]
+    ],
+    "first_12_ids": [
+      "1",
+      "2",
+      "13",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9",
+      "10",
+      "11"
+    ],
+    "control_values": {
+      "": 523,
+      "CONTROL": 77
+    },
+    "unmatched_sst_sentence_source_indices": [
+      9,
+      42,
+      50,
+      64,
+      126,
+      143,
+      158,
+      162,
+      167,
+      179,
+      249,
+      262,
+      325,
+      341,
+      347,
+      350,
+      367,
+      390
+    ],
+    "unmatched_sst_control_values": {
+      "": 18
+    }
   },
   "eye_event_headers": {
     "fixations": [

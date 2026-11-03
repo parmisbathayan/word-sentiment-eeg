@@ -28,6 +28,7 @@ jobs:
           PLOT_PREVIEW_DIR: artifacts/plot_test_previews
       - run: python tests/cloud_neutral_nonneutral.py
       - run: python tests/cloud_paper_python.py
+      - run: python tests/cloud_paper_decoding.py
       - run: python tests/cloud_all_plots.py
         env:
           PLOT_PREVIEW_DIR: artifacts/plot_test_previews
