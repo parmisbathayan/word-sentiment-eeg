@@ -165,7 +165,8 @@ EEG intervals; preserve that distinction when implementing evaluation.
 
 1. Neutral/nonneutral storage fix is pushed and full cloud tests passed. Link:
    https://colab.research.google.com/github/parmisbathayan/word-sentiment-eeg/blob/550091a/notebooks/neutral_nonneutral.ipynb
-   User has not yet reported successful completion of that resumed run.
+   Drive manifest and runtime status now verified completed: 44 cases, all four
+   tasks, child exit code 0. No rerun is required.
 2. Preserve this checkpoint and the current code commits.
 3. Investigate the native timing discrepancy against EYE-EEG/source versions.
    No discarding anchors or silently loosening a replication criterion to pass.
@@ -190,3 +191,42 @@ New reproduction engineering pilot: explicit independent 1–50 Hz Python FIR on
 released corpus-preprocessed continuous EEG, not a fresh Automagic/MARA run.
 No new paper FRP statistics, paper decoding scores or TeCo reproduction results
 have been produced. User's presentations and original results remain intact.
+
+## CNN follow-up and further alignment investigation
+
+User additionally authorized a CNN. `scripts/classify_cnn.py` and
+`notebooks/cnn.ipynb` now implement one compact independent EEGNet-inspired
+8/2/16 model, no tuning search. Uses existing archive all-channel 0…792-ms
+signals (100 samples), original word-agreement/quality/duplicate exclusions.
+Both positive/negative and neutral/nonneutral targets, three separate grouped
+sentence/word/reader holdouts, three outer folds each: 24 cases / 72 fold fits.
+Inner grouped validation chooses stopping epoch (maximum 25, patience 4).
+Word holdouts purge temporally overlapping training events, including inner
+validation. Scaling/class weights fit training only; neutral is not downsampled.
+One seed per fold: exploratory, no significance claim or tuning search.
+
+Model training, grouped validation, checkpoint reuse and actual shard-to-mmap
+identity/time/channel joins passed cloud synthetic checks in run 41713134102.
+No actual CNN results or user-data training have run. Select a Colab GPU.
+Additional Drive output estimate 20–60 MB, hard guard 150 MB. Temporary Colab
+staging up to roughly 3 GB per task, removed after task completion. No second
+Drive EEG archive or old feature preparation. A lost Colab runtime requires
+re-reading unfinished tasks' archive shards; completed tasks and folds reuse
+validated results. Epoch/optimizer checkpoints resume within an unfinished fold.
+
+New reproduction audit: `paper_alignment_diagnostics.py`, Actions run
+41713018027, numerical report `paper_alignment_diagnostics.json`.
+Raw/preprocessed EEG trigger codes and latencies are identical. Raw/corrected
+ET produce the same timing anchors. An independent calculation using EYE-EEG's
+regression direction and rounded endpoint grid still has three sentence-anchor
+errors of two native samples; the strict paper target is not met. This does NOT
+establish the old first-fixation analyses are invalid; this is a separate native
+source route for reproduction. No troublesome anchors were discarded.
+The original corpus script uses per-file start/end trigger settings and assigns
+sentences/bounds by event order after missing-file removal; the sampled 49/50
+trial discrepancy remains unresolved. No guessed label-to-recording join has
+been accepted. Script context was inspected read-only in cloud, not vendored.
+
+Latest user asks: report neutral/nonneutral results; give CNN notebook; continue
+paper reproduction. The source timing/mapping gates still prevent claiming a
+completed faithful reproduction. Preserve this distinction in all handoffs.
