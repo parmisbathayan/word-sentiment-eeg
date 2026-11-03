@@ -6,6 +6,7 @@ regression direction and rounded endpoint grid. Do not delete difficult anchors
 or change the acceptance criterion. Inspect corpus scripts for mapping evidence.
 """
 import json
+import argparse
 from pathlib import Path
 import re
 import sys
@@ -52,28 +53,30 @@ def compare(codes,latencies,eye,rate,allowed):
 
 def main():
     if sys.platform=='darwin':raise SystemExit('Cloud only; never download EEG/source datasets to the Mac')
+    parser=argparse.ArgumentParser();parser.add_argument('--scripts-only',action='store_true');args=parser.parse_args()
     inventory=json.loads((ROOT/'docs/paper_source_audit.json').read_text())
     names=['ZAB_SR1_EEG.mat','gip_ZAB_SR1_EEG.mat','ZAB_SR1_ET.mat','ZAB_SR1_corrected_ET.mat']
     report=dict(purpose='Resolve original timing/source identity, not sentiment results',comparisons={})
     with tempfile.TemporaryDirectory(prefix='paper-alignment-') as directory:
         folder=Path(directory);paths={}
-        for name in names:
+        for name in ([] if args.scripts_only else names):
             source=next(s for s in inventory['samples'] if s['name']==name)
             path,sha=fetch_sample(source,folder)
             if sha!=source['sha256']:raise ValueError('Changed audited source bytes')
             paths[name]=path
-        _,rate,codes,latencies,_=native_continuous(paths['gip_ZAB_SR1_EEG.mat'])
-        original=loadmat(paths['ZAB_SR1_EEG.mat'],squeeze_me=True,struct_as_record=False)
-        raw=original['EEG'];events=np.asarray(raw.event,dtype=object).reshape(-1)
-        raw_codes=[str(e.type) for e in events];raw_latencies=np.asarray([float(e.latency) for e in events])
-        report['raw_preprocessed_trigger_identity']=dict(raw_count=len(events),preprocessed_count=len(codes),
-            same_codes=raw_codes==codes,
-            max_latency_difference_samples=float(np.abs(raw_latencies-latencies).max()) if len(raw_latencies)==len(latencies) else None)
-        for name in ['ZAB_SR1_ET.mat','ZAB_SR1_corrected_ET.mat']:
-            eye=loadmat(paths[name],squeeze_me=True,struct_as_record=False)
-            report['comparisons'][name]={}
-            for label,allowed in [('sentence',[10,11,12,13]),('all_shared',[10,11,12,13,15,100])]:
-                report['comparisons'][name][label]=compare(codes,latencies,eye,rate,allowed)
+        if not args.scripts_only:
+            _,rate,codes,latencies,_=native_continuous(paths['gip_ZAB_SR1_EEG.mat'])
+            original=loadmat(paths['ZAB_SR1_EEG.mat'],squeeze_me=True,struct_as_record=False)
+            raw=original['EEG'];events=np.asarray(raw.event,dtype=object).reshape(-1)
+            raw_codes=[str(e.type) for e in events];raw_latencies=np.asarray([float(e.latency) for e in events])
+            report['raw_preprocessed_trigger_identity']=dict(raw_count=len(events),preprocessed_count=len(codes),
+                same_codes=raw_codes==codes,
+                max_latency_difference_samples=float(np.abs(raw_latencies-latencies).max()) if len(raw_latencies)==len(latencies) else None)
+            for name in ['ZAB_SR1_ET.mat','ZAB_SR1_corrected_ET.mat']:
+                eye=loadmat(paths[name],squeeze_me=True,struct_as_record=False)
+                report['comparisons'][name]={}
+                for label,allowed in [('sentence',[10,11,12,13]),('all_shared',[10,11,12,13,15,100])]:
+                    report['comparisons'][name][label]=compare(codes,latencies,eye,rate,allowed)
         report['corpus_script_evidence']={}
         for label,url in [('firstLevel_SR','https://osf.io/download/369ur/'),('SyncET2EEG','https://osf.io/download/74w3x/')]:
             with request(url) as response:code=response.read(1_000_000).decode('utf-8',errors='replace')
@@ -83,6 +86,10 @@ def main():
             excerpts=[dict(line=i,text=line.strip()[:220]) for i,line in enumerate(code.splitlines(),1)
                       if re.search(patterns,line) and not line.lstrip().startswith('%')]
             report['corpus_script_evidence'][label]=dict(url=url,matching_lines=excerpts[:35])
+            if args.scripts_only and label=='firstLevel_SR':
+                report['corpus_script_evidence'][label]['mapping_context']=[dict(line=i,text=line.rstrip())
+                    for i,line in enumerate(code.splitlines(),1) if (190<=i<=285 or 320<=i<=385)
+                    and line.strip() and not line.lstrip().startswith('%')]
     report['temporary_sources_removed']=True
     target=ROOT/'artifacts/paper_alignment_diagnostics.json';target.parent.mkdir(parents=True,exist_ok=True)
     target.write_text(json.dumps(report,indent=2)+'\n');print(json.dumps(report,indent=2),flush=True)
