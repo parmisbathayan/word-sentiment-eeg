@@ -8,6 +8,7 @@ from collections import Counter
 import csv
 import hashlib
 import json
+import os
 from pathlib import Path
 import re
 import sys
@@ -17,7 +18,7 @@ ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/'src'))
 import numpy as np
 from scipy.io import loadmat
-from word_sentiment_eeg.paper_labels import SST
+from word_sentiment_eeg.paper_labels import SST,canonical
 from paper_source_audit import request,fetch_sample
 from paper_sst_source import acquire_sst
 
@@ -38,7 +39,8 @@ def main():
             path,sha=fetch_sample(source,folder);paths[source['name']]=path
             report['sources'].append(dict(**source,sha256=sha))
         print('Download official SST text/labels (no model)',flush=True)
-        zip_path,report['sst_transport']=acquire_sst(folder)
+        cache=Path(os.environ.get('WORD_EEG_SST_CACHE',str(folder)));cache.mkdir(parents=True,exist_ok=True)
+        zip_path,report['sst_transport']=acquire_sst(cache)
         sst=SST(zip_path)
         report['sst_inventory']=dict(sentences=len(sst.sentences),phrases=len(sst.phrases),scores=len(sst.scores))
         sentences=loadmat(paths['sentencesSR.mat'],squeeze_me=True,struct_as_record=False)
@@ -57,9 +59,10 @@ def main():
             n=min(250,len(cells),len(text)-offset)
             matches=sum(sizes[i]==len(text[i+offset].split()) for i in range(n))
             report['bounds_count_alignment_candidates'].append(dict(sentence_offset=offset,compared=n,matching_word_counts=matches))
-        sentence_status=Counter();word_status=Counter();labels=Counter();multi=0
-        for sentence in text[5:405]:
+        sentence_status=Counter();word_status=Counter();labels=Counter();multi=0;unmatched=[]
+        for index,sentence in enumerate(text[5:405],5):
             joined=sst.join(sentence.split());sentence_status[joined['status']]+=1
+            if joined['status']!='matched':unmatched.append((index,sentence))
             for word in joined['words']:
                 word_status[word['status']]+=1
                 if word.get('word_label'):labels[word['word_label']['sentiment']]+=1
@@ -71,8 +74,16 @@ def main():
         with paths['sentiment_normal_reading.csv'].open(encoding='utf-8-sig',newline='') as handle:
             sample=handle.read(2048);handle.seek(0)
             dialect=csv.Sniffer().sniff(sample,delimiters=',;\t')
-            rows=list(csv.reader(handle,dialect=dialect))
-        report['experiment_csv']=dict(rows=len(rows)-1,columns=rows[0])
+            all_rows=list(csv.reader(handle,dialect=dialect))
+        rows=[r for r in all_rows if r and any(v.strip() for v in r)]
+        header=rows[0];sentence_column=header.index('sentence');control_column=header.index('control');id_column=header.index('ID')
+        valid=[r for r in rows[1:] if len(r)==len(header)]
+        controls={canonical(r[sentence_column]):r[control_column] for r in valid}
+        report['experiment_csv']=dict(raw_rows=len(all_rows),nonempty_rows=len(rows),valid_data_rows=len(valid),columns=header,
+                                      first_12_ids=[r[id_column] for r in valid[:12]],
+                                      control_values=dict(Counter(r[control_column] for r in valid)),
+                                      unmatched_sst_sentence_source_indices=[i for i,s in unmatched],
+                                      unmatched_sst_control_values=dict(Counter(controls.get(canonical(s),'not_in_experiment_csv') for i,s in unmatched)))
         eye=loadmat(paths['ZAB_SR1_ET.mat'],squeeze_me=True,struct_as_record=False)
         report['eye_event_headers']={name:[str(v) for v in np.asarray(getattr(eye['eyeevent'],name).colheader).reshape(-1)]
                                      for name in ['fixations','saccades','blinks']}

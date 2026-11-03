@@ -9,9 +9,17 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+          cache: pip
+          cache-dependency-path: requirements-colab.txt
+      - uses: actions/cache@v4
+        with:
+          path: ${{ runner.temp }}/word-eeg-sst-cache
+          key: original-sst-3f5209483b46bbf129cacbbbe6ae02fe780407034f61cf6342b7833257c3f1db
       - run: python -m pip install -r requirements-colab.txt
       - run: python tests/test_paper_labels.py
       - run: python scripts/paper_linguistic_audit.py
+        env:
+          WORD_EEG_SST_CACHE: ${{ runner.temp }}/word-eeg-sst-cache
       - uses: actions/upload-artifact@v4
         if: always()
         with:

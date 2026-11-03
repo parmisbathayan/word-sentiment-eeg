@@ -1,0 +1,327 @@
+{
+  "purpose": "Original-source linguistic alignment audit, not reproduction results",
+  "sources": [
+    {
+      "name": "sentencesSR.mat",
+      "bytes": 39657,
+      "download": "https://osf.io/download/qdtvz/",
+      "sha256": "4002614f44865b1800fce16cf575345249a119c5d41d76b6fa2a1749567985b6"
+    },
+    {
+      "name": "wordbounds_SNR1_ZAB.mat",
+      "bytes": 34529,
+      "download": "https://osf.io/download/hg38s/",
+      "sha256": "bf62259bd0c7adcdf0baf9c2b05156ffb20babd99900786f187003610eab6956"
+    },
+    {
+      "name": "ZAB_SR1_ET.mat",
+      "bytes": 813937,
+      "download": "https://osf.io/download/h7d4s/",
+      "sha256": "65e8ab7dae7a1ec0b4784fbf3f1c103289949cda0a9334169a3d8407877e147d"
+    },
+    {
+      "name": "sentiment_normal_reading.csv",
+      "bytes": 67617,
+      "download": "https://osf.io/download/f2z4u/",
+      "sha256": "3eb4787039e49f5a68f87fda19787a6d6952ea0a2f27a22fd09e0762efed703d"
+    }
+  ],
+  "sst_source": "https://nlp.stanford.edu/~socherr/stanfordSentimentTreebank.zip",
+  "sst_transport": {
+    "source": "https://data.deepai.org/sst5.zip",
+    "original_url": "https://nlp.stanford.edu/~socherr/stanfordSentimentTreebank.zip",
+    "sha256": "3f5209483b46bbf129cacbbbe6ae02fe780407034f61cf6342b7833257c3f1db",
+    "bytes": 6372817,
+    "transport_bytes": 11911363,
+    "checksum_source": "https://huggingface.co/datasets/stanfordnlp/sst/blob/fb1011170967fbcecfa3327a706b89e3d24cc8f5/dataset_infos.json",
+    "unsuccessful_sources": [
+      {
+        "url": "https://nlp.stanford.edu/~socherr/stanfordSentimentTreebank.zip",
+        "error": "URLError: <urlopen error timed out>"
+      }
+    ]
+  },
+  "sst_inventory": {
+    "sentences": 11855,
+    "phrases": 239232,
+    "scores": 239232
+  },
+  "sentence_file_keys": [
+    "sentences"
+  ],
+  "word_bounds": {
+    "entries": 250,
+    "first_12_row_counts": [
+      22,
+      22,
+      16,
+      5,
+      13,
+      16,
+      19,
+      11,
+      28,
+      21,
+      18,
+      7
+    ],
+    "first_rectangle": [
+      92.0,
+      76.0,
+      167.0,
+      90.0
+    ]
+  },
+  "sentences": {
+    "total": 600,
+    "first_12_word_counts": [
+      19,
+      11,
+      9,
+      10,
+      8,
+      22,
+      22,
+      16,
+      5,
+      13,
+      16,
+      19
+    ]
+  },
+  "bounds_count_alignment_candidates": [
+    {
+      "sentence_offset": 0,
+      "compared": 250,
+      "matching_word_counts": 5
+    },
+    {
+      "sentence_offset": 1,
+      "compared": 250,
+      "matching_word_counts": 5
+    },
+    {
+      "sentence_offset": 2,
+      "compared": 250,
+      "matching_word_counts": 8
+    },
+    {
+      "sentence_offset": 3,
+      "compared": 250,
+      "matching_word_counts": 12
+    },
+    {
+      "sentence_offset": 4,
+      "compared": 250,
+      "matching_word_counts": 14
+    },
+    {
+      "sentence_offset": 5,
+      "compared": 250,
+      "matching_word_counts": 250
+    },
+    {
+      "sentence_offset": 6,
+      "compared": 250,
+      "matching_word_counts": 14
+    },
+    {
+      "sentence_offset": 7,
+      "compared": 250,
+      "matching_word_counts": 12
+    },
+    {
+      "sentence_offset": 8,
+      "compared": 250,
+      "matching_word_counts": 8
+    },
+    {
+      "sentence_offset": 9,
+      "compared": 250,
+      "matching_word_counts": 5
+    },
+    {
+      "sentence_offset": 10,
+      "compared": 250,
+      "matching_word_counts": 5
+    }
+  ],
+  "sst_join": {
+    "scope": "Native sentence entries 5:405, following corpus practice removal",
+    "sentence_status": {
+      "matched": 382,
+      "sentence_not_found": 18
+    },
+    "word_status": {
+      "matched": 6642,
+      "multi_leaf_or_missing_word_label": 155
+    },
+    "original_word_label_counts": {
+      "neutral": 5566,
+      "positive": 682,
+      "negative": 394
+    },
+    "multi_leaf_source_words": 941,
+    "note": "Counts are source occurrences, not reader EEG trials. Unmatched/ambiguous rows have no invented label."
+  },
+  "experiment_csv": {
+    "rows": 1803,
+    "columns": [
+      "ID",
+      "sentence",
+      "control"
+    ]
+  },
+  "eye_event_headers": {
+    "fixations": [
+      "latency",
+      "endtime",
+      "duration",
+      "fix_avgpos_x",
+      "fix_avgpos_y",
+      "fix_avgpupilsize"
+    ],
+    "saccades": [
+      "latency",
+      "endtime",
+      "duration",
+      "sac_startpos_x",
+      "sac_startpos_y",
+      "sac_endpos_x",
+      "sac_endpos_y",
+      "sac_amplitude",
+      "sac_vmax"
+    ],
+    "blinks": [
+      "latency",
+      "endtime",
+      "duration"
+    ]
+  },
+  "eye_trigger_preview": [
+    [
+      5802707,
+      100
+    ],
+    [
+      5804746,
+      10
+    ],
+    [
+      5811425,
+      11
+    ],
+    [
+      5811437,
+      10
+    ],
+    [
+      5818260,
+      11
+    ],
+    [
+      5818266,
+      10
+    ],
+    [
+      5821709,
+      11
+    ],
+    [
+      5821716,
+      12
+    ]
+  ],
+  "eye_trigger_counts": {
+    "100": 1,
+    "10": 41,
+    "11": 41,
+    "12": 8,
+    "13": 8,
+    "15": 8
+  },
+  "eye_message_templates": [
+    [
+      "SFIX L #",
+      1002
+    ],
+    [
+      "EFIX L #",
+      1002
+    ],
+    [
+      "SSACC L #",
+      1002
+    ],
+    [
+      "ESACC L #",
+      1002
+    ],
+    [
+      "MSG # TR#",
+      107
+    ],
+    [
+      "MSG # !CAL",
+      62
+    ],
+    [
+      "SBLINK L #",
+      42
+    ],
+    [
+      "EBLINK L #",
+      42
+    ],
+    [
+      "MSG # VALIDATE",
+      9
+    ],
+    [
+      "INPUT # #",
+      7
+    ],
+    [
+      "-# # -#",
+      4
+    ],
+    [
+      "-#.#e-#, -#.#e-#",
+      4
+    ],
+    [
+      "-#.#e-#, #.#e-#",
+      3
+    ],
+    [
+      "#.# -#.# #.#",
+      2
+    ],
+    [
+      "-# #.# #.#",
+      1
+    ],
+    [
+      "# #.#",
+      1
+    ],
+    [
+      "-# #.# -#.#",
+      1
+    ],
+    [
+      "-#.#e-# #.#",
+      1
+    ],
+    [
+      "#.#e-#, -#.#e-#",
+      1
+    ],
+    [
+      "MSG # RECCFG",
+      1
+    ]
+  ],
+  "eye_message_id_examples": [],
+  "temporary_sources_removed": true
+}
