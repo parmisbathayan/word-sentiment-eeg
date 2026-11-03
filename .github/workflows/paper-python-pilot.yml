@@ -1,5 +1,12 @@
 name: Python paper methods pilot
-on: workflow_dispatch
+on:
+  workflow_dispatch:
+    inputs:
+      channels:
+        description: Number of channels for engineering check (3 or all 105)
+        default: '3'
+        type: choice
+        options: ['3', '105']
 jobs:
   pilot:
     runs-on: ubuntu-latest
@@ -13,7 +20,7 @@ jobs:
       - run: python tests/cloud_paper_python.py
       # Explicit diagnostic run at one output-grid sample. The report retains
       # the failed stricter 2-ms native target; this is not a replication run.
-      - run: python scripts/zuco_paper_pilot.py --channels 3 --engineering-timing-tolerance-ms 8 --output artifacts/zuco_paper_python_smoke
+      - run: python scripts/zuco_paper_pilot.py --channels ${{ inputs.channels }} --engineering-timing-tolerance-ms 8 --output artifacts/zuco_paper_python_smoke
       - uses: actions/upload-artifact@v4
         if: always()
         with:
