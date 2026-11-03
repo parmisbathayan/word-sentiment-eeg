@@ -1,8 +1,39 @@
 # Pfeiffer 2020: reproduction before TeCo adaptation
 
-Status 2026-11-03: source discovery and executable cloud input audit prepared.
-The full reproduction is **not implemented or run**. The existing classification
+Status 2026-11-03: user selected Colab/Python only, no MATLAB. Source audit,
+Python synchronization, sparse nuisance-GLM library, synthetic tests and a
+one-block engineering runner are implemented. The strict real-data timing
+validation is not passed. The full reproduction is **not implemented or run**. The existing classification
 and neutral/nonneutral follow-up are different experiments and remain unchanged.
+
+## Python pilot validation status
+
+`src/word_sentiment_eeg/paper_python.py` independently implements shared-trigger
+clock fitting, a time-expanded sparse fixation/saccade/blink/keypress design and
+per-channel least-squares nuisance subtraction. Synthetic clock recovery,
+trigger-mismatch rejection and recovery of known overlapping responses passed
+in GitHub Actions. This is not numerical equivalence to Unfold.
+
+On real ZAB SR block 1, the released preprocessed EEG and corrected eye events
+have 98 exactly sequence-matched sentence-boundary anchors. A global linear fit
+has maximum residual **3.9733 ms**, above the paper's stated 2-ms/one-native-sample
+level. Removing keypress triggers from synchronization anchors did not resolve
+this. See `paper_python_timing_audit.json` for the full public trigger diagnostics.
+No triggers were discarded to manufacture a passing fit. This needs investigation
+of source/version and synchronization differences before a faithful reproduction.
+
+The default pilot stops at 2 ms. A separately named explicit engineering option
+permits at most 8 ms (one 125-Hz output sample) for testing the remaining code;
+its report retains `native_one_sample_target_met=false`. Such a diagnostic run
+must never be described as passing the original paper's timing criterion or as
+a sentiment result. No word-bound mapping, original SST join, trial matching,
+FRP inferential statistics or paper decoding has yet been run.
+
+The experimental Colab pilot is `notebooks/zuco_paper_pilot.ipynb`. It is marked
+as not ready for faithful reproduction; do not ask the user to run it as a
+working full reproduction while the strict timing check fails. It downloads
+approximately 51 MB of public source files temporarily in the cloud and saves
+only coefficients, event tables, QA means and diagnostics (expected <5 MB).
 
 Source: https://doi.org/10.1016/j.neuroimage.2020.116934
 
