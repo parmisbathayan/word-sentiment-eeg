@@ -71,6 +71,16 @@ def main():
                                 sentence_status=dict(sentence_status),word_status=dict(word_status),
                                 original_word_label_counts=dict(labels),multi_leaf_source_words=multi,
                                 note='Counts are source occurrences, not reader EEG trials. Unmatched/ambiguous rows have no invented label.')
+        fallback_status=Counter();fallback_labels=Counter();fallback_methods=Counter()
+        for sentence in text[5:405]:
+            joined=sst.join(sentence.split(),allow_dictionary_fallback=True)
+            for word in joined['words']:
+                fallback_status[word['status']]+=1
+                if word.get('word_label'):
+                    fallback_labels[word['word_label']['sentiment']]+=1
+                    fallback_methods[word['word_label_rule']]+=1
+        report['explicit_dictionary_fallback_audit']=dict(word_status=dict(fallback_status),label_counts=dict(fallback_labels),
+            methods=dict(fallback_methods),note='Optional, separate original-SST word-dictionary lookup, no invented phrase/sentence labels; not assumed to reproduce authors unknown mapping code.')
         with paths['sentiment_normal_reading.csv'].open(encoding='utf-8-sig',newline='') as handle:
             sample=handle.read(2048);handle.seek(0)
             dialect=csv.Sniffer().sniff(sample,delimiters=',;\t')

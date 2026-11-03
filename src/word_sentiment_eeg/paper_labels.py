@@ -62,10 +62,33 @@ class SST:
         value=self.scores[identifier];label=five_class(value)
         return dict(phrase_id=identifier,score=value,label_5=label,sentiment=sentiment(label))
 
-    def join(self,words):
+    def lookup_word(self,word):
+        """Original dictionary entry only; never a sentiment prediction.
+
+        Edge punctuation removal is an explicit fallback. No lowercasing,
+        stemming, spelling correction or inferred compound/negation sentiment.
+        """
+        word=str(word)
+        if not word or any(c.isspace() for c in word):return None,None
+        exact=self.lookup([word])
+        if exact:return exact,'exact_original_dictionary_word'
+        stripped=word
+        while stripped and unicodedata.category(stripped[0]).startswith('P'):stripped=stripped[1:]
+        while stripped and unicodedata.category(stripped[-1]).startswith('P'):stripped=stripped[:-1]
+        result=self.lookup([stripped]) if stripped else None
+        return result,'original_dictionary_word_after_edge_punctuation' if result else None
+
+    def join(self,words,allow_dictionary_fallback=False):
         candidates=self.index.get(canonical(''.join(words)),[])
         if len(candidates)!=1:
-            return dict(status='sentence_not_found' if not candidates else 'ambiguous_sentence',candidate_count=len(candidates),words=[])
+            rows=[]
+            if allow_dictionary_fallback:
+                for i,word in enumerate(words):
+                    label,method=self.lookup_word(word)
+                    rows.append(dict(word_index=i,source_word=word,word_label=label,word_label_rule=method,
+                                     status='matched_dictionary_only' if label else 'missing_original_dictionary_word',
+                                     target_span_label=None,smallest_containing_phrase_label=None))
+            return dict(status='sentence_not_found' if not candidates else 'ambiguous_sentence',candidate_count=len(candidates),words=rows)
         record=candidates[0];tokens=record['tokens']
         leaf_lengths=[len(canonical(t)) for t in tokens]
         offsets=[0]
@@ -82,6 +105,10 @@ class SST:
             span=self.lookup(tokens[lo:hi])
             content=[i for i in range(lo,hi) if any(ch.isalnum() for ch in canonical(tokens[i]))]
             word_label=self.lookup([tokens[content[0]]]) if len(content)==1 else (self.lookup(tokens[lo:hi]) if hi-lo==1 else None)
+            rule='single lexical leaf (punctuation-only companions permitted)'
+            if word_label is None and allow_dictionary_fallback:
+                word_label,fallback=self.lookup_word(word)
+                if word_label:rule=fallback
             # Multiple lexical leaves (e.g. a split contraction) do not acquire
             # a fabricated word-alone label from their phrase score.
             containing=sorted((b-a,a,b) for a,b in node_spans if a<=lo and hi<=b and (a,b)!=(lo,hi))
@@ -90,7 +117,7 @@ class SST:
                              sst_leaf_start=lo,sst_leaf_stop=hi,
                              word_label=word_label,target_span_label=span,
                              smallest_containing_phrase_label=phrase,
-                             word_label_rule='single lexical leaf (punctuation-only companions permitted)'))
+                             word_label_rule=rule))
         return dict(status='matched',candidate_count=1,sst_sentence_index=record['sst_sentence_index'],
                     sentence_label=self.lookup(tokens),words=rows)
 

@@ -39,5 +39,13 @@ class LabelsTests(unittest.TestCase):
         self.assertEqual(canonical('“ -LRB- fine -RRB- ”'),'"(fine)"')
         with self.assertRaises(ValueError):tree_spans([1,0,-1],2)
 
+    def test_explicit_dictionary_fallback_does_not_invent_sentence_context(self):
+        joined=SST(fixture()).join(['new','good.'],allow_dictionary_fallback=True)
+        self.assertEqual(joined['status'],'sentence_not_found')
+        self.assertIsNone(joined['words'][0]['word_label'])
+        self.assertEqual(joined['words'][1]['word_label']['sentiment'],'positive')
+        self.assertIsNone(joined['words'][1]['smallest_containing_phrase_label'])
+        self.assertIsNone(joined.get('sentence_label'))
+
 
 if __name__=='__main__':unittest.main()
