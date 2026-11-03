@@ -19,6 +19,7 @@ import numpy as np
 from scipy.io import loadmat
 from word_sentiment_eeg.paper_labels import SST
 from paper_source_audit import request,fetch_sample
+from paper_sst_source import acquire_sst
 
 SOURCES=[dict(name='sentencesSR.mat',bytes=39657,download='https://osf.io/download/qdtvz/'),
          dict(name='wordbounds_SNR1_ZAB.mat',bytes=34529,download='https://osf.io/download/hg38s/'),
@@ -36,14 +37,8 @@ def main():
         for source in SOURCES:
             path,sha=fetch_sample(source,folder);paths[source['name']]=path
             report['sources'].append(dict(**source,sha256=sha))
-        zip_path=folder/'sst.zip';size=0;sha=hashlib.sha256()
         print('Download official SST text/labels (no model)',flush=True)
-        with request(SST_URL) as response,zip_path.open('wb') as target:
-            while chunk:=response.read(1024*1024):
-                size+=len(chunk)
-                if size>10_000_000:raise ValueError('SST ZIP exceeded 10 MB audit cap')
-                sha.update(chunk);target.write(chunk)
-        report['sst_bytes']=size;report['sst_sha256']=sha.hexdigest()
+        zip_path,report['sst_transport']=acquire_sst(folder)
         sst=SST(zip_path)
         report['sst_inventory']=dict(sentences=len(sst.sentences),phrases=len(sst.phrases),scores=len(sst.scores))
         sentences=loadmat(paths['sentencesSR.mat'],squeeze_me=True,struct_as_record=False)
