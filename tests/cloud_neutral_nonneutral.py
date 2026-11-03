@@ -31,6 +31,21 @@ def main():
     ix,y=n.population(meta)
     assert len(ix)==108 and (y=='negative').sum()==36 and (y=='positive').sum()==72
     with tempfile.TemporaryDirectory() as folder:
+        path=Path(folder)/'protocol.json'
+        legacy=dict(code=n.LEGACY_STORAGE_ONLY_CODE,helper='same-helper',caches=['same-cache'])
+        new=dict(legacy,code='new-storage-only-code')
+        path.write_text(json.dumps(legacy))
+        n.reconcile_protocol(path,new)
+        assert json.loads(path.read_text())==new
+        assert (path.parent/'storage_limit_migration.json').is_file()
+        path.write_text(json.dumps(legacy))
+        try:n.reconcile_protocol(path,dict(new,caches=['changed-cache']))
+        except ValueError:pass
+        else:raise AssertionError('Changed data allowed during storage-only migration')
+        path.write_text(json.dumps(legacy))
+        try:n.reconcile_protocol(path,dict(new,helper='changed-helper'))
+        except ValueError:pass
+        else:raise AssertionError('Changed analysis helper allowed during migration')
         out=Path(folder)/'zuco'/'SR'
         scores,skips=n.task_analysis(meta,X,X[:,:12],X[:,:6],out)
         assert not skips and len(scores)==11

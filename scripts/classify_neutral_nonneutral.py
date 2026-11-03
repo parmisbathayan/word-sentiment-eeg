@@ -13,6 +13,26 @@ import numpy as np
 import pandas as pd
 import analyze_trial_archive as a
 
+LEGACY_STORAGE_ONLY_CODE='1f0ba76d81f74b38d24b3bb9dfbbd2f498cb55c73d7231ea59aa25af16312ebe'
+
+
+def reconcile_protocol(path, protocol):
+    if path.is_file():
+        saved=json.loads(path.read_text())
+        if saved!=protocol:
+            # The first release had a 25 MB guard, which could stop after the
+            # third dataset/task. Only that exact released code may migrate;
+            # every data/helper/target field must remain identical.
+            old=dict(saved); old_code=old.pop('code',None)
+            new=dict(protocol); new.pop('code',None)
+            if old_code!=LEGACY_STORAGE_ONLY_CODE or old!=new:
+                raise ValueError('Follow-up protocol changed; refusing to mix saved cases')
+            a.write_json(path.parent/'storage_limit_migration.json',dict(
+                old_code=old_code,new_code=protocol['code'],old_output_limit_mb=25,new_output_limit_mb=60,
+                reason='Storage-only correction; features, selection, splits and models unchanged'))
+            print('RESUME: storage-limit fix recognized; completed cases are retained and checksum-validated.',flush=True)
+    a.write_json(path,protocol)
+
 
 def population(meta):
     ix, original, _ = a.selected(meta, 'word_agreement', 'three_class')
@@ -139,9 +159,7 @@ def main():
                     caches=[a.file_digest(source/'features'/r['dataset']/r['task']/r['subject']/'manifest.json') for r in records],
                     target='neutral vs positive+negative', policy='word_agreement', neutral_downsampling=False)
     out.mkdir(parents=True,exist_ok=True)
-    if (out/'protocol.json').is_file() and json.loads((out/'protocol.json').read_text()) != protocol:
-        raise ValueError('Follow-up protocol changed; refusing to mix saved cases')
-    a.write_json(out/'protocol.json',protocol)
+    reconcile_protocol(out/'protocol.json',protocol)
     by_task = defaultdict(list); labels = []
     for i, record in enumerate(records,1):
         print(f'LOAD SAVED FEATURES {i}/{len(records)}: {record["dataset"]}/{record["task"]}/{record["subject"]}',flush=True)
@@ -158,7 +176,7 @@ def main():
         rows, missing = task_analysis(meta,*arrays,out/dataset/task)
         scores.extend(dict(dataset=dataset,task=task,**r) for r in rows)
         skips.extend(dict(dataset=dataset,task=task,**r) for r in missing)
-        a.check_budget(out,25_000_000)
+        a.check_budget(out,60_000_000)
     pd.DataFrame(scores).to_csv(out/'scores.csv',index=False)
     a.write_json(out/'skipped.json',skips)
     a.write_json(out/'manifest.json',dict(status='completed',tasks_complete=['/'.join(k) for k in sorted(by_task)],cases=len(scores)))
