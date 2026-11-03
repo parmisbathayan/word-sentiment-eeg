@@ -10,10 +10,11 @@ import pandas as pd
 def synchronize(eeg_codes, eeg_samples_1based, eye_events, sample_rate):
     """Fit the eye-clock to EEG seconds using an exact common trigger sequence.
 
-    Trigger 15 is an answer keypress in the corpus's firstLevel_SR header.
+    Only sentence on/off triggers synchronize clocks, as described in the paper.
+    Trigger 15 is an answer keypress, not a synchronization anchor.
     Ambiguous/missing/reordered trigger sequences stop rather than being guessed.
     """
-    common={10,11,12,13,15}
+    common={10,11,12,13}
     eeg_codes=np.asarray([int(str(c).strip()) for c in eeg_codes])
     use=np.isin(eeg_codes,list(common))
     codes=eeg_codes[use]
