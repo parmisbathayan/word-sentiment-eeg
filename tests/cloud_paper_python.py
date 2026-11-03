@@ -6,7 +6,7 @@ import pandas as pd
 from threadpoolctl import threadpool_limits
 
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'src'))
-from word_sentiment_eeg.paper_python import synchronize,eye_to_seconds,time_expanded_design,fit_nuisance
+from word_sentiment_eeg.paper_python import synchronize,eye_to_seconds,time_expanded_design,fit_nuisance,event_basis,fit_reader_blocks
 
 
 def main():
@@ -39,6 +39,21 @@ def main():
     assert np.linalg.norm(residual)/np.linalg.norm(signal)<1e-5
     assert all(r['stop'] in [0,1,2,4,5] for r in diagnostics)
     np.testing.assert_allclose(recovered@design.T,signal,atol=1e-4)
+    # Two physically separate blocks share one basis/response model. A saccade
+    # near the end of block A must not create a response at the start of block B.
+    first=events[events.onset_seconds<25].copy()
+    second=events[events.onset_seconds>=25].copy();second.onset_seconds-=25
+    reference=event_basis(pd.concat([first,second],ignore_index=True))
+    limits=(-.04,.08)
+    d1,i1=time_expanded_design(first,3125,limits=limits,basis_reference=reference)
+    d2,i2=time_expanded_design(second,3125,limits=limits,basis_reference=reference)
+    assert i1['basis']==i2['basis'] and i1['predictors']==i2['predictors']
+    beta=rng.normal(size=(d1.shape[1],2))
+    blocks=[dict(block_id=name,channel_names=['C1','C2'],events=e,eeg=np.asarray(d@beta).T.astype(np.float32))
+            for name,e,d in [('A',first,d1),('B',second,d2)]]
+    cleaned,_,info=fit_reader_blocks(blocks,limits=limits)
+    assert not info['source_boundary_spill'] and info['shared_coefficients']
+    for block in blocks:assert np.linalg.norm(cleaned[block['block_id']])/np.linalg.norm(block['eeg'])<1e-3
     print('Python pilot: exact-clock recovery, mismatch/noise rejection and overlapping synthetic-response recovery passed')
 
 

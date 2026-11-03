@@ -57,7 +57,23 @@ def eye_to_seconds(values,sync):
             +sync['eeg_seconds_at_origin'])
 
 
-def time_expanded_design(events,n_samples,sample_rate=125,limits=(-.6,1.0)):
+def event_basis(events):
+    """Fit nuisance covariate scaling/spline knots once for an entire reader."""
+    from sklearn.preprocessing import SplineTransformer
+    required={'fixation','saccade','blink','keypress'}
+    if not required.issubset(set(events.event_type)):
+        raise ValueError('Requires explicitly observed fixation/saccade/blink/keypress events')
+    duration=events.loc[events.event_type=='fixation','duration_ms'].to_numpy(dtype=float)
+    amplitude=events.loc[events.event_type=='saccade','amplitude_deg'].to_numpy(dtype=float)
+    if not np.isfinite(duration).all() or np.any(duration<=0) or duration.std()<1e-12:
+        raise ValueError('Invalid or constant fixation durations')
+    if not np.isfinite(amplitude).all() or np.any(amplitude<0) or len(np.unique(amplitude))<8:
+        raise ValueError('Invalid/insufficient saccade amplitude variation')
+    spline=SplineTransformer(n_knots=8,degree=3,knots='quantile',include_bias=True).fit(amplitude[:,None])
+    return dict(duration_mean_ms=float(duration.mean()),duration_sd_ms=float(duration.std()),spline=spline)
+
+
+def time_expanded_design(events,n_samples,sample_rate=125,limits=(-.6,1.0),basis_reference=None):
     """Sparse FIR nuisance GLM with continuous, fractional-sample event timing.
 
     Cubic quantile B-splines are a documented Python choice, not assumed equal
@@ -65,10 +81,11 @@ def time_expanded_design(events,n_samples,sample_rate=125,limits=(-.6,1.0)):
     event latencies rather than introducing rounding errors into the timeline.
     """
     from scipy.sparse import coo_matrix
-    from sklearn.preprocessing import SplineTransformer
-    required={'fixation','saccade','blink','keypress'}
-    if not required.issubset(set(events.event_type)):
-        raise ValueError('Pilot requires explicitly observed fixation/saccade/blink/keypress events')
+    if not set(events.event_type).issubset({'fixation','saccade','blink','keypress'}):raise ValueError('Unknown nuisance event type')
+    onset_values=events.onset_seconds.to_numpy(dtype=float)
+    if not np.isfinite(onset_values).all() or np.any(onset_values<0) or np.any(onset_values>=n_samples/sample_rate):
+        raise ValueError('Events outside their actual recording block')
+    reference=event_basis(events) if basis_reference is None else basis_reference
     predictors=[];names=[];basis_info={}
     for kind in ['fixation','saccade','blink','keypress']:
         table=events[events.event_type==kind]
@@ -77,18 +94,16 @@ def time_expanded_design(events,n_samples,sample_rate=125,limits=(-.6,1.0)):
         if kind=='fixation':
             duration=table.duration_ms.to_numpy(dtype=float)
             if not np.isfinite(duration).all() or np.any(duration<=0):raise ValueError('Invalid fixation durations')
-            center=float(duration.mean());scale=float(duration.std())
-            if scale<1e-12:raise ValueError('No fixation-duration variation')
+            center=reference['duration_mean_ms'];scale=reference['duration_sd_ms']
             cols.append((duration-center)/scale);labels.append('duration_z')
             basis_info[kind]=dict(duration_mean_ms=center,duration_sd_ms=scale)
         if kind=='saccade':
             amplitude=table.amplitude_deg.to_numpy(dtype=float)
             if not np.isfinite(amplitude).all() or np.any(amplitude<0):raise ValueError('Invalid saccade amplitudes')
-            if len(np.unique(amplitude))<8:raise ValueError('Insufficient distinct amplitudes for spline model')
             # 8 knots + degree 3 - 1 = 10 basis functions. Drop one alongside
             # the separate event intercept to avoid partition-of-unity aliasing.
-            spline=SplineTransformer(n_knots=8,degree=3,knots='quantile',include_bias=True)
-            basis=spline.fit_transform(amplitude[:,None])
+            spline=reference['spline']
+            basis=spline.transform(amplitude[:,None]) if len(amplitude) else np.empty((0,10))
             cols.extend(basis[:,1:].T);labels += [f'bspline_{i}' for i in range(1,basis.shape[1])]
             basis_info[kind]=dict(basis='cubic quantile B-splines, 10 including intercept',
                                   knots=spline.bsplines_[0].t.tolist())
@@ -130,6 +145,40 @@ def fit_nuisance(eeg,design,atol=1e-5,maxiter=2000,progress=None):
                                 condition_estimate=float(result[6])))
         if progress:progress(channel+1,eeg.shape[0])
     return residual,betas,diagnostics
+
+
+def fit_reader_blocks(blocks,sample_rate=125,limits=(-.6,1.0),progress=None):
+    """Share nuisance coefficients across one reader's separate recording blocks.
+
+    Stack rows of block-specific designs, not signals on an invented continuous
+    clock. No lagged response can spill across a source-file boundary. Covariate
+    scaling and spline knots are shared across the reader, not refit per block.
+    Caller is responsible for preprocessing and independently validated clocks.
+    """
+    from scipy.sparse import vstack
+    if not blocks:raise ValueError('No recording blocks')
+    ids=[b['block_id'] for b in blocks]
+    if len(ids)!=len(set(ids)):raise ValueError('Duplicate recording block identity')
+    channels=list(blocks[0]['channel_names'])
+    for block in blocks:
+        if list(block['channel_names'])!=channels or block['eeg'].shape[0]!=len(channels):
+            raise ValueError('Reader blocks have different montage/order')
+    reference=event_basis(pd.concat([b['events'] for b in blocks],ignore_index=True))
+    designs=[];metadata=[];offset=0
+    for block in blocks:
+        design,info=time_expanded_design(block['events'],block['eeg'].shape[1],sample_rate,limits,reference)
+        designs.append(design)
+        metadata.append(dict(block_id=block['block_id'],row_start=offset,row_stop=offset+design.shape[0],
+                             samples=design.shape[0],design=info))
+        offset+=design.shape[0]
+    if any(m['design']['predictors']!=metadata[0]['design']['predictors'] for m in metadata):
+        raise ValueError('Block nuisance predictor identities disagree')
+    combined=vstack(designs,format='csr')
+    eeg=np.concatenate([b['eeg'] for b in blocks],axis=1)
+    residual,betas,solvers=fit_nuisance(eeg,combined,progress=progress)
+    outputs={m['block_id']:residual[:,m['row_start']:m['row_stop']] for m in metadata}
+    return outputs,betas,dict(blocks=metadata,solver=solvers,source_boundary_spill=False,
+                              shared_basis=True,shared_coefficients=True)
 
 
 def audit_epochs(eeg,residual,events,sample_rate=125):
