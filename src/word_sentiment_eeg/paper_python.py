@@ -38,7 +38,12 @@ def synchronize(eeg_codes, eeg_samples_1based, eye_events, sample_rate):
     residual=times-((eye_times-origin)*slope+center)
     max_error=float(np.max(np.abs(residual)))
     if max_error>1/sample_rate+1e-10:
-        raise ValueError(f'Synchronization residual {max_error*1000:.3f} ms exceeds one native sample')
+        error=ValueError(f'Synchronization residual {max_error*1000:.3f} ms exceeds one native sample')
+        error.diagnostics=dict(eye_origin_ms=origin,slope_seconds_per_eye_ms=float(slope),
+                               eeg_seconds_at_origin=float(center),max_residual_ms=max_error*1000,
+                               anchors=[dict(code=int(c),eye_ms=float(e),eeg_seconds=float(t),residual_ms=float(r)*1000)
+                                        for c,e,t,r in zip(codes,eye_times,times,residual)])
+        raise error
     return dict(eye_origin_ms=origin,slope_seconds_per_eye_ms=float(slope),
                 eeg_seconds_at_origin=float(center),triggers=len(codes),
                 max_residual_ms=max_error*1000,rms_residual_ms=float(np.sqrt(np.mean(residual**2)))*1000)

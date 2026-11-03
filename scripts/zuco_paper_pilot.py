@@ -162,6 +162,8 @@ def main():
                             checksums={k:file_digest(out/k) for k in names_to_hash}))
         print('PYTHON ENGINEERING PILOT COMPLETE:',out,flush=True)
     except Exception as error:
+        if hasattr(error,'diagnostics'):
+            write_json(out/'synchronization_failure.json',error.diagnostics)
         write_json(mark,dict(status='failed',error=f'{type(error).__name__}: {error}'))
         raise
 
