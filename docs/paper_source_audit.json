@@ -1,0 +1,2597 @@
+{
+  "checked_at_utc": "2026-11-03T14:05:06.201214+00:00",
+  "purpose": "Prerequisite audit only; no reproduction results",
+  "paper": "https://doi.org/10.1016/j.neuroimage.2020.116934",
+  "inventory": {
+    "scripts": [
+      {
+        "id": "5b7d3a3699a6cb001d4c01e3",
+        "name": "firstLevel_TSR.m",
+        "kind": "file",
+        "bytes": 47844,
+        "download": "https://osf.io/download/mksxg/"
+      },
+      {
+        "id": "5b7d3a37c252f70018e18526",
+        "name": "firstLevel_NR.m",
+        "kind": "file",
+        "bytes": 47382,
+        "download": "https://osf.io/download/gan9v/"
+      },
+      {
+        "id": "5b7d3a3899a6cb001d4c01e8",
+        "name": "firstLevel_SR.m",
+        "kind": "file",
+        "bytes": 60616,
+        "download": "https://osf.io/download/369ur/"
+      },
+      {
+        "id": "5b7d3a3899a6cb001d4c01e9",
+        "name": "prepareETData.m",
+        "kind": "file",
+        "bytes": 11584,
+        "download": "https://osf.io/download/g45wm/"
+      },
+      {
+        "id": "5b7d3a3dc252f70016e19eec",
+        "name": "lib",
+        "kind": "folder",
+        "bytes": null,
+        "download": null
+      },
+      {
+        "id": "5b7d3ea699a6cb001c4bd94a",
+        "name": "calcNewBoundsFunc.m",
+        "kind": "file",
+        "bytes": 18761,
+        "download": "https://osf.io/download/4w3ea/"
+      }
+    ],
+    "raw_sr": [
+      {
+        "id": "5b4f1b1933f0b9000cba98b5",
+        "name": "ZAB",
+        "kind": "folder",
+        "bytes": null,
+        "download": null
+      },
+      {
+        "id": "5b4f1b2c6d4eb300136ec0fd",
+        "name": "ZDM",
+        "kind": "folder",
+        "bytes": null,
+        "download": null
+      },
+      {
+        "id": "5b4f1b7d6d4eb300136ec139",
+        "name": "ZDN",
+        "kind": "folder",
+        "bytes": null,
+        "download": null
+      },
+      {
+        "id": "5b4f1b986d4eb300106ef175",
+        "name": "ZGW",
+        "kind": "folder",
+        "bytes": null,
+        "download": null
+      },
+      {
+        "id": "5b4f1ba16d4eb300136ec150",
+        "name": "ZJM",
+        "kind": "folder",
+        "bytes": null,
+        "download": null
+      },
+      {
+        "id": "5b4f1ba96d4eb300116eac25",
+        "name": "ZJN",
+        "kind": "folder",
+        "bytes": null,
+        "download": null
+      },
+      {
+        "id": "5b4f1bb26d4eb300106ef18c",
+        "name": "ZJS",
+        "kind": "folder",
+        "bytes": null,
+        "download": null
+      },
+      {
+        "id": "5b4f1bba6d4eb300136ec160",
+        "name": "ZKB",
+        "kind": "folder",
+        "bytes": null,
+        "download": null
+      },
+      {
+        "id": "5b4f1bc033f0b9000fba5f3e",
+        "name": "ZKH",
+        "kind": "folder",
+        "bytes": null,
+        "download": null
+      },
+      {
+        "id": "5b4f1bca6d4eb300136ec175",
+        "name": "ZKW",
+        "kind": "folder",
+        "bytes": null,
+        "download": null
+      },
+      {
+        "id": "5b4f1bd233f0b9000eba6365",
+        "name": "ZMG",
+        "kind": "folder",
+        "bytes": null,
+        "download": null
+      },
+      {
+        "id": "5b4f1bd76d4eb300116eac52",
+        "name": "ZPH",
+        "kind": "folder",
+        "bytes": null,
+        "download": null
+      },
+      {
+        "id": "5b7189cb90a7e0001988507a",
+        "name": "sentiment_normal_reading.csv",
+        "kind": "file",
+        "bytes": 67617,
+        "download": "https://osf.io/download/bhkzy/"
+      }
+    ],
+    "preprocessed_sr": [
+      {
+        "id": "5b728b43b081040018e5d5e2",
+        "name": "sentiment_normal_reading.csv",
+        "kind": "file",
+        "bytes": 67617,
+        "download": "https://osf.io/download/f2z4u/"
+      },
+      {
+        "id": "5b72c4aa7b1a3f0017cfbccf",
+        "name": "ZAB",
+        "kind": "folder",
+        "bytes": null,
+        "download": null
+      },
+      {
+        "id": "5b72c4b1b081040017e6077a",
+        "name": "ZDM",
+        "kind": "folder",
+        "bytes": null,
+        "download": null
+      },
+      {
+        "id": "5b72c4b8b081040015e62500",
+        "name": "ZDN",
+        "kind": "folder",
+        "bytes": null,
+        "download": null
+      },
+      {
+        "id": "5b72c4c17b1a3f0018cfbe6d",
+        "name": "ZGW",
+        "kind": "folder",
+        "bytes": null,
+        "download": null
+      },
+      {
+        "id": "5b72c4c77b1a3f0019cfb81f",
+        "name": "ZJM",
+        "kind": "folder",
+        "bytes": null,
+        "download": null
+      },
+      {
+        "id": "5b72c4d0b081040018e5ff4d",
+        "name": "ZJN",
+        "kind": "folder",
+        "bytes": null,
+        "download": null
+      },
+      {
+        "id": "5b72c4d5b081040017e607b2",
+        "name": "ZJS",
+        "kind": "folder",
+        "bytes": null,
+        "download": null
+      },
+      {
+        "id": "5b72c4e57b1a3f0019cfb841",
+        "name": "ZKB",
+        "kind": "folder",
+        "bytes": null,
+        "download": null
+      },
+      {
+        "id": "5b72c4ec7b1a3f0018cfbe9c",
+        "name": "ZKH",
+        "kind": "folder",
+        "bytes": null,
+        "download": null
+      },
+      {
+        "id": "5b72c4f6b081040016e604d2",
+        "name": "ZKW",
+        "kind": "folder",
+        "bytes": null,
+        "download": null
+      },
+      {
+        "id": "5b72c4fe7b1a3f0016cfd5dc",
+        "name": "ZMG",
+        "kind": "folder",
+        "bytes": null,
+        "download": null
+      },
+      {
+        "id": "5b72c5037b1a3f0017cfbd29",
+        "name": "ZPH",
+        "kind": "folder",
+        "bytes": null,
+        "download": null
+      },
+      {
+        "id": "5b7d6ffa99a6cb001a4be887",
+        "name": "sentencesSR.mat",
+        "kind": "file",
+        "bytes": 39657,
+        "download": "https://osf.io/download/qdtvz/"
+      }
+    ],
+    "raw_sr_ZAB": [
+      {
+        "id": "5b4f1c0d33f0b9000dba728b",
+        "name": "ZAB_SR2_ET.mat",
+        "kind": "file",
+        "bytes": 845851,
+        "download": "https://osf.io/download/z25fu/"
+      },
+      {
+        "id": "5b4f1c0e33f0b9000fba5f6e",
+        "name": "ZAB_SR1_ET.mat",
+        "kind": "file",
+        "bytes": 813937,
+        "download": "https://osf.io/download/h7d4s/"
+      },
+      {
+        "id": "5b4f1c0e6d4eb300106ef1f2",
+        "name": "ZAB_SR3_ET.mat",
+        "kind": "file",
+        "bytes": 902181,
+        "download": "https://osf.io/download/wtsxp/"
+      },
+      {
+        "id": "5b4f1c1133f0b9000cba99ca",
+        "name": "ZAB_SR4_ET.mat",
+        "kind": "file",
+        "bytes": 894074,
+        "download": "https://osf.io/download/kbhyz/"
+      },
+      {
+        "id": "5b4f1c136d4eb300136ec1b8",
+        "name": "ZAB_SR5_ET.mat",
+        "kind": "file",
+        "bytes": 894219,
+        "download": "https://osf.io/download/geb2a/"
+      },
+      {
+        "id": "5b4f1c1733f0b9000fba5f7a",
+        "name": "wordbounds_SNR1_ZAB.mat",
+        "kind": "file",
+        "bytes": 34529,
+        "download": "https://osf.io/download/bau8v/"
+      },
+      {
+        "id": "5b4f1c2c6d4eb300136ec1c9",
+        "name": "ZAB_SR2_EEG.mat",
+        "kind": "file",
+        "bytes": 56148418,
+        "download": "https://osf.io/download/j7krv/"
+      },
+      {
+        "id": "5b4f1c3033f0b9000dba72a5",
+        "name": "ZAB_SR3_EEG.mat",
+        "kind": "file",
+        "bytes": 61970573,
+        "download": "https://osf.io/download/mukgd/"
+      },
+      {
+        "id": "5b4f1c3233f0b9000eba639f",
+        "name": "ZAB_SR5_EEG.mat",
+        "kind": "file",
+        "bytes": 59226609,
+        "download": "https://osf.io/download/ubmdt/"
+      },
+      {
+        "id": "5b4f1c3333f0b9000dba72af",
+        "name": "ZAB_SR4_EEG.mat",
+        "kind": "file",
+        "bytes": 60155163,
+        "download": "https://osf.io/download/vadmu/"
+      },
+      {
+        "id": "5b4f1c3533f0b9000cba99f2",
+        "name": "ZAB_SR6_ET.mat",
+        "kind": "file",
+        "bytes": 913863,
+        "download": "https://osf.io/download/ugwrt/"
+      },
+      {
+        "id": "5b4f1c3633f0b9000cba99fa",
+        "name": "ZAB_SR7_ET.mat",
+        "kind": "file",
+        "bytes": 877160,
+        "download": "https://osf.io/download/xcm9u/"
+      },
+      {
+        "id": "5b4f1c3733f0b9000cba9a02",
+        "name": "ZAB_SR1_EEG.mat",
+        "kind": "file",
+        "bytes": 53488721,
+        "download": "https://osf.io/download/8ekwc/"
+      },
+      {
+        "id": "5b4f1c3833f0b9000fba5f92",
+        "name": "ZAB_SR8_ET.mat",
+        "kind": "file",
+        "bytes": 831589,
+        "download": "https://osf.io/download/tz7xv/"
+      },
+      {
+        "id": "5b4f1c3a33f0b9000cba9a09",
+        "name": "wordbounds_SNR2_ZAB.mat",
+        "kind": "file",
+        "bytes": 21274,
+        "download": "https://osf.io/download/ywhpg/"
+      },
+      {
+        "id": "5b4f1c496d4eb300136ec1e3",
+        "name": "ZAB_SNR7_EEG.mat",
+        "kind": "file",
+        "bytes": 58450016,
+        "download": "https://osf.io/download/e2w6y/"
+      },
+      {
+        "id": "5b4f1c4a33f0b9000cba9a20",
+        "name": "ZAB_SNR8_EEG.mat",
+        "kind": "file",
+        "bytes": 54894349,
+        "download": "https://osf.io/download/xyuqw/"
+      },
+      {
+        "id": "5b4f1c4f33f0b9000cba9a2c",
+        "name": "ZAB_SNR6_EEG.mat",
+        "kind": "file",
+        "bytes": 59866105,
+        "download": "https://osf.io/download/n2d63/"
+      }
+    ],
+    "preprocessed_sr_ZAB": [
+      {
+        "id": "5b72c5277b1a3f0018cfbecc",
+        "name": "ZAB_SR4_corrected_ET.mat",
+        "kind": "file",
+        "bytes": 890250,
+        "download": "https://osf.io/download/vadpx/"
+      },
+      {
+        "id": "5b72c527b081040016e60503",
+        "name": "wordbounds_SNR1_ZAB.mat",
+        "kind": "file",
+        "bytes": 34529,
+        "download": "https://osf.io/download/hg38s/"
+      },
+      {
+        "id": "5b72c5287b1a3f0018cfbed0",
+        "name": "ZAB_SR2_corrected_ET.mat",
+        "kind": "file",
+        "bytes": 843073,
+        "download": "https://osf.io/download/3u8bq/"
+      },
+      {
+        "id": "5b72c528b081040016e60507",
+        "name": "ZAB_SR3_corrected_ET.mat",
+        "kind": "file",
+        "bytes": 898889,
+        "download": "https://osf.io/download/exuhw/"
+      },
+      {
+        "id": "5b72c528b081040018e5ff95",
+        "name": "ZAB_SR1_corrected_ET.mat",
+        "kind": "file",
+        "bytes": 810904,
+        "download": "https://osf.io/download/k3v5t/"
+      },
+      {
+        "id": "5b72c52a7b1a3f0018cfbed4",
+        "name": "ZAB_SR5_corrected_ET.mat",
+        "kind": "file",
+        "bytes": 891494,
+        "download": "https://osf.io/download/5g7k2/"
+      },
+      {
+        "id": "5b72c543b081040015e625b8",
+        "name": "wordbounds_SNR2_ZAB.mat",
+        "kind": "file",
+        "bytes": 21274,
+        "download": "https://osf.io/download/w2vtf/"
+      },
+      {
+        "id": "5b72c5447b1a3f0019cfb890",
+        "name": "ZAB_SR8_corrected_ET.mat",
+        "kind": "file",
+        "bytes": 828694,
+        "download": "https://osf.io/download/e8t6w/"
+      },
+      {
+        "id": "5b72c545b081040015e625bd",
+        "name": "ZAB_SR7_corrected_ET.mat",
+        "kind": "file",
+        "bytes": 874345,
+        "download": "https://osf.io/download/zpn7y/"
+      },
+      {
+        "id": "5b72c5457b1a3f0017cfbd65",
+        "name": "ZAB_SR6_corrected_ET.mat",
+        "kind": "file",
+        "bytes": 910663,
+        "download": "https://osf.io/download/s3y29/"
+      },
+      {
+        "id": "5b72c93c7b1a3f0019cfbc25",
+        "name": "gip_ZAB_SR1_EEG.mat",
+        "kind": "file",
+        "bytes": 50454745,
+        "download": "https://osf.io/download/hy593/"
+      },
+      {
+        "id": "5b72c93cb081040016e608f4",
+        "name": "gip_ZAB_SR2_EEG.mat",
+        "kind": "file",
+        "bytes": 52966030,
+        "download": "https://osf.io/download/cfdk8/"
+      },
+      {
+        "id": "5b72c93eb081040018e6034d",
+        "name": "oip_ZAB_SR4_EEG.mat",
+        "kind": "file",
+        "bytes": 54589023,
+        "download": "https://osf.io/download/69s5b/"
+      },
+      {
+        "id": "5b72c93eb081040017e60c0f",
+        "name": "gip_ZAB_SR5_EEG.mat",
+        "kind": "file",
+        "bytes": 54956760,
+        "download": "https://osf.io/download/q4cu7/"
+      },
+      {
+        "id": "5b72c93fb081040015e62a73",
+        "name": "gip_ZAB_SR3_EEG.mat",
+        "kind": "file",
+        "bytes": 55497601,
+        "download": "https://osf.io/download/yptw2/"
+      },
+      {
+        "id": "5b72c9597b1a3f0018cfc244",
+        "name": "gip_ZAB_SNR7_EEG.mat",
+        "kind": "file",
+        "bytes": 53826752,
+        "download": "https://osf.io/download/nkgtu/"
+      },
+      {
+        "id": "5b72c95ab081040016e60906",
+        "name": "gip_ZAB_SNR6_EEG.mat",
+        "kind": "file",
+        "bytes": 55441530,
+        "download": "https://osf.io/download/jq7e4/"
+      },
+      {
+        "id": "5b72c95ab081040018e60361",
+        "name": "gip_ZAB_SNR8_EEG.mat",
+        "kind": "file",
+        "bytes": 51066077,
+        "download": "https://osf.io/download/tzm8p/"
+      }
+    ]
+  },
+  "samples": [
+    {
+      "group": "raw_sr",
+      "id": "5b4f1c3733f0b9000cba9a02",
+      "name": "ZAB_SR1_EEG.mat",
+      "kind": "file",
+      "bytes": 53488721,
+      "download": "https://osf.io/download/8ekwc/",
+      "sha256": "4b21f060f087c7ec8bf2c8732431645dfb353c41acf8cdc5014c873e4a48fb15",
+      "inspection": {
+        "schema": {
+          "EEG": {
+            "setname": {
+              "type": "str"
+            },
+            "filename": {
+              "shape": [
+                0
+              ],
+              "dtype": "<U1"
+            },
+            "filepath": {
+              "shape": [
+                0
+              ],
+              "dtype": "<U1"
+            },
+            "subject": {
+              "shape": [
+                0
+              ],
+              "dtype": "<U1"
+            },
+            "group": {
+              "shape": [
+                0
+              ],
+              "dtype": "<U1"
+            },
+            "condition": {
+              "shape": [
+                0
+              ],
+              "dtype": "<U1"
+            },
+            "session": {
+              "shape": [
+                0
+              ],
+              "dtype": "uint8"
+            },
+            "comments": {
+              "type": "str"
+            },
+            "nbchan": {
+              "scalar": 128.0
+            },
+            "trials": {
+              "scalar": 1.0
+            },
+            "pnts": {
+              "scalar": 122182.0
+            },
+            "srate": {
+              "scalar": 500.0
+            },
+            "xmin": {
+              "scalar": -0.0
+            },
+            "xmax": {
+              "scalar": 244.362
+            },
+            "times": {
+              "shape": [
+                122182
+              ],
+              "dtype": "float64"
+            },
+            "data": {
+              "shape": [
+                128,
+                122182
+              ],
+              "dtype": "float32"
+            },
+            "icaact": {
+              "shape": [
+                0
+              ],
+              "dtype": "uint8"
+            },
+            "icawinv": {
+              "shape": [
+                0
+              ],
+              "dtype": "uint8"
+            },
+            "icasphere": {
+              "shape": [
+                0
+              ],
+              "dtype": "uint8"
+            },
+            "icaweights": {
+              "shape": [
+                0
+              ],
+              "dtype": "uint8"
+            },
+            "icachansind": {
+              "shape": [
+                0
+              ],
+              "dtype": "uint8"
+            },
+            "chanlocs": {
+              "shape": [
+                128
+              ],
+              "dtype": "object",
+              "first_element_schema": {
+                "labels": {
+                  "type": "str"
+                },
+                "ref": {
+                  "shape": [
+                    0
+                  ],
+                  "dtype": "<U1"
+                },
+                "theta": {
+                  "shape": [
+                    0
+                  ],
+                  "dtype": "uint8"
+                },
+                "radius": {
+                  "shape": [
+                    0
+                  ],
+                  "dtype": "uint8"
+                },
+                "X": {
+                  "shape": [
+                    0
+                  ],
+                  "dtype": "uint8"
+                },
+                "Y": {
+                  "shape": [
+                    0
+                  ],
+                  "dtype": "uint8"
+                },
+                "Z": {
+                  "shape": [
+                    0
+                  ],
+                  "dtype": "uint8"
+                },
+                "sph_theta": {
+                  "shape": [
+                    0
+                  ],
+                  "dtype": "uint8"
+                },
+                "sph_phi": {
+                  "shape": [
+                    0
+                  ],
+                  "dtype": "uint8"
+                },
+                "sph_radius": {
+                  "shape": [
+                    0
+                  ],
+                  "dtype": "uint8"
+                },
+                "type": {
+                  "shape": [
+                    0
+                  ],
+                  "dtype": "<U1"
+                },
+                "urchan": {
+                  "shape": [
+                    0
+                  ],
+                  "dtype": "uint8"
+                }
+              }
+            },
+            "urchanlocs": {
+              "shape": [
+                0
+              ],
+              "dtype": "uint8"
+            },
+            "chaninfo": {
+              "plotrad": {
+                "shape": [
+                  0
+                ],
+                "dtype": "uint8"
+              },
+              "shrink": {
+                "shape": [
+                  0
+                ],
+                "dtype": "uint8"
+              },
+              "nosedir": {
+                "type": "str"
+              },
+              "nodatchans": {
+                "shape": [
+                  0
+                ],
+                "dtype": "uint8"
+              },
+              "icachansind": {
+                "shape": [
+                  0
+                ],
+                "dtype": "uint8"
+              }
+            },
+            "ref": {
+              "type": "str"
+            },
+            "event": {
+              "shape": [
+                108
+              ],
+              "dtype": "object",
+              "first_element_schema": {
+                "type": {
+                  "type": "str"
+                },
+                "value": {
+                  "type": "str"
+                },
+                "latency": {
+                  "scalar": 24.0
+                },
+                "duration": {
+                  "scalar": 0.0
+                },
+                "urevent": {
+                  "scalar": 1.0
+                }
+              }
+            },
+            "urevent": {
+              "shape": [
+                108
+              ],
+              "dtype": "object",
+              "first_element_schema": {
+                "type": {
+                  "type": "str"
+                },
+                "value": {
+                  "type": "str"
+                },
+                "latency": {
+                  "scalar": 24.0
+                },
+                "duration": {
+                  "scalar": 0.0
+                }
+              }
+            },
+            "eventdescription": {
+              "shape": [
+                5
+              ],
+              "dtype": "object",
+              "first_element_schema": {
+                "shape": [
+                  0
+                ],
+                "dtype": "<U1"
+              }
+            },
+            "epoch": {
+              "shape": [
+                0
+              ],
+              "dtype": "uint8"
+            },
+            "epochdescription": {
+              "shape": [
+                0
+              ],
+              "dtype": "object"
+            },
+            "reject": {
+              "rejjpE": {
+                "shape": [
+                  0
+                ],
+                "dtype": "uint8"
+              },
+              "rejjp": {
+                "shape": [
+                  0
+                ],
+                "dtype": "uint8"
+              },
+              "rejkurtE": {
+                "shape": [
+                  0
+                ],
+                "dtype": "uint8"
+              },
+              "rejkurt": {
+                "shape": [
+                  0
+                ],
+                "dtype": "uint8"
+              },
+              "rejmanualE": {
+                "shape": [
+                  0
+                ],
+                "dtype": "uint8"
+              },
+              "rejmanual": {
+                "shape": [
+                  0
+                ],
+                "dtype": "uint8"
+              },
+              "rejthreshE": {
+                "shape": [
+                  0
+                ],
+                "dtype": "uint8"
+              },
+              "rejthresh": {
+                "shape": [
+                  0
+                ],
+                "dtype": "uint8"
+              },
+              "rejconstE": {
+                "shape": [
+                  0
+                ],
+                "dtype": "uint8"
+              },
+              "rejconst": {
+                "shape": [
+                  0
+                ],
+                "dtype": "uint8"
+              },
+              "rejfreqE": {
+                "shape": [
+                  0
+                ],
+                "dtype": "uint8"
+              },
+              "rejfreq": {
+                "shape": [
+                  0
+                ],
+                "dtype": "uint8"
+              },
+              "icarejjpE": {
+                "shape": [
+                  0
+                ],
+                "dtype": "uint8"
+              },
+              "icarejjp": {
+                "shape": [
+                  0
+                ],
+                "dtype": "uint8"
+              },
+              "icarejkurtE": {
+                "shape": [
+                  0
+                ],
+                "dtype": "uint8"
+              },
+              "icarejkurt": {
+                "shape": [
+                  0
+                ],
+                "dtype": "uint8"
+              },
+              "icarejmanualE": {
+                "shape": [
+                  0
+                ],
+                "dtype": "uint8"
+              },
+              "icarejmanual": {
+                "shape": [
+                  0
+                ],
+                "dtype": "uint8"
+              },
+              "icarejthreshE": {
+                "shape": [
+                  0
+                ],
+                "dtype": "uint8"
+              },
+              "icarejthresh": {
+                "shape": [
+                  0
+                ],
+                "dtype": "uint8"
+              },
+              "icarejconstE": {
+                "shape": [
+                  0
+                ],
+                "dtype": "uint8"
+              },
+              "icarejconst": {
+                "shape": [
+                  0
+                ],
+                "dtype": "uint8"
+              },
+              "icarejfreqE": {
+                "shape": [
+                  0
+                ],
+                "dtype": "uint8"
+              },
+              "icarejfreq": {
+                "shape": [
+                  0
+                ],
+                "dtype": "uint8"
+              },
+              "rejglobal": {
+                "shape": [
+                  0
+                ],
+                "dtype": "uint8"
+              },
+              "rejglobalE": {
+                "shape": [
+                  0
+                ],
+                "dtype": "uint8"
+              },
+              "rejmanualcol": {
+                "shape": [
+                  3
+                ],
+                "dtype": "float64"
+              },
+              "rejthreshcol": {
+                "shape": [
+                  3
+                ],
+                "dtype": "float64"
+              },
+              "rejconstcol": {
+                "shape": [
+                  3
+                ],
+                "dtype": "float64"
+              },
+              "rejjpcol": {
+                "shape": [
+                  3
+                ],
+                "dtype": "float64"
+              },
+              "rejkurtcol": {
+                "shape": [
+                  3
+                ],
+                "dtype": "float64"
+              },
+              "rejfreqcol": {
+                "shape": [
+                  3
+                ],
+                "dtype": "float64"
+              },
+              "disprej": {
+                "shape": [
+                  0
+                ],
+                "dtype": "object"
+              },
+              "threshold": {
+                "shape": [
+                  3
+                ],
+                "dtype": "float64"
+              },
+              "threshentropy": {
+                "scalar": 600.0
+              },
+              "threshkurtact": {
+                "scalar": 600.0
+              },
+              "threshkurtdist": {
+                "scalar": 600.0
+              },
+              "gcompreject": {
+                "shape": [
+                  0
+                ],
+                "dtype": "uint8"
+              }
+            },
+            "stats": {
+              "jp": {
+                "shape": [
+                  0
+                ],
+                "dtype": "uint8"
+              },
+              "jpE": {
+                "shape": [
+                  0
+                ],
+                "dtype": "uint8"
+              },
+              "icajp": {
+                "shape": [
+                  0
+                ],
+                "dtype": "uint8"
+              },
+              "icajpE": {
+                "shape": [
+                  0
+                ],
+                "dtype": "uint8"
+              },
+              "kurt": {
+                "shape": [
+                  0
+                ],
+                "dtype": "uint8"
+              },
+              "kurtE": {
+                "shape": [
+                  0
+                ],
+                "dtype": "uint8"
+              },
+              "icakurt": {
+                "shape": [
+                  0
+                ],
+                "dtype": "uint8"
+              },
+              "icakurtE": {
+                "shape": [
+                  0
+                ],
+                "dtype": "uint8"
+              },
+              "compenta": {
+                "shape": [
+                  0
+                ],
+                "dtype": "uint8"
+              },
+              "compentr": {
+                "shape": [
+                  0
+                ],
+                "dtype": "uint8"
+              },
+              "compkurta": {
+                "shape": [
+                  0
+                ],
+                "dtype": "uint8"
+              },
+              "compkurtr": {
+                "shape": [
+                  0
+                ],
+                "dtype": "uint8"
+              },
+              "compkurtdist": {
+                "shape": [
+                  0
+                ],
+                "dtype": "uint8"
+              }
+            },
+            "specdata": {
+              "shape": [
+                0
+              ],
+              "dtype": "uint8"
+            },
+            "specicaact": {
+              "shape": [
+                0
+              ],
+              "dtype": "uint8"
+            },
+            "splinefile": {
+              "shape": [
+                0
+              ],
+              "dtype": "<U1"
+            },
+            "icasplinefile": {
+              "shape": [
+                0
+              ],
+              "dtype": "<U1"
+            },
+            "dipfit": {
+              "shape": [
+                0
+              ],
+              "dtype": "uint8"
+            },
+            "history": {
+              "type": "str"
+            },
+            "saved": {
+              "type": "str"
+            },
+            "etc": {
+              "eeglabvers": {
+                "type": "str"
+              }
+            },
+            "datfile": {
+              "shape": [
+                0
+              ],
+              "dtype": "<U1"
+            }
+          }
+        },
+        "event_tables": [
+          {
+            "path": "EEG.event",
+            "count": 108,
+            "fields": [
+              "duration",
+              "latency",
+              "type",
+              "urevent",
+              "value"
+            ],
+            "type_counts": {
+              "100 ": 1,
+              "10  ": 41,
+              "11  ": 41,
+              "12  ": 8,
+              "13  ": 8,
+              "15  ": 8,
+              "18  ": 1
+            }
+          },
+          {
+            "path": "EEG.urevent",
+            "count": 108,
+            "fields": [
+              "duration",
+              "latency",
+              "type",
+              "value"
+            ],
+            "type_counts": {
+              "100 ": 1,
+              "10  ": 41,
+              "11  ": 41,
+              "12  ": 8,
+              "13  ": 8,
+              "15  ": 8,
+              "18  ": 1
+            }
+          }
+        ],
+        "recordings": {
+          "EEG": {
+            "srate": 500.0,
+            "nbchan": 128.0,
+            "pnts": 122182.0,
+            "trials": 1.0,
+            "xmin": -0.0,
+            "xmax": 244.362
+          }
+        }
+      }
+    },
+    {
+      "group": "raw_sr",
+      "id": "5b4f1c0e33f0b9000fba5f6e",
+      "name": "ZAB_SR1_ET.mat",
+      "kind": "file",
+      "bytes": 813937,
+      "download": "https://osf.io/download/h7d4s/",
+      "sha256": "65e8ab7dae7a1ec0b4784fbf3f1c103289949cda0a9334169a3d8407877e147d",
+      "inspection": {
+        "schema": {
+          "comments": {
+            "shape": [
+              10
+            ],
+            "dtype": "object",
+            "first_element_schema": {
+              "type": "str"
+            }
+          },
+          "colheader": {
+            "shape": [
+              4
+            ],
+            "dtype": "object",
+            "first_element_schema": {
+              "type": "str"
+            }
+          },
+          "data": {
+            "shape": [
+              122208,
+              4
+            ],
+            "dtype": "float64"
+          },
+          "messages": {
+            "shape": [
+              4312
+            ],
+            "dtype": "object",
+            "first_element_schema": {
+              "type": "str"
+            }
+          },
+          "eyeevent": {
+            "saccades": {
+              "eye": {
+                "shape": [
+                  1002
+                ],
+                "dtype": "<U1"
+              },
+              "data": {
+                "shape": [
+                  1002,
+                  9
+                ],
+                "dtype": "float64"
+              },
+              "colheader": {
+                "shape": [
+                  9
+                ],
+                "dtype": "object",
+                "first_element_schema": {
+                  "type": "str"
+                }
+              }
+            },
+            "fixations": {
+              "eye": {
+                "shape": [
+                  1002
+                ],
+                "dtype": "<U1"
+              },
+              "data": {
+                "shape": [
+                  1002,
+                  6
+                ],
+                "dtype": "float64"
+              },
+              "colheader": {
+                "shape": [
+                  6
+                ],
+                "dtype": "object",
+                "first_element_schema": {
+                  "type": "str"
+                }
+              }
+            },
+            "blinks": {
+              "eye": {
+                "shape": [
+                  42
+                ],
+                "dtype": "<U1"
+              },
+              "data": {
+                "shape": [
+                  42,
+                  3
+                ],
+                "dtype": "int32"
+              },
+              "colheader": {
+                "shape": [
+                  3
+                ],
+                "dtype": "object",
+                "first_element_schema": {
+                  "type": "str"
+                }
+              }
+            }
+          },
+          "event": {
+            "shape": [
+              107,
+              2
+            ],
+            "dtype": "int32"
+          }
+        },
+        "event_tables": []
+      }
+    },
+    {
+      "group": "preprocessed_sr",
+      "id": "5b72c93c7b1a3f0019cfbc25",
+      "name": "gip_ZAB_SR1_EEG.mat",
+      "kind": "file",
+      "bytes": 50454745,
+      "download": "https://osf.io/download/hy593/",
+      "sha256": "a099a98a22ddedc652f29ca2bcf576dbabda48672f01f929ed6fe1bac93405b6",
+      "inspection": {
+        "format": "matlab_v7.3",
+        "schema": {
+          "EEG": {
+            "chaninfo": {
+              "filecontent": {
+                "shape_on_disk": [
+                  42,
+                  132
+                ],
+                "dtype": "uint16"
+              },
+              "filename": {
+                "shape_on_disk": [
+                  20,
+                  1
+                ],
+                "dtype": "uint16"
+              },
+              "icachansind": {
+                "shape_on_disk": [
+                  85,
+                  1
+                ],
+                "dtype": "float64"
+              },
+              "nodatchans": {
+                "X": {
+                  "shape_on_disk": [
+                    3,
+                    1
+                  ],
+                  "dtype": "object"
+                },
+                "Y": {
+                  "shape_on_disk": [
+                    3,
+                    1
+                  ],
+                  "dtype": "object"
+                },
+                "Z": {
+                  "shape_on_disk": [
+                    3,
+                    1
+                  ],
+                  "dtype": "object"
+                },
+                "datachan": {
+                  "shape_on_disk": [
+                    3,
+                    1
+                  ],
+                  "dtype": "object"
+                },
+                "labels": {
+                  "shape_on_disk": [
+                    3,
+                    1
+                  ],
+                  "dtype": "object"
+                },
+                "radius": {
+                  "shape_on_disk": [
+                    3,
+                    1
+                  ],
+                  "dtype": "object"
+                },
+                "ref": {
+                  "shape_on_disk": [
+                    3,
+                    1
+                  ],
+                  "dtype": "object"
+                },
+                "sph_phi": {
+                  "shape_on_disk": [
+                    3,
+                    1
+                  ],
+                  "dtype": "object"
+                },
+                "sph_radius": {
+                  "shape_on_disk": [
+                    3,
+                    1
+                  ],
+                  "dtype": "object"
+                },
+                "sph_theta": {
+                  "shape_on_disk": [
+                    3,
+                    1
+                  ],
+                  "dtype": "object"
+                },
+                "theta": {
+                  "shape_on_disk": [
+                    3,
+                    1
+                  ],
+                  "dtype": "object"
+                },
+                "type": {
+                  "shape_on_disk": [
+                    3,
+                    1
+                  ],
+                  "dtype": "object"
+                },
+                "urchan": {
+                  "shape_on_disk": [
+                    3,
+                    1
+                  ],
+                  "dtype": "object"
+                }
+              },
+              "nosedir": {
+                "shape_on_disk": [
+                  2,
+                  1
+                ],
+                "dtype": "uint16"
+              },
+              "plotrad": {
+                "shape_on_disk": [
+                  2
+                ],
+                "dtype": "uint64"
+              },
+              "shrink": {
+                "shape_on_disk": [
+                  2
+                ],
+                "dtype": "uint64"
+              }
+            },
+            "chanlocs": {
+              "X": {
+                "shape_on_disk": [
+                  105,
+                  1
+                ],
+                "dtype": "object"
+              },
+              "Y": {
+                "shape_on_disk": [
+                  105,
+                  1
+                ],
+                "dtype": "object"
+              },
+              "Z": {
+                "shape_on_disk": [
+                  105,
+                  1
+                ],
+                "dtype": "object"
+              },
+              "labels": {
+                "shape_on_disk": [
+                  105,
+                  1
+                ],
+                "dtype": "object"
+              },
+              "radius": {
+                "shape_on_disk": [
+                  105,
+                  1
+                ],
+                "dtype": "object"
+              },
+              "ref": {
+                "shape_on_disk": [
+                  105,
+                  1
+                ],
+                "dtype": "object"
+              },
+              "sph_phi": {
+                "shape_on_disk": [
+                  105,
+                  1
+                ],
+                "dtype": "object"
+              },
+              "sph_radius": {
+                "shape_on_disk": [
+                  105,
+                  1
+                ],
+                "dtype": "object"
+              },
+              "sph_theta": {
+                "shape_on_disk": [
+                  105,
+                  1
+                ],
+                "dtype": "object"
+              },
+              "theta": {
+                "shape_on_disk": [
+                  105,
+                  1
+                ],
+                "dtype": "object"
+              },
+              "type": {
+                "shape_on_disk": [
+                  105,
+                  1
+                ],
+                "dtype": "object"
+              },
+              "urchan": {
+                "shape_on_disk": [
+                  105,
+                  1
+                ],
+                "dtype": "object"
+              }
+            },
+            "comments": {
+              "shape_on_disk": [
+                82,
+                1
+              ],
+              "dtype": "uint16"
+            },
+            "condition": {
+              "shape_on_disk": [
+                2
+              ],
+              "dtype": "uint64"
+            },
+            "data": {
+              "shape_on_disk": [
+                122182,
+                105
+              ],
+              "dtype": "float32"
+            },
+            "datfile": {
+              "shape_on_disk": [
+                2
+              ],
+              "dtype": "uint64"
+            },
+            "dipfit": {
+              "shape_on_disk": [
+                2
+              ],
+              "dtype": "uint64"
+            },
+            "epoch": {
+              "shape_on_disk": [
+                2
+              ],
+              "dtype": "uint64"
+            },
+            "epochdescription": {
+              "shape_on_disk": [
+                2
+              ],
+              "dtype": "uint64"
+            },
+            "etc": {
+              "clean_channel_mask": {
+                "shape_on_disk": [
+                  105,
+                  1
+                ],
+                "dtype": "uint8"
+              },
+              "eeglabvers": {
+                "shape_on_disk": [
+                  6,
+                  1
+                ],
+                "dtype": "uint16"
+              },
+              "icasphere_beforerms": {
+                "shape_on_disk": [
+                  85,
+                  85
+                ],
+                "dtype": "float64"
+              },
+              "icaweights_beforerms": {
+                "shape_on_disk": [
+                  85,
+                  14
+                ],
+                "dtype": "float64"
+              }
+            },
+            "event": {
+              "duration": {
+                "shape_on_disk": [
+                  108,
+                  1
+                ],
+                "dtype": "object"
+              },
+              "latency": {
+                "shape_on_disk": [
+                  108,
+                  1
+                ],
+                "dtype": "object"
+              },
+              "type": {
+                "shape_on_disk": [
+                  108,
+                  1
+                ],
+                "dtype": "object"
+              },
+              "urevent": {
+                "shape_on_disk": [
+                  108,
+                  1
+                ],
+                "dtype": "object"
+              },
+              "value": {
+                "shape_on_disk": [
+                  108,
+                  1
+                ],
+                "dtype": "object"
+              }
+            },
+            "eventdescription": {
+              "shape_on_disk": [
+                5,
+                1
+              ],
+              "dtype": "object"
+            },
+            "filename": {
+              "shape_on_disk": [
+                2
+              ],
+              "dtype": "uint64"
+            },
+            "filepath": {
+              "shape_on_disk": [
+                2
+              ],
+              "dtype": "uint64"
+            },
+            "group": {
+              "shape_on_disk": [
+                2
+              ],
+              "dtype": "uint64"
+            },
+            "history": {
+              "shape_on_disk": [
+                234,
+                1
+              ],
+              "dtype": "uint16"
+            },
+            "icaact": {
+              "shape_on_disk": [
+                2
+              ],
+              "dtype": "uint64"
+            },
+            "icachansind": {
+              "shape_on_disk": [
+                85,
+                1
+              ],
+              "dtype": "float64"
+            },
+            "icasphere": {
+              "shape_on_disk": [
+                85,
+                85
+              ],
+              "dtype": "float64"
+            },
+            "icasplinefile": {
+              "shape_on_disk": [
+                2
+              ],
+              "dtype": "uint64"
+            },
+            "icaweights": {
+              "shape_on_disk": [
+                85,
+                14
+              ],
+              "dtype": "float64"
+            },
+            "icawinv": {
+              "shape_on_disk": [
+                14,
+                85
+              ],
+              "dtype": "float64"
+            },
+            "nbchan": {
+              "shape_on_disk": [
+                1,
+                1
+              ],
+              "dtype": "float64",
+              "scalar": 105.0
+            },
+            "pnts": {
+              "shape_on_disk": [
+                1,
+                1
+              ],
+              "dtype": "float64",
+              "scalar": 122182.0
+            },
+            "ref": {
+              "shape_on_disk": [
+                6,
+                1
+              ],
+              "dtype": "uint16"
+            },
+            "reject": {
+              "disprej": {
+                "shape_on_disk": [
+                  2
+                ],
+                "dtype": "uint64"
+              },
+              "gcompreject": {
+                "shape_on_disk": [
+                  14,
+                  1
+                ],
+                "dtype": "float64"
+              },
+              "icarejconst": {
+                "shape_on_disk": [
+                  2
+                ],
+                "dtype": "uint64"
+              },
+              "icarejconstE": {
+                "shape_on_disk": [
+                  2
+                ],
+                "dtype": "uint64"
+              },
+              "icarejfreq": {
+                "shape_on_disk": [
+                  2
+                ],
+                "dtype": "uint64"
+              },
+              "icarejfreqE": {
+                "shape_on_disk": [
+                  2
+                ],
+                "dtype": "uint64"
+              },
+              "icarejjp": {
+                "shape_on_disk": [
+                  2
+                ],
+                "dtype": "uint64"
+              },
+              "icarejjpE": {
+                "shape_on_disk": [
+                  2
+                ],
+                "dtype": "uint64"
+              },
+              "icarejkurt": {
+                "shape_on_disk": [
+                  2
+                ],
+                "dtype": "uint64"
+              },
+              "icarejkurtE": {
+                "shape_on_disk": [
+                  2
+                ],
+                "dtype": "uint64"
+              },
+              "icarejmanual": {
+                "shape_on_disk": [
+                  2
+                ],
+                "dtype": "uint64"
+              },
+              "icarejmanualE": {
+                "shape_on_disk": [
+                  2
+                ],
+                "dtype": "uint64"
+              },
+              "icarejthresh": {
+                "shape_on_disk": [
+                  2
+                ],
+                "dtype": "uint64"
+              },
+              "icarejthreshE": {
+                "shape_on_disk": [
+                  2
+                ],
+                "dtype": "uint64"
+              },
+              "rejconst": {
+                "shape_on_disk": [
+                  2
+                ],
+                "dtype": "uint64"
+              },
+              "rejconstE": {
+                "shape_on_disk": [
+                  2
+                ],
+                "dtype": "uint64"
+              },
+              "rejconstcol": {
+                "shape_on_disk": [
+                  3,
+                  1
+                ],
+                "dtype": "float64"
+              },
+              "rejfreq": {
+                "shape_on_disk": [
+                  2
+                ],
+                "dtype": "uint64"
+              },
+              "rejfreqE": {
+                "shape_on_disk": [
+                  2
+                ],
+                "dtype": "uint64"
+              },
+              "rejfreqcol": {
+                "shape_on_disk": [
+                  3,
+                  1
+                ],
+                "dtype": "float64"
+              },
+              "rejglobal": {
+                "shape_on_disk": [
+                  2
+                ],
+                "dtype": "uint64"
+              },
+              "rejglobalE": {
+                "shape_on_disk": [
+                  2
+                ],
+                "dtype": "uint64"
+              },
+              "rejjp": {
+                "shape_on_disk": [
+                  2
+                ],
+                "dtype": "uint64"
+              },
+              "rejjpE": {
+                "shape_on_disk": [
+                  2
+                ],
+                "dtype": "uint64"
+              },
+              "rejjpcol": {
+                "shape_on_disk": [
+                  3,
+                  1
+                ],
+                "dtype": "float64"
+              },
+              "rejkurt": {
+                "shape_on_disk": [
+                  2
+                ],
+                "dtype": "uint64"
+              },
+              "rejkurtE": {
+                "shape_on_disk": [
+                  2
+                ],
+                "dtype": "uint64"
+              },
+              "rejkurtcol": {
+                "shape_on_disk": [
+                  3,
+                  1
+                ],
+                "dtype": "float64"
+              },
+              "rejmanual": {
+                "shape_on_disk": [
+                  2
+                ],
+                "dtype": "uint64"
+              },
+              "rejmanualE": {
+                "shape_on_disk": [
+                  2
+                ],
+                "dtype": "uint64"
+              },
+              "rejmanualcol": {
+                "shape_on_disk": [
+                  3,
+                  1
+                ],
+                "dtype": "float64"
+              },
+              "rejthresh": {
+                "shape_on_disk": [
+                  2
+                ],
+                "dtype": "uint64"
+              },
+              "rejthreshE": {
+                "shape_on_disk": [
+                  2
+                ],
+                "dtype": "uint64"
+              },
+              "rejthreshcol": {
+                "shape_on_disk": [
+                  3,
+                  1
+                ],
+                "dtype": "float64"
+              },
+              "threshentropy": {
+                "shape_on_disk": [
+                  1,
+                  1
+                ],
+                "dtype": "float64",
+                "scalar": 600.0
+              },
+              "threshkurtact": {
+                "shape_on_disk": [
+                  1,
+                  1
+                ],
+                "dtype": "float64",
+                "scalar": 600.0
+              },
+              "threshkurtdist": {
+                "shape_on_disk": [
+                  1,
+                  1
+                ],
+                "dtype": "float64",
+                "scalar": 600.0
+              },
+              "threshold": {
+                "shape_on_disk": [
+                  3,
+                  1
+                ],
+                "dtype": "float64"
+              }
+            },
+            "saved": {
+              "shape_on_disk": [
+                2,
+                1
+              ],
+              "dtype": "uint16"
+            },
+            "session": {
+              "shape_on_disk": [
+                2
+              ],
+              "dtype": "uint64"
+            },
+            "setname": {
+              "shape_on_disk": [
+                24,
+                1
+              ],
+              "dtype": "uint16"
+            },
+            "specdata": {
+              "shape_on_disk": [
+                2
+              ],
+              "dtype": "uint64"
+            },
+            "specicaact": {
+              "shape_on_disk": [
+                2
+              ],
+              "dtype": "uint64"
+            },
+            "splinefile": {
+              "shape_on_disk": [
+                2
+              ],
+              "dtype": "uint64"
+            },
+            "srate": {
+              "shape_on_disk": [
+                1,
+                1
+              ],
+              "dtype": "float64",
+              "scalar": 500.0
+            },
+            "stats": {
+              "compenta": {
+                "shape_on_disk": [
+                  2
+                ],
+                "dtype": "uint64"
+              },
+              "compentr": {
+                "shape_on_disk": [
+                  2
+                ],
+                "dtype": "uint64"
+              },
+              "compkurta": {
+                "shape_on_disk": [
+                  2
+                ],
+                "dtype": "uint64"
+              },
+              "compkurtdist": {
+                "shape_on_disk": [
+                  2
+                ],
+                "dtype": "uint64"
+              },
+              "compkurtr": {
+                "shape_on_disk": [
+                  2
+                ],
+                "dtype": "uint64"
+              },
+              "icajp": {
+                "shape_on_disk": [
+                  2
+                ],
+                "dtype": "uint64"
+              },
+              "icajpE": {
+                "shape_on_disk": [
+                  2
+                ],
+                "dtype": "uint64"
+              },
+              "icakurt": {
+                "shape_on_disk": [
+                  2
+                ],
+                "dtype": "uint64"
+              },
+              "icakurtE": {
+                "shape_on_disk": [
+                  2
+                ],
+                "dtype": "uint64"
+              },
+              "jp": {
+                "shape_on_disk": [
+                  2
+                ],
+                "dtype": "uint64"
+              },
+              "jpE": {
+                "shape_on_disk": [
+                  2
+                ],
+                "dtype": "uint64"
+              },
+              "kurt": {
+                "shape_on_disk": [
+                  2
+                ],
+                "dtype": "uint64"
+              },
+              "kurtE": {
+                "shape_on_disk": [
+                  2
+                ],
+                "dtype": "uint64"
+              }
+            },
+            "subject": {
+              "shape_on_disk": [
+                2
+              ],
+              "dtype": "uint64"
+            },
+            "times": {
+              "shape_on_disk": [
+                122182,
+                1
+              ],
+              "dtype": "float64"
+            },
+            "trials": {
+              "shape_on_disk": [
+                1,
+                1
+              ],
+              "dtype": "float64",
+              "scalar": 1.0
+            },
+            "urchanlocs": {
+              "shape_on_disk": [
+                2
+              ],
+              "dtype": "uint64"
+            },
+            "urevent": {
+              "duration": {
+                "shape_on_disk": [
+                  108,
+                  1
+                ],
+                "dtype": "object"
+              },
+              "latency": {
+                "shape_on_disk": [
+                  108,
+                  1
+                ],
+                "dtype": "object"
+              },
+              "type": {
+                "shape_on_disk": [
+                  108,
+                  1
+                ],
+                "dtype": "object"
+              },
+              "value": {
+                "shape_on_disk": [
+                  108,
+                  1
+                ],
+                "dtype": "object"
+              }
+            },
+            "xmax": {
+              "shape_on_disk": [
+                1,
+                1
+              ],
+              "dtype": "float64",
+              "scalar": 244.362
+            },
+            "xmin": {
+              "shape_on_disk": [
+                1,
+                1
+              ],
+              "dtype": "float64",
+              "scalar": -0.0
+            }
+          },
+          "auto_badchans": {
+            "shape_on_disk": [
+              10,
+              1
+            ],
+            "dtype": "float64"
+          },
+          "automagic": {
+            "version": {
+              "shape_on_disk": [
+                5,
+                1
+              ],
+              "dtype": "uint16"
+            }
+          },
+          "ica_rejected": {
+            "shape_on_disk": [
+              14,
+              1
+            ],
+            "dtype": "float64"
+          },
+          "is_interpolated": {
+            "shape_on_disk": [
+              1,
+              1
+            ],
+            "dtype": "uint8",
+            "scalar": 1.0
+          },
+          "man_badchans": {
+            "shape_on_disk": [
+              10,
+              1
+            ],
+            "dtype": "float64"
+          },
+          "params": {
+            "channel_rejection_params": {
+              "burst_criterion": {
+                "shape_on_disk": [
+                  3,
+                  1
+                ],
+                "dtype": "uint16"
+              },
+              "channel_criterion": {
+                "shape_on_disk": [
+                  1,
+                  1
+                ],
+                "dtype": "float64",
+                "scalar": 0.85
+              },
+              "highpass": {
+                "shape_on_disk": [
+                  3,
+                  1
+                ],
+                "dtype": "uint16"
+              },
+              "line_noise_criterion": {
+                "shape_on_disk": [
+                  1,
+                  1
+                ],
+                "dtype": "float64",
+                "scalar": 4.0
+              },
+              "rar": {
+                "shape_on_disk": [
+                  1,
+                  1
+                ],
+                "dtype": "float64",
+                "scalar": 0.0
+              },
+              "window_criterion": {
+                "shape_on_disk": [
+                  3,
+                  1
+                ],
+                "dtype": "uint16"
+              }
+            },
+            "eeg_system": {
+              "eog_chans": {
+                "shape_on_disk": [
+                  2
+                ],
+                "dtype": "uint64"
+              },
+              "file_loc_type": {
+                "shape_on_disk": [
+                  2
+                ],
+                "dtype": "uint64"
+              },
+              "loc_file": {
+                "shape_on_disk": [
+                  2
+                ],
+                "dtype": "uint64"
+              },
+              "name": {
+                "shape_on_disk": [
+                  3,
+                  1
+                ],
+                "dtype": "uint16"
+              },
+              "ref_chan": {
+                "shape_on_disk": [
+                  2
+                ],
+                "dtype": "uint64"
+              },
+              "sys10_20": {
+                "shape_on_disk": [
+                  1,
+                  1
+                ],
+                "dtype": "float64",
+                "scalar": 0.0
+              },
+              "tobe_excluded_chans": {
+                "shape_on_disk": [
+                  2
+                ],
+                "dtype": "uint64"
+              }
+            },
+            "filter_params": {
+              "high_freq": {
+                "shape_on_disk": [
+                  1,
+                  1
+                ],
+                "dtype": "float64",
+                "scalar": 0.5
+              },
+              "high_order": {
+                "shape_on_disk": [
+                  2
+                ],
+                "dtype": "uint64"
+              },
+              "low_freq": {
+                "shape_on_disk": [
+                  1,
+                  1
+                ],
+                "dtype": "float64",
+                "scalar": -1.0
+              },
+              "low_order": {
+                "shape_on_disk": [
+                  1,
+                  1
+                ],
+                "dtype": "float64",
+                "scalar": -1.0
+              },
+              "notch_freq": {
+                "shape_on_disk": [
+                  1,
+                  1
+                ],
+                "dtype": "float64",
+                "scalar": 50.0
+              }
+            },
+            "ica_params": {
+              "bool": {
+                "shape_on_disk": [
+                  1,
+                  1
+                ],
+                "dtype": "float64",
+                "scalar": 1.0
+              }
+            },
+            "interpolation_params": {
+              "method": {
+                "shape_on_disk": [
+                  9,
+                  1
+                ],
+                "dtype": "uint16"
+              }
+            },
+            "pca_params": {
+              "lambda": {
+                "shape_on_disk": [
+                  1,
+                  1
+                ],
+                "dtype": "float64",
+                "scalar": -1.0
+              },
+              "maxIter": {
+                "shape_on_disk": [
+                  1,
+                  1
+                ],
+                "dtype": "float64",
+                "scalar": -1.0
+              },
+              "tol": {
+                "shape_on_disk": [
+                  1,
+                  1
+                ],
+                "dtype": "float64",
+                "scalar": -1.0
+              }
+            },
+            "perform_eog_regression": {
+              "shape_on_disk": [
+                1,
+                1
+              ],
+              "dtype": "float64",
+              "scalar": 1.0
+            },
+            "perform_reduce_channels": {
+              "shape_on_disk": [
+                1,
+                1
+              ],
+              "dtype": "float64",
+              "scalar": 1.0
+            }
+          },
+          "rate": {
+            "shape_on_disk": [
+              4,
+              1
+            ],
+            "dtype": "uint16"
+          },
+          "tobe_interpolated": {
+            "shape_on_disk": [
+              2
+            ],
+            "dtype": "uint64"
+          }
+        },
+        "scope": "HDF field/dimension inventory only; events and preprocessing not yet decoded"
+      }
+    },
+    {
+      "group": "preprocessed_sr",
+      "id": "5b72c528b081040018e5ff95",
+      "name": "ZAB_SR1_corrected_ET.mat",
+      "kind": "file",
+      "bytes": 810904,
+      "download": "https://osf.io/download/k3v5t/",
+      "sha256": "84364b46533d7c5439e72a6c0dea1af7c26efb47c9686e604c821f975afac49f",
+      "inspection": {
+        "schema": {
+          "comments": {
+            "shape": [
+              10
+            ],
+            "dtype": "object",
+            "first_element_schema": {
+              "type": "str"
+            }
+          },
+          "colheader": {
+            "shape": [
+              4
+            ],
+            "dtype": "object",
+            "first_element_schema": {
+              "type": "str"
+            }
+          },
+          "data": {
+            "shape": [
+              122208,
+              4
+            ],
+            "dtype": "float64"
+          },
+          "messages": {
+            "shape": [
+              4312
+            ],
+            "dtype": "object",
+            "first_element_schema": {
+              "type": "str"
+            }
+          },
+          "eyeevent": {
+            "saccades": {
+              "eye": {
+                "shape": [
+                  1002
+                ],
+                "dtype": "<U1"
+              },
+              "data": {
+                "shape": [
+                  1002,
+                  9
+                ],
+                "dtype": "float64"
+              },
+              "colheader": {
+                "shape": [
+                  9
+                ],
+                "dtype": "object",
+                "first_element_schema": {
+                  "type": "str"
+                }
+              }
+            },
+            "fixations": {
+              "eye": {
+                "shape": [
+                  923
+                ],
+                "dtype": "<U1"
+              },
+              "data": {
+                "shape": [
+                  923,
+                  6
+                ],
+                "dtype": "float64"
+              },
+              "colheader": {
+                "shape": [
+                  6
+                ],
+                "dtype": "object",
+                "first_element_schema": {
+                  "type": "str"
+                }
+              }
+            },
+            "blinks": {
+              "eye": {
+                "shape": [
+                  42
+                ],
+                "dtype": "<U1"
+              },
+              "data": {
+                "shape": [
+                  42,
+                  3
+                ],
+                "dtype": "int32"
+              },
+              "colheader": {
+                "shape": [
+                  3
+                ],
+                "dtype": "object",
+                "first_element_schema": {
+                  "type": "str"
+                }
+              }
+            }
+          },
+          "event": {
+            "shape": [
+              107,
+              2
+            ],
+            "dtype": "int32"
+          }
+        },
+        "event_tables": []
+      }
+    }
+  ],
+  "exact_study_code": "Not located; dataset preprocessing scripts are not the complete 2020 study code",
+  "full_reproduction_implemented": false,
+  "temporary_source_files_removed": true
+}

@@ -17,6 +17,13 @@ It uses 100 stratified 95/5 train/test splits, not our sentence/word/reader
 holdouts. This must be stated when comparing scores. Original samples must
 never occur in both train and test averages; save average membership explicitly.
 
+One decoding detail needs the original scripts or an explicit reconstruction
+decision: 5% of the reported 328 forty-trial averages is about 17 test samples,
+fewer than the 24 possible reader × sentiment strata. Standard joint-stratified
+scikit-learn splitting cannot represent all those strata in that test set.
+The prose may describe marginal/approximate matching instead. Do not silently
+change the test fraction or claim an exact joint-stratified implementation.
+
 ## Work packages and acceptance checks
 
 | Stage | Required implementation / evidence | Current status |
