@@ -31,4 +31,5 @@ jobs:
             artifacts/zuco_paper_figure_pilot/readers/*/manifest.json
             artifacts/zuco_paper_figure_pilot/readers/*/source_mapping.json
             artifacts/zuco_paper_figure_pilot/readers/*/matching_counts.csv
+            artifacts/zuco_paper_figure_pilot/readers/*/pre_matching_counts.json
           retention-days: 7

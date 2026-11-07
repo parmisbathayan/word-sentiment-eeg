@@ -211,6 +211,10 @@ def prepare_reader(subject,source,inventory,sst,out,null_folder,limits,use_gpu,s
         del sentences
         table=pd.concat(tables,ignore_index=True)
         if table.event_id.duplicated().any():raise ValueError('Repeated original fixation event')
+        write_json(out/'pre_matching_counts.json',dict(selection=dict(Counter(table.selection_status)),mapping=dict(Counter(table.mapping_status)),
+            labels=dict(Counter(table.sentiment)),known_neighbors=int(np.isfinite(table[['previous_gap_ms','next_gap_ms']]).all(axis=1).sum()),
+            duration_range_ms=[float(table.duration_ms.min()),float(table.duration_ms.max())],mapped_source_sentences=len(used)))
+        print('SELECTION AUDIT', (out/'pre_matching_counts.json').read_text(),flush=True)
         table,bins,match_counts=matching(table)
         residual,betas,model=fit_reader_blocks(blocks,progress=lambda a,b:print(f'DECONVOLUTION {subject}: channel {a}/{b}',flush=True))
         atomic_npz(out/'nuisance_betas.npz',betas=betas)
