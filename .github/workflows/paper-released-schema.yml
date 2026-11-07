@@ -1,0 +1,21 @@
+name: Released ZuCo SR sentence and eye-event schema
+on: workflow_dispatch
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: requirements-analysis.txt
+      - run: python -m pip install -r requirements-analysis.txt
+      - run: python scripts/paper_released_schema.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: paper-released-schema
+          path: artifacts/paper_released_schema.json
+          retention-days: 7
