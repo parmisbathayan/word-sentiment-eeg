@@ -35,6 +35,7 @@ DEPARTURES=[
  'Released corpus preprocessing is reused; Automagic/MARA are not rerun.',
  'Independent Python 1-50 Hz FIR, splines and least-squares solver; MATLAB numerical equivalence unverified.',
  'Native timing tolerance is one output-grid sample (8 ms), not the reported 2 ms; every block residual is reported.',
+ 'Blocks exceeding the 8-ms global clock-fit limit are excluded with observed fixation counts and diagnostics; coverage can differ from the paper.',
  'Sentence text and bounds are located by full-waveform match; unmatched released sentences are not guessed.',
  'Original SST labels with explicit dictionary-only fallback; ambiguous or missing original labels are excluded.',
  'Original word rectangles; blink-predecessor rule is an explicit operational reconstruction.',
@@ -168,6 +169,19 @@ def map_block(subject,block_id,raw,rate,codes,latencies,eye,corrected,sentences,
                               source_mapping=mapping_audit),maps
 
 
+def excluded_clock_block(subject,block_id,corrected,error):
+    """Retain every observed fixation as an explicit source-level exclusion."""
+    fixes=event_table(corrected,'fixations');rows=[]
+    for index,fix in fixes.iterrows():
+        rows.append(dict(event_id=digest([subject,block_id,int(index)])[:32],subject=subject,block_id=block_id,
+            onset_seconds=np.nan,duration_ms=float(fix.duration),gaze_x=float(fix.fix_avgpos_x),gaze_y=float(fix.fix_avgpos_y),
+            blink_predecessor=False,mapping_status='unavailable_clock_alignment',word_label_status='unknown',sentiment='unknown',
+            preceded_by_negation=False,word='',word_index=-1,word_length=0,sentence_key='',label_5=99,
+            previous_gap_ms=np.nan,next_gap_ms=np.nan,neighbor_offsets_ms=[],selection_status='block_failed_clock_alignment'))
+    return pd.DataFrame(rows),dict(block_id=block_id,status='excluded_clock_alignment',
+        reason=str(error),synchronization=error.diagnostics,corrected_fixations_excluded=len(rows),source_mapping=[])
+
+
 def matching(table):
     eligible=table.selection_status.eq('eligible_before_matching')
     bad_length=~table.word_length.between(1,20)
@@ -222,7 +236,18 @@ def prepare_reader(subject,source,inventory,sst,out,null_folder,limits,use_gpu,s
             if channels!=montage:raise ValueError('Native channel order differs from the verified 105-channel montage')
             eye=loadmat(eye_path,squeeze_me=True,struct_as_record=False);corrected=loadmat(corrected_path,squeeze_me=True,struct_as_record=False)
             duration_audit=dict(raw=repair_eye_duration_columns(eye),corrected=repair_eye_duration_columns(corrected))
-            table,timeline,diagnostic,maps=map_block(subject,item['block_id'],raw,rate,codes,latencies,eye,corrected,sentences,used)
+            try:
+                table,timeline,diagnostic,maps=map_block(subject,item['block_id'],raw,rate,codes,latencies,eye,corrected,sentences,used)
+            except ValueError as error:
+                if not hasattr(error,'diagnostics'):raise
+                table,diagnostic=excluded_clock_block(subject,item['block_id'],corrected,error)
+                diagnostic['duration_endpoint_audit']=duration_audit
+                diagnostic['source_sha256']={p.name:file_digest(p) for p in [eeg_path,eye_path,corrected_path]}
+                tables.append(table);diagnostics.append(diagnostic)
+                print(f'EXCLUDE SOURCE BLOCK {subject}/{item["block_id"]}: {error}; {len(table)} observed fixations',flush=True)
+                for p in [eeg_path,eye_path,corrected_path]:p.unlink(missing_ok=True)
+                continue
+            diagnostic['status']='included'
             diagnostic['duration_endpoint_audit']=duration_audit
             filtered,filter_info=filter_and_resample(raw,rate)
             diagnostic['filter']=filter_info;diagnostics.append(diagnostic);tables.append(table)
@@ -236,6 +261,7 @@ def prepare_reader(subject,source,inventory,sst,out,null_folder,limits,use_gpu,s
         # Sentence identities have been carried forward in event rows. Release
         # the large source sentence arrays before constructing the nuisance GLM.
         del sentences
+        if not blocks:raise ValueError('No native blocks passed clock alignment for '+subject)
         table=pd.concat(tables,ignore_index=True)
         if table.event_id.duplicated().any():raise ValueError('Repeated original fixation event')
         write_json(out/'pre_matching_counts.json',dict(selection=dict(Counter(table.selection_status)),mapping=dict(Counter(table.mapping_status)),

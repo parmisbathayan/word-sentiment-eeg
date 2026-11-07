@@ -33,6 +33,16 @@ def analyze_and_render(out):
     out=Path(out);readers,stats,events=load_readers(out)
     if len(readers)<3:raise ValueError('Group inference requires at least three readers; this source pilot prepared one reader only')
     analysis=out/'analysis';analysis.mkdir(exist_ok=True)
+    coverage=[]
+    for reader in readers:
+        source=json.loads((out/'readers'/reader/'source_mapping.json').read_text())
+        for block in source['blocks']:
+            sync=block['synchronization']
+            coverage.append(dict(reader=reader,block=block['block_id'],status=block['status'],
+                maximum_clock_residual_ms=sync['max_residual_ms'],
+                mapped_sentences=len(block['source_mapping']),
+                excluded_corrected_fixations=block.get('corrected_fixations_excluded',0)))
+    pd.DataFrame(coverage).to_csv(analysis/'source_coverage.csv',index=False)
     counts=np.stack([v['counts'] for v in stats]);sums=np.stack([v['sums'] for v in stats]);squares=np.stack([v['squares'] for v in stats])
     models=[]
     map_models=[]
@@ -63,7 +73,7 @@ def analyze_and_render(out):
                tct='Independent electrode permutations for every within-reader ranked trial pair',
                cluster='Within-pair sign flips, maximum absolute spatial-temporal cluster mass',
                sensor_neighbors='Distance-pruned Delaunay, >=5 supra-threshold neighbors',
-               checksums={name:file_digest(analysis/name) for name in ['group_results.npz','permutation_results.npz','eye_model.npz','clusters.json']},
+               checksums={name:file_digest(analysis/name) for name in ['group_results.npz','permutation_results.npz','eye_model.npz','clusters.json','source_coverage.csv']},
                source='Pfeiffer et al. 2020, doi:10.1016/j.neuroimage.2020.116934'))
     render_all(out)
 
@@ -132,7 +142,7 @@ def figure1(out,readers,stats,events):
     for i,(text,y) in enumerate(zip(texts,ys)):
         flow.text(.27,y,text,ha='center',va='center',fontsize=8,bbox=dict(boxstyle='square,pad=.6',fc='white',ec='#333333'),transform=flow.transAxes)
         if i<4:flow.annotate('',xy=(.27,ys[i+1]+.045),xytext=(.27,y-.045),xycoords='axes fraction',arrowprops={'arrowstyle':'->','lw':1.3})
-    excluded=[(.83,'Excluded\nUnmapped / out-of-word bounds\nBlink-preceded / <100 ms\nN = '+f'{len(events)-n_qual:,}'),
+    excluded=[(.83,'Excluded\nUnmapped / failed clock / out-of-bounds\nBlink-preceded / <100 ms\nN = '+f'{len(events)-n_qual:,}'),
               (.62,'Excluded\nNeutral / unknown original label\nPreceding negation\nN = '+f'{n_qual-n_pool:,}'),
               (.17,'Excluded\nMatching / missing timing\nBlock boundaries / ±90 µV\nN = '+f'{n_pool-int(accepted.sum()):,}')]
     for y,text in excluded:
@@ -204,7 +214,7 @@ def figure_frp(out,group,permutation,representation):
     for index,(value,label) in enumerate(zip(values,['POS','NEG','POS−NEG','1−Pval'])):
         ax=fig.add_subplot(spec[1,index]);im=topography(ax,value,xy,1 if index==3 else limit,label,probability=index==3)
         if index in [1,3]:fig.colorbar(im,ax=ax,orientation='horizontal',shrink=.9,pad=.08,label='1−Pval' if index==3 else 'µV')
-    name='Raw FRPs' if r==0 else 'Regression-cleaned FRPs';fig.suptitle(name+' · ZuCo sentiment reading',fontweight='bold',y=.99)
+    name='Raw FRPs' if r==0 else 'Regression-cleaned FRPs';fig.suptitle(name+f' · ZuCo sentiment reading · {len(counts)} readers',fontweight='bold',y=.99)
     save(fig,out,f'figure_{r+2}_'+('raw_frp' if r==0 else 'cleaned_frp'),
          'Computed Python results in the published A–F panel arrangement. Heatmap limits scale to this run. GFP shading uses reader contributions.\nRed: pointwise mixed-model p<.05; black contours: cluster-corrected p<.05. TCT bars require ≥6 samples. Topography windows are predeclared reference windows, not detected effects.')
 

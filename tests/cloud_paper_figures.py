@@ -11,7 +11,7 @@ from threadpoolctl import threadpool_limits
 ROOT=Path(__file__).resolve().parents[1];sys.path.insert(0,str(ROOT/'src'));sys.path.insert(0,str(ROOT/'scripts'))
 from word_sentiment_eeg.paper_figure_stats import gaussian_profile,mixed_models,permutation_reader,finish_permutations,temporal_mask
 from word_sentiment_eeg.paper_released import sentence_location
-from prepare_zuco_paper_figures import repair_eye_duration_columns
+from prepare_zuco_paper_figures import repair_eye_duration_columns,excluded_clock_block
 
 
 def figure_previews():
@@ -67,6 +67,11 @@ def main():
     eye={'eyeevent':SimpleNamespace(fixations=event,saccades=SimpleNamespace(colheader=[],data=np.empty((0,0))),blinks=SimpleNamespace(colheader=[],data=np.empty((0,0))))}
     audit=repair_eye_duration_columns(eye)
     assert event.data[0,2]==125 and audit['fixations']['stored_duration_mismatches']==1
+    eye['eyeevent'].fixations=SimpleNamespace(colheader=['duration','fix_avgpos_x','fix_avgpos_y'],data=np.array([[125.,100.,200.]]))
+    error=ValueError('clock exceeds limit');error.diagnostics={'max_residual_ms':10.6}
+    excluded,diagnostic=excluded_clock_block('TEST','3',eye,error)
+    assert len(excluded)==1 and excluded.selection_status.eq('block_failed_clock_alignment').all()
+    assert diagnostic['corrected_fixations_excluded']==1
     rng=np.random.default_rng(75)
     counts=np.array([[12,17],[14,10],[10,19],[18,13]],int)
     values=[[rng.normal(i*.3+c*2,.8,n) for c,n in enumerate(row)] for i,row in enumerate(counts)]
