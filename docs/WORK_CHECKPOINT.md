@@ -291,3 +291,54 @@ nonunique identity rejection, and the full inherited classifier path. Cloud run
 User should finish the running CNN before launching another notebook/runtime.
 Then open neutral_nonneutral_content.ipynb, CPU, Run all. Existing runs/CNN code
 and their protocols were not modified by this addition.
+
+## ZuCo main-paper figure reconstruction (2026-11-07)
+
+User narrowed the current request to ZuCo and the paper's figures; no TeCo now.
+New entry point: notebooks/zuco_paper_figures.ipynb; see ZUCO_PAPER_FIGURES.md.
+Independent Python implementation of the four main figures, with original SST
+labels, all eligible word-associated fixations and −600…1000 ms epochs.
+Published decoding Table 1 remains a separate, unresolved exact-replication task.
+
+The recorded-trial/sentence-order ambiguity is bypassed by exact full-105-channel
+waveform matching of released sentence EEG inside native blocks. Cloud mapping
+audit 42368914686 found 48 valid sentence identities in ZAB block 1, with one
+missing released waveform; no assumed 50-trial order. Released high-level MAT
+schema audit 42368682021 confirms it lacks the full native event timeline.
+
+Native source duration exports were found physically inconsistent (~1.4e14 ms).
+The new preparation route recomputes duration from recorded end-minus-start,
+validates 0…10,000 ms, and saves mismatch/range audits. Blink timestamps/durations
+remain separately observed. The prior first-fixation archive used stored segment
+lengths, so this does not establish a bug in that archive. Earlier engineering
+runs using the exported duration field are superseded, not scientific validation.
+
+Real-source pilot 42371243545 PASSED: ZAB block 1, all 105 channels, validated
+word mapping/selection, nuisance model and resumable trial permutations (4 test
+shuffles only). It accepted 22 negative +22 positive events after matching and
+rejection. This is an engineering pilot, not a full-reader or group result.
+Native trigger residual remains 3.973 ms; explicit 8-ms output-sample tolerance
+used. Do not claim the published 2-ms criterion passed.
+
+Cloud numerical tests verify the sufficient-statistic Gaussian likelihood against
+a full dense covariance likelihood, trial-level channel/sign permutations,
+nonunique sentence rejection, temporal duration and no double-add on resume.
+Cloud layout tests 42371307216 and 42371580987 passed; actual published reference
+figure images were inspected, then synthetic (watermarked) four-figure previews
+rendered and visually checked. A latest test also covers saved-analysis checksums.
+
+Full-reader ZAB native pilot 42371583171 launched to validate all eight source
+blocks; inspect conclusion before claiming it passed. The full 12-reader group
+analysis and 5,000/1,000-permutation run have NOT run. No actual paper-class effect
+or replication claim yet. Outputs cannot be copied from existing first-fix data.
+
+Destination is a new zuco_paper_figures folder. Verified additional Drive-space
+preflight: ~1.5 GB peak allowance, ~1.01 GB null maps before compression; final
+50–200 MB estimate (not full-run measured). Native sources temporary in cloud.
+Keep sufficient statistics, coefficients, event audits and only E62 trial rasters;
+no second all-channel EEG archive. Atomic reader/permutation checkpoints and
+checksums prevent repeated additions. Delete only own null_work after successful
+inference/figures. Completed runs skip downloads/refits; plots-only redraw exists.
+
+All preprocessing/matching/statistical differences are documented with output.
+Existing CNN, neutral/content classification and earlier ERP output unchanged.
