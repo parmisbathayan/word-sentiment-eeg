@@ -322,16 +322,27 @@ def main():
     sources=[r for r in json.loads((ROOT/'configs/zuco1_sources.json').read_text())['files'] if r['task']=='SR']
     if args.subjects:sources=[r for r in sources if r['subject'] in args.subjects]
     if not sources or (args.subjects and set(args.subjects)!={r['subject'] for r in sources}):raise ValueError('Unknown source reader')
-    peak=(args.tct_permutations+args.cluster_permutations)*2*105*201*4+150_000_000
+    peak=(args.tct_permutations+args.cluster_permutations)*2*105*201*4+350_000_000
     out.mkdir(parents=True,exist_ok=True)
-    if args.output is None and (args.free_drive_bytes is None or args.free_drive_bytes<peak+100_000_000):
-        raise SystemExit(f'Need verified free Drive space up to {(peak+100_000_000)/1e9:.2f} GB for resumable permutation work. No extraction started.')
     protocol=dict(subjects=[r['subject'] for r in sources],blocks=args.blocks,sources=sources,
                   tct_permutations=args.tct_permutations,cluster_permutations=args.cluster_permutations,
                   lowpass_hz=50,highpass_hz=1,output_hz=125,epoch_ms=[-600,1000],baseline=None,
                   label_source='original SST; no agent sentiment labels',native_timing_tolerance_ms=8,
-                  code={name:file_digest(ROOT/name) for name in ['scripts/prepare_zuco_paper_figures.py','src/word_sentiment_eeg/paper_released.py','src/word_sentiment_eeg/paper_python.py','src/word_sentiment_eeg/paper_labels.py','src/word_sentiment_eeg/paper_fixations.py','src/word_sentiment_eeg/paper_figure_stats.py']},departures=DEPARTURES)
+                  code={name:file_digest(ROOT/name) for name in ['scripts/prepare_zuco_paper_figures.py','scripts/zuco_paper_pilot.py','scripts/paper_sst_source.py','src/word_sentiment_eeg/paper_released.py','src/word_sentiment_eeg/paper_python.py','src/word_sentiment_eeg/paper_labels.py','src/word_sentiment_eeg/paper_fixations.py','src/word_sentiment_eeg/paper_trials.py','src/word_sentiment_eeg/paper_figure_stats.py']},departures=DEPARTURES)
     if (out/'protocol.json').is_file() and json.loads((out/'protocol.json').read_text())!=protocol:raise ValueError('Figure preparation protocol changed; do not mix outputs')
+    if (out/'manifest.json').is_file():
+        saved=json.loads((out/'manifest.json').read_text())
+        if saved.get('status')=='completed' and all((out/k).is_file() and file_digest(out/k)==v for k,v in saved['figure_checksums'].items()):
+            from render_zuco_paper_figures import load_readers
+            load_readers(out)
+            print('KEEP COMPLETED RUN: verified reader checkpoints and four figure files. No source reads or refitting.',flush=True);return
+        raise ValueError('Final figures changed or incomplete; use --plots-only to rebuild from verified statistics')
+    # Count already stored workflow files as reusable capacity, so interrupted
+    # runs do not incorrectly demand their entire peak allocation a second time.
+    existing_bytes=sum(p.stat().st_size for p in out.rglob('*') if p.is_file())
+    required=max(0,peak+100_000_000-existing_bytes)
+    if args.output is None and (args.free_drive_bytes is None or args.free_drive_bytes<required):
+        raise SystemExit(f'Need {required/1e9:.2f} GB additional verified free Drive space (peak allowance {(peak+100_000_000)/1e9:.2f} GB). No extraction started.')
     write_json(out/'protocol.json',protocol)
     (out/'METHOD_DIFFERENCES.md').write_text('# Python reconstruction differences\n\n'+'\n'.join('- '+v for v in DEPARTURES)+'\n')
     with tempfile.TemporaryDirectory(prefix='paper-sst-') as temporary:

@@ -172,8 +172,10 @@ def figure_frp(out,group,permutation,representation):
     def p_strip(spec,p,significant,label):
         ax=fig.add_subplot(spec[0]);ax.fill_between(times,0,1-p,color='#777777',lw=0)
         ax.axhline(.95,color='#b93333',ls=':',lw=.7);ax.set(xlim=(-600,1000),ylim=(0,1),ylabel=label,xticklabels=[],yticks=[0,1])
+        ax.yaxis.label.set_size(7);ax.yaxis.labelpad=1
         ax=fig.add_subplot(spec[1]);ax.fill_between(times,0,1,where=significant,color='#c72228',step='mid')
         ax.axvline(0,color='#888888',lw=.6,ls='--');ax.set(xlim=(-600,1000),ylim=(0,1),xlabel='Time relative to fixation onset (ms)',ylabel='Stat. diff.',yticks=[])
+        ax.yaxis.label.set_size(6);ax.yaxis.labelpad=1
     sub=grid[1,0].subgridspec(3,1,height_ratios=[4,1,.45],hspace=.12)
     ax=fig.add_subplot(sub[0]);panel(ax,'D','Global Field Power (GFP)')
     for ci,label in enumerate(['negative','positive']):
@@ -212,8 +214,10 @@ def figure4(out,stats,events,eye_model):
     def stat_strips(sub,p,significant,x=times):
         ax=fig.add_subplot(sub[0]);ax.fill_between(x,0,1-p,color='#777777',lw=0);ax.axhline(.95,color='#b93333',ls=':',lw=.6)
         ax.set(xlim=(-600,1000),ylim=(0,1),ylabel='1−Pval',xticklabels=[],yticks=[0,1])
+        ax.yaxis.label.set_size(7);ax.yaxis.labelpad=1
         ax=fig.add_subplot(sub[1]);ax.fill_between(x,0,1,where=significant,color='#c72228',step='mid');ax.axvline(0,color='#888888',lw=.6,ls=':')
         ax.set(xlim=(-600,1000),ylim=(0,1),xlabel='Time relative to fixation onset (ms)',ylabel='Stat. diff.',yticks=[])
+        ax.yaxis.label.set_size(6);ax.yaxis.labelpad=1
     for direction,label in enumerate(['Horizontal eye velocity','Vertical eye velocity']):
         sub=grid[0,direction].subgridspec(3,1,height_ratios=[4,1,.4],hspace=.1);ax=fig.add_subplot(sub[0]);panel(ax,chr(65+direction),label)
         for ci,cls in enumerate(['negative','positive']):
@@ -236,8 +240,8 @@ def figure4(out,stats,events,eye_model):
     with __import__('warnings').catch_warnings():
         __import__('warnings').simplefilter('ignore',RuntimeWarning);p=ttest_rel(total[:,1],total[:,0],axis=0).pvalue
     stat_strips([sub[2],sub[3]],p,p<.05,centers)
-    sub=grid[1,0].subgridspec(1,2,wspace=.12);before=events.eligible_for_matching.astype(str).str.lower().isin(['true','1']);after=events.selection_status.eq('accepted')
-    for column,(keep,title) in enumerate([(before,'Before event matching'),(after,'After event matching')]):
+    sub=grid[1,0].subgridspec(1,2,wspace=.24);before=events.eligible_for_matching.astype(str).str.lower().isin(['true','1']);after=events.selection_status.eq('accepted')
+    for column,(keep,title) in enumerate([(before,'Before matching'),(after,'After matching')]):
         ax=fig.add_subplot(sub[column]);panel(ax,'D' if column==0 else '',title)
         for ci,cls in enumerate(['negative','positive']):
             x=pd.to_numeric(events.loc[keep&events.sentiment.eq(cls),'word_length']);hist,_=np.histogram(x,bins=np.arange(.5,21.5))
