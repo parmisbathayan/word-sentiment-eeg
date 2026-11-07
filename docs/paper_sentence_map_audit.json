@@ -1,0 +1,338 @@
+{
+  "purpose": "Whole-sentence waveform identity audit; no guessed trial ordering",
+  "source": "resultsZAB_SR.mat",
+  "native": "gip_ZAB_SR1_EEG.mat",
+  "sentences": [
+    {
+      "source_sentence": 0,
+      "words": 22,
+      "onset_sample_0based": 1039,
+      "status": "exact"
+    },
+    {
+      "source_sentence": 1,
+      "words": 22,
+      "onset_sample_0based": 4386,
+      "status": "exact"
+    },
+    {
+      "source_sentence": 2,
+      "words": 16,
+      "onset_sample_0based": 7800,
+      "status": "exact"
+    },
+    {
+      "source_sentence": 3,
+      "words": 5,
+      "onset_sample_0based": 9525,
+      "status": "exact"
+    },
+    {
+      "source_sentence": 4,
+      "words": 13,
+      "onset_sample_0based": 11796,
+      "status": "exact"
+    },
+    {
+      "source_sentence": 5,
+      "words": 16,
+      "onset_sample_0based": 14928,
+      "status": "exact"
+    },
+    {
+      "source_sentence": 6,
+      "words": 19,
+      "onset_sample_0based": 17032,
+      "status": "exact"
+    },
+    {
+      "source_sentence": 7,
+      "words": 11,
+      "onset_sample_0based": 19770,
+      "status": "exact"
+    },
+    {
+      "source_sentence": 8,
+      "words": 28,
+      "onset_sample_0based": 21175,
+      "status": "exact"
+    },
+    {
+      "source_sentence": 9,
+      "words": 21,
+      "onset_sample_0based": 24310,
+      "status": "exact"
+    },
+    {
+      "source_sentence": 10,
+      "words": 18,
+      "onset_sample_0based": 27342,
+      "status": "exact"
+    },
+    {
+      "source_sentence": 11,
+      "words": 7,
+      "onset_sample_0based": 30052,
+      "status": "exact"
+    },
+    {
+      "source_sentence": 12,
+      "words": 7,
+      "onset_sample_0based": 32790,
+      "status": "exact"
+    },
+    {
+      "source_sentence": 13,
+      "words": 23,
+      "onset_sample_0based": 37139,
+      "status": "exact"
+    },
+    {
+      "source_sentence": 14,
+      "words": 8,
+      "onset_sample_0based": 40321,
+      "status": "exact"
+    },
+    {
+      "source_sentence": 15,
+      "words": 21,
+      "onset_sample_0based": 41778,
+      "status": "exact"
+    },
+    {
+      "source_sentence": 16,
+      "words": 13,
+      "onset_sample_0based": 43854,
+      "status": "exact"
+    },
+    {
+      "source_sentence": 17,
+      "words": 36,
+      "onset_sample_0based": 46310,
+      "status": "exact"
+    },
+    {
+      "source_sentence": 18,
+      "words": 28,
+      "onset_sample_0based": 50680,
+      "status": "exact"
+    },
+    {
+      "source_sentence": 19,
+      "words": 25,
+      "onset_sample_0based": 55017,
+      "status": "exact"
+    },
+    {
+      "source_sentence": 20,
+      "words": 21,
+      "onset_sample_0based": 58585,
+      "status": "exact"
+    },
+    {
+      "source_sentence": 21,
+      "words": 17,
+      "onset_sample_0based": 61960,
+      "status": "exact"
+    },
+    {
+      "source_sentence": 22,
+      "words": 16,
+      "onset_sample_0based": 64293,
+      "status": "exact"
+    },
+    {
+      "source_sentence": 23,
+      "words": 6,
+      "onset_sample_0based": 66759,
+      "status": "exact"
+    },
+    {
+      "source_sentence": 24,
+      "words": 7,
+      "onset_sample_0based": 68039,
+      "status": "exact"
+    },
+    {
+      "source_sentence": 25,
+      "words": 12,
+      "onset_sample_0based": 70500,
+      "status": "exact"
+    },
+    {
+      "source_sentence": 26,
+      "words": 8,
+      "onset_sample_0based": 73628,
+      "status": "exact"
+    },
+    {
+      "source_sentence": 27,
+      "words": 10,
+      "onset_sample_0based": null,
+      "status": "missing_released_sentence_eeg"
+    },
+    {
+      "source_sentence": 28,
+      "words": 9,
+      "onset_sample_0based": 76792,
+      "status": "exact"
+    },
+    {
+      "source_sentence": 29,
+      "words": 27,
+      "onset_sample_0based": 79317,
+      "status": "exact"
+    },
+    {
+      "source_sentence": 30,
+      "words": 16,
+      "onset_sample_0based": 82334,
+      "status": "exact"
+    },
+    {
+      "source_sentence": 31,
+      "words": 23,
+      "onset_sample_0based": 84154,
+      "status": "exact"
+    },
+    {
+      "source_sentence": 32,
+      "words": 17,
+      "onset_sample_0based": 87021,
+      "status": "exact"
+    },
+    {
+      "source_sentence": 33,
+      "words": 21,
+      "onset_sample_0based": 89754,
+      "status": "exact"
+    },
+    {
+      "source_sentence": 34,
+      "words": 5,
+      "onset_sample_0based": 91513,
+      "status": "exact"
+    },
+    {
+      "source_sentence": 35,
+      "words": 26,
+      "onset_sample_0based": 93043,
+      "status": "exact"
+    },
+    {
+      "source_sentence": 36,
+      "words": 28,
+      "onset_sample_0based": 96095,
+      "status": "exact"
+    },
+    {
+      "source_sentence": 37,
+      "words": 11,
+      "onset_sample_0based": 99442,
+      "status": "exact"
+    },
+    {
+      "source_sentence": 38,
+      "words": 22,
+      "onset_sample_0based": 101004,
+      "status": "exact"
+    },
+    {
+      "source_sentence": 39,
+      "words": 17,
+      "onset_sample_0based": 105279,
+      "status": "exact"
+    },
+    {
+      "source_sentence": 40,
+      "words": 3,
+      "onset_sample_0based": 107143,
+      "status": "exact"
+    },
+    {
+      "source_sentence": 41,
+      "words": 6,
+      "onset_sample_0based": 108226,
+      "status": "exact"
+    },
+    {
+      "source_sentence": 42,
+      "words": 9,
+      "onset_sample_0based": 109347,
+      "status": "exact"
+    },
+    {
+      "source_sentence": 43,
+      "words": 6,
+      "onset_sample_0based": 111419,
+      "status": "exact"
+    },
+    {
+      "source_sentence": 44,
+      "words": 11,
+      "onset_sample_0based": 112147,
+      "status": "exact"
+    },
+    {
+      "source_sentence": 45,
+      "words": 19,
+      "onset_sample_0based": 113096,
+      "status": "exact"
+    },
+    {
+      "source_sentence": 46,
+      "words": 11,
+      "onset_sample_0based": 115804,
+      "status": "exact"
+    },
+    {
+      "source_sentence": 47,
+      "words": 7,
+      "onset_sample_0based": 117459,
+      "status": "exact"
+    },
+    {
+      "source_sentence": 48,
+      "words": 12,
+      "onset_sample_0based": 118915,
+      "status": "exact"
+    },
+    {
+      "source_sentence": 49,
+      "words": 9,
+      "onset_sample_0based": null,
+      "status": "unmatched"
+    },
+    {
+      "source_sentence": 50,
+      "words": 6,
+      "onset_sample_0based": null,
+      "status": "unmatched"
+    },
+    {
+      "source_sentence": 51,
+      "words": 29,
+      "onset_sample_0based": null,
+      "status": "unmatched"
+    },
+    {
+      "source_sentence": 52,
+      "words": 23,
+      "onset_sample_0based": null,
+      "status": "unmatched"
+    },
+    {
+      "source_sentence": 53,
+      "words": 10,
+      "onset_sample_0based": null,
+      "status": "unmatched"
+    },
+    {
+      "source_sentence": 54,
+      "words": 24,
+      "onset_sample_0based": null,
+      "status": "unmatched"
+    }
+  ],
+  "temporary_sources_removed": true
+}
