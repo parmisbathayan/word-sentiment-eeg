@@ -110,3 +110,18 @@ folder is removed. Small final permutation statistics remain. A completed run
 verifies reader/figure checksums and returns without source reads or refitting.
 `--plots-only` redraws from saved statistics. Changed preparation fingerprints
 stop rather than silently mix different methods. Never run two writers at once.
+
+## Validation evidence
+
+Cloud run 42371942981 exercised all eight ZAB source blocks and all 105 channels.
+Five blocks passed the 8-ms limit; blocks 3, 5 and 7 were explicitly excluded.
+The shared-reader model completed, with 287 negative and 286 positive accepted
+fixations and 286 ranked trial pairs. This used only four test permutations,
+not the final 5,000/1,000 counts or a group result. Numeric coverage is saved in
+`paper_full_reader_validation.json`. Cloud run 42372106932 passed Gaussian
+likelihood, permutation/resume/input-change, exclusion and full rendering checks.
+The full twelve-reader group workflow has not been executed during preparation.
+
+A later synchronization investigation could recover excluded blocks. Do not
+resolve that by silently increasing the threshold or describing the current
+selection as the complete published input cohort.

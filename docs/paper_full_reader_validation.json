@@ -1,0 +1,69 @@
+{
+  "validation_run": 42371942981,
+  "scope": "one reader, all eight source blocks; 4 test permutations, not full group inference",
+  "subject": "ZAB",
+  "accepted_counts": [
+    287,
+    286
+  ],
+  "paired_trials": 286,
+  "mapped_source_sentences": 243,
+  "blocks": [
+    {
+      "block": "1",
+      "status": "included",
+      "max_residual_ms": 3.973277330970859,
+      "matched_sentences": 48,
+      "excluded_fixations": 0
+    },
+    {
+      "block": "2",
+      "status": "included",
+      "max_residual_ms": 5.201451093086007,
+      "matched_sentences": 49,
+      "excluded_fixations": 0
+    },
+    {
+      "block": "3",
+      "status": "excluded_clock_alignment",
+      "max_residual_ms": 10.632349795912432,
+      "matched_sentences": 0,
+      "excluded_fixations": 1030
+    },
+    {
+      "block": "4",
+      "status": "included",
+      "max_residual_ms": 7.147630838643337,
+      "matched_sentences": 48,
+      "excluded_fixations": 0
+    },
+    {
+      "block": "5",
+      "status": "excluded_clock_alignment",
+      "max_residual_ms": 8.929545090666124,
+      "matched_sentences": 0,
+      "excluded_fixations": 1088
+    },
+    {
+      "block": "6",
+      "status": "included",
+      "max_residual_ms": 6.609569166272422,
+      "matched_sentences": 48,
+      "excluded_fixations": 0
+    },
+    {
+      "block": "7",
+      "status": "excluded_clock_alignment",
+      "max_residual_ms": 8.217271535187365,
+      "matched_sentences": 0,
+      "excluded_fixations": 1057
+    },
+    {
+      "block": "8",
+      "status": "included",
+      "max_residual_ms": 4.576697379661709,
+      "matched_sentences": 50,
+      "excluded_fixations": 0
+    }
+  ]
+}

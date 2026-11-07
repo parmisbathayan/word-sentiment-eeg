@@ -327,8 +327,12 @@ Cloud layout tests 42371307216 and 42371580987 passed; actual published referenc
 figure images were inspected, then synthetic (watermarked) four-figure previews
 rendered and visually checked. A latest test also covers saved-analysis checksums.
 
-Full-reader ZAB native pilot 42371583171 launched to validate all eight source
-blocks; inspect conclusion before claiming it passed. The full 12-reader group
+Full-reader ZAB pilot 42371583171 exposed blocks above the 8-ms limit. The
+conservative exclusion policy was added, then pilot 42371942981 PASSED all eight
+source blocks: five included, three explicitly excluded (3, 5, 7); 243 mapped
+sentences, 287 negative +286 positive accepted events, 286 ranked trial pairs.
+All 105 channels completed shared-reader nuisance fitting. Four test permutations
+only. See paper_full_reader_validation.json; this is not group inference. The full 12-reader group
 analysis and 5,000/1,000-permutation run have NOT run. No actual paper-class effect
 or replication claim yet. Outputs cannot be copied from existing first-fix data.
 
@@ -342,3 +346,12 @@ inference/figures. Completed runs skip downloads/refits; plots-only redraw exist
 
 All preprocessing/matching/statistical differences are documented with output.
 Existing CNN, neutral/content classification and earlier ERP output unchanged.
+
+Final notebook execution is pinned to tested code revision
+5fc7e92b5dbb0d6697e517d21835094ba520e5aa. Cloud check 42372106932 PASSED the
+numerical, input-change/resume, source-exclusion and complete rendering tests.
+The notebook can be opened from main but fetches this pinned execution revision;
+future unrelated commits will not alter an interrupted run's preparation code.
+Remaining methodological work: recover better source synchronization to retain
+clock-excluded blocks; strict original 2-ms parity is not established. Current
+figures report the reduced source coverage. No full 12-reader figure run yet.
