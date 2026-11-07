@@ -2,7 +2,7 @@
 
 This is an independent Python/Colab reconstruction of the four main figures in
 Pfeiffer et al. (2020), *Neural dynamics of sentiment processing during naturalistic
-sentence reading*, NeuroImage 221, 116934.
+sentence reading*, NeuroImage 218, 116934.
 https://doi.org/10.1016/j.neuroimage.2020.116934
 
 Open `notebooks/zuco_paper_figures.ipynb` in Colab. Run all; GPU recommended for

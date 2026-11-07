@@ -1,5 +1,13 @@
 # Pfeiffer 2020: reproduction before TeCo adaptation
 
+> **2026-11-07 update:** A separate runnable Python reconstruction of the four
+> main figures now exists: [current workflow](ZUCO_PAPER_FIGURES.md),
+> `notebooks/zuco_paper_figures.ipynb`. Full-waveform sentence matching resolves
+> the nominal trial-order ambiguity without guessing. Original 2-ms timing parity
+> remains unmet; the figure workflow explicitly excludes source blocks exceeding
+> 8 ms and reports coverage. Exact decoding/Table 1 replication remains outside
+> this workflow. The following is the earlier historical planning/audit record.
+
 Status 2026-11-03: user selected Colab/Python only, no MATLAB. Source audit,
 Python synchronization, sparse nuisance-GLM library, synthetic tests and a
 one-block engineering runner, shared-reader block fitting, original-SST parsing,

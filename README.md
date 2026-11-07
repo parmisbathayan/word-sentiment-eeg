@@ -2,6 +2,18 @@
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/parmisbathayan/word-sentiment-eeg/blob/main/notebooks/short.ipynb)
 
+## ZuCo paper figures — independent Python reconstruction
+
+[Open the four-figure Colab notebook](https://colab.research.google.com/github/parmisbathayan/word-sentiment-eeg/blob/main/notebooks/zuco_paper_figures.ipynb).
+ZuCo SR only: selection/cleaning flow, raw FRPs, cleaned FRPs and control analyses
+in the four main published layouts. Uses original SST labels and all eligible
+word-associated fixations, requiring a new native-source pass. GPU recommended
+for permutations; CPU is used for regression/mixed models. Peak additional Drive
+allowance ~1.5 GB; final output estimated 50–200 MB. Reader checkpoints resume.
+Blocks failing the 8-ms clock-fit criterion are explicitly excluded and reported.
+This reconstructs the figures with documented method differences; it is not a
+claim of matching the published effects. See [scope, methods and storage](docs/ZUCO_PAPER_FIGURES.md).
+
 ## All overall and regional plots — separate notebooks
 
 For completed runs, use **CPU → Runtime → Run all**:
