@@ -230,3 +230,28 @@ been accepted. Script context was inspected read-only in cloud, not vendored.
 Latest user asks: report neutral/nonneutral results; give CNN notebook; continue
 paper reproduction. The source timing/mapping gates still prevent claiming a
 completed faithful reproduction. Preserve this distinction in all handoffs.
+
+## CNN NumPy JSON-key failure — 2026-11-07
+
+User's first actual CNN run finished loading TeCo (through yaser 50/50 blocks),
+then failed writing `split_spec.json` before the first model training. The shared
+splitter returned np.int64 class-count dictionary keys for CNN's numeric labels.
+Prior tests exercised splitting and training separately, missing this I/O boundary.
+
+Fix commit `5322c1c`: convert ONLY the CNN split-count keys to native strings and
+counts to Python ints. No shared analyzer/common helper, model, selection, splits,
+or staging fingerprints changed. The exact old CNN script SHA256 is
+`fe7f1154a29905488381a5199a8cf9c9d4d2a774db001158d9d1a2addd3113fb`.
+`reconcile_protocol` permits only this old serialization-only revision with all
+other data/runtime/helper/spec fields unchanged and records the migration.
+
+Added full `run_case` training-to-score JSON/prediction tests for both binary
+targets, all-holdout split JSON tests, and old-protocol migration/changed-input
+rejection checks. Cloud matrix now checks Python 3.12 AND 3.13, matching Colab.
+Cloud check run: 42353392663 (inspect conclusion before reporting passed).
+
+User recovery: keep the CURRENT Colab runtime; rerun notebook setup, then the
+training cell. Setup pulls main; expect migration message and `KEEP RUNTIME STAGE
+teco/task1: no archive shard reads`. That reuse still requires the original cloud
+temporary files and matching checksums. A runtime reset requires reloading from
+the archive. Do not claim training started or results exist from the failed run.
