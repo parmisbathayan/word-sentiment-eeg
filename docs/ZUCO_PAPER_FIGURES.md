@@ -57,7 +57,10 @@ Raw eye events provide the nuisance timeline; corrected gaze provides word mappi
 - Trigger-sequence matching and a linear eye-to-EEG clock fit are required.
   Maximum accepted residual is 8 ms (one output sample), versus the published
   2-ms native-sample criterion. The observed residual and whether 2 ms was met
-  are recorded for every block; a failed check stops the run.
+  are recorded for every block. A block failing the residual check is explicitly
+  excluded with its observed fixation count. Missing/reordered triggers or other
+  unsupported schema problems still stop the run. Inspect `source_coverage.csv`;
+  do not describe the selected blocks as the complete published cohort.
 - Original released word rectangles and an explicitly defined blink-predecessor
   rule are used. Earlier preprocessing exclusions cannot be reconstructed as
   newly counted exclusions from an already corrected export.

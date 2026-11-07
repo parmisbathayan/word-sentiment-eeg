@@ -97,6 +97,10 @@ def main():
         folder=Path(directory)
         first=permutation_reader(differences,differences*.5,folder,'A',31,31,chunk=8,use_gpu=False)
         again=permutation_reader(differences,differences*.5,folder,'A',31,31,chunk=8,use_gpu=False)
+        try:
+            permutation_reader(differences+1,differences*.5,folder,'A',31,31,chunk=8,use_gpu=False)
+        except ValueError as error:assert 'inputs changed' in str(error)
+        else:raise AssertionError('Changed reader inputs reused old permutations')
         for mark in folder.glob('*.json'):assert json.loads(mark.read_text())['subjects']==['A']
         second=permutation_reader(differences,differences*.5,folder,'B',31,31,chunk=8,use_gpu=False)
         result,clusters=finish_permutations(folder,first['pair_sum']+second['pair_sum'],first['pair_squares']+second['pair_squares'],40,np.ones((C,C),bool)^np.eye(C,dtype=bool),['A','B'])

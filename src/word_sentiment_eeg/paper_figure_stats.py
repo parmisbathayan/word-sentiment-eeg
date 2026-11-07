@@ -130,6 +130,8 @@ def permutation_reader(raw_diff,clean_diff,folder,subject,total_tct=5000,total_c
     from .common import write_json,file_digest,atomic_npz,digest
     folder=Path(folder);folder.mkdir(parents=True,exist_ok=True)
     diff=np.stack([raw_diff,clean_diff]).astype(np.float32)
+    import hashlib
+    signature=hashlib.sha256(diff.view(np.uint8)).hexdigest()
     R,N,C,T=diff.shape
     if N<2 or not np.isfinite(diff).all():raise ValueError('Invalid paired differences')
     device=None;torch=None;tensor=None
@@ -141,13 +143,16 @@ def permutation_reader(raw_diff,clean_diff,folder,subject,total_tct=5000,total_c
     for kind,iterations in [('tct',total_tct),('cluster',total_cluster)]:
         for begin in range(0,iterations,chunk):
             end=min(begin+chunk,iterations);mark=folder/f'{kind}_{begin:05d}.json';old_path=None
-            included=[];pairs=0
+            included=[];pairs=0;signatures={}
             if mark.is_file():
                 saved=__import__('json').loads(mark.read_text())
                 old_path=folder/saved['file']
                 if file_digest(old_path)!=saved['sha256']:raise ValueError('Permutation checkpoint corrupt')
                 included=saved['subjects'];pairs=saved['pairs']
-                if subject in included:continue
+                signatures=saved['input_signatures']
+                if subject in included:
+                    if signatures[subject]!=signature:raise ValueError('Reader trial inputs changed during permutation resume')
+                    continue
                 with np.load(old_path,allow_pickle=False) as z:maps=z['maps'].copy()
             else:maps=np.zeros((end-begin,R,C,T),np.float32)
             for j,p in enumerate(range(begin,end)):
@@ -166,7 +171,7 @@ def permutation_reader(raw_diff,clean_diff,folder,subject,total_tct=5000,total_c
             # and metadata writes leaves the prior committed chunk recoverable.
             path=folder/f'{kind}_{begin:05d}__{len(included)+1:02d}.npz'
             atomic_npz(path,maps=maps)
-            write_json(mark,dict(subjects=included+[subject],pairs=pairs+N,file=path.name,sha256=file_digest(path)))
+            write_json(mark,dict(subjects=included+[subject],pairs=pairs+N,file=path.name,sha256=file_digest(path),input_signatures=dict(signatures,**{subject:signature})))
             if old_path and old_path!=path:old_path.unlink(missing_ok=True)
             if begin%250==0 or end==iterations:print(f'PERMUTATIONS {subject} {kind}: {end}/{iterations}',flush=True)
     return dict(pair_sum=diff.sum(axis=1,dtype=np.float64),pair_squares=(diff.astype(np.float64)**2).sum(axis=1),pairs=N)
