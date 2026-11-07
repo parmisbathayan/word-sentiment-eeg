@@ -27,7 +27,7 @@ jobs:
         with:
           name: paper-figure-checks
           path: |
-            artifacts/paper_figure_previews/*.png
+            artifacts/paper_figure_previews/figures/*.png
             artifacts/zuco_paper_figure_pilot/readers/*/manifest.json
             artifacts/zuco_paper_figure_pilot/readers/*/source_mapping.json
             artifacts/zuco_paper_figure_pilot/readers/*/matching_counts.csv

@@ -14,6 +14,45 @@ from word_sentiment_eeg.paper_released import sentence_location
 from prepare_zuco_paper_figures import repair_eye_duration_columns
 
 
+def figure_previews():
+    """Small artificial fixture for layout QA; never publish as scientific output."""
+    from word_sentiment_eeg.paper_figure_stats import scalp_geometry
+    from render_zuco_paper_figures import figure1,figure_frp,figure4
+    rng=np.random.default_rng(88);out=ROOT/'artifacts/paper_figure_previews';out.mkdir(parents=True,exist_ok=True)
+    (out/'analysis').mkdir(exist_ok=True);(out/'SYNTHETIC_TEST_ONLY').touch()
+    times=np.arange(-75,126)*8;edges=np.r_[np.arange(-600,1000,60),1000]
+    readers=['TEST_A','TEST_B','TEST_C','TEST_D'];stats=[];frames=[]
+    spatial=np.linspace(-1,1,105)[:,None];temporal=np.exp(-((times-260)/100)**2)[None,:]
+    for subject in readers:
+        counts=np.array([20,22]);mean=rng.normal(0,.02,(2,2,106,201));mean[:,:,:105]+=spatial[None,None]*temporal[None,None]*.3
+        mean[:,:,105]=.2+np.abs(mean[:,:,105]);sums=mean*counts[None,:,None,None]
+        stats.append(dict(counts=counts,sums=sums,times_ms=times,neighbor_edges=edges,
+                          eye_means=rng.normal(0,10,(2,2,201)),neighbor_means=rng.uniform(0,.02,(2,6,len(edges)-1)),
+                          pz_trials=rng.normal(0,1,(2,42,201)),pz_duration_ms=np.arange(42)*8+100))
+        rows=[]
+        for i in range(54):
+            cls='negative' if i<20 else ('positive' if i<42 else 'neutral')
+            rows.append(dict(subject=subject,duration_ms=100+8*i,mapping_status='matched',blink_predecessor=False,
+                             label_5=-1 if cls=='negative' else (1 if cls=='positive' else 0),preceded_by_negation=False,
+                             sentiment=cls,selection_status='accepted' if i<42 else 'neutral',eligible_for_matching=i<42,
+                             word_length=1+i%14,word_frequency=1+i%10))
+        frames.append(pd.DataFrame(rows))
+    folder=out/'readers'/readers[0];folder.mkdir(parents=True,exist_ok=True)
+    (folder/'example_sentence.json').write_text(json.dumps(dict(words=['A','positive','example'],bounds=[[0,0,20,30],[30,0,110,30],[120,0,200,30]],
+        gaze=[dict(gaze_x=60,gaze_y=15,duration_ms=200,sentiment='positive')])))
+    xy,adj=scalp_geometry(pd.read_csv(ROOT/'assets/zuco_chanlocs.csv'))
+    p=rng.uniform(.1,1,(2,106,201));p[:,:8,100:110]=.01
+    group=dict(times_ms=times,counts=np.stack([v['counts'] for v in stats]),sums=np.stack([v['sums'] for v in stats]),
+               xy=xy,p=p,map_p=rng.uniform(.1,1,(2,105)))
+    mask=np.zeros((2,105,201),bool);mask[:,:8,100:110]=True
+    permutation=dict(cluster_mask=mask,tct_p=rng.uniform(.2,1,(2,201)),tct_significant=np.zeros((2,201),bool))
+    events=pd.concat(frames,ignore_index=True)
+    figure1(out,readers,stats,events);figure_frp(out,group,permutation,0);figure_frp(out,group,permutation,1)
+    figure4(out,stats,events,dict(included_readers=np.ones(4,bool),p=np.ones((2,201))*.5))
+    assert len(list((out/'figures').glob('*.png')))==4
+    print('Four synthetic layout previews rendered; NOT scientific results')
+
+
 def main():
     from types import SimpleNamespace
     event=SimpleNamespace(colheader=['latency','endtime','duration'],data=np.array([[100.,225.,1.4e14]]))
@@ -56,3 +95,4 @@ def main():
 
 if __name__=='__main__':
     with threadpool_limits(limits=2):main()
+    figure_previews()
