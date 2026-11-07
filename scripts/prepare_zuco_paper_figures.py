@@ -269,6 +269,8 @@ def prepare_reader(subject,source,inventory,sst,out,null_folder,limits,use_gpu,s
             duration_range_ms=[float(table.duration_ms.min()),float(table.duration_ms.max())],mapped_source_sentences=len(used)))
         print('SELECTION AUDIT', (out/'pre_matching_counts.json').read_text(),flush=True)
         table,bins,match_counts=matching(table)
+        write_json(out/'source_mapping.json',dict(blocks=diagnostics,matched_source_sentences=len(used),released_sha256=released_sha))
+        match_counts.to_csv(out/'matching_counts.csv',index=False)
         residual,betas,model=fit_reader_blocks(blocks,progress=lambda a,b:print(f'DECONVOLUTION {subject}: channel {a}/{b}',flush=True))
         atomic_npz(out/'nuisance_betas.npz',betas=betas)
         epochs=[[],[]];accepted=[];eyes=[];neighbors=[]
@@ -355,6 +357,8 @@ def main():
                   lowpass_hz=50,highpass_hz=1,output_hz=125,epoch_ms=[-600,1000],baseline=None,
                   label_source='original SST; no agent sentiment labels',native_timing_tolerance_ms=8,
                   code={name:file_digest(ROOT/name) for name in ['scripts/prepare_zuco_paper_figures.py','scripts/zuco_paper_pilot.py','scripts/paper_sst_source.py','src/word_sentiment_eeg/paper_released.py','src/word_sentiment_eeg/paper_python.py','src/word_sentiment_eeg/paper_labels.py','src/word_sentiment_eeg/paper_fixations.py','src/word_sentiment_eeg/paper_trials.py','src/word_sentiment_eeg/paper_figure_stats.py']},departures=DEPARTURES)
+    from importlib.metadata import version
+    protocol['software']={name:version(name) for name in ['numpy','scipy','pandas','h5py','scikit-learn']}
     if (out/'protocol.json').is_file() and json.loads((out/'protocol.json').read_text())!=protocol:raise ValueError('Figure preparation protocol changed; do not mix outputs')
     if (out/'manifest.json').is_file():
         saved=json.loads((out/'manifest.json').read_text())
