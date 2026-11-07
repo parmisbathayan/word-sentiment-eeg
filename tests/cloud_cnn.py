@@ -34,11 +34,42 @@ def main():
                            subject=[f'R{i//20}' for i in range(200)],dataset='zuco',sentence_position=np.arange(200),
                            onset_sample_sentence_0based=200,event_id=[str(i) for i in range(200)]))
     for mode in ['sentence','word','reader']:
-        folds,_=c.nested_folds(meta,y,mode);seen=[]
+        folds,spec=c.nested_folds(meta,y,mode);seen=[]
+        # Reproduce the actual run_case JSON boundary with integer-coded labels.
+        assert set(spec['group_counts_by_class'])=={'0','1'}
+        with tempfile.TemporaryDirectory() as directory:
+            path=Path(directory)/'split_spec.json';c.write_json(path,spec)
+            assert json.loads(path.read_text())==spec
         for tr,va,te in folds:
             assert not set(tr)&set(va) and not set(tr)&set(te) and not set(va)&set(te)
             seen.extend(te)
         assert sorted(seen)==list(range(200))
+    with tempfile.TemporaryDirectory() as directory:
+        root=Path(directory)
+        # Exercise full case orchestration, not just independent split/model
+        # components: JSON -> training -> OOF predictions -> score persistence.
+        for classes in [['negative','positive'],['neutral','nonneutral']]:
+            case=root/classes[0];case.mkdir()
+            score=c.run_case(X,meta,np.arange(len(y)),y,classes,'sentence',case,
+                             dict(max_epochs=1,patience=1,batch_size=32,device='cpu'))
+            saved=json.loads((case/'score.json').read_text())
+            assert saved==score and score['trials']==200
+            predictions=pd.read_csv(case/'predictions.csv.gz')
+            assert len(predictions)==200 and predictions.event_id.nunique()==200
+            assert set(predictions.truth)==set(classes)
+        protocol_path=root/'protocol.json'
+        old=dict(code=c.LEGACY_JSON_ONLY_CODE,helper='fixed',archive='fixed',device='cuda',spec=c.SPEC)
+        new=dict(old,code='json-fixed-code')
+        c.write_json(protocol_path,old);c.reconcile_protocol(protocol_path,new)
+        assert json.loads(protocol_path.read_text())==new
+        assert (root/'json_output_migration.json').is_file()
+        # A new runtime/archive/helper must not be silently accepted.
+        for field in ['helper','archive','device','code']:
+            c.write_json(protocol_path,old if field!='code' else dict(old,code='unrecognized'))
+            changed=dict(new,**{field:'changed'}) if field!='code' else new
+            try:c.reconcile_protocol(protocol_path,changed)
+            except ValueError:pass
+            else:raise AssertionError('Changed CNN protocol accepted: '+field)
     assert sum(p.numel() for p in c.CompactEEGNet(105).parameters())<10000
     # Exercise the actual archive-to-temporary-stage adapter, not just training.
     with tempfile.TemporaryDirectory() as directory:
@@ -64,7 +95,7 @@ def main():
         staged,meta,identity2,_=c.stage_task(archive,roster,root,temporary)
         assert identity==identity2 # a validated stage never needs to reopen EEG
         np.testing.assert_array_equal(staged,data[:,:,25:125]);del staged
-    print('CNN checks passed: learns signal, train-only scaling, grouped validation, OOF coverage, resume and parameter budget')
+    print('CNN checks passed: learns signal, train-only scaling, grouped validation, JSON case orchestration, OOF coverage, migration, resume and parameter budget')
 
 
 if __name__=='__main__':main()

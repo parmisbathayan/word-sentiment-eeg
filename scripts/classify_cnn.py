@@ -26,6 +26,7 @@ import analyze_trial_archive as a
 from word_sentiment_eeg.common import digest,file_digest,write_json
 
 SEED=2026
+LEGACY_JSON_ONLY_CODE='fe7f1154a29905488381a5199a8cf9c9d4d2a774db001158d9d1a2addd3113fb'
 SPEC=dict(model='independent EEGNet-inspired 8/2/16',targets=['positive_negative','neutral_nonneutral'],
           splits=['sentence','word','reader'],outer_folds=3,max_epochs=25,patience=4,batch_size=128,
           learning_rate=.001,weight_decay=.0001,dropout=.5,input_ms=[0,800],last_sample_ms=792,
@@ -56,6 +57,26 @@ def seed_all(seed):
 
 def atomic_torch(path,value):
     temp=path.with_suffix('.tmp');torch.save(value,temp);temp.replace(path)
+
+
+def reconcile_protocol(path,protocol):
+    """Recognize only the exact prior JSON-output bug, with all run inputs fixed.
+
+    The split labels written to JSON change from NumPy keys to native strings;
+    model, trials, folds and staging fingerprints are unchanged. Never bypass
+    changed archive, runtime, helper, or model identities to make a rerun pass.
+    """
+    if path.is_file():
+        saved=json.loads(path.read_text())
+        if saved!=protocol:
+            old=dict(saved);old_code=old.pop('code',None)
+            new=dict(protocol);new.pop('code',None)
+            if old_code!=LEGACY_JSON_ONLY_CODE or old!=new:
+                raise ValueError('CNN code/data/runtime changed; refusing mixed results')
+            write_json(path.parent/'json_output_migration.json',dict(old_code=old_code,new_code=protocol['code'],
+                reason='Split-count JSON keys only; model, selection, splits and temporary EEG stage unchanged'))
+            print('RESUME: JSON-output fix recognized; keeping the existing temporary EEG stage and saved fits.',flush=True)
+    write_json(path,protocol)
 
 
 def stage_task(archive,records,thesis,temporary,prepare=True):
@@ -135,6 +156,9 @@ def population(meta,target):
 def nested_folds(meta,y,mode):
     column={'sentence':'sentence_key','word':'word_identity','reader':'subject'}[mode]
     groups=meta[column].astype(str).to_numpy();outer,spec=a.grouped_splits(y,groups)
+    # Integer-coded CNN targets produce np.int64 dictionary keys in the shared
+    # splitter. json.dumps(default=...) cannot fix unsupported dictionary keys.
+    spec['group_counts_by_class']={str(k):int(v) for k,v in spec['group_counts_by_class'].items()}
     if mode=='word':outer,spec['outer_overlap_purges']=a.purge_overlapping_train(meta,y,outer)
     result=[]
     for train,test in outer:
@@ -260,9 +284,7 @@ def main():
     args.temporary_root.mkdir(parents=True,exist_ok=True)
     protocol=dict(spec=SPEC,code=file_digest(Path(__file__)),helper=file_digest(ROOT/'scripts/analyze_trial_archive.py'),
                   archive=file_digest(archive/'manifest.json'),archive_protocol=archive_protocol,torch=torch.__version__,numpy=np.__version__,device=device)
-    if (out/'protocol.json').is_file() and json.loads((out/'protocol.json').read_text())!=protocol:
-        raise ValueError('CNN code/data/runtime changed; refusing mixed results')
-    write_json(out/'protocol.json',protocol);scores=[];skips=[];by_task=defaultdict(list)
+    reconcile_protocol(out/'protocol.json',protocol);scores=[];skips=[];by_task=defaultdict(list)
     for r in records:by_task[(r['dataset'],r['task'])].append(r)
     write_json(out/'manifest.json',dict(status='running'))
     options=dict(max_epochs=SPEC['max_epochs'],patience=SPEC['patience'],batch_size=SPEC['batch_size'],device=device)
