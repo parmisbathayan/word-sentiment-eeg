@@ -255,3 +255,39 @@ training cell. Setup pulls main; expect migration message and `KEEP RUNTIME STAG
 teco/task1: no archive shard reads`. That reuse still requires the original cloud
 temporary files and matching checksums. A runtime reset requires reloading from
 the archive. Do not claim training started or results exist from the failed run.
+
+## Content-word neutral/nonneutral sensitivity analysis
+
+User asked to remove function words from the neutral/nonneutral experiment.
+New independent script `scripts/classify_content_neutral_nonneutral.py` and
+notebook `notebooks/neutral_nonneutral_content.ipynb` reuse the complete feature
+caches. Keep only grammatical_class=content in BOTH classes; exclude function,
+uncertain and missing grammar. Word-alone/context agreement remains; no sentence
+sentiment restriction or neutral downsampling. Existing grammar is an agent
+review/conservative screen, not human gold contextual POS annotation.
+
+Grammar is overlaid by exact word occurrence identity ONLY; it never replaces
+historical sentiment labels. Duplicate physical/signal groups are removed before
+grammar filtering so partial duplicate retention cannot change the original QC.
+All three holdouts and logistic/LDA/dummy/pre-onset/nuisance controls inherited
+from the original follow-up. Saves per-task selection counts, confusion plots,
+predictions and before/after comparisons. No EEG reads or feature preparation.
+New output: classification_similarity/neutral_nonneutral_content/. Expected
+additional Drive output 10–40 MB, checked against 60 MB. No actual results yet.
+
+Private TeCo grammar-only CSV (3,016 rows, 152,141 bytes) derived from the existing
+private reviewed three-level CSV and uploaded to the verified existing Thesis/
+gpt uploaded files/word_sentiment_eeg/teco folder. SHA256 is pinned in the code:
+2b0cb972609f1878e17b4483023f13191fbaa422536bcffbdc57dcd39adcf347.
+Private data is ignored by Git; no Persian stimulus text was published.
+English grammar uses the public existing three-level annotations. Both source
+hashes are recorded in the new output protocol; changed inputs refuse mixed reuse.
+
+Regression tests cover exact grammar joins, unchanged sentiment columns,
+reconciling selection counts, missing labels, neutral words in positive sentences,
+nonunique identity rejection, and the full inherited classifier path. Cloud run
+42368040964 verifies these (check conclusion before claiming passed).
+
+User should finish the running CNN before launching another notebook/runtime.
+Then open neutral_nonneutral_content.ipynb, CPU, Run all. Existing runs/CNN code
+and their protocols were not modified by this addition.
