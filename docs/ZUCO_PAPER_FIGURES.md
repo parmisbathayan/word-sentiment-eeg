@@ -97,7 +97,9 @@ The final estimate is not a measured full-12-reader output size.
 
 No second full-channel EEG archive is saved. Native downloads live temporarily
 in Colab and are removed after conversion. Only the E62 trial raster is retained
-at trial level for Figure 1. Completed-reader checksums prevent counting a reader
+at trial level for Figure 1. The notebook pins its execution code revision for stable resumption. Numerical
+dependency versions are recorded; changed environments refuse mixed outputs.
+Completed-reader checksums prevent counting a reader
 twice. Permutation chunks use atomic generations and reader membership; interrupted
 chunks resume without adding completed readers again. An incomplete reader can
 need source download/regression again. The original first-fixation archive,
