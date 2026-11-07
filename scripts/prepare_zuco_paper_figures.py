@@ -41,9 +41,11 @@ DEPARTURES=[
  'Matching: reader, exact word length 1-20, tertiles of previous and next fixation-onset gaps; exact original sampling code unavailable.',
  'Python normal/identity random-intercept-and-slope ML with asymptotic Wald p-values; no MATLAB fitglme numerical-parity claim.',
  'Electrode adjacency uses distance-pruned Delaunay geometry, not a recovered FieldTrip neighbor file.',
- 'Word frequency uses English wordfreq Zipf values as an explicit alternate reference.',
+ 'Word frequency counts case-folded, edge-punctuation-stripped occurrences in the released SR text pool; normalization is explicit.',
+ 'Control-panel neighbor-bin, duration and frequency tests use reader-paired t-tests; EEG/GFP inference uses individual-trial mixed models.',
  'Eye velocity uses recorded pixels/second; no invented visual-angle calibration.',
- 'Topography panel uses the predeclared published 224-304 ms window, including when this run is nonsignificant.',
+ 'Eye-event duration is recomputed from recorded endtime minus latency; inconsistent stored duration exports are audited.',
+ 'Topography panels use predeclared reference windows (raw 224-280 ms; cleaned 224-304 ms), including when this run is nonsignificant.',
  'The four main figures are the scope; published decoding Table 1 is a separate analysis, not fabricated from existing linear/CNN scores.'
 ]
 
@@ -77,6 +79,29 @@ def event_table(eye,name):
     if values.size==0:values=np.empty((0,len(columns)))
     if values.ndim==1:values=values[None,:]
     return pd.DataFrame(values,columns=columns)
+
+
+def repair_eye_duration_columns(eye):
+    """Use recorded interval endpoints, not physically inconsistent duration fields.
+
+    Several released native exports have finite but impossible stored durations.
+    The onset/end timestamps remain independently usable. No gaps or onsets are
+    guessed. All durations use the same explicit end-minus-start convention.
+    """
+    audit={}
+    for name in ['fixations','saccades','blinks']:
+        source=getattr(eye['eyeevent'],name);columns=[str(v) for v in np.asarray(source.colheader).reshape(-1)]
+        array=np.asarray(source.data,float)
+        if not array.size:audit[name]=dict(events=0);continue
+        if array.ndim==1:array=array[None,:]
+        start,end,duration=[columns.index(k) for k in ['latency','endtime','duration']]
+        physical=array[:,end]-array[:,start]
+        if not np.isfinite(physical).all() or np.any(physical<=0) or np.any(physical>10000):
+            raise ValueError('Eye-event endpoints do not form plausible millisecond intervals: '+name)
+        audit[name]=dict(events=len(array),stored_duration_mismatches=int((np.abs(array[:,duration]-physical)>2).sum()),
+                         minimum_recomputed_ms=float(physical.min()),maximum_recomputed_ms=float(physical.max()))
+        array=array.copy();array[:,duration]=physical;source.data=array
+    return audit
 
 
 def sentence_metadata(path,sst):
@@ -180,7 +205,6 @@ def eye_velocity(eye,sync,epoch_times):
 
 def prepare_reader(subject,source,inventory,sst,out,null_folder,limits,use_gpu,source_paths=None):
     from scipy.io import loadmat
-    from wordfreq import zipf_frequency
     out.mkdir(parents=True,exist_ok=True)
     with tempfile.TemporaryDirectory(prefix='zuco-paper-reader-') as temporary:
         folder=Path(temporary)
@@ -189,6 +213,7 @@ def prepare_reader(subject,source,inventory,sst,out,null_folder,limits,use_gpu,s
         if path.stat().st_size!=source['bytes']:raise ValueError('Released source size changed')
         released_sha=file_digest(path)
         sentences=sentence_metadata(path,sst);blocks=[];tables=[];diagnostics=[];used=set();example=None;example_sentence=None
+        frequency=Counter(word.strip('.,!?;:"()[]{}').casefold() for s in sentences for word in s['words'])
         for bi,item in enumerate(inventory,1):
             print(f'SOURCE {subject}: block {bi}/{len(inventory)}',flush=True)
             eeg_path=fetch(item['eeg'],folder);eye_path=fetch(item['eye'],folder);corrected_path=fetch(item['corrected'],folder)
@@ -196,14 +221,16 @@ def prepare_reader(subject,source,inventory,sst,out,null_folder,limits,use_gpu,s
             montage=pd.read_csv(ROOT/'assets/zuco_chanlocs.csv').labels.astype(str).tolist()
             if channels!=montage:raise ValueError('Native channel order differs from the verified 105-channel montage')
             eye=loadmat(eye_path,squeeze_me=True,struct_as_record=False);corrected=loadmat(corrected_path,squeeze_me=True,struct_as_record=False)
+            duration_audit=dict(raw=repair_eye_duration_columns(eye),corrected=repair_eye_duration_columns(corrected))
             table,timeline,diagnostic,maps=map_block(subject,item['block_id'],raw,rate,codes,latencies,eye,corrected,sentences,used)
+            diagnostic['duration_endpoint_audit']=duration_audit
             filtered,filter_info=filter_and_resample(raw,rate)
             diagnostic['filter']=filter_info;diagnostics.append(diagnostic);tables.append(table)
             diagnostic['source_sha256']={p.name:file_digest(p) for p in [eeg_path,eye_path,corrected_path]}
             blocks.append(dict(block_id=item['block_id'],eeg=filtered,events=timeline,channel_names=channels,eye=eye,sync=diagnostic['synchronization']))
             if example_sentence is None and maps:
                 start,stop,s=maps[0];example_sentence=dict(words=s['words'],bounds=np.asarray(s['bounds']).tolist(),
-                    gaze=table.loc[(table.onset_seconds>=start)&(table.onset_seconds<=stop),['gaze_x','gaze_y','duration_ms']].to_dict('records'))
+                    gaze=table.loc[(table.onset_seconds>=start)&(table.onset_seconds<=stop),['gaze_x','gaze_y','duration_ms','sentiment']].to_dict('records'))
             # Temporary source copies are no longer needed after conversion.
             for p in [eeg_path,eye_path,corrected_path]:p.unlink(missing_ok=True)
         # Sentence identities have been carried forward in event rows. Release
@@ -220,6 +247,7 @@ def prepare_reader(subject,source,inventory,sst,out,null_folder,limits,use_gpu,s
         atomic_npz(out/'nuisance_betas.npz',betas=betas)
         epochs=[[],[]];accepted=[];eyes=[];neighbors=[]
         sums=np.zeros((2,2,106,201),np.float64);squares=np.zeros_like(sums);counts=np.zeros(2,int)
+        map_sums=np.zeros((2,2,105));map_squares=np.zeros_like(map_sums)
         for block in blocks:
             indices=table.index[(table.block_id==block['block_id'])&table.selection_status.eq('matched_before_epoch_rejection')]
             for index in indices:
@@ -228,10 +256,13 @@ def prepare_reader(subject,source,inventory,sst,out,null_folder,limits,use_gpu,s
                 pair=np.stack([block['eeg'][:,ix],residual[block['block_id']][:,ix]])
                 if not np.isfinite(pair).all():table.loc[index,'selection_status']='nonfinite_paired_epoch';continue
                 if np.max(np.abs(pair[0]))>90:table.loc[index,'selection_status']='raw_amplitude_over_90uV';continue
-                table.loc[index,'selection_status']='accepted';table.loc[index,'frequency_zipf']=zipf_frequency(row.word,'en')
+                table.loc[index,'selection_status']='accepted';table.loc[index,'word_frequency']=frequency[row.word.strip('.,!?;:"()[]{}').casefold()]
                 c=0 if row.sentiment=='negative' else 1;counts[c]+=1
                 value=np.concatenate([pair,np.std(pair,axis=1)[:,None,:]],axis=1)
                 sums[:,c]+=value;squares[:,c]+=value.astype(np.float64)**2
+                for r,stop in enumerate([280,304]):
+                    window=(TIMES>=224)&(TIMES<=stop);topo=pair[r][:,window].mean(axis=1)
+                    map_sums[r,c]+=topo;map_squares[r,c]+=topo.astype(np.float64)**2
                 for r in range(2):epochs[r].append(pair[r])
                 accepted.append(index);eyes.append(eye_velocity(block['eye'],block['sync'],float(row.onset_seconds)+TIMES/1000))
                 neighbors.append(np.stack([np.histogram([offset],bins=BIN_EDGES)[0] if np.isfinite(offset) else np.zeros(len(BIN_EDGES)-1) for offset in row.neighbor_offsets_ms]))
@@ -255,10 +286,14 @@ def prepare_reader(subject,source,inventory,sst,out,null_folder,limits,use_gpu,s
             with __import__('warnings').catch_warnings():
                 __import__('warnings').simplefilter('ignore',RuntimeWarning);eye_means.append(eye_sums[ci]/max(1,eye_counts[ci]))
             neighbor_means.append(neighbor_values[pick].mean(axis=0))
-        atomic_npz(out/'statistics.npz',counts=counts,sums=sums,squares=squares,eye_means=np.stack(eye_means),
+        pz_index=pd.read_csv(ROOT/'assets/zuco_chanlocs.csv').labels.astype(str).tolist().index('E62')
+        pz_trials=np.stack([np.stack(v)[:,pz_index] for v in epochs])
+        example=sums[:,:,:105].sum(axis=1)/counts.sum()
+        atomic_npz(out/'statistics.npz',counts=counts,sums=sums,squares=squares,map_sums=map_sums,map_squares=map_squares,eye_means=np.stack(eye_means),
                    neighbor_means=np.stack(neighbor_means),times_ms=TIMES,neighbor_edges=BIN_EDGES,
                    eye_counts=eye_counts,eye_sums=eye_sums,eye_squares=eye_squares,
-                   pair_sum=perm['pair_sum'],pair_squares=perm['pair_squares'],pairs=np.array(n),example=example)
+                   pair_sum=perm['pair_sum'],pair_squares=perm['pair_squares'],pairs=np.array(n),example=example,
+                   pz_trials=pz_trials,pz_duration_ms=accepted_table.duration_ms.to_numpy())
         for column in ['neighbor_offsets_ms']:
             table[column]=table[column].map(lambda value:json.dumps(value,allow_nan=True))
         table.to_csv(out/'fixation_audit.csv.gz',index=False,compression='gzip')

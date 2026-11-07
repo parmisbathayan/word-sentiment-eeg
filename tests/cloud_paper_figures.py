@@ -11,9 +11,15 @@ from threadpoolctl import threadpool_limits
 ROOT=Path(__file__).resolve().parents[1];sys.path.insert(0,str(ROOT/'src'));sys.path.insert(0,str(ROOT/'scripts'))
 from word_sentiment_eeg.paper_figure_stats import gaussian_profile,mixed_models,permutation_reader,finish_permutations,temporal_mask
 from word_sentiment_eeg.paper_released import sentence_location
+from prepare_zuco_paper_figures import repair_eye_duration_columns
 
 
 def main():
+    from types import SimpleNamespace
+    event=SimpleNamespace(colheader=['latency','endtime','duration'],data=np.array([[100.,225.,1.4e14]]))
+    eye={'eyeevent':SimpleNamespace(fixations=event,saccades=SimpleNamespace(colheader=[],data=np.empty((0,0))),blinks=SimpleNamespace(colheader=[],data=np.empty((0,0))))}
+    audit=repair_eye_duration_columns(eye)
+    assert event.data[0,2]==125 and audit['fixations']['stored_duration_mismatches']==1
     rng=np.random.default_rng(75)
     counts=np.array([[12,17],[14,10],[10,19],[18,13]],int)
     values=[[rng.normal(i*.3+c*2,.8,n) for c,n in enumerate(row)] for i,row in enumerate(counts)]
