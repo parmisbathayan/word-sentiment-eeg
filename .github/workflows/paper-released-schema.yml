@@ -12,10 +12,10 @@ jobs:
           cache: pip
           cache-dependency-path: requirements-analysis.txt
       - run: python -m pip install -r requirements-analysis.txt
-      - run: python scripts/paper_released_schema.py
+      - run: python scripts/paper_sentence_map_audit.py
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: paper-released-schema
-          path: artifacts/paper_released_schema.json
+          path: artifacts/paper_sentence_map_audit.json
           retention-days: 7

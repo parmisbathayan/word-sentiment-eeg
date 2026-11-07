@@ -1,0 +1,1047 @@
+{
+  "source": {
+    "subject": "ZAB",
+    "task": "SR",
+    "filename": "resultsZAB_SR.mat",
+    "bytes": 846202463,
+    "url": "https://osf.io/download/gwmxd/"
+  },
+  "purpose": "Released source schema; no sentiment results",
+  "format": "MAT_v5",
+  "sentences": 400,
+  "fields": [
+    "content",
+    "rawData",
+    "mean_t1",
+    "mean_t2",
+    "mean_a1",
+    "mean_a2",
+    "mean_b1",
+    "mean_b2",
+    "mean_g1",
+    "mean_g2",
+    "mean_t1_sec",
+    "mean_t2_sec",
+    "mean_a1_sec",
+    "mean_a2_sec",
+    "mean_b1_sec",
+    "mean_b2_sec",
+    "mean_g1_sec",
+    "mean_g2_sec",
+    "mean_t1_diff",
+    "mean_t2_diff",
+    "mean_a1_diff",
+    "mean_a2_diff",
+    "mean_b1_diff",
+    "mean_b2_diff",
+    "mean_g1_diff",
+    "mean_g2_diff",
+    "mean_t1_diff_sec",
+    "mean_t2_diff_sec",
+    "mean_a1_diff_sec",
+    "mean_a2_diff_sec",
+    "mean_b1_diff_sec",
+    "mean_b2_diff_sec",
+    "mean_g1_diff_sec",
+    "mean_g2_diff_sec",
+    "word",
+    "omissionRate",
+    "allFixations",
+    "wordbounds",
+    "answer_mean_t1",
+    "answer_mean_t2",
+    "answer_mean_a1",
+    "answer_mean_a2",
+    "answer_mean_b1",
+    "answer_mean_b2",
+    "answer_mean_g1",
+    "answer_mean_g2",
+    "answer_mean_t1_diff",
+    "answer_mean_t2_diff",
+    "answer_mean_a1_diff",
+    "answer_mean_a2_diff",
+    "answer_mean_b1_diff",
+    "answer_mean_b2_diff",
+    "answer_mean_g1_diff",
+    "answer_mean_g2_diff"
+  ],
+  "first_sentence_fields": {
+    "content": {
+      "shape": [],
+      "dtype": "<U117"
+    },
+    "rawData": {
+      "shape": [
+        105,
+        3341
+      ],
+      "dtype": "float32"
+    },
+    "mean_t1": {
+      "shape": [
+        105
+      ],
+      "dtype": "float32"
+    },
+    "mean_t2": {
+      "shape": [
+        105
+      ],
+      "dtype": "float32"
+    },
+    "mean_a1": {
+      "shape": [
+        105
+      ],
+      "dtype": "float32"
+    },
+    "mean_a2": {
+      "shape": [
+        105
+      ],
+      "dtype": "float32"
+    },
+    "mean_b1": {
+      "shape": [
+        105
+      ],
+      "dtype": "float32"
+    },
+    "mean_b2": {
+      "shape": [
+        105
+      ],
+      "dtype": "float32"
+    },
+    "mean_g1": {
+      "shape": [
+        105
+      ],
+      "dtype": "float32"
+    },
+    "mean_g2": {
+      "shape": [
+        105
+      ],
+      "dtype": "float32"
+    },
+    "mean_t1_sec": {
+      "shape": [
+        7,
+        105
+      ],
+      "dtype": "float64"
+    },
+    "mean_t2_sec": {
+      "shape": [
+        7,
+        105
+      ],
+      "dtype": "float64"
+    },
+    "mean_a1_sec": {
+      "shape": [
+        7,
+        105
+      ],
+      "dtype": "float64"
+    },
+    "mean_a2_sec": {
+      "shape": [
+        7,
+        105
+      ],
+      "dtype": "float64"
+    },
+    "mean_b1_sec": {
+      "shape": [
+        7,
+        105
+      ],
+      "dtype": "float64"
+    },
+    "mean_b2_sec": {
+      "shape": [
+        7,
+        105
+      ],
+      "dtype": "float64"
+    },
+    "mean_g1_sec": {
+      "shape": [
+        7,
+        105
+      ],
+      "dtype": "float64"
+    },
+    "mean_g2_sec": {
+      "shape": [
+        7,
+        105
+      ],
+      "dtype": "float64"
+    },
+    "mean_t1_diff": {
+      "shape": [
+        48
+      ],
+      "dtype": "float32"
+    },
+    "mean_t2_diff": {
+      "shape": [
+        48
+      ],
+      "dtype": "float32"
+    },
+    "mean_a1_diff": {
+      "shape": [
+        48
+      ],
+      "dtype": "float32"
+    },
+    "mean_a2_diff": {
+      "shape": [
+        48
+      ],
+      "dtype": "float32"
+    },
+    "mean_b1_diff": {
+      "shape": [
+        48
+      ],
+      "dtype": "float32"
+    },
+    "mean_b2_diff": {
+      "shape": [
+        48
+      ],
+      "dtype": "float32"
+    },
+    "mean_g1_diff": {
+      "shape": [
+        48
+      ],
+      "dtype": "float32"
+    },
+    "mean_g2_diff": {
+      "shape": [
+        48
+      ],
+      "dtype": "float32"
+    },
+    "mean_t1_diff_sec": {
+      "shape": [
+        7,
+        48
+      ],
+      "dtype": "float64"
+    },
+    "mean_t2_diff_sec": {
+      "shape": [
+        7,
+        48
+      ],
+      "dtype": "float64"
+    },
+    "mean_a1_diff_sec": {
+      "shape": [
+        7,
+        48
+      ],
+      "dtype": "float64"
+    },
+    "mean_a2_diff_sec": {
+      "shape": [
+        7,
+        48
+      ],
+      "dtype": "float64"
+    },
+    "mean_b1_diff_sec": {
+      "shape": [
+        7,
+        48
+      ],
+      "dtype": "float64"
+    },
+    "mean_b2_diff_sec": {
+      "shape": [
+        7,
+        48
+      ],
+      "dtype": "float64"
+    },
+    "mean_g1_diff_sec": {
+      "shape": [
+        7,
+        48
+      ],
+      "dtype": "float64"
+    },
+    "mean_g2_diff_sec": {
+      "shape": [
+        7,
+        48
+      ],
+      "dtype": "float64"
+    },
+    "word": {
+      "shape": [
+        22
+      ],
+      "dtype": "object"
+    },
+    "omissionRate": {
+      "shape": [],
+      "dtype": "float64"
+    },
+    "allFixations": [
+      "x",
+      "y",
+      "duration",
+      "pupilsize"
+    ],
+    "wordbounds": {
+      "shape": [
+        22,
+        4
+      ],
+      "dtype": "float64"
+    },
+    "answer_mean_t1": {
+      "shape": [
+        0
+      ],
+      "dtype": "float64"
+    },
+    "answer_mean_t2": {
+      "shape": [
+        0
+      ],
+      "dtype": "float64"
+    },
+    "answer_mean_a1": {
+      "shape": [
+        0
+      ],
+      "dtype": "float64"
+    },
+    "answer_mean_a2": {
+      "shape": [
+        0
+      ],
+      "dtype": "float64"
+    },
+    "answer_mean_b1": {
+      "shape": [
+        0
+      ],
+      "dtype": "float64"
+    },
+    "answer_mean_b2": {
+      "shape": [
+        0
+      ],
+      "dtype": "float64"
+    },
+    "answer_mean_g1": {
+      "shape": [
+        0
+      ],
+      "dtype": "float64"
+    },
+    "answer_mean_g2": {
+      "shape": [
+        0
+      ],
+      "dtype": "float64"
+    },
+    "answer_mean_t1_diff": {
+      "shape": [
+        0
+      ],
+      "dtype": "float64"
+    },
+    "answer_mean_t2_diff": {
+      "shape": [
+        0
+      ],
+      "dtype": "float64"
+    },
+    "answer_mean_a1_diff": {
+      "shape": [
+        0
+      ],
+      "dtype": "float64"
+    },
+    "answer_mean_a2_diff": {
+      "shape": [
+        0
+      ],
+      "dtype": "float64"
+    },
+    "answer_mean_b1_diff": {
+      "shape": [
+        0
+      ],
+      "dtype": "float64"
+    },
+    "answer_mean_b2_diff": {
+      "shape": [
+        0
+      ],
+      "dtype": "float64"
+    },
+    "answer_mean_g1_diff": {
+      "shape": [
+        0
+      ],
+      "dtype": "float64"
+    },
+    "answer_mean_g2_diff": {
+      "shape": [
+        0
+      ],
+      "dtype": "float64"
+    }
+  },
+  "allFixations_fields": {
+    "x": {
+      "shape": [
+        28
+      ],
+      "dtype": "float64"
+    },
+    "y": {
+      "shape": [
+        28
+      ],
+      "dtype": "float64"
+    },
+    "duration": {
+      "shape": [
+        28
+      ],
+      "dtype": "uint8"
+    },
+    "pupilsize": {
+      "shape": [
+        28
+      ],
+      "dtype": "uint16"
+    }
+  },
+  "word_fields": {
+    "content": {
+      "shape": [],
+      "dtype": "<U8"
+    },
+    "fixPositions": {
+      "shape": [
+        4
+      ],
+      "dtype": "uint8"
+    },
+    "nFixations": {
+      "shape": [],
+      "dtype": "int64"
+    },
+    "meanPupilSize": {
+      "shape": [],
+      "dtype": "float64"
+    },
+    "rawEEG": {
+      "shape": [
+        4
+      ],
+      "dtype": "object"
+    },
+    "rawET": {
+      "shape": [
+        4
+      ],
+      "dtype": "object"
+    },
+    "FFD": {
+      "shape": [],
+      "dtype": "int64"
+    },
+    "FFD_pupilsize": {
+      "shape": [],
+      "dtype": "int64"
+    },
+    "FFD_t1": {
+      "shape": [
+        105
+      ],
+      "dtype": "float64"
+    },
+    "FFD_t2": {
+      "shape": [
+        105
+      ],
+      "dtype": "float64"
+    },
+    "FFD_a1": {
+      "shape": [
+        105
+      ],
+      "dtype": "float64"
+    },
+    "FFD_a2": {
+      "shape": [
+        105
+      ],
+      "dtype": "float64"
+    },
+    "FFD_b1": {
+      "shape": [
+        105
+      ],
+      "dtype": "float64"
+    },
+    "FFD_b2": {
+      "shape": [
+        105
+      ],
+      "dtype": "float64"
+    },
+    "FFD_g1": {
+      "shape": [
+        105
+      ],
+      "dtype": "float64"
+    },
+    "FFD_g2": {
+      "shape": [
+        105
+      ],
+      "dtype": "float64"
+    },
+    "FFD_t1_diff": {
+      "shape": [
+        48
+      ],
+      "dtype": "float64"
+    },
+    "FFD_t2_diff": {
+      "shape": [
+        48
+      ],
+      "dtype": "float64"
+    },
+    "FFD_a1_diff": {
+      "shape": [
+        48
+      ],
+      "dtype": "float64"
+    },
+    "FFD_a2_diff": {
+      "shape": [
+        48
+      ],
+      "dtype": "float64"
+    },
+    "FFD_b1_diff": {
+      "shape": [
+        48
+      ],
+      "dtype": "float64"
+    },
+    "FFD_b2_diff": {
+      "shape": [
+        48
+      ],
+      "dtype": "float64"
+    },
+    "FFD_g1_diff": {
+      "shape": [
+        48
+      ],
+      "dtype": "float64"
+    },
+    "FFD_g2_diff": {
+      "shape": [
+        48
+      ],
+      "dtype": "float64"
+    },
+    "TRT": {
+      "shape": [],
+      "dtype": "int64"
+    },
+    "TRT_pupilsize": {
+      "shape": [],
+      "dtype": "float64"
+    },
+    "TRT_t1": {
+      "shape": [
+        105
+      ],
+      "dtype": "float64"
+    },
+    "TRT_t2": {
+      "shape": [
+        105
+      ],
+      "dtype": "float64"
+    },
+    "TRT_a1": {
+      "shape": [
+        105
+      ],
+      "dtype": "float64"
+    },
+    "TRT_a2": {
+      "shape": [
+        105
+      ],
+      "dtype": "float64"
+    },
+    "TRT_b1": {
+      "shape": [
+        105
+      ],
+      "dtype": "float64"
+    },
+    "TRT_b2": {
+      "shape": [
+        105
+      ],
+      "dtype": "float64"
+    },
+    "TRT_g1": {
+      "shape": [
+        105
+      ],
+      "dtype": "float64"
+    },
+    "TRT_g2": {
+      "shape": [
+        105
+      ],
+      "dtype": "float64"
+    },
+    "TRT_t1_diff": {
+      "shape": [
+        48
+      ],
+      "dtype": "float64"
+    },
+    "TRT_t2_diff": {
+      "shape": [
+        48
+      ],
+      "dtype": "float64"
+    },
+    "TRT_a1_diff": {
+      "shape": [
+        48
+      ],
+      "dtype": "float64"
+    },
+    "TRT_a2_diff": {
+      "shape": [
+        48
+      ],
+      "dtype": "float64"
+    },
+    "TRT_b1_diff": {
+      "shape": [
+        48
+      ],
+      "dtype": "float64"
+    },
+    "TRT_b2_diff": {
+      "shape": [
+        48
+      ],
+      "dtype": "float64"
+    },
+    "TRT_g1_diff": {
+      "shape": [
+        48
+      ],
+      "dtype": "float64"
+    },
+    "TRT_g2_diff": {
+      "shape": [
+        48
+      ],
+      "dtype": "float64"
+    },
+    "GD": {
+      "shape": [],
+      "dtype": "int64"
+    },
+    "GD_pupilsize": {
+      "shape": [],
+      "dtype": "int64"
+    },
+    "GD_t1": {
+      "shape": [
+        105
+      ],
+      "dtype": "float64"
+    },
+    "GD_t2": {
+      "shape": [
+        105
+      ],
+      "dtype": "float64"
+    },
+    "GD_a1": {
+      "shape": [
+        105
+      ],
+      "dtype": "float64"
+    },
+    "GD_a2": {
+      "shape": [
+        105
+      ],
+      "dtype": "float64"
+    },
+    "GD_b1": {
+      "shape": [
+        105
+      ],
+      "dtype": "float64"
+    },
+    "GD_b2": {
+      "shape": [
+        105
+      ],
+      "dtype": "float64"
+    },
+    "GD_g1": {
+      "shape": [
+        105
+      ],
+      "dtype": "float64"
+    },
+    "GD_g2": {
+      "shape": [
+        105
+      ],
+      "dtype": "float64"
+    },
+    "GD_t1_diff": {
+      "shape": [
+        48
+      ],
+      "dtype": "float64"
+    },
+    "GD_t2_diff": {
+      "shape": [
+        48
+      ],
+      "dtype": "float64"
+    },
+    "GD_a1_diff": {
+      "shape": [
+        48
+      ],
+      "dtype": "float64"
+    },
+    "GD_a2_diff": {
+      "shape": [
+        48
+      ],
+      "dtype": "float64"
+    },
+    "GD_b1_diff": {
+      "shape": [
+        48
+      ],
+      "dtype": "float64"
+    },
+    "GD_b2_diff": {
+      "shape": [
+        48
+      ],
+      "dtype": "float64"
+    },
+    "GD_g1_diff": {
+      "shape": [
+        48
+      ],
+      "dtype": "float64"
+    },
+    "GD_g2_diff": {
+      "shape": [
+        48
+      ],
+      "dtype": "float64"
+    },
+    "GPT": {
+      "shape": [],
+      "dtype": "int64"
+    },
+    "GPT_pupilsize": {
+      "shape": [],
+      "dtype": "int64"
+    },
+    "GPT_t1": {
+      "shape": [
+        105
+      ],
+      "dtype": "float64"
+    },
+    "GPT_t2": {
+      "shape": [
+        105
+      ],
+      "dtype": "float64"
+    },
+    "GPT_a1": {
+      "shape": [
+        105
+      ],
+      "dtype": "float64"
+    },
+    "GPT_a2": {
+      "shape": [
+        105
+      ],
+      "dtype": "float64"
+    },
+    "GPT_b1": {
+      "shape": [
+        105
+      ],
+      "dtype": "float64"
+    },
+    "GPT_b2": {
+      "shape": [
+        105
+      ],
+      "dtype": "float64"
+    },
+    "GPT_g1": {
+      "shape": [
+        105
+      ],
+      "dtype": "float64"
+    },
+    "GPT_g2": {
+      "shape": [
+        105
+      ],
+      "dtype": "float64"
+    },
+    "GPT_t1_diff": {
+      "shape": [
+        48
+      ],
+      "dtype": "float64"
+    },
+    "GPT_t2_diff": {
+      "shape": [
+        48
+      ],
+      "dtype": "float64"
+    },
+    "GPT_a1_diff": {
+      "shape": [
+        48
+      ],
+      "dtype": "float64"
+    },
+    "GPT_a2_diff": {
+      "shape": [
+        48
+      ],
+      "dtype": "float64"
+    },
+    "GPT_b1_diff": {
+      "shape": [
+        48
+      ],
+      "dtype": "float64"
+    },
+    "GPT_b2_diff": {
+      "shape": [
+        48
+      ],
+      "dtype": "float64"
+    },
+    "GPT_g1_diff": {
+      "shape": [
+        48
+      ],
+      "dtype": "float64"
+    },
+    "GPT_g2_diff": {
+      "shape": [
+        48
+      ],
+      "dtype": "float64"
+    },
+    "SFD": {
+      "shape": [
+        0
+      ],
+      "dtype": "float64"
+    },
+    "SFD_pupilsize": {
+      "shape": [
+        0
+      ],
+      "dtype": "float64"
+    },
+    "SFD_t1": {
+      "shape": [
+        0
+      ],
+      "dtype": "float64"
+    },
+    "SFD_t2": {
+      "shape": [
+        0
+      ],
+      "dtype": "float64"
+    },
+    "SFD_a1": {
+      "shape": [
+        0
+      ],
+      "dtype": "float64"
+    },
+    "SFD_a2": {
+      "shape": [
+        0
+      ],
+      "dtype": "float64"
+    },
+    "SFD_b1": {
+      "shape": [
+        0
+      ],
+      "dtype": "float64"
+    },
+    "SFD_b2": {
+      "shape": [
+        0
+      ],
+      "dtype": "float64"
+    },
+    "SFD_g1": {
+      "shape": [
+        0
+      ],
+      "dtype": "float64"
+    },
+    "SFD_g2": {
+      "shape": [
+        0
+      ],
+      "dtype": "float64"
+    },
+    "SFD_t1_diff": {
+      "shape": [
+        0
+      ],
+      "dtype": "float64"
+    },
+    "SFD_t2_diff": {
+      "shape": [
+        0
+      ],
+      "dtype": "float64"
+    },
+    "SFD_a1_diff": {
+      "shape": [
+        0
+      ],
+      "dtype": "float64"
+    },
+    "SFD_a2_diff": {
+      "shape": [
+        0
+      ],
+      "dtype": "float64"
+    },
+    "SFD_b1_diff": {
+      "shape": [
+        0
+      ],
+      "dtype": "float64"
+    },
+    "SFD_b2_diff": {
+      "shape": [
+        0
+      ],
+      "dtype": "float64"
+    },
+    "SFD_g1_diff": {
+      "shape": [
+        0
+      ],
+      "dtype": "float64"
+    },
+    "SFD_g2_diff": {
+      "shape": [
+        0
+      ],
+      "dtype": "float64"
+    }
+  },
+  "corpus_output_field_names": [
+    "allFixations",
+    "answer_mean_a1",
+    "answer_mean_a1_diff",
+    "answer_mean_a2",
+    "answer_mean_a2_diff",
+    "answer_mean_b1",
+    "answer_mean_b1_diff",
+    "answer_mean_b2",
+    "answer_mean_b2_diff",
+    "answer_mean_g1",
+    "answer_mean_g1_diff",
+    "answer_mean_g2",
+    "answer_mean_g2_diff",
+    "answer_mean_t1",
+    "answer_mean_t1_diff",
+    "answer_mean_t2",
+    "answer_mean_t2_diff",
+    "content",
+    "mean_a1",
+    "mean_a1_diff",
+    "mean_a1_diff_sec",
+    "mean_a1_sec",
+    "mean_a2",
+    "mean_a2_diff",
+    "mean_a2_diff_sec",
+    "mean_a2_sec",
+    "mean_b1",
+    "mean_b1_diff",
+    "mean_b1_diff_sec",
+    "mean_b1_sec",
+    "mean_b2",
+    "mean_b2_diff",
+    "mean_b2_diff_sec",
+    "mean_b2_sec",
+    "mean_g1",
+    "mean_g1_diff",
+    "mean_g1_diff_sec",
+    "mean_g1_sec",
+    "mean_g2",
+    "mean_g2_diff",
+    "mean_g2_diff_sec",
+    "mean_g2_sec",
+    "mean_t1",
+    "mean_t1_diff",
+    "mean_t1_diff_sec",
+    "mean_t1_sec",
+    "mean_t2",
+    "mean_t2_diff",
+    "mean_t2_diff_sec",
+    "mean_t2_sec",
+    "omissionRate",
+    "rawData",
+    "word",
+    "wordbounds"
+  ],
+  "temporary_source_removed": true
+}
