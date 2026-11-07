@@ -335,6 +335,9 @@ def main():
         if saved.get('status')=='completed' and all((out/k).is_file() and file_digest(out/k)==v for k,v in saved['figure_checksums'].items()):
             from render_zuco_paper_figures import load_readers
             load_readers(out)
+            analysis=out/'analysis';audit=json.loads((analysis/'analysis_manifest.json').read_text())
+            if file_digest(analysis/'analysis_manifest.json')!=saved['analysis_manifest_sha256'] or any(file_digest(analysis/k)!=v for k,v in audit['checksums'].items()):
+                raise ValueError('Completed analysis checksums changed')
             print('KEEP COMPLETED RUN: verified reader checkpoints and four figure files. No source reads or refitting.',flush=True);return
         raise ValueError('Final figures changed or incomplete; use --plots-only to rebuild from verified statistics')
     # Count already stored workflow files as reusable capacity, so interrupted

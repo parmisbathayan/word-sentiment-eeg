@@ -63,6 +63,7 @@ def analyze_and_render(out):
                tct='Independent electrode permutations for every within-reader ranked trial pair',
                cluster='Within-pair sign flips, maximum absolute spatial-temporal cluster mass',
                sensor_neighbors='Distance-pruned Delaunay, >=5 supra-threshold neighbors',
+               checksums={name:file_digest(analysis/name) for name in ['group_results.npz','permutation_results.npz','eye_model.npz','clusters.json']},
                source='Pfeiffer et al. 2020, doi:10.1016/j.neuroimage.2020.116934'))
     render_all(out)
 
@@ -163,9 +164,10 @@ def figure_frp(out,group,permutation,representation):
     pooled=sums.sum(axis=0)/counts.sum(axis=0)[:,None,None]
     reader_means=sums/counts[:,:,None,None]
     positive=pooled[1,:105];negative=pooled[0,:105];difference=positive-negative
+    condition_limit=max(float(np.max(np.abs([positive,negative]))),.01)
     fig=plt.figure(figsize=(15,7.5));grid=fig.add_gridspec(2,3,hspace=.5,wspace=.38,height_ratios=[1,1.2])
     for col,(name,value) in enumerate([('Positive',positive),('Negative',negative),('Positive − negative',difference)]):
-        ax=fig.add_subplot(grid[0,col]);limit=max(float(np.abs(value).max()),.01)
+        ax=fig.add_subplot(grid[0,col]);limit=condition_limit if col<2 else max(float(np.abs(value).max()),.01)
         image=ax.imshow(value,aspect='auto',origin='upper',extent=[-600,1000,105,1],cmap='RdYlBu_r',vmin=-limit,vmax=limit)
         ax.axvline(0,color='black',lw=.8,ls='--');ax.set(xlim=(-600,1000),xlabel='Time relative to fixation onset (ms)',ylabel='Electrodes')
         panel(ax,chr(65+col),name);fig.colorbar(image,ax=ax,shrink=.55,label='µV',pad=.02)
@@ -263,11 +265,15 @@ def figure4(out,stats,events,eye_model):
 
 def render_all(out):
     out=Path(out);readers,stats,events=load_readers(out)
+    audit=json.loads((out/'analysis/analysis_manifest.json').read_text())
+    if audit.get('status')!='completed' or any(file_digest(out/'analysis'/name)!=value for name,value in audit['checksums'].items()):
+        raise ValueError('Computed analysis files are incomplete or have changed')
     with np.load(out/'analysis/group_results.npz',allow_pickle=False) as z:group={k:z[k].copy() for k in z.files}
     with np.load(out/'analysis/permutation_results.npz',allow_pickle=False) as z:permutation={k:z[k].copy() for k in z.files}
     with np.load(out/'analysis/eye_model.npz',allow_pickle=False) as z:eye={k:z[k].copy() for k in z.files}
     figure1(out,readers,stats,events);figure_frp(out,group,permutation,0);figure_frp(out,group,permutation,1);figure4(out,stats,events,eye)
     files=list((out/'figures').glob('*'))
     write_json(out/'manifest.json',dict(status='completed',scope='ZuCo SR main figures 1-4; independent Python reconstruction',
-               subjects=readers,figure_checksums={str(p.relative_to(out)):file_digest(p) for p in files}))
+               subjects=readers,analysis_manifest_sha256=file_digest(out/'analysis/analysis_manifest.json'),
+               figure_checksums={str(p.relative_to(out)):file_digest(p) for p in files}))
     print('FOUR MAIN FIGURES SAVED:',out/'figures',flush=True)

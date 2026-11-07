@@ -17,7 +17,8 @@ from prepare_zuco_paper_figures import repair_eye_duration_columns
 def figure_previews():
     """Small artificial fixture for layout QA; never publish as scientific output."""
     from word_sentiment_eeg.paper_figure_stats import scalp_geometry
-    from render_zuco_paper_figures import figure1,figure_frp,figure4
+    from render_zuco_paper_figures import render_all
+    from word_sentiment_eeg.common import atomic_npz,write_json,file_digest
     rng=np.random.default_rng(88);out=ROOT/'artifacts/paper_figure_previews';out.mkdir(parents=True,exist_ok=True)
     (out/'analysis').mkdir(exist_ok=True);(out/'SYNTHETIC_TEST_ONLY').touch()
     times=np.arange(-75,126)*8;edges=np.r_[np.arange(-600,1000,60),1000]
@@ -46,9 +47,16 @@ def figure_previews():
                xy=xy,p=p,map_p=rng.uniform(.1,1,(2,105)))
     mask=np.zeros((2,105,201),bool);mask[:,:8,100:110]=True
     permutation=dict(cluster_mask=mask,tct_p=rng.uniform(.2,1,(2,201)),tct_significant=np.zeros((2,201),bool))
-    events=pd.concat(frames,ignore_index=True)
-    figure1(out,readers,stats,events);figure_frp(out,group,permutation,0);figure_frp(out,group,permutation,1)
-    figure4(out,stats,events,dict(included_readers=np.ones(4,bool),p=np.ones((2,201))*.5))
+    for subject,stat,frame in zip(readers,stats,frames):
+        folder=out/'readers'/subject;folder.mkdir(parents=True,exist_ok=True)
+        atomic_npz(folder/'statistics.npz',**stat);frame.to_csv(folder/'fixation_audit.csv.gz',index=False)
+        write_json(folder/'manifest.json',dict(status='completed',checksums={name:file_digest(folder/name) for name in ['statistics.npz','fixation_audit.csv.gz']}))
+    write_json(out/'preparation_manifest.json',dict(status='completed',subjects=readers))
+    analysis=out/'analysis';atomic_npz(analysis/'group_results.npz',**group);atomic_npz(analysis/'permutation_results.npz',**permutation)
+    atomic_npz(analysis/'eye_model.npz',included_readers=np.ones(4,bool),p=np.ones((2,201))*.5);write_json(analysis/'clusters.json',[])
+    write_json(analysis/'analysis_manifest.json',dict(status='completed',checksums={name:file_digest(analysis/name) for name in ['group_results.npz','permutation_results.npz','eye_model.npz','clusters.json']}))
+    render_all(out)
+    assert json.loads((out/'manifest.json').read_text())['status']=='completed'
     assert len(list((out/'figures').glob('*.png')))==4
     print('Four synthetic layout previews rendered; NOT scientific results')
 

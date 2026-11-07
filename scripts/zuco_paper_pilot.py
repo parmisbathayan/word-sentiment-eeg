@@ -50,6 +50,9 @@ def normalized_events(eye,codes,latencies,rate,sync,duration_seconds):
         columns=[str(v) for v in np.asarray(source.colheader).reshape(-1)]
         headers[kind]=columns;keys=[normalize(v) for v in columns]
         array=np.asarray(source.data,dtype=float)
+        if not array.size:
+            outside[kind]=0
+            continue
         if array.ndim==1:array=array[None,:]
         def column(aliases):
             found=[i for i,key in enumerate(keys) if key in aliases]
