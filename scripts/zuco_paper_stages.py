@@ -37,7 +37,7 @@ def main():
     names=['scripts/zuco_paper_stages.py','scripts/prepare_zuco_paper_figures.py','scripts/zuco_paper_pilot.py',
            'scripts/paper_sst_source.py','src/word_sentiment_eeg/paper_stage_archive.py','src/word_sentiment_eeg/paper_figure_stats.py',
            'src/word_sentiment_eeg/paper_python.py','src/word_sentiment_eeg/paper_released.py','src/word_sentiment_eeg/paper_labels.py',
-           'src/word_sentiment_eeg/paper_fixations.py','src/word_sentiment_eeg/paper_trials.py']
+           'src/word_sentiment_eeg/paper_fixations.py','src/word_sentiment_eeg/paper_trials.py','assets/zuco_chanlocs.csv']
     protocol=dict(workflow='cpu_gpu_stages_v1',subjects=[s['subject'] for s in sources],sources=sources,blocks=args.blocks,
         budget_bytes=args.budget_bytes,tct_permutations=args.tct_permutations,cluster_permutations=args.cluster_permutations,
         code={name:file_digest(ROOT/name) for name in names},software={name:version(name) for name in ['numpy','scipy','pandas','h5py','scikit-learn']},
