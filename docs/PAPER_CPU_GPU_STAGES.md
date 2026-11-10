@@ -104,3 +104,19 @@ would otherwise have stopped; they are preserved without rewriting their data.
 Prior migration records are retained; source_inventory_recovery.json records the
 new lineage. Partial readers restart preparation; saved readers are skipped.
 Recovering absent public source files from another release remains future work.
+
+The all12-reader file inventory audit also found ZKW6 missing its raw eye-event
+file; this is handled by the same explicit exclusion policy. See the metadata-only
+paper_source_pair_audit.json. Other readers have complete named file pairs; this
+does not guarantee that all their signal/timing checks will pass.
+
+The native ZDN test additionally found block6 has a missing/reordered/ambiguous
+shared trigger sequence. Such a source now gets an explicit unverified-trigger
+alignment exclusion without inventing a clock. The fixed synchronization helper
+itself is unchanged; the caller records the known validation failure and omits
+that block. Previously completed readers could not have contained such a failing
+block because the old code would have stopped before a completion checkpoint.
+Timing tolerances remain8ms. Source coverage may therefore be substantially
+smaller than8 blocks for some readers. Later checks should consider a sensitivity
+analysis excluding a reader with very limited remaining source coverage, and
+recovering missing files or better synchronization from an alternate release.
