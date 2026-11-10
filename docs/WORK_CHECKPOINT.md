@@ -388,3 +388,21 @@ and storage rejection. New metadata/montage unit checks in latest paper-stages C
 Terminology: the reproduction's GPU stage runs permutations, not CNN training.
 Individual trials are preserved for later classifiers. Existing CNN still consumes
 the previous first-fixation archive; no new classifier silently added in this turn.
+
+## ZDM blink validation failure and checkpoint-preserving fix (2026-11-10)
+
+User saved ZAB CPU checkpoint, then ZDM failed in block5. Native cloud source audit
+42803449309 confirmed one blink with equal latency/endtime7838804 and recorded
+2ms duration, both raw/corrected. Repair accepts this only when recorded duration
+matches the measured native gaze period (<=4ms); all other endpoint checks remain.
+New single_sample_blinks_retained/source_rows/recorded_eye_sample_ms audits.
+
+Exact prior53d11de protocol code hashes are embedded in migration helper. Verify
+all untouched code/config/data/software, prepared-reader checksums and positive
+historical endpoint ranges; no GPU outputs or complete CPU root marker allowed.
+Save old protocol+recovery lineage, keep ZAB bytes unchanged, restart incomplete
+ZDM. Both stage notebooks now pin be08d01b94212425f9ac3de4649d89d469f37bc5.
+Unit cloud run42803758567 PASSED including valid source-sized single blink,
+negative/incompatible duration rejection, exact migration preservation and changed
+method/environment/input refusal. Full nativeZDM pilot42803764187 and repaired
+endpoint audit42803769178 launched; inspect results before claiming success.

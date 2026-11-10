@@ -59,3 +59,22 @@ A runtime ending **during** a CPU reader can still require repeating that unfini
 reader. Once that reader's `prepared.json` exists and verifies, changing runtimes
 will not repeat its CPU work. Interrupted GPU permutations resume reader/chunk
 membership with trial-input hashes, without adding the same reader twice.
+
+## Single-sample blink source correction (2026-11-10)
+
+ZDM block5 contains a blink with latency=endtime=7838804 and recorded duration
+2 ms. This is present in both raw and corrected eye exports. The original validator
+incorrectly required every endpoint difference to be positive. The corrected rule
+retains a zero-span blink only when its positive recorded duration equals the
+measured native gaze sampling period (maximum4ms). Onsets are unchanged. Negative,
+nonfinite or incompatible zero-span records still fail. Audit fields record the
+source row and period; this is not a blanket relaxation of eye-event validation.
+
+The exact53d11de staged protocol can migrate this endpoint-only correction when
+all other settings, code dependencies, sources and numerical versions match.
+Prepared reader checksums and historical positive duration ranges must verify.
+Migration is restricted to incomplete CPU preparation without GPU work. It records
+the old protocol and preserved reader checkpoint hashes. Existing ZAB files are
+not rewritten, relabeled or reprocessed. The unfinished ZDM reader must restart
+its CPU work because it had no complete CPU checkpoint. Both notebooks pin the
+same updated execution revision. Keep the existing Drive folder and files.
