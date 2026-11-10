@@ -173,3 +173,28 @@ def inventory_checkpoint_migration_test():
 
 
 if __name__=='__main__':inventory_checkpoint_migration_test()
+
+
+def single_sample_fixation_tests():
+    from types import SimpleNamespace
+    from prepare_zuco_paper_figures import repair_eye_duration_columns
+    from word_sentiment_eeg.paper_fixations import selection_outcomes
+    def record(start=4.,end=4.):
+        event=SimpleNamespace(colheader=['latency','endtime','duration'],data=np.array([[start,end,140484085284866.]]))
+        return {'data':np.c_[np.arange(0.,20.,2.)], 'eyeevent':SimpleNamespace(fixations=event,
+            saccades=SimpleNamespace(colheader=[],data=np.array([])),blinks=SimpleNamespace(colheader=[],data=np.array([])))}
+    eye=record();audit=repair_eye_duration_columns(eye)
+    assert eye['eyeevent'].fixations.data[0,2]==2 and audit['fixations']['single_sample_events_retained']==1
+    event=pd.DataFrame(dict(mapping_status=['matched'],duration_ms=[2.],blink_predecessor=[False],
+        word_label_status=['matched'],sentiment=['positive'],preceded_by_negation=[False]))
+    assert selection_outcomes(event)[0]=='fixation_shorter_than_100ms'
+    for bad in [record(3.,3.),record(30.,30.),record(4.,2.),record(4.,float('nan'))]:
+        try:repair_eye_duration_columns(bad)
+        except ValueError:pass
+        else:raise AssertionError('Unsupported or invalid endpoint was repaired')
+    positive=record(4.,104.)
+    repair_eye_duration_columns(positive);assert positive['eyeevent'].fixations.data[0,2]==100
+    print('Single-sample fixation verified on native grid, excluded by100ms rule; ordinary/invalid durations unchanged')
+
+
+if __name__=='__main__':single_sample_fixation_tests()

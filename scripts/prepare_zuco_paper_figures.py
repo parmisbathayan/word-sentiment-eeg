@@ -104,7 +104,9 @@ def repair_eye_duration_columns(eye):
     audit={}
     data=np.asarray(eye.get('data',[]))
     sample_ms=np.nan
+    native_times=np.array([],float)
     if data.ndim==2 and len(data)>1 and data.shape[1]:
+        native_times=np.unique(data[np.isfinite(data[:,0].astype(float)),0].astype(float))
         gaps=np.diff(data[:,0].astype(float));gaps=gaps[np.isfinite(gaps)&(gaps>0)]
         if len(gaps):sample_ms=float(np.median(gaps))
     for name in ['fixations','saccades','blinks']:
@@ -114,20 +116,26 @@ def repair_eye_duration_columns(eye):
         if array.ndim==1:array=array[None,:]
         start,end,duration=[columns.index(k) for k in ['latency','endtime','duration']]
         physical=array[:,end]-array[:,start]
-        # EyeLink can encode a one-sample blink with equal endpoint timestamps.
-        # Retain its recorded duration only when the actual gaze clock confirms
-        # that duration is exactly one sample; never repair negative/unknown spans.
+        # Inclusive endpoints can encode one native sample with equal times.
+        # Corrupted duration fields are not evidence. Require an actual gaze
+        # timestamp, or the previously supported recorded one-sample blink.
         single_sample=np.zeros(len(array),bool)
-        if name=='blinks' and np.isfinite(sample_ms) and 0<sample_ms<=4:
-            single_sample=(physical==0)&np.isclose(array[:,duration],sample_ms,rtol=0,atol=1e-6)
-            physical=np.where(single_sample,array[:,duration],physical)
+        if np.isfinite(sample_ms) and 0<sample_ms<=4:
+            on_grid=np.zeros(len(array),bool)
+            if len(native_times):
+                positions=np.searchsorted(native_times,array[:,start])
+                on_grid=(positions<len(native_times))&np.isclose(native_times[np.minimum(positions,len(native_times)-1)],array[:,start],rtol=0,atol=1e-6)
+            recorded_blink=(name=='blinks')&np.isclose(array[:,duration],sample_ms,rtol=0,atol=1e-6)
+            single_sample=(physical==0)&(on_grid|recorded_blink)
+            physical=np.where(single_sample,sample_ms,physical)
         if not np.isfinite(physical).all() or np.any(physical<=0) or np.any(physical>10000):
             raise ValueError('Eye-event endpoints do not form plausible millisecond intervals: '+name)
         audit[name]=dict(events=len(array),stored_duration_mismatches=int((np.abs(array[:,duration]-physical)>2).sum()),
                          minimum_recomputed_ms=float(physical.min()),maximum_recomputed_ms=float(physical.max()))
         if single_sample.any():
-            audit[name].update(single_sample_blinks_retained=int(single_sample.sum()),source_rows=np.flatnonzero(single_sample).tolist(),
-                               recorded_eye_sample_ms=sample_ms,duration_rule='recorded duration equals measured native eye sample period; equal endpoints')
+            audit[name].update(single_sample_events_retained=int(single_sample.sum()),source_rows=np.flatnonzero(single_sample).tolist(),
+                               recorded_eye_sample_ms=sample_ms,duration_rule='equal endpoints on measured gaze sample grid, or recorded one-sample blink')
+            if name=='blinks':audit[name]['single_sample_blinks_retained']=int(single_sample.sum())
         array=array.copy();array[:,duration]=physical;source.data=array
     return audit
 
