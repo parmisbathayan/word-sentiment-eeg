@@ -406,3 +406,12 @@ Unit cloud run42803758567 PASSED including valid source-sized single blink,
 negative/incompatible duration rejection, exact migration preservation and changed
 method/environment/input refusal. Full nativeZDM pilot42803764187 and repaired
 endpoint audit42803769178 launched; inspect results before claiming success.
+
+Final validation: native ZDM full-reader pilot42803764187 PASSED. All8 blocks
+were inspected; blocks3/5/7 excluded by the unchanged8ms clock threshold
+(42.448/56.522/22.346ms). The single-sample blink in block5 no longer crashes
+validation. Included blocks completed all105-channel cleaning and persistent CPU
+trial storage; a separate process completed test permutations; CPU rerun skipped
+ZDM. Four test permutations only, no full group result. Endpoint audit42803769178
+also passed and reports measured2ms eye period and one retained source blink,
+row7, in both raw and corrected exports. No user Drive data modified in testing.
