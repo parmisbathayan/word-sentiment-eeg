@@ -1,0 +1,147 @@
+{
+  "validation_run": 42904745881,
+  "scope": "ZJM all8source blocks, full105channel cleaning, persisted/reloaded accepted trials;4testpermutations, not full group inference",
+  "accepted_counts": [
+    536,
+    535
+  ],
+  "pairs": 535,
+  "blocks": [
+    {
+      "block": "1",
+      "status": "included",
+      "max_clock_residual_ms": 5.48750110652918,
+      "sample_events": {
+        "raw": {
+          "fixations": 0,
+          "saccades": 0,
+          "blinks": 0
+        },
+        "corrected": {
+          "fixations": 0,
+          "saccades": 0,
+          "blinks": 0
+        }
+      }
+    },
+    {
+      "block": "2",
+      "status": "included",
+      "max_clock_residual_ms": 4.589209239932224,
+      "sample_events": {
+        "raw": {
+          "fixations": 0,
+          "saccades": 0,
+          "blinks": 0
+        },
+        "corrected": {
+          "fixations": 0,
+          "saccades": 0,
+          "blinks": 0
+        }
+      }
+    },
+    {
+      "block": "3",
+      "status": "included",
+      "max_clock_residual_ms": 4.668243579516229,
+      "sample_events": {
+        "raw": {
+          "fixations": 0,
+          "saccades": 0,
+          "blinks": 0
+        },
+        "corrected": {
+          "fixations": 0,
+          "saccades": 0,
+          "blinks": 0
+        }
+      }
+    },
+    {
+      "block": "4",
+      "status": "included",
+      "max_clock_residual_ms": 4.696468480688054,
+      "sample_events": {
+        "raw": {
+          "fixations": 0,
+          "saccades": 0,
+          "blinks": 0
+        },
+        "corrected": {
+          "fixations": 0,
+          "saccades": 0,
+          "blinks": 0
+        }
+      }
+    },
+    {
+      "block": "5",
+      "status": "included",
+      "max_clock_residual_ms": 4.257567445449695,
+      "sample_events": {
+        "raw": {
+          "fixations": 0,
+          "saccades": 0,
+          "blinks": 0
+        },
+        "corrected": {
+          "fixations": 0,
+          "saccades": 0,
+          "blinks": 0
+        }
+      }
+    },
+    {
+      "block": "6",
+      "status": "excluded_clock_alignment",
+      "max_clock_residual_ms": 10.164683676038067,
+      "sample_events": {
+        "raw": {
+          "fixations": 1,
+          "saccades": 0,
+          "blinks": 1
+        },
+        "corrected": {
+          "fixations": 1,
+          "saccades": 0,
+          "blinks": 1
+        }
+      }
+    },
+    {
+      "block": "7",
+      "status": "included",
+      "max_clock_residual_ms": 6.891249316623771,
+      "sample_events": {
+        "raw": {
+          "fixations": 0,
+          "saccades": 0,
+          "blinks": 0
+        },
+        "corrected": {
+          "fixations": 0,
+          "saccades": 0,
+          "blinks": 0
+        }
+      }
+    },
+    {
+      "block": "8",
+      "status": "included",
+      "max_clock_residual_ms": 4.326683638037565,
+      "sample_events": {
+        "raw": {
+          "fixations": 0,
+          "saccades": 0,
+          "blinks": 1
+        },
+        "corrected": {
+          "fixations": 0,
+          "saccades": 0,
+          "blinks": 1
+        }
+      }
+    }
+  ]
+}

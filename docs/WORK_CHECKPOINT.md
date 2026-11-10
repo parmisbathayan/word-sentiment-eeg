@@ -488,3 +488,14 @@ no overwriting prior endpoint/source recovery. Earlier prepared readers are skip
 unfinished ZJM restarts CPU processing. No user Drive outputs changed in tests.
 Notebook revision0d993b9 pins8ed1628 for BOTHCPUandGPU. User must use updatedGPU
 as well after CPU completion. No source-only older notebook should be rerun.
+
+Final native validation42904745881 PASSED: inspected all8ZJMblocks, block6
+explicitly excluded by unchanged8ms alignment rule(max10.165ms) after duration
+parsing; all105channels cleaned for included blocks; CPU archive saved; separate
+process completed test permutations; CPU rerun skipped the reader. Only4test
+permutations, no full-group result. Summary in paper_ZJM_source_validation.json.
+All186available eye-file audit + actual four-file ZJM/ZJS repairs + migration and
+sampling regression tests completed successfully. Latest notebook0d993b9 pins
+8ed1628. Resume withCPU Runall inclsetup; expect CHECKPOINT MIGRATION and KEEP CPU
+READER for earlier saved readers; incompleteZJM restarts. UpdatedGPU later must
+use same pin. No folder deletion or extra trial archive/storage budget increase.
