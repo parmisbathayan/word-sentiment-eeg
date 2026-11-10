@@ -217,7 +217,8 @@ def eye_velocity(eye,sync,epoch_times):
     return np.stack([np.interp(epoch_times,times,velocity[:,c],left=np.nan,right=np.nan) for c in range(2)])
 
 
-def prepare_reader(subject,source,inventory,sst,out,null_folder,limits,use_gpu,source_paths=None):
+def prepare_reader(subject,source,inventory,sst,out,null_folder,limits,use_gpu,source_paths=None,
+                   defer_permutations=False,storage_root=None,preparation_budget_bytes=None):
     from scipy.io import loadmat
     out.mkdir(parents=True,exist_ok=True)
     with tempfile.TemporaryDirectory(prefix='zuco-paper-reader-') as temporary:
@@ -303,7 +304,15 @@ def prepare_reader(subject,source,inventory,sst,out,null_folder,limits,use_gpu,s
         n=min(map(len,orders));neg,pos=[order[:n] for order in orders]
         raw_diff=np.stack(epochs[0])[pos]-np.stack(epochs[0])[neg]
         clean_diff=np.stack(epochs[1])[pos]-np.stack(epochs[1])[neg]
-        perm=permutation_reader(raw_diff,clean_diff,null_folder,subject,limits[0],limits[1],use_gpu=use_gpu)
+        if defer_permutations:
+            from word_sentiment_eeg.paper_stage_archive import save_trials
+            save_trials(out,np.stack([np.stack(v) for v in epochs]),accepted_table,neg,pos,
+                        storage_root,preparation_budget_bytes)
+            diff=np.stack([raw_diff,clean_diff]).astype(np.float32)
+            perm=dict(pair_sum=diff.sum(axis=1,dtype=np.float64),
+                      pair_squares=(diff.astype(np.float64)**2).sum(axis=1),pairs=n)
+        else:
+            perm=permutation_reader(raw_diff,clean_diff,null_folder,subject,limits[0],limits[1],use_gpu=use_gpu)
         eye_values=np.stack(eyes);neighbor_values=np.stack(neighbors);eye_means=[];neighbor_means=[]
         eye_sums=np.zeros((2,2,201));eye_squares=np.zeros_like(eye_sums);eye_counts=np.zeros(2,int)
         for c in ['negative','positive']:
@@ -330,8 +339,13 @@ def prepare_reader(subject,source,inventory,sst,out,null_folder,limits,use_gpu,s
         write_json(out/'matching_policy.json',dict(tertile_edges_ms=bins,method='reader/exact length/neighbor tertiles'))
         write_json(out/'nuisance_diagnostics.json',model)
         write_json(out/'example_sentence.json',example_sentence)
-        write_json(out/'manifest.json',dict(status='completed',subject=subject,accepted_counts=counts.tolist(),pairs=n,
-                    checksums={p.name:file_digest(p) for p in out.iterdir() if p.is_file() and p.name!='manifest.json'}))
+        if defer_permutations:
+            from word_sentiment_eeg.paper_stage_archive import mark_prepared
+            mark_prepared(out,subject,counts,n)
+            print(f'CPU PREPARED {subject}: trials and statistics verified on Drive; safe to switch runtime',flush=True)
+        else:
+            write_json(out/'manifest.json',dict(status='completed',subject=subject,accepted_counts=counts.tolist(),pairs=n,
+                        checksums={p.name:file_digest(p) for p in out.iterdir() if p.is_file() and p.name!='manifest.json'}))
 
 
 def main():

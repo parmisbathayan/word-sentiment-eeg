@@ -1,0 +1,36 @@
+name: CPU GPU paper preparation handoff
+on:
+  workflow_dispatch:
+    inputs:
+      native_pilot:
+        type: boolean
+        default: false
+  push:
+    paths: ['scripts/zuco_paper_stages.py','src/word_sentiment_eeg/paper_stage_archive.py','tests/cloud_paper_stages.py','.github/workflows/paper-stages.yml']
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: requirements-paper.txt
+      - run: python -m pip install -r requirements-paper.txt
+      - run: python tests/cloud_paper_stages.py
+      - if: ${{ inputs.native_pilot }}
+        run: |
+          python scripts/zuco_paper_stages.py --thesis-root /tmp/test-thesis --output artifacts/staged_pilot --phase prepare --subjects ZAB --blocks 1 --tct-permutations 4 --cluster-permutations 4
+          python scripts/zuco_paper_stages.py --thesis-root /tmp/test-thesis --output artifacts/staged_pilot --phase analyze --subjects ZAB --blocks 1 --tct-permutations 4 --cluster-permutations 4 --cpu --skip-inference
+          python scripts/zuco_paper_stages.py --thesis-root /tmp/test-thesis --output artifacts/staged_pilot --phase prepare --subjects ZAB --blocks 1 --tct-permutations 4 --cluster-permutations 4
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: staged-handoff-validation
+          path: |
+            artifacts/staged_pilot/cpu_preparation_manifest.json
+            artifacts/staged_pilot/readers/*/prepared.json
+            artifacts/staged_pilot/readers/*/manifest.json
+          retention-days: 7
