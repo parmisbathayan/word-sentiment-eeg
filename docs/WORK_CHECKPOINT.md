@@ -415,3 +415,28 @@ trial storage; a separate process completed test permutations; CPU rerun skipped
 ZDM. Four test permutations only, no full group result. Endpoint audit42803769178
 also passed and reports measured2ms eye period and one retained source blink,
 row7, in both raw and corrected exports. No user Drive data modified in testing.
+
+## ZDN incomplete source-pair recovery (2026-11-10)
+
+User hit Missing native eye-event source for oip_ZDN_SNR4_EEG.mat. Direct OSF
+metadata read confirmed actual source omissions, not merely an SR/SNR typo:
+ZDN4 raw+corrected missing,5corrected missing,7/8raw missing. A corrected8file
+in the raw folder must NOT be used as the raw event timeline. Resolver now joins
+exact reader/block/type, supports SR/SNR/zero-padding, checks alternate folder
+for correctly typed misplaced files, rejects ambiguous candidates. Missing pairs
+become explicit excluded_missing_source_files diagnostics, no downloads/no guessed
+onsets, unknown fixation count (not zero). Coverage rendering handles absent
+synchronization and reports missing sources. Figure1 counts available observations.
+
+Both initial53d11de and blink-fixedbe08d01 exact staged code sets can migrate an
+incomplete CPU run, retaining all checksum-verified completed readers with valid
+duration audits and originally complete source pairs. Settings/dependencies/data/
+software must match; no GPU work permitted. Preserve original endpoint recovery,
+add source_inventory_recovery/protocol backup; do not rewrite reader bytes.
+
+Notebook revision3749540 pins execution665c53247d0c00828913c8a9dd57cf7f3a214e0d.
+BothCPU/GPU must use this updated pin. CPU table includes source block coverage.
+Unit42881341453 PASSED source pairing/missing/ambiguity/migration plus prior
+lossless/archive/blink tests. Run42881344710 audited inventories for all12 readers
+successfully and is running fullZDN preparation/CPU-to-analysis test; inspect final
+conclusion before reporting native pass. Existing user Drive outputs untouched.
