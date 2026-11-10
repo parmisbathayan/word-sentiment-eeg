@@ -455,3 +455,36 @@ paper_source_pair_audit.json; ZKW6also missing raw ET and handled explicitly.
 Native numeric summary in paper_ZDN_source_validation.json. No actual user Drive
 files modified in tests; new run migrates known prior protocol and verifies/keeps
 prepared ZAB/ZDM, then rebuilds unfinished ZDN. Do not delete output folders.
+
+## Grid-verified fixation/saccade samples and complete endpoint audit (2026-11-11)
+
+User CPU run saved earlier readers then failed ZJM6 on fixation duration validation.
+Source target audit42904208364 found equal endpoints5941166 and corrupted stored
+fixation duration140484085284866, in raw+corrected. All-reader audit42903540454
+PASSED its scan of186available eye files across12readers, identifying only two
+previously unhandled physical endpoint cases: that ZJM6fixation and ZJS1saccade
+(timestamp6899426, corrupted stored duration140458315481090), both raw/corrected.
+No other negative/nonfinite/>10s failures in the audited files; known zero blinks
+already supported. Audit summary is docs/paper_eye_endpoint_audit_summary.json.
+
+New code8ed1628a09c108644e47b2929b08da24855f41f1 supports equal endpoints as one
+native sample ONLY when actual native gaze timestamps verify the event is on the
+measured<=4ms grid; prior recorded-duration single-blink exception retained.
+Other positive end-minus-start durations and all rejection thresholds unchanged.
+Corrupted stored duration is never used for fixations/saccades. Two-ms fixations
+remain excluded from sentiment trials by<100ms. Nuisance model retains observed
+onsets. Actual-target repair audit42905072148 PASSED both raw/corrected ZJM6and
+ZJS1 with one sample event each; no unhandled endpoint error remains in those
+four files. Unit42905069383 PASSED grid/offgrid/negative/NaN and sample exclusion,
+plus checkpoint migration preserving source-fixed readers including missing files
+and old recovery history. Full nativeZJMpilot42904745881 still running; inspect
+before claiming completed cleaning/data handoff.
+
+Known prior3a547ae exact code signatures added to migration alongside53d11de and
+be08d01. Validate same data/settings/software/dependencies, all reader checksums
+and historical positive duration audits; recognize existing missing-file exclusions
+without treating them as data. Immutable protocol_migrations recovery history;
+no overwriting prior endpoint/source recovery. Earlier prepared readers are skipped;
+unfinished ZJM restarts CPU processing. No user Drive outputs changed in tests.
+Notebook revision0d993b9 pins8ed1628 for BOTHCPUandGPU. User must use updatedGPU
+as well after CPU completion. No source-only older notebook should be rerun.
