@@ -355,3 +355,36 @@ future unrelated commits will not alter an interrupted run's preparation code.
 Remaining methodological work: recover better source synchronization to retain
 clock-excluded blocks; strict original 2-ms parity is not established. Current
 figures report the reduced source coverage. No full 12-reader figure run yet.
+
+## CPU -> GPU persistent preparation (2026-11-10)
+
+User explicitly wants CPU data preparation followed by a fresh GPU runtime.
+New notebooks: zuco_paper_prepare_cpu.ipynb, zuco_paper_analyze_gpu.ipynb.
+Both pin execution to 53d11de68587c008c8ed18ede7ad4d4895309df0.
+New script scripts/zuco_paper_stages.py and helper paper_stage_archive.py.
+New folder zuco_paper_figures_staged; original active/pinned reproduction untouched.
+
+Reader raw/clean accepted signals are saved as LOSSLESS float32 before any
+permutations, not collapsed means or float16. Include all105 channels,201samples,
+channel names, times/units, positive/negative labels, trial IDs, metadata and pair
+indices. prepared.json is the CPU checkpoint, separate from GPU manifest.json.
+CPU reruns verify/skip prepared readers. GPU loads these files without native
+source reads, alignment or cleaning. Per-attempt status files preserve history.
+An unfinished CPU reader can still need repeating; do not promise per-channel
+resume. Earlier incomplete beta-only outputs lack validated full trial provenance;
+no silent adoption/deletion. The first staged CPU pass must build this archive.
+
+Storage allowance explicitly increased from old1.5GB plan to4GB TOTAL, including
+~1.01GB temporary null maps+250MB margin; CPU prepared files capped~2.7GB with
+uncompressed next-reader write guard. Drive free-space gate runs before extraction.
+No Mac dependencies/data installed/downloaded. Numerical tests all in cloud.
+
+Cloud native test42797968301 PASSED: ZABblock1 all105channels -> CPU archive ->
+separate process analysis(test4permutations onCPU) -> rerun CPU skips sourcework.
+No claim of GPU hardware timing benchmark or full12-reader result. Regression
+checks include exact float32/ID roundtrip, no repeated permutations, corruption
+and storage rejection. New metadata/montage unit checks in latest paper-stages CI.
+
+Terminology: the reproduction's GPU stage runs permutations, not CNN training.
+Individual trials are preserved for later classifiers. Existing CNN still consumes
+the previous first-fixation archive; no new classifier silently added in this turn.

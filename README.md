@@ -2,6 +2,17 @@
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/parmisbathayan/word-sentiment-eeg/blob/main/notebooks/short.ipynb)
 
+## CPU preparation, then GPU analysis (ZuCo paper workflow)
+
+1. [CPU preparation notebook](https://colab.research.google.com/github/parmisbathayan/word-sentiment-eeg/blob/main/notebooks/zuco_paper_prepare_cpu.ipynb): save full accepted raw/clean trials per reader. Wait for **CPU PREPARATION COMPLETE**.
+2. Switch to a GPU runtime, then [open the GPU analysis notebook](https://colab.research.google.com/github/parmisbathayan/word-sentiment-eeg/blob/main/notebooks/zuco_paper_analyze_gpu.ipynb). It loads saved trials without repeating native EEG loading/cleaning.
+
+This staged workflow keeps a lossless accepted-trial archive under a new
+`zuco_paper_figures_staged/` folder and caps its total storage at **4 GB**,
+including temporary permutation files. The paper GPU stage is permutation testing,
+not CNN training. Stop the older reproduction job before starting this workflow.
+See [handoff, archive structure and storage](docs/PAPER_CPU_GPU_STAGES.md).
+
 ## ZuCo paper figures — independent Python reconstruction
 
 [Open the four-figure Colab notebook](https://colab.research.google.com/github/parmisbathayan/word-sentiment-eeg/blob/main/notebooks/zuco_paper_figures.ipynb).
