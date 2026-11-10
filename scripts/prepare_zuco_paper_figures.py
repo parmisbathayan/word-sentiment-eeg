@@ -55,14 +55,26 @@ def source_inventory(subject):
     audit=json.loads((ROOT/'docs/paper_source_audit.json').read_text())
     raw_folder=next(x for x in audit['inventory']['raw_sr'] if x['name']==subject and x['kind']=='folder')
     processed_folder=next(x for x in audit['inventory']['preprocessed_sr'] if x['name']==subject and x['kind']=='folder')
-    raw=listing(raw_folder['id']);processed=listing(processed_folder['id']);blocks=[]
+    return resolve_source_inventory(subject,listing(raw_folder['id']),listing(processed_folder['id']))
+
+
+def resolve_source_inventory(subject,raw,processed):
+    """Join exact subject/block/type; aliases and misplaced files remain auditable."""
+    blocks=[]
+    def select(primary,secondary,number,corrected):
+        suffix='corrected_ET' if corrected else 'ET'
+        pattern=re.compile(r'^'+re.escape(subject)+r'_(?:SR|SNR)0*'+str(number)+'_'+suffix+r'\.mat$')
+        for items in [primary,secondary]:
+            candidates={v['id']:v for v in items if pattern.fullmatch(v['name'])}
+            if len(candidates)>1:raise ValueError(f'Ambiguous eye-event source for {subject}/{number}/{suffix}')
+            if candidates:return next(iter(candidates.values()))
+        return None
     for item in processed:
         match=re.match(r'^(?:[A-Za-z]+_)?'+re.escape(subject)+r'_(?:SR|SNR)(\d+)_EEG\.mat$',item['name'])
         if not match:continue
-        number=int(match[1]);eye_name=f'{subject}_SR{number}_ET.mat';corrected_name=f'{subject}_SR{number}_corrected_ET.mat'
-        eye=next((x for x in raw if x['name']==eye_name),None);corrected=next((x for x in processed if x['name']==corrected_name),None)
-        if eye is None or corrected is None:raise ValueError('Missing native eye-event source for '+item['name'])
-        blocks.append(dict(block_id=str(number),eeg=item,eye=eye,corrected=corrected))
+        number=int(match[1]);eye=select(raw,processed,number,False);corrected=select(processed,raw,number,True)
+        missing=[name for name,value in [('raw_eye_events',eye),('corrected_eye_events',corrected)] if value is None]
+        blocks.append(dict(block_id=str(number),eeg=item,eye=eye,corrected=corrected,available=not missing,missing_sources=missing))
     ids=[b['block_id'] for b in blocks]
     if len(ids)!=len(set(ids)) or not blocks:raise ValueError('Ambiguous or absent preprocessed native recording blocks')
     return sorted(blocks,key=lambda b:int(b['block_id']))
@@ -246,6 +258,12 @@ def prepare_reader(subject,source,inventory,sst,out,null_folder,limits,use_gpu,s
         frequency=Counter(word.strip('.,!?;:"()[]{}').casefold() for s in sentences for word in s['words'])
         for bi,item in enumerate(inventory,1):
             print(f'SOURCE {subject}: block {bi}/{len(inventory)}',flush=True)
+            if not item.get('available',True):
+                diagnostics.append(dict(block_id=item['block_id'],status='excluded_missing_source_files',
+                    missing_sources=item['missing_sources'],source_mapping=[],synchronization=None,
+                    corrected_fixations_excluded=None,available_files={k:item[k] for k in ['eeg','eye','corrected'] if item[k] is not None}))
+                print(f'EXCLUDE SOURCE BLOCK {subject}/{item["block_id"]}: missing '+', '.join(item['missing_sources'])+'; fixation count unavailable',flush=True)
+                continue
             eeg_path=fetch(item['eeg'],folder);eye_path=fetch(item['eye'],folder);corrected_path=fetch(item['corrected'],folder)
             raw,rate,codes,latencies,channels=native_recording(eeg_path)
             montage=pd.read_csv(ROOT/'assets/zuco_chanlocs.csv').labels.astype(str).tolist()

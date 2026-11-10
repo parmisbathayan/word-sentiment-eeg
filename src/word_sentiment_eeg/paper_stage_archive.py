@@ -8,6 +8,10 @@ LEGACY_ENDPOINT_CODE={
     'scripts/prepare_zuco_paper_figures.py':'06e1e7ca2b4cf7a9838910632b56075a83b7da3faa289e89b71307692e7c0dab',
     'scripts/zuco_paper_stages.py':'eee0118be9573bbb7697b44125b537726d79fcc48783e5befb352add19f08cf7',
     'src/word_sentiment_eeg/paper_stage_archive.py':'9ba5b5200598a29c1c377693cff419cfd34074ccb5bb322e2ccff54b8a49a342'}
+LEGACY_BLINK_FIXED_CODE={
+    'scripts/prepare_zuco_paper_figures.py':'9daf1ba036e8d83221f0effd7b49cd3167f7d3519830666ebf6e96841a834b60',
+    'scripts/zuco_paper_stages.py':'5ba89fe96147e4b70a69cddf807ff8de8a04108aeb815b9c0bed54aa63cc4204',
+    'src/word_sentiment_eeg/paper_stage_archive.py':'44f3c9801df954e574d0e28d5a3d378137268cf91c7599cbb78d8e43ced71013'}
 
 
 def migrate_endpoint_protocol(old,new,out):
@@ -16,9 +20,9 @@ def migrate_endpoint_protocol(old,new,out):
     if {k:v for k,v in old.items() if k!='code'}!={k:v for k,v in new.items() if k!='code'}:
         raise ValueError('Settings, data or environment changed; endpoint-only migration refused')
     if set(old['code'])!=set(new['code']):raise ValueError('Unknown code inventory in old checkpoint')
-    for name,sha in old['code'].items():
-        expected=LEGACY_ENDPOINT_CODE.get(name,new['code'][name])
-        if sha!=expected:raise ValueError('Unknown prior scientific code; endpoint migration refused: '+name)
+    supported=any(all(sha==legacy.get(name,new['code'][name]) for name,sha in old['code'].items())
+                  for legacy in [LEGACY_ENDPOINT_CODE,LEGACY_BLINK_FIXED_CODE])
+    if not supported:raise ValueError('Unknown prior scientific code; checkpoint migration refused')
     if (out/'cpu_preparation_manifest.json').exists() or (out/'preparation_manifest.json').exists():
         raise ValueError('Endpoint recovery is restricted to an incomplete CPU preparation')
     if (out/'null_work').exists() and any((out/'null_work').iterdir()):raise ValueError('Existing GPU work must not be silently migrated')
@@ -28,15 +32,18 @@ def migrate_endpoint_protocol(old,new,out):
         if (reader/'manifest.json').exists():raise ValueError('GPU reader checkpoint cannot use this CPU-only migration')
         mapping=json.loads((reader/'source_mapping.json').read_text())
         for block in mapping['blocks']:
+            if block.get('missing_sources'):raise ValueError('Historical source exclusion cannot be silently migrated')
             for kind in ['raw','corrected']:
                 for events in block['duration_endpoint_audit'][kind].values():
                     if events['events'] and not (0<events['minimum_recomputed_ms']<=events['maximum_recomputed_ms']<=10000):
                         raise ValueError('Prepared reader does not satisfy the unchanged historical endpoint rule')
         preserved.append(dict(subject=state['subject'],prepared_sha256=file_digest(mark)))
-    write_json(out/'protocol_before_endpoint_fix.json',old)
-    write_json(out/'endpoint_recovery.json',dict(reason='Single-sample blink handling only; previously prepared readers have strictly positive endpoint durations',
-        preserved_readers=preserved,old_code=old['code'],new_code=new['code']))
-    print('ENDPOINT FIX MIGRATION: verified and retained CPU readers '+str([v['subject'] for v in preserved]),flush=True)
+    if not (out/'protocol_before_endpoint_fix.json').exists():write_json(out/'protocol_before_endpoint_fix.json',old)
+    recovery=dict(reason='Source discovery and single-sample blink fixes; completed readers had complete sources and valid duration audits',
+        preserved_readers=preserved,old_code=old['code'],new_code=new['code'])
+    if not (out/'endpoint_recovery.json').exists():write_json(out/'endpoint_recovery.json',recovery)
+    write_json(out/'protocol_before_source_inventory_fix.json',old);write_json(out/'source_inventory_recovery.json',recovery)
+    print('CHECKPOINT MIGRATION: verified and retained CPU readers '+str([v['subject'] for v in preserved]),flush=True)
 
 
 def disk_bytes(root):

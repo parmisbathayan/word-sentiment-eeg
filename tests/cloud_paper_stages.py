@@ -95,3 +95,34 @@ def endpoint_recovery_tests():
 
 
 if __name__=='__main__':endpoint_recovery_tests()
+
+
+def source_inventory_tests():
+    from prepare_zuco_paper_figures import resolve_source_inventory
+    from word_sentiment_eeg.paper_stage_archive import migrate_endpoint_protocol,LEGACY_BLINK_FIXED_CODE
+    import copy
+    def file(name):return dict(id=name,name=name,download='unused',bytes=1)
+    raw=[file('ZDN_SR'+str(i)+'_ET.mat') for i in [1,2,3,5,6]]+[file('ZDN_SR8_corrected_ET.mat')]
+    processed=[file('gip_ZDN_SNR'+str(i)+'_EEG.mat') for i in range(1,9)]
+    processed += [file('ZDN_SR'+str(i)+'_corrected_ET.mat') for i in [1,2,3,6,7,8]]
+    blocks=resolve_source_inventory('ZDN',raw,processed)
+    assert [v['block_id'] for v in blocks if v['available']]==['1','2','3','6']
+    assert {v['block_id']:v['missing_sources'] for v in blocks if not v['available']}=={
+        '4':['raw_eye_events','corrected_eye_events'],'5':['corrected_eye_events'],'7':['raw_eye_events'],'8':['raw_eye_events']}
+    alias=resolve_source_inventory('ZDN',[file('ZDN_SNR1_ET.mat'),file('ZDN_SNR1_corrected_ET.mat')],[file('oip_ZDN_SNR1_EEG.mat')])
+    assert alias[0]['available'] and alias[0]['corrected']['name']=='ZDN_SNR1_corrected_ET.mat'
+    for bad_raw,bad_processed in [([file('ZDN_SR1_ET.mat'),file('ZDN_SNR1_ET.mat')],processed),
+                                  (raw,processed+[file('oip_ZDN_SR1_EEG.mat')])]:
+        try:resolve_source_inventory('ZDN',bad_raw,bad_processed)
+        except ValueError:pass
+        else:raise AssertionError('Ambiguous source accepted')
+    with tempfile.TemporaryDirectory() as folder:
+        old=dict(subjects=['ZAB','ZDM','ZDN'],software=dict(numpy='same'),code=dict(LEGACY_BLINK_FIXED_CODE,unchanged='abc'))
+        new=copy.deepcopy(old)
+        for key in LEGACY_BLINK_FIXED_CODE:new['code'][key]='source-fix'
+        migrate_endpoint_protocol(old,new,Path(folder))
+        assert (Path(folder)/'source_inventory_recovery.json').exists()
+    print('All source matching, missing-pair, alias, ambiguity and blink-fixed protocol migration checks passed')
+
+
+if __name__=='__main__':source_inventory_tests()

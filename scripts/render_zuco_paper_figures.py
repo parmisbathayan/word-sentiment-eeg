@@ -37,9 +37,9 @@ def analyze_and_render(out):
     for reader in readers:
         source=json.loads((out/'readers'/reader/'source_mapping.json').read_text())
         for block in source['blocks']:
-            sync=block['synchronization']
+            sync=block.get('synchronization') or {}
             coverage.append(dict(reader=reader,block=block['block_id'],status=block['status'],
-                maximum_clock_residual_ms=sync['max_residual_ms'],
+                maximum_clock_residual_ms=sync.get('max_residual_ms'),missing_sources=';'.join(block.get('missing_sources',[])),
                 mapped_sentences=len(block['source_mapping']),
                 excluded_corrected_fixations=block.get('corrected_fixations_excluded',0)))
     pd.DataFrame(coverage).to_csv(analysis/'source_coverage.csv',index=False)
@@ -165,7 +165,7 @@ def figure1(out,readers,stats,events):
         ax.set(xlim=(-600,1000),ylabel='Trials (duration-sorted)' if r==0 else '',xlabel='Time relative to fixation onset (ms)')
         if r==1:fig.colorbar(im,ax=ax,shrink=.6,label='µV',pad=.01)
     events.selection_status.value_counts().rename_axis('outcome').reset_index(name='fixations').to_csv(out/'analysis/exclusion_counts.csv',index=False)
-    save(fig,out,'figure_1_selection_cleaning','Computed reconstruction, following panels A–C of the paper. Circles encode original word valence and recorded fixation duration.\nThe starting population is the released corrected eye export; upstream removals are not counted as new exclusions. Trial rasters preserve only E62, not another full EEG archive.')
+    save(fig,out,'figure_1_selection_cleaning','Computed reconstruction, following panels A–C of the paper. Circles encode original word valence and recorded fixation duration.\nCounts cover available source observations. Missing-file blocks have unknown trial counts; see source_coverage.csv. Upstream removals are not counted again. Trial rasters retain E62 only.')
 
 
 
