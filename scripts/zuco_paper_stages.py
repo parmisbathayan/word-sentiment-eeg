@@ -43,7 +43,9 @@ def main():
         code={name:file_digest(ROOT/name) for name in names},software={name:version(name) for name in ['numpy','scipy','pandas','h5py','scikit-learn']},
         storage='Lossless float32: raw/clean, accepted trial, 105 channels, 201 samples; original trial IDs and ranked pair indices')
     out.mkdir(parents=True,exist_ok=True)
-    if (out/'protocol.json').exists() and json.loads((out/'protocol.json').read_text())!=protocol:raise ValueError('Staged protocol or numerical environment changed; outputs must not be mixed')
+    if (out/'protocol.json').exists() and json.loads((out/'protocol.json').read_text())!=protocol:
+        from word_sentiment_eeg.paper_stage_archive import migrate_endpoint_protocol
+        migrate_endpoint_protocol(json.loads((out/'protocol.json').read_text()),protocol,out)
     if args.phase=='analyze' and not (out/'protocol.json').exists():raise ValueError('Run CPU preparation first')
     used=disk_bytes(out)
     null_used=disk_bytes(out/'null_work') if (out/'null_work').exists() else 0

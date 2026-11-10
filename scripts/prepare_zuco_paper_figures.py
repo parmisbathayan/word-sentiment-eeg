@@ -90,6 +90,11 @@ def repair_eye_duration_columns(eye):
     guessed. All durations use the same explicit end-minus-start convention.
     """
     audit={}
+    data=np.asarray(eye.get('data',[]))
+    sample_ms=np.nan
+    if data.ndim==2 and len(data)>1 and data.shape[1]:
+        gaps=np.diff(data[:,0].astype(float));gaps=gaps[np.isfinite(gaps)&(gaps>0)]
+        if len(gaps):sample_ms=float(np.median(gaps))
     for name in ['fixations','saccades','blinks']:
         source=getattr(eye['eyeevent'],name);columns=[str(v) for v in np.asarray(source.colheader).reshape(-1)]
         array=np.asarray(source.data,float)
@@ -97,10 +102,20 @@ def repair_eye_duration_columns(eye):
         if array.ndim==1:array=array[None,:]
         start,end,duration=[columns.index(k) for k in ['latency','endtime','duration']]
         physical=array[:,end]-array[:,start]
+        # EyeLink can encode a one-sample blink with equal endpoint timestamps.
+        # Retain its recorded duration only when the actual gaze clock confirms
+        # that duration is exactly one sample; never repair negative/unknown spans.
+        single_sample=np.zeros(len(array),bool)
+        if name=='blinks' and np.isfinite(sample_ms) and 0<sample_ms<=4:
+            single_sample=(physical==0)&np.isclose(array[:,duration],sample_ms,rtol=0,atol=1e-6)
+            physical=np.where(single_sample,array[:,duration],physical)
         if not np.isfinite(physical).all() or np.any(physical<=0) or np.any(physical>10000):
             raise ValueError('Eye-event endpoints do not form plausible millisecond intervals: '+name)
         audit[name]=dict(events=len(array),stored_duration_mismatches=int((np.abs(array[:,duration]-physical)>2).sum()),
                          minimum_recomputed_ms=float(physical.min()),maximum_recomputed_ms=float(physical.max()))
+        if single_sample.any():
+            audit[name].update(single_sample_blinks_retained=int(single_sample.sum()),source_rows=np.flatnonzero(single_sample).tolist(),
+                               recorded_eye_sample_ms=sample_ms,duration_rule='recorded duration equals measured native eye sample period; equal endpoints')
         array=array.copy();array[:,duration]=physical;source.data=array
     return audit
 

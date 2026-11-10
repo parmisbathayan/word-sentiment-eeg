@@ -4,6 +4,40 @@ from pathlib import Path
 import numpy as np
 from .common import atomic_npz,write_json,file_digest
 
+LEGACY_ENDPOINT_CODE={
+    'scripts/prepare_zuco_paper_figures.py':'06e1e7ca2b4cf7a9838910632b56075a83b7da3faa289e89b71307692e7c0dab',
+    'scripts/zuco_paper_stages.py':'eee0118be9573bbb7697b44125b537726d79fcc48783e5befb352add19f08cf7',
+    'src/word_sentiment_eeg/paper_stage_archive.py':'9ba5b5200598a29c1c377693cff419cfd34074ccb5bb322e2ccff54b8a49a342'}
+
+
+def migrate_endpoint_protocol(old,new,out):
+    """Only migrate the exact released endpoint fix; valid prepared data unchanged."""
+    out=Path(out)
+    if {k:v for k,v in old.items() if k!='code'}!={k:v for k,v in new.items() if k!='code'}:
+        raise ValueError('Settings, data or environment changed; endpoint-only migration refused')
+    if set(old['code'])!=set(new['code']):raise ValueError('Unknown code inventory in old checkpoint')
+    for name,sha in old['code'].items():
+        expected=LEGACY_ENDPOINT_CODE.get(name,new['code'][name])
+        if sha!=expected:raise ValueError('Unknown prior scientific code; endpoint migration refused: '+name)
+    if (out/'cpu_preparation_manifest.json').exists() or (out/'preparation_manifest.json').exists():
+        raise ValueError('Endpoint recovery is restricted to an incomplete CPU preparation')
+    if (out/'null_work').exists() and any((out/'null_work').iterdir()):raise ValueError('Existing GPU work must not be silently migrated')
+    preserved=[]
+    for mark in sorted((out/'readers').glob('*/prepared.json')):
+        reader=mark.parent;state=verify_prepared(reader)
+        if (reader/'manifest.json').exists():raise ValueError('GPU reader checkpoint cannot use this CPU-only migration')
+        mapping=json.loads((reader/'source_mapping.json').read_text())
+        for block in mapping['blocks']:
+            for kind in ['raw','corrected']:
+                for events in block['duration_endpoint_audit'][kind].values():
+                    if events['events'] and not (0<events['minimum_recomputed_ms']<=events['maximum_recomputed_ms']<=10000):
+                        raise ValueError('Prepared reader does not satisfy the unchanged historical endpoint rule')
+        preserved.append(dict(subject=state['subject'],prepared_sha256=file_digest(mark)))
+    write_json(out/'protocol_before_endpoint_fix.json',old)
+    write_json(out/'endpoint_recovery.json',dict(reason='Single-sample blink handling only; previously prepared readers have strictly positive endpoint durations',
+        preserved_readers=preserved,old_code=old['code'],new_code=new['code']))
+    print('ENDPOINT FIX MIGRATION: verified and retained CPU readers '+str([v['subject'] for v in preserved]),flush=True)
+
 
 def disk_bytes(root):
     return sum(p.stat().st_size for p in Path(root).rglob('*') if p.is_file())

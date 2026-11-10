@@ -48,3 +48,50 @@ def main():
 
 
 if __name__=='__main__':main()
+
+
+def endpoint_recovery_tests():
+    import copy
+    from types import SimpleNamespace
+    sys.path.insert(0,str(ROOT/'scripts'))
+    from prepare_zuco_paper_figures import repair_eye_duration_columns
+    from word_sentiment_eeg.common import write_json,file_digest
+    from word_sentiment_eeg.paper_stage_archive import migrate_endpoint_protocol,LEGACY_ENDPOINT_CODE
+    def eye_record(duration=2,end=100):
+        event=SimpleNamespace(colheader=['latency','endtime','duration'],data=np.array([[100.,float(end),float(duration)]]))
+        return {'data':np.c_[np.arange(0.,20.,2.)], 'eyeevent':SimpleNamespace(blinks=event,
+            fixations=SimpleNamespace(colheader=[],data=np.array([])),saccades=SimpleNamespace(colheader=[],data=np.array([])))}
+    eye=eye_record();audit=repair_eye_duration_columns(eye)
+    assert eye['eyeevent'].blinks.data[0,2]==2 and audit['blinks']['single_sample_blinks_retained']==1
+    for eye in [eye_record(duration=3),eye_record(end=98),eye_record(duration=1e14)]:
+        try:repair_eye_duration_columns(eye)
+        except ValueError:pass
+        else:raise AssertionError('Invalid blink accepted')
+    with tempfile.TemporaryDirectory() as temporary:
+        root=Path(temporary);reader=root/'readers/ZAB';reader.mkdir(parents=True)
+        signal=np.ones((2,4,105,201),np.float32)
+        meta=pd.DataFrame(dict(event_id=['a','b','c','d'],sentiment=['negative']*2+['positive']*2))
+        save_trials(reader,signal,meta,[0,1],[2,3],root,10_000_000)
+        atomic_npz(reader/'statistics.npz',counts=np.array([2,2]))
+        events={'blinks':dict(events=2,minimum_recomputed_ms=20,maximum_recomputed_ms=100)}
+        write_json(reader/'source_mapping.json',dict(blocks=[dict(duration_endpoint_audit=dict(raw=events,corrected=events))]))
+        mark_prepared(reader,'ZAB',[2,2],2);before={p.name:file_digest(p) for p in reader.iterdir()}
+        old=dict(workflow='cpu_gpu_stages_v1',software={'numpy':'same'},subjects=['ZAB','ZDM'],code=dict(LEGACY_ENDPOINT_CODE,unchanged='abc'))
+        new=copy.deepcopy(old)
+        for key in LEGACY_ENDPOINT_CODE:new['code'][key]='new-implementation'
+        migrate_endpoint_protocol(old,new,root)
+        assert before=={p.name:file_digest(p) for p in reader.iterdir()}
+        assert json.loads((root/'endpoint_recovery.json').read_text())['preserved_readers'][0]['subject']=='ZAB'
+        for changed in ['method','environment','unknown_code','corrupted_reader']:
+            invalid=copy.deepcopy(old)
+            if changed=='method':invalid['subjects']=['ZAB']
+            elif changed=='environment':invalid['software']['numpy']='different'
+            elif changed=='unknown_code':invalid['code']['unchanged']='changed'
+            else:(reader/'statistics.npz').write_bytes(b'corrupt')
+            try:migrate_endpoint_protocol(invalid,new,root)
+            except ValueError:pass
+            else:raise AssertionError('Unsafe checkpoint migration accepted: '+changed)
+    print('Blink endpoint recovery and exact legacy migration checks passed; prepared reader bytes preserved')
+
+
+if __name__=='__main__':endpoint_recovery_tests()
