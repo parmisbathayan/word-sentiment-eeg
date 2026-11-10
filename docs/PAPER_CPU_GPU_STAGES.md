@@ -78,3 +78,29 @@ the old protocol and preserved reader checkpoint hashes. Existing ZAB files are
 not rewritten, relabeled or reprocessed. The unfinished ZDM reader must restart
 its CPU work because it had no complete CPU checkpoint. Both notebooks pin the
 same updated execution revision. Keep the existing Drive folder and files.
+
+## Incomplete native source pairs (ZDN, 2026-11-10)
+
+The public source listing has preprocessed ZDN EEG blocks without the raw and/or
+corrected eye-event files required by this workflow. Metadata for block4 lacks
+both eye files; block5 lacks the corrected file; blocks7/8 lack the raw eye file.
+A corrected block8 file in the raw folder is not an uncorrected timeline.
+The resolver now joins exact reader, block and file type with SR/SNR aliases,
+searches the alternate folder when a correctly typed file was misplaced, rejects
+ambiguous choices, and explicitly marks genuinely unavailable source pairs.
+
+Missing-file blocks are not downloaded, inferred or assigned to another reader.
+They are recorded as excluded_missing_source_files in the reader source mapping
+and final source_coverage.csv. Their unobserved fixation count stays unknown;
+it is not fabricated as zero. Figure1 counts only available observations and
+points to the coverage report. This reduces source coverage relative to the
+complete published cohort; it does not establish an exact numerical replication.
+
+The exact previous blink-fixed version (be08d01) and initial staged version
+(53d11de) have guarded incomplete-CPU migrations. Unchanged code dependencies,
+settings, environment and all saved-reader checksums/duration audits must verify.
+Old completed readers had complete source pairs because their earlier resolver
+would otherwise have stopped; they are preserved without rewriting their data.
+Prior migration records are retained; source_inventory_recovery.json records the
+new lineage. Partial readers restart preparation; saved readers are skipped.
+Recovering absent public source files from another release remains future work.
