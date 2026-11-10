@@ -126,3 +126,21 @@ def source_inventory_tests():
 
 
 if __name__=='__main__':source_inventory_tests()
+
+
+def mismatched_trigger_exclusion_test():
+    from prepare_zuco_paper_figures import map_block,excluded_clock_block
+    from types import SimpleNamespace
+    corrected={'eyeevent':SimpleNamespace(fixations=SimpleNamespace(colheader=['duration','fix_avgpos_x','fix_avgpos_y'],data=np.array([[200.,300.,400.]])))}
+    try:
+        map_block('ZDN','6',np.zeros((105,500)),500,['10','11'],np.array([1,100]),{'event':np.array([[10,100],[12,200]])},corrected,[],set())
+    except ValueError as error:
+        assert error.diagnostics['status']=='unverified_trigger_sequence'
+        events,diagnostic=excluded_clock_block('ZDN','6',corrected,error)
+        assert events.selection_status.eq('block_failed_clock_alignment').all()
+        assert diagnostic['synchronization']['max_residual_ms'] is None
+    else:raise AssertionError('Mismatched trigger sequence was inferred')
+    print('Unverified trigger source is explicitly excluded; no fabricated clock')
+
+
+if __name__=='__main__':mismatched_trigger_exclusion_test()

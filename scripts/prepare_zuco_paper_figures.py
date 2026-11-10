@@ -143,7 +143,15 @@ def sentence_metadata(path,sst):
 
 
 def map_block(subject,block_id,raw,rate,codes,latencies,eye,corrected,sentences,used):
-    sync=synchronize(codes,latencies,eye['event'],rate,max_error_ms=8.)
+    try:
+        sync=synchronize(codes,latencies,eye['event'],rate,max_error_ms=8.)
+    except ValueError as error:
+        if str(error) in {'Missing, reordered or ambiguous shared trigger sequence; synchronization not inferred',
+                          'Trigger clocks are not strictly increasing'}:
+            error.diagnostics=dict(reason=str(error),configured_tolerance_ms=8.,max_residual_ms=None,
+                eeg_sentence_anchors=sum(str(v).strip() in {'10','11','12','13'} for v in codes),
+                eye_trigger_rows=int(len(eye['event'])),status='unverified_trigger_sequence')
+        raise
     timeline,headers,outside=normalized_events(eye,codes,latencies,rate,sync,raw.shape[1]/rate)
     fixes=event_table(corrected,'fixations');blinks=event_table(eye,'blinks')
     starts=eye_to_seconds(fixes.latency.to_numpy(),sync)
