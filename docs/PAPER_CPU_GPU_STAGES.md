@@ -120,3 +120,33 @@ Timing tolerances remain8ms. Source coverage may therefore be substantially
 smaller than8 blocks for some readers. Later checks should consider a sensitivity
 analysis excluding a reader with very limited remaining source coverage, and
 recovering missing files or better synchronization from an alternate release.
+
+## Grid-verified one-sample fixations/saccades (2026-11-11)
+
+The completed audit examined186available raw/corrected eye files across all12
+readers. In addition to the previously handled one-sample blinks, it found a
+zero-span fixation in ZJM6 (timestamp5941166; corrupt stored duration) and a
+zero-span saccade in ZJS1 (timestamp6899426; corrupt stored duration), each in
+both raw and corrected exports. No other unhandled endpoint cases were found by
+that audit. This is an eye-event validation audit, not a full12-reader EEG run.
+
+Equal endpoints can represent a single captured sample. These fixation/saccade
+records are assigned the measured native sample duration only if their timestamp
+is actually present in the native gaze time grid (sample period>0and<=4ms).
+The corrupted stored duration is not used. The prior recorded-duration blink
+exception remains supported. Negative/nonfinite spans, unsupported off-grid
+zero spans and spans exceeding the existing10s ceiling still fail validation.
+Other positive durations retain the previous end-minus-start convention.
+
+A two-millisecond fixation remains below100ms, so it cannot enter the sentiment
+trial archive. Its observed onset remains in the nuisance timeline, as the model
+uses all observed fixation events. Source-row IDs, native sample period and
+single_sample_events_retained are saved in the per-block duration audit.
+
+Exact source-fixed3a547ae protocol recovery is now supported alongside the two
+older staged revisions. Checksum-verified completed readers, including earlier
+missing-file/trigger exclusions, remain unchanged. Migration validates those
+historical exclusion records rather than pretending their data exists. Original
+migration records are retained and new immutable protocol_migrations entries
+record each known-version update. Unfinished ZJM CPU preparation must restart;
+previously prepared readers do not need reprocessing.
