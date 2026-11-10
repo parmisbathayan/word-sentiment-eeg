@@ -1,0 +1,110 @@
+{
+  "validation_run": 42882099801,
+  "scope": "One ZDN reader, all8 source slots;4testpermutations; not full group inference",
+  "accepted_counts": [
+    31,
+    31
+  ],
+  "pairs": 31,
+  "blocks": [
+    {
+      "block": "1",
+      "status": "excluded_clock_alignment",
+      "missing_sources": [],
+      "synchronization": {
+        "eye_origin_ms": 4592218.346938776,
+        "slope_seconds_per_eye_ms": 0.0010000101854621692,
+        "eeg_seconds_at_origin": 105.65900000000039,
+        "max_residual_ms": 8.10607649171402
+      },
+      "matched_sentences": 0,
+      "excluded_fixations": 661
+    },
+    {
+      "block": "2",
+      "status": "included",
+      "missing_sources": [],
+      "synchronization": {
+        "eye_origin_ms": 4808922.74,
+        "slope_seconds_per_eye_ms": 0.0010000090597067455,
+        "eeg_seconds_at_origin": 106.65752000000018,
+        "triggers": 100,
+        "configured_tolerance_ms": 8.0,
+        "native_one_sample_target_met": false,
+        "max_residual_ms": 5.394168935453081,
+        "rms_residual_ms": 1.6922921620380957
+      },
+      "matched_sentences": 50,
+      "excluded_fixations": 0
+    },
+    {
+      "block": "3",
+      "status": "excluded_clock_alignment",
+      "missing_sources": [],
+      "synchronization": {
+        "eye_origin_ms": 5086426.11,
+        "slope_seconds_per_eye_ms": 0.001000011603156048,
+        "eeg_seconds_at_origin": 114.15004000000033,
+        "max_residual_ms": 10.779981519107196
+      },
+      "matched_sentences": 0,
+      "excluded_fixations": 828
+    },
+    {
+      "block": "4",
+      "status": "excluded_missing_source_files",
+      "missing_sources": [
+        "raw_eye_events",
+        "corrected_eye_events"
+      ],
+      "synchronization": null,
+      "matched_sentences": 0,
+      "excluded_fixations": null
+    },
+    {
+      "block": "5",
+      "status": "excluded_missing_source_files",
+      "missing_sources": [
+        "corrected_eye_events"
+      ],
+      "synchronization": null,
+      "matched_sentences": 0,
+      "excluded_fixations": null
+    },
+    {
+      "block": "6",
+      "status": "excluded_clock_alignment",
+      "missing_sources": [],
+      "synchronization": {
+        "reason": "Missing, reordered or ambiguous shared trigger sequence; synchronization not inferred",
+        "configured_tolerance_ms": 8.0,
+        "max_residual_ms": null,
+        "eeg_sentence_anchors": 98,
+        "eye_trigger_rows": 112,
+        "status": "unverified_trigger_sequence"
+      },
+      "matched_sentences": 0,
+      "excluded_fixations": 757
+    },
+    {
+      "block": "7",
+      "status": "excluded_missing_source_files",
+      "missing_sources": [
+        "raw_eye_events"
+      ],
+      "synchronization": null,
+      "matched_sentences": 0,
+      "excluded_fixations": null
+    },
+    {
+      "block": "8",
+      "status": "excluded_missing_source_files",
+      "missing_sources": [
+        "raw_eye_events"
+      ],
+      "synchronization": null,
+      "matched_sentences": 0,
+      "excluded_fixations": null
+    }
+  ]
+}

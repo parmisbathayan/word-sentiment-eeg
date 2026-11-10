@@ -440,3 +440,18 @@ Unit42881341453 PASSED source pairing/missing/ambiguity/migration plus prior
 lossless/archive/blink tests. Run42881344710 audited inventories for all12 readers
 successfully and is running fullZDN preparation/CPU-to-analysis test; inspect final
 conclusion before reporting native pass. Existing user Drive outputs untouched.
+
+Final source recovery validation:42882099801 PASSED full ZDN source loop,
+all105-channel cleaning of accepted data, persistent CPU trials, separate-process
+test permutations and CPU rerun skip. The prior665c532 native test exposed ZDN6
+unverified shared trigger sequence; prepare caller now records that known source
+validation failure as explicit alignment exclusion without changing synchronization
+logic/tolerance or guessing triggers. Only ZDNblock2 survives:1/3 fail8ms,
+4/5/7/8missing source pairs,6unverified trigger sequence. Coverage is materially
+limited; report it and consider with/without-ZDN sensitivity later.
+Latest notebook revision a4fe239 pins3a547ae7b7c8cc5fd4914c29acb1192013765a8a.
+Unit42882096987 PASSED. Metadata-only all12 audit is stored in
+paper_source_pair_audit.json; ZKW6also missing raw ET and handled explicitly.
+Native numeric summary in paper_ZDN_source_validation.json. No actual user Drive
+files modified in tests; new run migrates known prior protocol and verifies/keeps
+prepared ZAB/ZDM, then rebuilds unfinished ZDN. Do not delete output folders.
