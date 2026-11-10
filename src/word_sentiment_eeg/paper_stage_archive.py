@@ -11,7 +11,7 @@ def disk_bytes(root):
 
 def save_trials(folder,signal,metadata,negative,positive,storage_root,budget):
     folder=Path(folder);signal=np.asarray(signal)
-    if signal.dtype!=np.float32 or signal.ndim!=4 or signal.shape[0]!=2 or not np.isfinite(signal).all():
+    if signal.dtype!=np.float32 or signal.ndim!=4 or signal.shape[0]!=2 or signal.shape[2:]!=(105,201) or not np.isfinite(signal).all():
         raise ValueError('Expected finite raw/clean float32 trial arrays')
     if signal.shape[1]!=len(metadata) or metadata.event_id.duplicated().any():raise ValueError('Trial identity mismatch')
     negative=np.asarray(negative,dtype=np.int64);positive=np.asarray(positive,dtype=np.int64)
@@ -21,8 +21,12 @@ def save_trials(folder,signal,metadata,negative,positive,storage_root,budget):
     estimate=signal.nbytes+2_000_000
     if budget is None or storage_root is None or disk_bytes(storage_root)+estimate>budget:
         raise OSError('Prepared-trial storage cap would be exceeded. Earlier reader checkpoints retained; no trial file written.')
+    import pandas as pd
+    montage=pd.read_csv(Path(__file__).resolve().parents[2]/'assets/zuco_chanlocs.csv').labels.astype(str).to_numpy(dtype=str)
     atomic_npz(folder/'prepared_trials.npz',signal=signal,labels=labels.astype(np.int8),
-               event_ids=metadata.event_id.astype(str).to_numpy(dtype=str),negative_pair_index=negative,positive_pair_index=positive)
+               event_ids=metadata.event_id.astype(str).to_numpy(dtype=str),negative_pair_index=negative,positive_pair_index=positive,
+               channel_names=montage,times_ms=np.arange(-75,126)*8,sample_rate_hz=np.array(125),
+               representations=np.array(['raw','cleaned']),units=np.array('microvolts'))
     metadata.to_csv(folder/'accepted_trial_metadata.csv.gz',index=False,compression='gzip')
 
 

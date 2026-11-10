@@ -21,6 +21,8 @@ def main():
         save_trials(reader,signal,meta,neg,pos,root,20_000_000)
         with np.load(reader/'prepared_trials.npz',allow_pickle=False) as z:
             np.testing.assert_array_equal(signal,z['signal']);np.testing.assert_array_equal(meta.event_id,z['event_ids'])
+            assert len(z['channel_names'])==105 and int(z['sample_rate_hz'])==125
+            assert z['times_ms'][0]==-600 and z['times_ms'][-1]==1000
         d=signal[:,pos]-signal[:,neg]
         atomic_npz(reader/'statistics.npz',pair_sum=d.sum(axis=1,dtype=np.float64),pair_squares=(d.astype(np.float64)**2).sum(axis=1))
         mark_prepared(reader,'A',[4,4],4);verify_prepared(reader)
