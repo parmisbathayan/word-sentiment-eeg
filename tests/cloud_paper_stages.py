@@ -192,6 +192,11 @@ def single_sample_fixation_tests():
         try:repair_eye_duration_columns(bad)
         except ValueError:pass
         else:raise AssertionError('Unsupported or invalid endpoint was repaired')
+    saccade=record()
+    saccade['eyeevent'].saccades=saccade['eyeevent'].fixations
+    saccade['eyeevent'].fixations=SimpleNamespace(colheader=[],data=np.array([]))
+    repaired=repair_eye_duration_columns(saccade)
+    assert saccade['eyeevent'].saccades.data[0,2]==2 and repaired['saccades']['single_sample_events_retained']==1
     positive=record(4.,104.)
     repair_eye_duration_columns(positive);assert positive['eyeevent'].fixations.data[0,2]==100
     print('Single-sample fixation verified on native grid, excluded by100ms rule; ordinary/invalid durations unchanged')

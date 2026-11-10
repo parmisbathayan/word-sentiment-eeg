@@ -42,7 +42,7 @@ def audit_subject(subject,requested_block=None):
 if __name__=='__main__':
     if sys.platform=='darwin':raise SystemExit('Cloud only: no eye datasets on Mac')
     parser=argparse.ArgumentParser();parser.add_argument('--all-readers',action='store_true');args=parser.parse_args()
-    result=audit_subject('ZJM','6')
+    result=audit_subject('ZJM','6')+audit_subject('ZJS','1')
     if args.all_readers:
         subjects=[s['subject'] for s in json.loads((ROOT/'configs/zuco1_sources.json').read_text())['files'] if s['task']=='SR']
         with ThreadPoolExecutor(max_workers=4) as pool:

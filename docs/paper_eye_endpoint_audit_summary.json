@@ -1,0 +1,175 @@
+{
+  "validation_run": 42903540454,
+  "files": 186,
+  "readers": 12,
+  "failures": [
+    {
+      "subject": "ZJM",
+      "block": "6",
+      "kind": "eye",
+      "file": "ZJM_SR6_ET.mat",
+      "events": {
+        "fixations": {
+          "count": 1294,
+          "bad_rows": [
+            {
+              "latency": 5941166.0,
+              "endtime": 5941166.0,
+              "duration": 140484085284866.0
+            }
+          ],
+          "duration_range": [
+            0.0,
+            1214.0
+          ]
+        },
+        "saccades": {
+          "count": 1293,
+          "bad_rows": [],
+          "duration_range": [
+            4.0,
+            214.0
+          ]
+        },
+        "blinks": {
+          "count": 23,
+          "bad_rows": [
+            {
+              "latency": 6139198.0,
+              "endtime": 6139198.0,
+              "duration": 2.0
+            }
+          ],
+          "duration_range": [
+            0.0,
+            92.0
+          ]
+        },
+        "validation_error": "Eye-event endpoints do not form plausible millisecond intervals: fixations"
+      }
+    },
+    {
+      "subject": "ZJM",
+      "block": "6",
+      "kind": "corrected",
+      "file": "ZJM_SR6_corrected_ET.mat",
+      "events": {
+        "fixations": {
+          "count": 1219,
+          "bad_rows": [
+            {
+              "latency": 5941166.0,
+              "endtime": 5941166.0,
+              "duration": 140484085284866.0
+            }
+          ],
+          "duration_range": [
+            0.0,
+            778.0
+          ]
+        },
+        "saccades": {
+          "count": 1293,
+          "bad_rows": [],
+          "duration_range": [
+            4.0,
+            214.0
+          ]
+        },
+        "blinks": {
+          "count": 23,
+          "bad_rows": [
+            {
+              "latency": 6139198.0,
+              "endtime": 6139198.0,
+              "duration": 2.0
+            }
+          ],
+          "duration_range": [
+            0.0,
+            92.0
+          ]
+        },
+        "validation_error": "Eye-event endpoints do not form plausible millisecond intervals: fixations"
+      }
+    },
+    {
+      "subject": "ZJS",
+      "block": "1",
+      "kind": "eye",
+      "file": "ZJS_SR1_ET.mat",
+      "events": {
+        "fixations": {
+          "count": 852,
+          "bad_rows": [],
+          "duration_range": [
+            20.0,
+            1902.0
+          ]
+        },
+        "saccades": {
+          "count": 851,
+          "bad_rows": [
+            {
+              "latency": 6899426.0,
+              "endtime": 6899426.0,
+              "duration": 140458315481090.0
+            }
+          ],
+          "duration_range": [
+            0.0,
+            1448.0
+          ]
+        },
+        "blinks": {
+          "count": 10,
+          "bad_rows": [],
+          "duration_range": [
+            38.0,
+            1342.0
+          ]
+        },
+        "validation_error": "Eye-event endpoints do not form plausible millisecond intervals: saccades"
+      }
+    },
+    {
+      "subject": "ZJS",
+      "block": "1",
+      "kind": "corrected",
+      "file": "ZJS_SR1_corrected_ET.mat",
+      "events": {
+        "fixations": {
+          "count": 804,
+          "bad_rows": [],
+          "duration_range": [
+            20.0,
+            680.0
+          ]
+        },
+        "saccades": {
+          "count": 851,
+          "bad_rows": [
+            {
+              "latency": 6899426.0,
+              "endtime": 6899426.0,
+              "duration": 140458315481090.0
+            }
+          ],
+          "duration_range": [
+            0.0,
+            1448.0
+          ]
+        },
+        "blinks": {
+          "count": 10,
+          "bad_rows": [],
+          "duration_range": [
+            38.0,
+            1342.0
+          ]
+        },
+        "validation_error": "Eye-event endpoints do not form plausible millisecond intervals: saccades"
+      }
+    }
+  ]
+}
