@@ -144,3 +144,32 @@ def mismatched_trigger_exclusion_test():
 
 
 if __name__=='__main__':mismatched_trigger_exclusion_test()
+
+
+def inventory_checkpoint_migration_test():
+    from word_sentiment_eeg.paper_stage_archive import migrate_endpoint_protocol,LEGACY_INVENTORY_FIXED_CODE
+    from word_sentiment_eeg.common import write_json,file_digest
+    import copy
+    with tempfile.TemporaryDirectory() as temporary:
+        root=Path(temporary);reader=root/'readers/ZDN';reader.mkdir(parents=True)
+        signal=np.ones((2,4,105,201),np.float32)
+        meta=pd.DataFrame(dict(event_id=['a','b','c','d'],sentiment=['negative']*2+['positive']*2))
+        save_trials(reader,signal,meta,[0,1],[2,3],root,10_000_000)
+        atomic_npz(reader/'statistics.npz',counts=np.array([2,2]))
+        audit={'fixations':dict(events=10,minimum_recomputed_ms=20,maximum_recomputed_ms=900)}
+        write_json(reader/'source_mapping.json',dict(blocks=[
+            dict(status='included',duration_endpoint_audit=dict(raw=audit,corrected=audit)),
+            dict(status='excluded_missing_source_files',missing_sources=['raw_eye_events'],source_mapping=[],synchronization=None)]))
+        mark_prepared(reader,'ZDN',[2,2],2);before={p.name:file_digest(p) for p in reader.iterdir()}
+        old=dict(subjects=['ZAB','ZDM','ZDN','ZJM'],software={'numpy':'same'},code=dict(LEGACY_INVENTORY_FIXED_CODE,unchanged='abc'))
+        new=copy.deepcopy(old)
+        for key in LEGACY_INVENTORY_FIXED_CODE:new['code'][key]='endpoint-fix'
+        (root/'source_inventory_recovery.json').write_text('previous source recovery')
+        migrate_endpoint_protocol(old,new,root)
+        assert before=={p.name:file_digest(p) for p in reader.iterdir()}
+        assert (root/'source_inventory_recovery.json').read_text()=='previous source recovery'
+        assert len(list((root/'protocol_migrations').glob('*.json')))==1
+    print('Source-fixed reader migration preserves accepted signals and missing-source exclusions without overwriting history')
+
+
+if __name__=='__main__':inventory_checkpoint_migration_test()

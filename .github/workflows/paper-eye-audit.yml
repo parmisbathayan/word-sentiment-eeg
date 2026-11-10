@@ -1,5 +1,10 @@
 name: Paper eye endpoint source audit
-on: workflow_dispatch
+on:
+  workflow_dispatch:
+    inputs:
+      all_readers:
+        type: boolean
+        default: true
 jobs:
   audit:
     runs-on: ubuntu-latest
@@ -12,7 +17,14 @@ jobs:
           cache: pip
           cache-dependency-path: requirements-paper.txt
       - run: python -m pip install -r requirements-paper.txt
-      - run: python scripts/audit_paper_eye_endpoints.py --all-readers
+      - env:
+          ALL_READERS: ${{ inputs.all_readers }}
+        run: |
+          if [ "$ALL_READERS" = "true" ]; then
+            python scripts/audit_paper_eye_endpoints.py --all-readers
+          else
+            python scripts/audit_paper_eye_endpoints.py
+          fi
       - uses: actions/upload-artifact@v4
         if: always()
         with:

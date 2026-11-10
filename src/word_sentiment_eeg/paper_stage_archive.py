@@ -12,6 +12,10 @@ LEGACY_BLINK_FIXED_CODE={
     'scripts/prepare_zuco_paper_figures.py':'9daf1ba036e8d83221f0effd7b49cd3167f7d3519830666ebf6e96841a834b60',
     'scripts/zuco_paper_stages.py':'5ba89fe96147e4b70a69cddf807ff8de8a04108aeb815b9c0bed54aa63cc4204',
     'src/word_sentiment_eeg/paper_stage_archive.py':'44f3c9801df954e574d0e28d5a3d378137268cf91c7599cbb78d8e43ced71013'}
+LEGACY_INVENTORY_FIXED_CODE={
+    'scripts/prepare_zuco_paper_figures.py':'614d7c1cf9476358233f083de27cfad235a17edfb7522ab2b8523353c8568d66',
+    'scripts/zuco_paper_stages.py':'5ba89fe96147e4b70a69cddf807ff8de8a04108aeb815b9c0bed54aa63cc4204',
+    'src/word_sentiment_eeg/paper_stage_archive.py':'d4b5f85cb56c0c1514a24c901c06f4a1a90c675421be27c1b2fccf834710a118'}
 
 
 def migrate_endpoint_protocol(old,new,out):
@@ -21,7 +25,7 @@ def migrate_endpoint_protocol(old,new,out):
         raise ValueError('Settings, data or environment changed; endpoint-only migration refused')
     if set(old['code'])!=set(new['code']):raise ValueError('Unknown code inventory in old checkpoint')
     supported=any(all(sha==legacy.get(name,new['code'][name]) for name,sha in old['code'].items())
-                  for legacy in [LEGACY_ENDPOINT_CODE,LEGACY_BLINK_FIXED_CODE])
+                  for legacy in [LEGACY_ENDPOINT_CODE,LEGACY_BLINK_FIXED_CODE,LEGACY_INVENTORY_FIXED_CODE])
     if not supported:raise ValueError('Unknown prior scientific code; checkpoint migration refused')
     if (out/'cpu_preparation_manifest.json').exists() or (out/'preparation_manifest.json').exists():
         raise ValueError('Endpoint recovery is restricted to an incomplete CPU preparation')
@@ -32,7 +36,10 @@ def migrate_endpoint_protocol(old,new,out):
         if (reader/'manifest.json').exists():raise ValueError('GPU reader checkpoint cannot use this CPU-only migration')
         mapping=json.loads((reader/'source_mapping.json').read_text())
         for block in mapping['blocks']:
-            if block.get('missing_sources'):raise ValueError('Historical source exclusion cannot be silently migrated')
+            if block.get('missing_sources'):
+                if block.get('status')!='excluded_missing_source_files' or block.get('source_mapping') or block.get('synchronization') is not None:
+                    raise ValueError('Historical source exclusion is inconsistent')
+                continue
             for kind in ['raw','corrected']:
                 for events in block['duration_endpoint_audit'][kind].values():
                     if events['events'] and not (0<events['minimum_recomputed_ms']<=events['maximum_recomputed_ms']<=10000):
@@ -42,7 +49,11 @@ def migrate_endpoint_protocol(old,new,out):
     recovery=dict(reason='Source discovery and single-sample blink fixes; completed readers had complete sources and valid duration audits',
         preserved_readers=preserved,old_code=old['code'],new_code=new['code'])
     if not (out/'endpoint_recovery.json').exists():write_json(out/'endpoint_recovery.json',recovery)
-    write_json(out/'protocol_before_source_inventory_fix.json',old);write_json(out/'source_inventory_recovery.json',recovery)
+    if not (out/'protocol_before_source_inventory_fix.json').exists():write_json(out/'protocol_before_source_inventory_fix.json',old)
+    if not (out/'source_inventory_recovery.json').exists():write_json(out/'source_inventory_recovery.json',recovery)
+    from .common import digest
+    history=out/'protocol_migrations'/('recovery_'+digest([old['code'],new['code']])[:16]+'.json')
+    if not history.exists():write_json(history,dict(previous_protocol=old,**recovery))
     print('CHECKPOINT MIGRATION: verified and retained CPU readers '+str([v['subject'] for v in preserved]),flush=True)
 
 
