@@ -45,7 +45,10 @@ def main():
     out.mkdir(parents=True,exist_ok=True)
     if (out/'protocol.json').exists() and json.loads((out/'protocol.json').read_text())!=protocol:raise ValueError('Staged protocol or numerical environment changed; outputs must not be mixed')
     if args.phase=='analyze' and not (out/'protocol.json').exists():raise ValueError('Run CPU preparation first')
-    used=disk_bytes(out);required=max(0,args.budget_bytes-used)
+    used=disk_bytes(out)
+    null_used=disk_bytes(out/'null_work') if (out/'null_work').exists() else 0
+    required=max(0,args.budget_bytes-used) if args.phase=='prepare' else max(0,null_bytes+200_000_000-null_used)
+    if args.phase=='analyze' and (out/'manifest.json').exists():required=0
     if args.output is None and (args.free_drive_bytes is None or args.free_drive_bytes<required):raise OSError(f'Need {required/1e9:.2f} GB additional verified free space for the {args.budget_bytes/1e9:.1f} GB capped staged workflow. No extraction started.')
     write_json(out/'protocol.json',protocol)
     (out/'METHOD_DIFFERENCES.md').write_text('# Python reconstruction differences\n\n'+'\n'.join('- '+v for v in DEPARTURES)+'\n')
@@ -77,6 +80,12 @@ def main():
     if state['status']!='completed' or state['subjects']!=protocol['subjects'] or state['protocol_sha256']!=file_digest(out/'protocol.json'):raise ValueError('CPU handoff identity changed')
     for s in sources:
         if file_digest(out/'readers'/s['subject']/'prepared.json')!=state['reader_checkpoint_sha256'][s['subject']]:raise ValueError('Prepared reader identity changed')
+    if (out/'manifest.json').exists():
+        done=json.loads((out/'manifest.json').read_text());analysis=out/'analysis'
+        if done.get('status')!='completed' or any(file_digest(out/k)!=v for k,v in done['figure_checksums'].items()):raise ValueError('Final figure checksum changed')
+        audit=json.loads((analysis/'analysis_manifest.json').read_text())
+        if file_digest(analysis/'analysis_manifest.json')!=done['analysis_manifest_sha256'] or any(file_digest(analysis/k)!=v for k,v in audit['checksums'].items()):raise ValueError('Final statistics changed')
+        print('KEEP COMPLETED FIGURES: saved CPU trials and results verified; no source reads, cleaning or GPU work.',flush=True);return
     fixed=used-(disk_bytes(out/'null_work') if (out/'null_work').exists() else 0)
     if fixed+null_bytes+200_000_000>args.budget_bytes:raise OSError('GPU permutation reserve would exceed total workflow cap; CPU data retained')
     for i,s in enumerate(sources,1):
