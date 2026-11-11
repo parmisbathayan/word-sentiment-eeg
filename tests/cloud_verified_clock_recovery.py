@@ -28,7 +28,9 @@ with tempfile.TemporaryDirectory() as tmp:
     try:mapper('TEST','1')
     except ValueError:pass
     else:raise AssertionError('Old maximum-trigger rule must reject the synthetic block')
-    with verified_mapping(module,'TEST',inventory,[proof]):
+    # An unrelated approved block may be omitted by an explicit pilot subset.
+    unrelated=copy.deepcopy(proof);unrelated['block']='2'
+    with verified_mapping(module,'TEST',inventory,[proof,unrelated]):
         try:module.map_block('TEST','1')
         except ValueError:pass
         else:raise AssertionError('Unverified source files must not be accepted')

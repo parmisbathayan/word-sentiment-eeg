@@ -1,5 +1,5 @@
 {
-  "status": "remaining_ZMG_audit_pending",
+  "status": "completed",
   "scope": "Independent waveform timing validation; not accepted sentiment-trial counts",
   "audit_workflow_runs": [
     43065333762,
@@ -1765,6 +1765,256 @@
       }
     },
     {
+      "subject": "ZMG",
+      "block": "1",
+      "trigger_choice": "all_shared_exact_sequence",
+      "source_sentence_matches": 48,
+      "identity_audit": {
+        "word_event_count_or_waveform_unresolved": 239,
+        "unmatched_stored_segment": 36,
+        "sentence_interval_unresolved": 8,
+        "duplicate_waveform_times_excluded": 0
+      },
+      "candidate_clocks": {
+        "original_affine": {
+          "eye_origin_ms": 6789819.5,
+          "slope_seconds_per_eye_ms": 0.001000007661558221,
+          "eeg_seconds_at_origin": 163.46722975803493,
+          "anchor_max_error_ms": 11.435828086661104,
+          "anchor_median_error_ms": 0.779641142177212,
+          "anchors_over_8ms": 1
+        },
+        "theil_sen_candidate": {
+          "eye_origin_ms": 6789819.5,
+          "slope_seconds_per_eye_ms": 0.0010000093644357457,
+          "eeg_seconds_at_origin": 163.46762559113,
+          "anchor_max_error_ms": 11.988594117241291,
+          "anchor_median_error_ms": 0.756702594884473,
+          "anchors_over_8ms": 1
+        }
+      },
+      "validation": {
+        "original_affine": {
+          "checked_fixations": 648,
+          "checked_sentences": 40,
+          "median_error_ms": 0.5113001946015494,
+          "p99_error_ms": 1.1024003806510052,
+          "maximum_error_ms": 1.1193961684767828,
+          "signed_median_error_ms": 0.17642304842979684,
+          "within_2ms": 648,
+          "within_4ms": 648,
+          "within_8ms": 648,
+          "candidate_passes_audit": true
+        },
+        "theil_sen_candidate": {
+          "checked_fixations": 648,
+          "checked_sentences": 40,
+          "median_error_ms": 0.6429621582952905,
+          "p99_error_ms": 1.3587953589934898,
+          "maximum_error_ms": 1.3795686740962765,
+          "signed_median_error_ms": 0.6429621582952905,
+          "within_2ms": 648,
+          "within_4ms": 648,
+          "within_8ms": 648,
+          "candidate_passes_audit": true
+        }
+      },
+      "conclusion": "Audit only. Passing candidate does not alter accepted trials or prove full nuisance-timeline equivalence.",
+      "source_checksums": {
+        "eeg": "161e815f9514a352a676399539520093d1e2c277d9a9a0897994648dd2a4cb59",
+        "eye": "c11c12caf734fabe048cb0b7d4ad440845fd0362793afa6331ae797f9b4283ab",
+        "corrected": "65a3ca783a58f30841cbc2bd56b59b9df01059a4a37bb099e4603bc12315cefc"
+      }
+    },
+    {
+      "subject": "ZMG",
+      "block": "2",
+      "trigger_choice": "all_shared_exact_sequence",
+      "source_sentence_matches": 48,
+      "identity_audit": {
+        "sentence_interval_unresolved": 5,
+        "word_event_count_or_waveform_unresolved": 306,
+        "unmatched_stored_segment": 36,
+        "word_duration_sequence_mismatch": 1,
+        "duplicate_waveform_times_excluded": 0
+      },
+      "candidate_clocks": {
+        "original_affine": {
+          "eye_origin_ms": 7381488.0,
+          "slope_seconds_per_eye_ms": 0.0010000123814205802,
+          "eeg_seconds_at_origin": 145.17217203487183,
+          "anchor_max_error_ms": 10.271928173096967,
+          "anchor_median_error_ms": 0.8877127658877271,
+          "anchors_over_8ms": 1
+        },
+        "theil_sen_candidate": {
+          "eye_origin_ms": 7381488.0,
+          "slope_seconds_per_eye_ms": 0.0010000118162113527,
+          "eeg_seconds_at_origin": 145.17263823779797,
+          "anchor_max_error_ms": 10.733570991163788,
+          "anchor_median_error_ms": 0.7949563264606496,
+          "anchors_over_8ms": 1
+        }
+      },
+      "validation": {
+        "original_affine": {
+          "checked_fixations": 690,
+          "checked_sentences": 43,
+          "median_error_ms": 0.4045257731917218,
+          "p99_error_ms": 0.9856523952893781,
+          "maximum_error_ms": 1.0043780557680293,
+          "signed_median_error_ms": 0.006852154470493588,
+          "within_2ms": 690,
+          "within_4ms": 690,
+          "within_8ms": 690,
+          "candidate_passes_audit": true
+        },
+        "theil_sen_candidate": {
+          "checked_fixations": 690,
+          "checked_sentences": 43,
+          "median_error_ms": 0.5090364182969154,
+          "p99_error_ms": 1.460363642000857,
+          "maximum_error_ms": 1.47823448003237,
+          "signed_median_error_ms": 0.5044841348897933,
+          "within_2ms": 690,
+          "within_4ms": 690,
+          "within_8ms": 690,
+          "candidate_passes_audit": true
+        }
+      },
+      "conclusion": "Audit only. Passing candidate does not alter accepted trials or prove full nuisance-timeline equivalence.",
+      "source_checksums": {
+        "eeg": "80642456e7f8d1a7819a9d6584788ddac961f7e60a7b912f7b93348b4892cb44",
+        "eye": "e7142091421a26e8c3556185c7c203ab010488266f71a1fee8584cf4823d8e18",
+        "corrected": "ba36c905702afe4dbde207254cef4ea1500b111dc3f9c22e6dbf4ee6ebb50892"
+      }
+    },
+    {
+      "subject": "ZMG",
+      "block": "6",
+      "trigger_choice": "all_shared_exact_sequence",
+      "source_sentence_matches": 49,
+      "identity_audit": {
+        "word_event_count_or_waveform_unresolved": 381,
+        "unmatched_stored_segment": 40,
+        "sentence_interval_unresolved": 5,
+        "word_duration_sequence_mismatch": 1,
+        "duplicate_waveform_times_excluded": 0
+      },
+      "candidate_clocks": {
+        "original_affine": {
+          "eye_origin_ms": 5696961.5,
+          "slope_seconds_per_eye_ms": 0.0010000186990536512,
+          "eeg_seconds_at_origin": 126.4947701778246,
+          "anchor_max_error_ms": 12.758686570343514,
+          "anchor_median_error_ms": 0.9908736590049649,
+          "anchors_over_8ms": 2
+        },
+        "theil_sen_candidate": {
+          "eye_origin_ms": 5696961.5,
+          "slope_seconds_per_eye_ms": 0.0010000143667839953,
+          "eeg_seconds_at_origin": 126.4952650815315,
+          "anchor_max_error_ms": 13.60377846419425,
+          "anchor_median_error_ms": 0.7537102219714598,
+          "anchors_over_8ms": 2
+        }
+      },
+      "validation": {
+        "original_affine": {
+          "checked_fixations": 669,
+          "checked_sentences": 44,
+          "median_error_ms": 0.694861381617784,
+          "p99_error_ms": 2.0185567978017716,
+          "maximum_error_ms": 2.0501222962807653,
+          "signed_median_error_ms": -0.5856872105454158,
+          "within_2ms": 660,
+          "within_4ms": 669,
+          "within_8ms": 669,
+          "candidate_passes_audit": false
+        },
+        "theil_sen_candidate": {
+          "checked_fixations": 669,
+          "checked_sentences": 44,
+          "median_error_ms": 0.4742906400423408,
+          "p99_error_ms": 1.1998936858014988,
+          "maximum_error_ms": 1.2279146612854674,
+          "signed_median_error_ms": -0.12086775375053094,
+          "within_2ms": 669,
+          "within_4ms": 669,
+          "within_8ms": 669,
+          "candidate_passes_audit": true
+        }
+      },
+      "conclusion": "Audit only. Passing candidate does not alter accepted trials or prove full nuisance-timeline equivalence.",
+      "source_checksums": {
+        "eeg": "cbc5363151f783cd1b5803a6ec2cebc7c8dc675d70433c146997466ac5d5b8f5",
+        "eye": "369e1c38fc7548d4da5615b1428d7e8cbae787cfbb7ef13abed4d2e6e95b2fe8",
+        "corrected": "16994c617cd3debe3f884cb3b9e5182d157a1ceae5710c08e9efba783b901448"
+      }
+    },
+    {
+      "subject": "ZMG",
+      "block": "7",
+      "trigger_choice": "all_shared_exact_sequence",
+      "source_sentence_matches": 46,
+      "identity_audit": {
+        "word_event_count_or_waveform_unresolved": 348,
+        "unmatched_stored_segment": 38,
+        "sentence_interval_unresolved": 1,
+        "duplicate_waveform_times_excluded": 0
+      },
+      "candidate_clocks": {
+        "original_affine": {
+          "eye_origin_ms": 6005502.5,
+          "slope_seconds_per_eye_ms": 0.001000015756942192,
+          "eeg_seconds_at_origin": 107.07549892463126,
+          "anchor_max_error_ms": 10.105088450004018,
+          "anchor_median_error_ms": 0.9757460841655075,
+          "anchors_over_8ms": 2
+        },
+        "theil_sen_candidate": {
+          "eye_origin_ms": 6005502.5,
+          "slope_seconds_per_eye_ms": 0.0010000111583513193,
+          "eeg_seconds_at_origin": 107.07594339368376,
+          "anchor_max_error_ms": 10.81041946763861,
+          "anchor_median_error_ms": 0.6397639294490887,
+          "anchors_over_8ms": 2
+        }
+      },
+      "validation": {
+        "original_affine": {
+          "checked_fixations": 570,
+          "checked_sentences": 45,
+          "median_error_ms": 0.809461652483634,
+          "p99_error_ms": 1.6280155758952028,
+          "maximum_error_ms": 1.6499369490055038,
+          "signed_median_error_ms": -0.01014348897143691,
+          "within_2ms": 570,
+          "within_4ms": 570,
+          "within_8ms": 570,
+          "candidate_passes_audit": true
+        },
+        "theil_sen_candidate": {
+          "checked_fixations": 570,
+          "checked_sentences": 45,
+          "median_error_ms": 0.5743538174636242,
+          "p99_error_ms": 1.5462994108480643,
+          "maximum_error_ms": 1.5609304642794086,
+          "signed_median_error_ms": 0.436972052575868,
+          "within_2ms": 570,
+          "within_4ms": 570,
+          "within_8ms": 570,
+          "candidate_passes_audit": true
+        }
+      },
+      "conclusion": "Audit only. Passing candidate does not alter accepted trials or prove full nuisance-timeline equivalence.",
+      "source_checksums": {
+        "eeg": "232650b81de7e7344ceeb8b7dab25d23f1c9e8c8c353aee0bd0effd3fa2439b3",
+        "eye": "91dd1a15823503346d7ce1c8210bb372450536a6e32412648e220461aeda4f94",
+        "corrected": "81e8a740e30d2eeac79d1984408db08693208b12b17b43da247e5e5109c58bd7"
+      }
+    },
+    {
       "subject": "ZPH",
       "block": "1",
       "source_sentence_matches": 49,
@@ -2011,5 +2261,31 @@
         "corrected": "bb726503f252094996e517df41a999f7e3e0845d22a54c57893834698742169a"
       }
     }
-  ]
+  ],
+  "summary": {
+    "audited_previously_excluded_blocks": 37,
+    "approved_blocks": 34,
+    "unresolved_blocks": 3,
+    "validated_fixation_checks": 25401,
+    "largest_approved_waveform_error_ms": 1.975046823986304,
+    "possible_source_blocks_after_reconstruction": 88,
+    "missing_source_blocks": 5,
+    "unresolved": [
+      {
+        "subject": "ZDN",
+        "block": "6",
+        "reason": "No unique complete shared trigger sequence"
+      },
+      {
+        "subject": "ZGW",
+        "block": "5",
+        "reason": "independent timing criterion not met"
+      },
+      {
+        "subject": "ZJN",
+        "block": "1",
+        "reason": "independent timing criterion not met"
+      }
+    ]
+  }
 }

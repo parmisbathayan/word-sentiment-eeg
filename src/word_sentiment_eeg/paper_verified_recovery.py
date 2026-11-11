@@ -24,8 +24,8 @@ def approved_clock(proof):
 def verified_mapping(module,subject,inventory,proofs):
     """Scoped wrapper, used sequentially per reader; restored even on failure."""
     original_fetch=module.fetch;original_map=module.map_block;original_sync=module.synchronize
-    selected={str(p['block']):p for p in proofs if p['subject']==subject and approved_clock(p)}
     items={str(b['block_id']):b for b in inventory};checked=set()
+    selected={str(p['block']):p for p in proofs if p['subject']==subject and str(p['block']) in items and approved_clock(p)}
     by_id={}
     for block,proof in selected.items():
         if block not in items or not items[block].get('available'):raise ValueError('Validated block is no longer available')
