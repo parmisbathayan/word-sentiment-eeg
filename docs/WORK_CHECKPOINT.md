@@ -638,3 +638,16 @@ sent; keep previous draft for after recovery investigation. Newly added audit:
   Wait for currentTeCo job to finish,CPUrecoveryRunall,thenGPUanalysisRunall.
   Explain why reader-level model/matching refit is necessary; do not append90
   pilot trials toold6634. Email remains deferred until recovery is assessed.
+
+## 2026-11-12: recovery initial quota stop
+
+User's first CPU attempt stopped before protocol write/source reads: required
+4,000,000,000 bytes, authenticated free3,726,021,983. Updated BOTH recovery
+notebook commands to3,600,000,000bytes. Same immutable scientific code pin,
+no script changes, no data precision/channel/time/permutation reductions.
+Temporary null reserve1,013,040,000 + safety250,000,000 leaves2,336,960,000
+CPUarchive allowance. CPU/GPU caps match, so handoff protocol stays consistent.
+Initial reserve now fits reported free space, but this is not proof of final
+size; per-reader archive guards still stop safely if actual output hits cap.
+No Drive data deleted or modified by this fix. User should reload CPU notebook
+fromGitHub main and Runall; no need to free/delete results merely for this stop.

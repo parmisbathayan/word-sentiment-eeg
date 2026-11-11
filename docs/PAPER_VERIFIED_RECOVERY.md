@@ -52,8 +52,8 @@ in the NEW reconstruction resume with checksum validation. Unfinished readers
 may need repeating after interruption. GPU permutations resume without double
 reader additions and require no repeat native extraction.
 
-**Additional storage cap:4GB**, including about1GB temporary null maps and a
-250MB safety reserve. CPU archive allowance approximately2.7GB. Authenticated
+**Notebook additional storage cap:3.6GB**, including about1GB temporary null maps and a
+250MB safety reserve. CPU archive allowance approximately2.34GB. Authenticated
 Drive quota is checked before extraction. No additional source EEG copies remain
 on Drive. Temporary permutation maps are removed after successful final figures.
 Do not run multiple jobs into the same destination.
@@ -81,3 +81,5 @@ accepted trials, lossless raw/clean archive checksums verified, and4TCT+4cluster
 CPU permutations completed from the saved archive. These are engineering-pilot
 counts with block-only matching, not counts to append to the old full-reader
 results. Latest synthetic proof-binding checks passed in43069023056.
+
+2026-11-12: both notebook commands use3,600,000,000bytes after the initial4GB reservation exceeded the reported3,726,021,983bytes free. This changes only the operational cap; raw/clean float32 trials, all channels/time points and5000+1000permutations are unchanged. The script’s CLI default remains4GB; notebook commands pass the lower cap explicitly.
