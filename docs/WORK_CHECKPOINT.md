@@ -575,3 +575,25 @@ sent; keep previous draft for after recovery investigation. Newly added audit:
   no Mac dependency/environment/dataset installation/download. Artifact output
   smallJSON only, no EEG/stimulus text. No Drive quota consumption or old-result
   edits. Investigate candidate clocks and validation coverage before any rerun.
+
+### Recovery pilot outcome and extension
+
+- Real native audit43065333762 completed successfully. All7 rejected pilot
+  blocks (ZAB3/5/7, ZPH1/2/3/7) pass Theil–Sen candidate timing validation.
+  5,487 fixation waveform checks across315 sentence-reader instances; max
+  absolute error1.8985ms across these checked onsets. Large trigger residuals
+  remain visible; candidate method does not delete anchors. NO new accepted
+  sentiment trials or updated FRP results yet. Metrics saved in
+  docs/paper_clock_pilot_results.json; all underlying signals stayed in cloud.
+- Public source scan covered452 entries across26 folders in complete raw and
+  preprocessed SR trees. Still no source pair for missingZDN4/5/7/8 and ZKW6.
+  Do not claim absence from all other tasks/releases/archives/the entire website.
+- Full remaining audit dispatched43066690280, revision036cff5: remaining29 numeric
+  residual failures plus ZDN6 sequence mismatch,10 readers,max3 cloud workers.
+  It skips the7 already-tested blocks rather than downloading them again.
+- New audit-only reading-sequence fallback requires an exact complete10/11
+  sequence if full10/11/12/13 sequence disagrees (e.g. missing question trigger).
+  It still requires independent waveform validation. No guessed event ordering.
+- Next: inspect completed native job logs via gh api, retaining only summary
+  metrics/source metadata, not EEG or full fixation-event data on Mac. Then
+  decide conservative adoption/reconstruction scope; email remains deferred.
