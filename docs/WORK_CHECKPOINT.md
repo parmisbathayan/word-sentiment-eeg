@@ -552,3 +552,26 @@ use same pin. No folder deletion or extra trial archive/storage budget increase.
   synchronization guidance/source-file locations. Draft in chat only; no email
   sent and no mailbox draft created. Next step is validated timing recovery,
   not another blind full extraction or forcing exactly12,789 trials.
+
+## Active 2026-11-11: independent timing recovery attempt (email deferred)
+
+User explicitly asked to attempt recovery before contacting authors. No email
+sent; keep previous draft for after recovery investigation. Newly added audit:
+- `paper_clock_audit.py`: original affine and Theil–Sen trigger-clock candidates;
+  reports all outlying anchors; no thresholds/extraction behavior changed.
+- `audit_paper_clock_recovery.py`: independently locate released sentence and
+  stored word-fixation waveforms in105-channel native EEG. Associate corrected
+  ET fixations by sentence trigger identity, word bounds, order and duration,
+  NEVER nearest predicted clock time. Candidate clocks validated on matched
+  waveforms, not the triggers used to fit them. No sentiment labels involved.
+- Predeclared audit pass: >=100 fixation checks across>=10sentences, p99 error
+  <=2ms and max<=4ms. This is an audit criterion, not a pipeline adoption step.
+- Source search traverses the complete raw/preprocessed public SR folder trees,
+  including misplaced subject files; does not claim every OSF archive searched.
+- Cloud synthetic checks pass (push run43065265998). Real source audit dispatched
+  as43065333762: ZABblocks3/5/7, ZPHblocks1/2/3/7; ZABalso broadETsource search.
+  Workflow `.github/workflows/paper-clock-recovery.yml`, native input true.
+- Public source EEG downloads permitted ONLY in temporary cloud runner storage;
+  no Mac dependency/environment/dataset installation/download. Artifact output
+  smallJSON only, no EEG/stimulus text. No Drive quota consumption or old-result
+  edits. Investigate candidate clocks and validation coverage before any rerun.
