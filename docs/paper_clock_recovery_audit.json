@@ -1,0 +1,590 @@
+{
+  "review_date": "2026-11-11",
+  "scope": "Existing saved timing diagnostics only; no EEG/onset recovery performed",
+  "blocks_total": 96,
+  "included": 54,
+  "excluded_missing_sources": 5,
+  "excluded_trigger_sequence": 1,
+  "excluded_affine_residual": 36,
+  "criterion": "Maximum absolute trigger residual >8 ms rejects the entire block",
+  "finding": "Every one of the 36 residual-failed blocks had only 1–3 anchors exceeding 8 ms among approximately 100; this does not independently validate fixation onsets.",
+  "blocks": [
+    {
+      "reader": "ZPH",
+      "block": "1",
+      "max_ms": 68.31,
+      "median_ms": 1.45,
+      "over8": 1,
+      "total": 98,
+      "max_anchor": 95,
+      "max_code": 11,
+      "mean_by_code": {
+        "10": 0.7,
+        "11": -0.72,
+        "12": 0.55,
+        "13": -0.44
+      }
+    },
+    {
+      "reader": "ZPH",
+      "block": "2",
+      "max_ms": 48.08,
+      "median_ms": 1.92,
+      "over8": 3,
+      "total": 100,
+      "max_anchor": 91,
+      "max_code": 11,
+      "mean_by_code": {
+        "10": 0.84,
+        "11": -0.94,
+        "12": 0.08,
+        "13": 0.87
+      }
+    },
+    {
+      "reader": "ZPH",
+      "block": "3",
+      "max_ms": 56.93,
+      "median_ms": 1.07,
+      "over8": 1,
+      "total": 100,
+      "max_anchor": 83,
+      "max_code": 11,
+      "mean_by_code": {
+        "10": 0.38,
+        "11": -0.5,
+        "12": 0.26,
+        "13": 0.57
+      }
+    },
+    {
+      "reader": "ZPH",
+      "block": "7",
+      "max_ms": 14,
+      "median_ms": 0.83,
+      "over8": 2,
+      "total": 100,
+      "max_anchor": 55,
+      "max_code": 11,
+      "mean_by_code": {
+        "10": 0.08,
+        "11": -0.12,
+        "12": 1.37,
+        "13": 0.35
+      }
+    },
+    {
+      "reader": "ZMG",
+      "block": "1",
+      "max_ms": 11.44,
+      "median_ms": 0.8,
+      "over8": 1,
+      "total": 98,
+      "max_anchor": 90,
+      "max_code": 10,
+      "mean_by_code": {
+        "10": -0.33,
+        "11": 0.19,
+        "12": 0.67,
+        "13": 0.01
+      }
+    },
+    {
+      "reader": "ZMG",
+      "block": "2",
+      "max_ms": 10.27,
+      "median_ms": 0.91,
+      "over8": 1,
+      "total": 100,
+      "max_anchor": 54,
+      "max_code": 10,
+      "mean_by_code": {
+        "10": 0.03,
+        "11": 0.03,
+        "12": -1.03,
+        "13": 0.52
+      }
+    },
+    {
+      "reader": "ZMG",
+      "block": "6",
+      "max_ms": 12.76,
+      "median_ms": 1,
+      "over8": 2,
+      "total": 98,
+      "max_anchor": 13,
+      "max_code": 11,
+      "mean_by_code": {
+        "10": -0.04,
+        "11": 0.1,
+        "12": 0.38,
+        "13": -0.87
+      }
+    },
+    {
+      "reader": "ZMG",
+      "block": "7",
+      "max_ms": 10.11,
+      "median_ms": 1,
+      "over8": 2,
+      "total": 100,
+      "max_anchor": 20,
+      "max_code": 10,
+      "mean_by_code": {
+        "10": -0.39,
+        "11": 0.36,
+        "12": 1.33,
+        "13": 0.3
+      }
+    },
+    {
+      "reader": "ZKW",
+      "block": "1",
+      "max_ms": 57.48,
+      "median_ms": 1.19,
+      "over8": 2,
+      "total": 98,
+      "max_anchor": 37,
+      "max_code": 11,
+      "mean_by_code": {
+        "10": 1.06,
+        "11": -1.38,
+        "12": 0.37,
+        "13": 1.29
+      }
+    },
+    {
+      "reader": "ZKW",
+      "block": "4",
+      "max_ms": 8.85,
+      "median_ms": 1.38,
+      "over8": 1,
+      "total": 100,
+      "max_anchor": 2,
+      "max_code": 10,
+      "mean_by_code": {
+        "10": -0.39,
+        "11": 0.12,
+        "12": 0.7,
+        "13": 0.35
+      }
+    },
+    {
+      "reader": "ZKW",
+      "block": "5",
+      "max_ms": 9.38,
+      "median_ms": 1.21,
+      "over8": 1,
+      "total": 102,
+      "max_anchor": 39,
+      "max_code": 11,
+      "mean_by_code": {
+        "10": -0.13,
+        "11": 0.21,
+        "12": -0.53,
+        "13": -0.6
+      }
+    },
+    {
+      "reader": "ZKH",
+      "block": "2",
+      "max_ms": 11.16,
+      "median_ms": 1.11,
+      "over8": 2,
+      "total": 100,
+      "max_anchor": 26,
+      "max_code": 10,
+      "mean_by_code": {
+        "10": -0.3,
+        "11": 0.24,
+        "12": 0.61,
+        "13": -0.06
+      }
+    },
+    {
+      "reader": "ZKH",
+      "block": "3",
+      "max_ms": 49.04,
+      "median_ms": 1.41,
+      "over8": 2,
+      "total": 100,
+      "max_anchor": 77,
+      "max_code": 13,
+      "mean_by_code": {
+        "10": 0.62,
+        "11": 0.49,
+        "12": -0.14,
+        "13": -8.03
+      }
+    },
+    {
+      "reader": "ZKB",
+      "block": "1",
+      "max_ms": 61.06,
+      "median_ms": 1.02,
+      "over8": 2,
+      "total": 98,
+      "max_anchor": 29,
+      "max_code": 11,
+      "mean_by_code": {
+        "10": 0.4,
+        "11": -0.63,
+        "12": 0.18,
+        "13": 0.99
+      }
+    },
+    {
+      "reader": "ZKB",
+      "block": "3",
+      "max_ms": 9.43,
+      "median_ms": 1.06,
+      "over8": 3,
+      "total": 100,
+      "max_anchor": 72,
+      "max_code": 12,
+      "mean_by_code": {
+        "10": 0.21,
+        "11": 0.16,
+        "12": -3.25,
+        "13": 0.52
+      }
+    },
+    {
+      "reader": "ZJS",
+      "block": "1",
+      "max_ms": 26.95,
+      "median_ms": 0.87,
+      "over8": 1,
+      "total": 98,
+      "max_anchor": 29,
+      "max_code": 11,
+      "mean_by_code": {
+        "10": 0.3,
+        "11": -0.39,
+        "12": 0.13,
+        "13": 0.34
+      }
+    },
+    {
+      "reader": "ZJS",
+      "block": "2",
+      "max_ms": 12.4,
+      "median_ms": 0.96,
+      "over8": 1,
+      "total": 100,
+      "max_anchor": 50,
+      "max_code": 10,
+      "mean_by_code": {
+        "10": -0.19,
+        "11": 0.21,
+        "12": -0.16,
+        "13": -0.02
+      }
+    },
+    {
+      "reader": "ZJS",
+      "block": "4",
+      "max_ms": 9.71,
+      "median_ms": 0.68,
+      "over8": 1,
+      "total": 100,
+      "max_anchor": 10,
+      "max_code": 10,
+      "mean_by_code": {
+        "10": -0.37,
+        "11": 0.09,
+        "12": 0.56,
+        "13": 0.54
+      }
+    },
+    {
+      "reader": "ZJS",
+      "block": "5",
+      "max_ms": 8.08,
+      "median_ms": 1.2,
+      "over8": 1,
+      "total": 102,
+      "max_anchor": 68,
+      "max_code": 10,
+      "mean_by_code": {
+        "10": 0.28,
+        "11": -0.31,
+        "12": 0.95,
+        "13": -0.42
+      }
+    },
+    {
+      "reader": "ZJS",
+      "block": "8",
+      "max_ms": 58.46,
+      "median_ms": 1.23,
+      "over8": 1,
+      "total": 102,
+      "max_anchor": 51,
+      "max_code": 13,
+      "mean_by_code": {
+        "10": 0.56,
+        "11": 0.42,
+        "12": 0.89,
+        "13": -6.15
+      }
+    },
+    {
+      "reader": "ZJN",
+      "block": "1",
+      "max_ms": 16.61,
+      "median_ms": 0.88,
+      "over8": 1,
+      "total": 98,
+      "max_anchor": 0,
+      "max_code": 10,
+      "mean_by_code": {
+        "10": -0.31,
+        "11": 0.14,
+        "12": 0.78,
+        "13": 0.06
+      }
+    },
+    {
+      "reader": "ZJN",
+      "block": "2",
+      "max_ms": 9.8,
+      "median_ms": 1.07,
+      "over8": 1,
+      "total": 100,
+      "max_anchor": 70,
+      "max_code": 10,
+      "mean_by_code": {
+        "10": -0.22,
+        "11": 0.36,
+        "12": -0.56,
+        "13": -0.68
+      }
+    },
+    {
+      "reader": "ZJN",
+      "block": "7",
+      "max_ms": 26.51,
+      "median_ms": 1.2,
+      "over8": 1,
+      "total": 100,
+      "max_anchor": 57,
+      "max_code": 11,
+      "mean_by_code": {
+        "10": 0.29,
+        "11": -0.25,
+        "12": 1.13,
+        "13": -2.9
+      }
+    },
+    {
+      "reader": "ZJM",
+      "block": "6",
+      "max_ms": 10.16,
+      "median_ms": 1.27,
+      "over8": 1,
+      "total": 98,
+      "max_anchor": 56,
+      "max_code": 10,
+      "mean_by_code": {
+        "10": -0.05,
+        "11": 0.18,
+        "12": -0.65,
+        "13": -0.5
+      }
+    },
+    {
+      "reader": "ZGW",
+      "block": "4",
+      "max_ms": 19.43,
+      "median_ms": 1.23,
+      "over8": 1,
+      "total": 100,
+      "max_anchor": 75,
+      "max_code": 11,
+      "mean_by_code": {
+        "10": 0.24,
+        "11": -0.19,
+        "12": -0.52,
+        "13": 0.33
+      }
+    },
+    {
+      "reader": "ZGW",
+      "block": "5",
+      "max_ms": 13.23,
+      "median_ms": 0.9,
+      "over8": 2,
+      "total": 102,
+      "max_anchor": 0,
+      "max_code": 10,
+      "mean_by_code": {
+        "10": 0.13,
+        "11": -0.03,
+        "12": -2.44,
+        "13": 0.79
+      }
+    },
+    {
+      "reader": "ZGW",
+      "block": "6",
+      "max_ms": 8.57,
+      "median_ms": 0.81,
+      "over8": 1,
+      "total": 98,
+      "max_anchor": 40,
+      "max_code": 10,
+      "mean_by_code": {
+        "10": -0.12,
+        "11": 0,
+        "12": -0.04,
+        "13": 1.07
+      }
+    },
+    {
+      "reader": "ZGW",
+      "block": "7",
+      "max_ms": 10.95,
+      "median_ms": 0.92,
+      "over8": 1,
+      "total": 100,
+      "max_anchor": 6,
+      "max_code": 10,
+      "mean_by_code": {
+        "10": -0.08,
+        "11": 0.04,
+        "12": 0.06,
+        "13": 2.01
+      }
+    },
+    {
+      "reader": "ZDN",
+      "block": "1",
+      "max_ms": 8.11,
+      "median_ms": 0.77,
+      "over8": 1,
+      "total": 98,
+      "max_anchor": 71,
+      "max_code": 11,
+      "mean_by_code": {
+        "10": -0.06,
+        "11": -0.1,
+        "12": 0.54,
+        "13": 0.26
+      }
+    },
+    {
+      "reader": "ZDN",
+      "block": "3",
+      "max_ms": 10.78,
+      "median_ms": 0.94,
+      "over8": 1,
+      "total": 100,
+      "max_anchor": 44,
+      "max_code": 10,
+      "mean_by_code": {
+        "10": -0.12,
+        "11": 0.19,
+        "12": -0.14,
+        "13": -0.35
+      }
+    },
+    {
+      "reader": "ZDM",
+      "block": "3",
+      "max_ms": 42.45,
+      "median_ms": 1.46,
+      "over8": 3,
+      "total": 100,
+      "max_anchor": 77,
+      "max_code": 13,
+      "mean_by_code": {
+        "10": 0.6,
+        "11": 0.35,
+        "12": 0.13,
+        "13": -7.05
+      }
+    },
+    {
+      "reader": "ZDM",
+      "block": "5",
+      "max_ms": 56.52,
+      "median_ms": 1.64,
+      "over8": 3,
+      "total": 102,
+      "max_anchor": 77,
+      "max_code": 11,
+      "mean_by_code": {
+        "10": 0.61,
+        "11": 0.1,
+        "12": 1.01,
+        "13": -12.32
+      }
+    },
+    {
+      "reader": "ZDM",
+      "block": "7",
+      "max_ms": 22.35,
+      "median_ms": 0.94,
+      "over8": 1,
+      "total": 100,
+      "max_anchor": 49,
+      "max_code": 11,
+      "mean_by_code": {
+        "10": 0.05,
+        "11": -0.11,
+        "12": 0.87,
+        "13": 1.84
+      }
+    },
+    {
+      "reader": "ZAB",
+      "block": "3",
+      "max_ms": 10.63,
+      "median_ms": 1.19,
+      "over8": 2,
+      "total": 100,
+      "max_anchor": 80,
+      "max_code": 10,
+      "mean_by_code": {
+        "10": -0.47,
+        "11": 0.38,
+        "12": -0.09,
+        "13": 0.71
+      }
+    },
+    {
+      "reader": "ZAB",
+      "block": "5",
+      "max_ms": 8.93,
+      "median_ms": 0.89,
+      "over8": 1,
+      "total": 102,
+      "max_anchor": 68,
+      "max_code": 10,
+      "mean_by_code": {
+        "10": -0.23,
+        "11": 0.22,
+        "12": 0.15,
+        "13": 0.07
+      }
+    },
+    {
+      "reader": "ZAB",
+      "block": "7",
+      "max_ms": 8.22,
+      "median_ms": 0.79,
+      "over8": 1,
+      "total": 100,
+      "max_anchor": 72,
+      "max_code": 10,
+      "mean_by_code": {
+        "10": -0.04,
+        "11": -0.01,
+        "12": 0.61,
+        "13": 1.59
+      }
+    }
+  ],
+  "recovery_status": "Not yet validated. Examine local event timing and independent waveform/onset evidence before retaining intervals. Do not raise cutoff or discard anchors merely to obtain a target trial count."
+}

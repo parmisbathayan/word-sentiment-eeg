@@ -526,3 +526,29 @@ use same pin. No folder deletion or extra trial archive/storage budget increase.
   Final release is immutable tag teco-paper-raw-v1; see git log/test run for hash.
 - Nothing installed/downloaded as dependencies or EEG datasets on Mac. Used
   existing bundled Python only for stdlib syntax/notebook construction.
+
+## 2026-11-11: user requests recovering excluded ZuCo blocks
+
+- Read all 12 saved source_mapping.json files on Drive (metadata only). The37
+  alignment exclusions split into36 max-affine-residual failures and1 trigger
+  sequence mismatch (ZDN6). All36 residual failures contain only1–3 anchors >8ms
+  among98–102 anchors; median absolute residuals~0.68–1.92ms.18/36 blocks have
+  maximum residual <=12ms. Detailed nonstimulus audit: paper_clock_recovery_audit.json.
+- Original global-max rule rejected whole recordings for sparse discrepant
+  anchors. This warrants validation of local/sentence-level salvage. NO clocks
+  changed, blocks recovered, or completed results overwritten in this review.
+  Validate against independent released word-fixation waveform/onset matches;
+  do not remove anchors or loosen thresholds solely to match paper trial count.
+- Five missing-source blocks: ZDN4(raw+corrected ET),5(corrected ET),7/8(raw ET),
+  ZKW6(raw ET). These are missing from the currently discovered native inventory,
+  not proved permanently unavailable or absent from every dataset release.
+- IMPORTANT frequency clarification: paper2.7/3.3 used a two-sample comparison of
+  frequencies for UNIQUE word identities. Our Figure4 uses reader-paired means
+  over accepted FIXATIONS. Thus p=1.05e−7 is not an equivalent replication of
+  their frequency test. Do not say that p disproves their frequency control or
+  that absence of significance means perfectly matched word frequencies.
+- User asked for email draft requesting authors' preprocessing/deconvolution,
+  matching/statistics/word-label mapping code and selected fixation IDs, plus
+  synchronization guidance/source-file locations. Draft in chat only; no email
+  sent and no mailbox draft created. Next step is validated timing recovery,
+  not another blind full extraction or forcing exactly12,789 trials.
