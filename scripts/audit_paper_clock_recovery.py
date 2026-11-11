@@ -44,9 +44,15 @@ def search_missing():
 
 
 def validate_block(subject,block,eeg,sentences,eye,corrected,rate,codes,latencies):
-    c,x,y=anchors(codes,latencies,eye['event'],rate);clocks=fit_candidates(x,y);intervals=reading_intervals(c,x,y)
+    allowed=(10,11,12,13);trigger_choice='all_shared_exact_sequence'
+    try:c,x,y=anchors(codes,latencies,eye['event'],rate,allowed)
+    except ValueError:
+        # Missing question markers do not justify guessing reading trial order.
+        # Require a COMPLETE exact 10/11 reading sequence as a separate candidate.
+        allowed=(10,11);c,x,y=anchors(codes,latencies,eye['event'],rate,allowed);trigger_choice='reading_only_exact_sequence'
+    clocks=fit_candidates(x,y);intervals=reading_intervals(c,x,y)
     # Corrected selection timestamps must share the original native eye clock.
-    cc,cx,cy=anchors(codes,latencies,corrected['event'],rate)
+    cc,cx,cy=anchors(codes,latencies,corrected['event'],rate,allowed)
     if not np.array_equal(c,cc) or not np.array_equal(x,cx):raise ValueError('Raw/corrected eye trigger timestamps differ; no common clock established')
     fixes=event_table(corrected,'fixations');duration=fixes.endtime.to_numpy(float)-fixes.latency.to_numpy(float)
     valid_duration=np.isfinite(duration)&(duration>=100)
@@ -91,7 +97,7 @@ def validate_block(subject,block,eeg,sentences,eye,corrected,rate,codes,latencie
     # Reused physical EEG onset is never independent evidence for two events.
     keys=[r['waveform_eeg_seconds'] for r in rows];duplicate={v for v,n in Counter(keys).items() if n>1}
     counts['duplicate_waveform_times_excluded']=sum(v in duplicate for v in keys);rows=[r for r in rows if r['waveform_eeg_seconds'] not in duplicate]
-    return dict(subject=subject,block=block,source_sentence_matches=sentence_matches,identity_audit=dict(counts),candidate_clocks=clocks,
+    return dict(subject=subject,block=block,trigger_choice=trigger_choice,source_sentence_matches=sentence_matches,identity_audit=dict(counts),candidate_clocks=clocks,
         validation=summarize_validation(clocks,rows),validation_events=rows,
         conclusion='Audit only. Passing candidate does not alter accepted trials or prove full nuisance-timeline equivalence.')
 

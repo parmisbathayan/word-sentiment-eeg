@@ -7,13 +7,13 @@ any candidate clock's errors are inspected. Sentiment labels are never used.
 import numpy as np
 
 
-def anchors(codes,samples,eye_events,rate):
-    codes=np.asarray([int(str(v).strip()) for v in codes]);use=np.isin(codes,[10,11,12,13]);c=codes[use]
+def anchors(codes,samples,eye_events,rate,allowed=(10,11,12,13)):
+    codes=np.asarray([int(str(v).strip()) for v in codes]);use=np.isin(codes,allowed);c=codes[use]
     t=(np.asarray(samples,float)[use]-1)/rate;e=np.asarray(eye_events,float)
     candidates=[]
     if e.ndim!=2 or e.shape[1]!=2:raise ValueError('Invalid trigger table')
     for col in [0,1]:
-        mask=np.isin(e[:,col],[10,11,12,13])
+        mask=np.isin(e[:,col],allowed)
         if np.array_equal(e[mask,col],c):candidates.append(e[mask,1-col])
     if len(candidates)!=1 or len(c)<10:raise ValueError('No unique complete shared trigger sequence')
     x=candidates[0]

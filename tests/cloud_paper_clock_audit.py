@@ -18,6 +18,14 @@ try:anchors(codes,samples,eye[:-1],500)
 except ValueError:pass
 else:raise AssertionError('Incomplete trigger sequence must not be guessed')
 
+# A missing question marker may leave an exact complete reading sequence.
+cf=np.r_[codes,[12,13]];sf=np.r_[samples,[samples[-1]+5000,samples[-1]+6000]]
+ef=np.vstack([eye,[x[-1]+12000,13]])
+try:anchors(cf,sf,ef,500)
+except ValueError:pass
+else:raise AssertionError('Full sequence mismatch must be reported')
+assert len(anchors(cf,sf,ef,500,allowed=(10,11))[0])==100
+
 rng=np.random.default_rng(5);signal=rng.normal(size=(105,70000)).astype(np.float32)
 sentences=[];fixes=[];codes=[];samples=[];eye_events=[]
 for si in range(12):
