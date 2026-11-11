@@ -597,3 +597,28 @@ sent; keep previous draft for after recovery investigation. Newly added audit:
 - Next: inspect completed native job logs via gh api, retaining only summary
   metrics/source metadata, not EEG or full fixation-event data on Mac. Then
   decide conservative adoption/reconstruction scope; email remains deferred.
+
+### Independent audit complete; guarded recovery extraction being validated
+
+- Full native run43066690280 succeeded for all10 remaining readers. Combined
+  with pilot43065333762,37 clock-excluded blocks audited.34 approved,25,401
+  waveform checks,max1.97505ms. Could attempt88/96blocks (54old+34); not yet
+  newly accepted full-run trial counts. UnresolvedZGW5,ZJN1,ZDN6;5source pairs
+  still missing. The authoritative consolidated report is now
+  docs/paper_clock_recovery_verified.json (inclsource hashes and source scan).
+- Added proof-bound context wrapper paper_verified_recovery.py and separate
+  zuco_paper_recovered_stages.py. Old helpers/old pinned notebooks unchanged.
+  New outputzuco_paper_figures_recovered,4GB cap,CPU->GPU same archive layout.
+  Exact source SHA/candidate parameters and numeric evidence required. No mere
+  relaxed threshold. Requires refitting full reader nuisance models/matching.
+- First native extraction pilot43068181611 stopped before EEG downloads due to
+  a subset-selection bug (proofs for omitted blocks treated as missing). Fixed
+  in1b4908e and added synthetic coverage. New native pilot43068348201 running
+  ZAB3 through CPU archives and4+4CPUpermutations (skip group inference).
+- Recovery notebook files prepared locally, not released/tagged until native
+  pilot passes. They pin immutable verified-clock-recovery-v1 (tag pending).
+- Email remains deferred. No Drive changes; no Mac dependencies/EEG downloads.
+
+- Intermediate pilot/remaining JSON reports consolidated into the authoritative
+  paper_clock_recovery_verified.json (full metrics, source hashes and source
+  metadata search preserved). Earlier snapshots remain in git history.

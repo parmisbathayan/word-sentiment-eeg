@@ -13,7 +13,9 @@ from word_sentiment_eeg.paper_stage_archive import disk_bytes,verify_prepared,fi
 import prepare_zuco_paper_figures as preparation
 from prepare_zuco_paper_figures import source_inventory
 from word_sentiment_eeg.paper_verified_recovery import verified_mapping
-PROOFS=json.loads((ROOT/'docs/paper_clock_recovery_verified.json').read_text())['blocks']
+EVIDENCE=json.loads((ROOT/'docs/paper_clock_recovery_verified.json').read_text())
+if EVIDENCE.get('status')!='completed':raise ValueError('Independent recovery audit is incomplete')
+PROOFS=EVIDENCE['blocks']
 DEPARTURES=[v for v in preparation.DEPARTURES if not v.startswith(('Native timing tolerance','Blocks exceeding'))]+[
  'For previously rejected blocks only, an independently waveform-validated trigger clock is allowed. Exact native file SHA256 and candidate parameters must match the saved audit; unapproved blocks retain the original rejection rule.',
  'Timing audit: >=100 stored word-waveform matches across >=10 sentences, p99 onset error <=2ms, maximum <=4ms. Not every fixation was individually validated; ambiguous word/sequence pairs are excluded from audit evidence.',

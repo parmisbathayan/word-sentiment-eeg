@@ -2287,5 +2287,120 @@
         "reason": "independent timing criterion not met"
       }
     ]
+  },
+  "source_search": {
+    "scanned_items": 452,
+    "folders": 26,
+    "scope": "Public raw/preprocessed SR trees only; not proof of absence in every release or archive",
+    "candidate_names": [
+      {
+        "path": "raw_sr/ZKW",
+        "name": "ZKW_SR2_ET.mat"
+      },
+      {
+        "path": "raw_sr/ZKW",
+        "name": "ZKW_SR1_ET.mat"
+      },
+      {
+        "path": "raw_sr/ZKW",
+        "name": "ZKW_SR4_ET.mat"
+      },
+      {
+        "path": "raw_sr/ZKW",
+        "name": "ZKW_SR3_ET.mat"
+      },
+      {
+        "path": "raw_sr/ZKW",
+        "name": "ZKW_SR5_ET.mat"
+      },
+      {
+        "path": "raw_sr/ZKW",
+        "name": "ZKW_SR7_ET.mat"
+      },
+      {
+        "path": "raw_sr/ZKW",
+        "name": "ZKW_SR8_ET.mat"
+      },
+      {
+        "path": "raw_sr/ZDN",
+        "name": "ZDN_SR1_ET.mat"
+      },
+      {
+        "path": "raw_sr/ZDN",
+        "name": "ZDN_SR3_ET.mat"
+      },
+      {
+        "path": "raw_sr/ZDN",
+        "name": "ZDN_SR2_ET.mat"
+      },
+      {
+        "path": "raw_sr/ZDN",
+        "name": "ZDN_SR5_ET.mat"
+      },
+      {
+        "path": "raw_sr/ZDN",
+        "name": "ZDN_SR6_ET.mat"
+      },
+      {
+        "path": "raw_sr/ZDN",
+        "name": "ZDN_SR8_corrected_ET.mat"
+      },
+      {
+        "path": "preprocessed_sr/ZKW",
+        "name": "ZKW_SR1_corrected_ET.mat"
+      },
+      {
+        "path": "preprocessed_sr/ZKW",
+        "name": "ZKW_SR2_corrected_ET.mat"
+      },
+      {
+        "path": "preprocessed_sr/ZKW",
+        "name": "ZKW_SR4_corrected_ET.mat"
+      },
+      {
+        "path": "preprocessed_sr/ZKW",
+        "name": "ZKW_SR3_corrected_ET.mat"
+      },
+      {
+        "path": "preprocessed_sr/ZKW",
+        "name": "ZKW_SR5_corrected_ET.mat"
+      },
+      {
+        "path": "preprocessed_sr/ZKW",
+        "name": "ZKW_SR6_corrected_ET.mat"
+      },
+      {
+        "path": "preprocessed_sr/ZKW",
+        "name": "ZKW_SR8_corrected_ET.mat"
+      },
+      {
+        "path": "preprocessed_sr/ZKW",
+        "name": "ZKW_SR7_corrected_ET.mat"
+      },
+      {
+        "path": "preprocessed_sr/ZDN",
+        "name": "ZDN_SR2_corrected_ET.mat"
+      },
+      {
+        "path": "preprocessed_sr/ZDN",
+        "name": "ZDN_SR1_corrected_ET.mat"
+      },
+      {
+        "path": "preprocessed_sr/ZDN",
+        "name": "ZDN_SR3_corrected_ET.mat"
+      },
+      {
+        "path": "preprocessed_sr/ZDN",
+        "name": "ZDN_SR8_corrected_ET.mat"
+      },
+      {
+        "path": "preprocessed_sr/ZDN",
+        "name": "ZDN_SR6_corrected_ET.mat"
+      },
+      {
+        "path": "preprocessed_sr/ZDN",
+        "name": "ZDN_SR7_corrected_ET.mat"
+      }
+    ]
   }
 }
