@@ -11,7 +11,7 @@ not evidence that the original authors' analysis is wrong.
 | Original source blocks | Full paper source processing | 54 of 96 included; 37 fail the configured clock/alignment checks and 5 lack source pairs |
 | Significant corrected scalp clusters | Left-central and right-posterior effects around 224–304 ms after cleaning | None; minimum corrected cluster p=0.3866133866 |
 | Overall field strength (GFP) | No significant valence effect | No sustained difference visible in the saved GFP significance strips |
-| Frequency control | Authors report no confounding linguistic difference | Saved control figure reports reader-paired word-frequency p=1.05e−7: an imbalance remains |
+| Frequency control | Authors report no confounding linguistic difference | Saved control figure reports reader-paired fixation-weighted word-frequency p=1.05e−7; this is a different test from the paper’s unique-word comparison |
 
 The raw and cleaned positive-minus-negative maps look very similar, while the
 common fixation response decreases after cleaning. Their similarity alone does
@@ -23,7 +23,7 @@ map does not mean that window is significant in our results.
 
 The paper's main topographic result was **not reproduced**. The plots can be
 compared descriptively, with the missing blocks, smaller retained sample,
-remaining frequency imbalance, Python implementation and preprocessing departures
+fixation-weighted frequency imbalance, non-equivalent frequency control test, Python implementation and preprocessing departures
 reported. Completion means the configured analysis finished, not that the
 published methodology or findings were fully reproduced. No new ZuCo extraction
 is needed merely to view these results.
@@ -34,3 +34,5 @@ https://doi.org/10.1016/j.neuroimage.2020.116934.
 Reviewed private outputs: `analysis/analysis_manifest.json`, `clusters.json`,
 `source_coverage.csv`, `exclusion_counts.csv` and saved raw, cleaned and control
 figures. No source EEG or model arrays were downloaded to the Mac for this review.
+
+Follow-up timing audit: all36 numeric residual failures have only1–3 trigger anchors exceeding8ms (among98–102). This suggests testing local recovery rather than assuming whole blocks are unusable. No recovery has yet been validated. See paper_clock_recovery_audit.json.
