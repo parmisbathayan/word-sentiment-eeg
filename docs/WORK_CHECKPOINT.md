@@ -622,3 +622,19 @@ sent; keep previous draft for after recovery investigation. Newly added audit:
 - Intermediate pilot/remaining JSON reports consolidated into the authoritative
   paper_clock_recovery_verified.json (full metrics, source hashes and source
   metadata search preserved). Earlier snapshots remain in git history.
+
+### Recovery release ready
+
+- Native extraction pilot43068348201 PASS (revision1b4908e): recoveredZAB3
+  included,45negative+45positive accepted, raw/clean float32 archive verified,
+  saved-trial CPU->permutation handoff completed (4+4engineering permutations).
+  No group inference claim. No raw EEG or trial arrays downloaded toMac/Drive.
+- Latest synthetic proof-binding tests43069023056 PASS (f764c2b).
+- Final notebooks zuco_paper_recover_prepare_cpu / analyze_gpu pin immutable
+  verified-clock-recovery-v1. Newoutzuco_paper_figures_recovered,4GB additional
+  cap incl~1GB temporary nulls. Source proofs and validation status bound into
+  protocol. Existing ZuCo/TeCo scripts and outputs unchanged.
+- Full user reconstruction NOT run yet; cannot claim new full-run counts.
+  Wait for currentTeCo job to finish,CPUrecoveryRunall,thenGPUanalysisRunall.
+  Explain why reader-level model/matching refit is necessary; do not append90
+  pilot trials toold6634. Email remains deferred until recovery is assessed.

@@ -75,3 +75,9 @@ corrupt waveforms, changed source files, insufficient evidence and out-of-range
 validation metrics. They preserve bad-marker diagnostics and restore original
 extraction functions after the scoped recovery operation. The native extraction
 pilot exercises ZAB3, a block previously rejected by the8ms marker rule.
+
+Native pilot43068348201 succeeded for recoveredZAB3:45negative+45positive
+accepted trials, lossless raw/clean archive checksums verified, and4TCT+4cluster
+CPU permutations completed from the saved archive. These are engineering-pilot
+counts with block-only matching, not counts to append to the old full-reader
+results. Latest synthetic proof-binding checks passed in43069023056.

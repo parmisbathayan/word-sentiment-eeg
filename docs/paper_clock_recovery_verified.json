@@ -2402,5 +2402,15 @@
         "name": "ZDN_SR7_corrected_ET.mat"
       }
     ]
+  },
+  "native_extraction_pilot": {
+    "workflow_run": 43068348201,
+    "subject": "ZAB",
+    "block": "3",
+    "status": "cpu_archive_and_permutation_handoff_passed",
+    "accepted_negative": 45,
+    "accepted_positive": 45,
+    "pairs": 45,
+    "scope": "One block in temporary cloud storage; not a full-reader/full-run count; no old Drive result changed"
   }
 }
