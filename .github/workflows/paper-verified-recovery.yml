@@ -1,0 +1,36 @@
+name: Verified clock recovery extraction
+on:
+  workflow_dispatch:
+    inputs:
+      native_pilot:
+        type: boolean
+        default: false
+  push:
+    paths: ['src/word_sentiment_eeg/paper_verified_recovery.py','scripts/zuco_paper_recovered_stages.py','docs/paper_clock_recovery_verified.json','tests/cloud_verified_clock_recovery.py','.github/workflows/paper-verified-recovery.yml']
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: requirements-paper.txt
+      - run: python -m pip install -r requirements-paper.txt
+      - run: python tests/cloud_verified_clock_recovery.py
+      - if: ${{ inputs.native_pilot }}
+        run: |
+          python -u scripts/zuco_paper_recovered_stages.py --thesis-root /tmp/test-thesis --output artifacts/recovered_pilot --phase prepare --subjects ZAB --blocks 3 --tct-permutations 4 --cluster-permutations 4
+          python -u scripts/zuco_paper_recovered_stages.py --thesis-root /tmp/test-thesis --output artifacts/recovered_pilot --phase analyze --subjects ZAB --blocks 3 --tct-permutations 4 --cluster-permutations 4 --cpu --skip-inference
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: recovered-block-pilot
+          path: |
+            artifacts/recovered_pilot/cpu_preparation_manifest.json
+            artifacts/recovered_pilot/readers/*/source_mapping.json
+            artifacts/recovered_pilot/readers/*/prepared.json
+            artifacts/recovered_pilot/readers/*/matching_counts.csv
+          retention-days: 7
