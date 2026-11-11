@@ -24,14 +24,16 @@ def render(root,readers,stats,audit):
     pos,neg=means[1,:C],means[0,:C];diff=pos-neg
     fig=plt.figure(figsize=(15,8));grid=fig.add_gridspec(2,3,hspace=.5,wspace=.33)
     for j,(title,value) in enumerate([('Positive',pos),('Negative',neg),('Positive − negative',diff)]):
-        ax=fig.add_subplot(grid[0,j]);v=max(float(abs(value).max()),.01)
-        ax.imshow(value,origin='upper',aspect='auto',extent=[-600,1000,C,1],cmap='RdYlBu_r',vmin=-v,vmax=v)
+        ax=fig.add_subplot(grid[0,j]);v=max(float(np.max(np.abs([pos,neg]))) if j<2 else float(abs(value).max()),.01)
+        im=ax.imshow(value,origin='upper',aspect='auto',extent=[-600,1000,C,1],cmap='RdYlBu_r',vmin=-v,vmax=v)
+        fig.colorbar(im,ax=ax,shrink=.8,label='Assumed µV')
         ax.axvline(0,color='black',ls=':',lw=.6);ax.set(xlabel='Fixation onset (ms)',ylabel='Channels');panel(ax,chr(65+j),title+' (µV)')
     ax=fig.add_subplot(grid[1,0]);panel(ax,'D','Global field power: mean of trial GFPs')
     rm=sums/counts[:,:,None,None]
     for c,name in enumerate(['Negative','Positive']):
-        # Equal-reader uncertainty shown alongside a trial-weighted point estimate.
-        v=rm[:,c,C];sem=v.std(axis=0,ddof=1)/np.sqrt(len(v))
+        # Same reader-contribution uncertainty convention as the ZuCo renderer.
+        v=rm[:,c,C];w=counts[:,c]/counts[:,c].sum()
+        sem=np.sqrt(np.sum(w[:,None]**2*(v-means[c,C])**2,axis=0)*len(v)/(len(v)-1))
         ax.plot(TIMES,means[c,C],color=COLORS[c],label=name);ax.fill_between(TIMES,means[c,C]-sem,means[c,C]+sem,color=COLORS[c],alpha=.15)
     ax.set(xlabel='Fixation onset (ms)',ylabel='GFP (assumed µV)');ax.legend(fontsize=8)
     sub=grid[1,1].subgridspec(2,1,height_ratios=[4,1]);ax=fig.add_subplot(sub[0]);panel(ax,'E','Pointwise ML tests; corrected cluster contours')

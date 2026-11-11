@@ -499,3 +499,30 @@ sampling regression tests completed successfully. Latest notebook0d993b9 pins
 8ed1628. Resume withCPU Runall inclsetup; expect CHECKPOINT MIGRATION and KEEP CPU
 READER for earlier saved readers; incompleteZJM restarts. UpdatedGPU later must
 use same pin. No folder deletion or extra trial archive/storage budget increase.
+
+## 2026-11-11: completed staged ZuCo review and TeCo adaptation
+
+- Verified private Drive staged manifests: all 12 ZuCo readers complete, 6,634
+  accepted trials /3,314 ranked pairs. Of96 source blocks,54 included,37 clock
+  exclusions,5 missing source pairs.61 candidate clusters; zero corrected p<.05,
+  minimum p=.3866133866. Main published topographic effect NOT reproduced.
+- Saved control figure shows word-frequency imbalance (reader-paired p=1.05e−7).
+  Fixed 224–280/304-ms maps are reference windows, not detected effects. Exact
+  saved TCT interval not recomputed in this review; do not invent its bounds.
+- Review saved in docs/ZUCO_COMPLETED_COMPARISON.md. No new ZuCo extraction.
+- Added independent TeCo Task1 RAW-FRP adaptation: teco_paper_stages.py,
+  teco_paper.py, teco_paper_stats.py, render_teco_paper.py; two Colab notebooks
+  teco_paper_prepare_cpu and teco_paper_analyze_gpu. All stored word fixations,
+  controls' reading included, lexical=contextual label agreement, no sentence
+  constraint, no neutral in this binary paper-style route. All native126channels.
+- Full TeCo blink/saccade/keypress timeline is NOT validated. Do not present this
+  as full cleaned replication; Figure3 and full eye controls unavailable. Exact
+  length/target-duration matching replaces neighbor-timing matching explicitly.
+- Additional2GB total cap incl~.61GB temporary null maps;~1.24GB CPUtrial allowance.
+  Persistent float32 epochs, checksummed reader checkpoints and deduplicated
+  permutation resume. Native private run has NOT been performed by this agent.
+- Cloud synthetic validation workflow: .github/workflows/teco-paper.yml.
+  First run43039298287 passed; further small plot-caption/scale edits retested.
+  Final release is immutable tag teco-paper-raw-v1; see git log/test run for hash.
+- Nothing installed/downloaded as dependencies or EEG datasets on Mac. Used
+  existing bundled Python only for stdlib syntax/notebook construction.
