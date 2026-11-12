@@ -168,6 +168,7 @@ def stage(run,work,subjects,store,identity):
             if not (labels[neg]==0).all() or not (labels[pos]==1).all() or len(neg)!=len(pos):raise ValueError('Invalid saved ranked pairs')
             x[:,offset:offset+len(m)]=s;paired.append((subject,neg+offset,pos+offset))
         mapping=read(folder/'source_mapping.json')
+        if file_digest(folder/'source_mapping.json')!=state['checksums']['source_mapping.json']:raise ValueError('Source mapping checksum changed')
         # Derive recovered status from the source audit's declared recovery flag,
         # not from large residuals or from a guessed list of source filenames.
         for b in mapping['blocks']:
@@ -270,6 +271,24 @@ def diagnostics(x,meta,paired,provenance,store,work):
                 same_class_other_word_mean_r=float(np.mean(control)) if control else None))
     store.json('diagnostics/repeated_words.json',dict(rows=repeat,warning='Descriptive scalp-map correlation at 224–304 ms; shared reader/context and noise remain possible explanations.'))
     make_plots(tests,maps,similarity,store,work)
+    import matplotlib.pyplot as plt
+    fig,axes=plt.subplots(1,3,figsize=(15,4),layout='constrained')
+    b=pd.DataFrame(balance(meta));b=b[b.reader!='ALL_TRIALS']
+    cols=list(b.covariate.unique())
+    for i,col in enumerate(cols):
+        v=pd.to_numeric(b.loc[b.covariate==col,'standardized_difference'],errors='coerce')
+        axes[0].scatter(np.full(len(v),i),v,s=15)
+    axes[0].axhline(0,color='k',lw=.7);axes[0].set_xticks(range(len(cols)),cols,rotation=35,ha='right')
+    axes[0].set_title('Covariate balance: one point per reader');axes[0].set_ylabel('Standardized positive − negative difference')
+    for rep,color in [('raw','tab:blue'),('cleaned','tab:orange')]:
+        v=[z['cosine_original_recovered'] for z in block_maps if z['representation']==rep and z['cosine_original_recovered'] is not None]
+        axes[1].scatter(np.arange(len(v)),v,label=rep,color=color,s=18)
+    axes[1].axhline(0,color='k',lw=.7);axes[1].set_ylim(-1,1);axes[1].set_title('Original vs recovered contrast maps');axes[1].set_ylabel('Cosine similarity, 224–304 ms');axes[1].legend()
+    for i,z in enumerate(repeat):
+        if z['same_word_mean_r'] is None:continue
+        axes[2].plot([0,1],[z['same_word_mean_r'],z['same_class_other_word_mean_r']],alpha=.5,color='tab:blue' if z['representation']=='raw' else 'tab:orange')
+    axes[2].set_xticks([0,1],['Same word','Other word, same class']);axes[2].set_ylabel('Mean scalp-map correlation');axes[2].set_title('Repeated words: each line = reader/representation')
+    p=work/'controls_and_repeats.png';fig.savefig(p,dpi=140);plt.close(fig);store.file('figures/'+p.name,p)
     return meta
 
 def make_plots(tests,maps,similarity,store,work):
@@ -321,7 +340,7 @@ def run_classifiers(x,meta,store,work):
 
 def main():
     parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('--thesis-root',type=Path,required=True)
-    parser.add_argument('--phase',choices=['diagnostics','classification','cnn'],required=True)
+    parser.add_argument('--phase',choices=['cpu','diagnostics','classification','cnn'],required=True)
     parser.add_argument('--run-dir',type=Path);parser.add_argument('--output',type=Path);parser.add_argument('--work-root',type=Path)
     args=parser.parse_args()
     if sys.platform=='darwin':raise SystemExit('Colab/cloud only; no native EEG or trial downloads on Mac')
@@ -333,7 +352,8 @@ def main():
     if state['protocol_sha256']!=file_digest(run/'protocol.json'):raise ValueError('CPU protocol changed')
     for s in state['subjects']:
         if file_digest(run/'readers'/s/'prepared.json')!=state['reader_checkpoint_sha256'][s]:raise ValueError('Reader completion changed')
-    code=['scripts/zuco_recovered_followups.py','src/word_sentiment_eeg/paper_labels.py','scripts/paper_sst_source.py','scripts/zuco_recovered_cnn.py']
+    code=['scripts/zuco_recovered_followups.py','src/word_sentiment_eeg/paper_labels.py','scripts/paper_sst_source.py','scripts/zuco_recovered_cnn.py',
+          'src/word_sentiment_eeg/paper_small_checkpoints.py','src/word_sentiment_eeg/paper_verified_recovery.py','docs/paper_clock_recovery_verified.json']
     protocol=dict(spec=SPEC,cpu_manifest=file_digest(run/'cpu_preparation_manifest.json'),
         final_manifest=file_digest(run/'manifest.json'),code={p:file_digest(ROOT/p) for p in code},
         software={p:version(p) for p in ['numpy','scipy','pandas','scikit-learn']})
@@ -349,13 +369,13 @@ def main():
     root.mkdir(parents=True,exist_ok=True)
     with tempfile.TemporaryDirectory(dir=root) as temporary:
         work=Path(temporary);x,meta,paired,provenance=stage(run,work,state['subjects'],store,digest(protocol))
-        if args.phase=='diagnostics':diagnostics(x,meta,paired,provenance,store,work)
-        elif args.phase=='classification':run_classifiers(x,meta,store,work)
-        else:
+        if args.phase in ['cpu','diagnostics']:meta=diagnostics(x,meta,paired,provenance,store,work)
+        if args.phase in ['cpu','classification']:run_classifiers(x,meta,store,work)
+        if args.phase=='cnn':
             from zuco_recovered_cnn import run_cnn
             run_cnn(x,meta,store,work)
         del x
-    directories={'diagnostics':['diagnostics','figures'],'classification':['classification'],'cnn':['cnn']}[args.phase]
+    directories={'cpu':['diagnostics','figures','classification'],'diagnostics':['diagnostics','figures'],'classification':['classification'],'cnn':['cnn']}[args.phase]
     checks={str(p.relative_to(out)):file_digest(p) for d in directories for p in (out/d).rglob('*') if p.is_file()}
     store.json(marker.name,dict(status='completed',protocol=digest(protocol),checksums=checks))
     print(f'COMPLETE {args.phase}: {out}; existing preparation and figures untouched',flush=True)

@@ -1,0 +1,111 @@
+Recovered ZuCo SR follow-ups — fixed plan, 2026-11-13
+
+Input (read-only)
+Thesis/Results/word_sentiment_eeg/zuco_paper_figures_recovered/
+12 completed readers; 11,296 accepted fixation events (5,645 positive,
+5,651 negative); original paired inference used 5,645 pairs.
+All new decoding uses all saved accepted trials, including six unpaired negatives.
+No new native EEG download, cleaning, trial extraction or relabeling.
+
+Output
+Thesis/Results/word_sentiment_eeg/zuco_recovered_followups/
+Hard 50,000,000-byte total cap, including diagnostic plots, scores and small CNN
+frames. Features and waveform copies live only on the cloud runtime disk and
+are removed after the phase. No duplicated EEG archive on Drive. Checkpoints
+are new immutable files; no automatic deletion or replacement generations.
+CPU diagnostics + linear classification share one trial-loading pass. Completed
+cases/folds persist. A completed phase verifies outputs and skips all loading.
+An interrupted phase reloads the saved archives, skips completed classifiers,
+and resumes CNN from the latest committed frame (at most four epochs repeated).
+Do not run concurrent jobs into this output folder.
+
+Step 1: author code / exact trial selection
+Draft: docs/AUTHOR_CODE_REQUEST_EMAIL.txt. Not sent.
+Public study-specific complete code has not been verified. General toolboxes
+are not the study pipeline. Recheck exact author procedures if code is received.
+Need exact SST leaf/dictionary mappings, trial IDs, eye-event sources, matching
+bins, preprocessing versions, TCT implementation and decoding splits/averages.
+
+Step 2: diagnostics (CPU; no changes to the completed results)
+- Recheck each distinct accepted word/label/method against original SST dictionary
+  scores; export every review flag and its fixation/source-occurrence counts.
+  Dictionary mismatch is not proof an SST lexical-leaf label was wrong.
+  No sentence label is copied onto words. Source sentence/token joins cannot all
+  be re-established from retained accepted-word metadata; report this limit.
+- Per-reader and pooled standardized covariate differences: word length, saved
+  corpus word frequency (not an external normative frequency), target fixation
+  duration, previous and next fixation onset gap. Do not treat pooled readers as
+  independent biological replicates or sum overlapping exclusion flags.
+- Additional exact reader sign-flip tests of the mean scalp contrast map in
+  224–280 and 224–304 ms, raw and cleaned, with Holm correction over four tests.
+  Equal reader weights, all electrodes, no electrode selection, spatial mean
+  removed. Statistic is RMS across the group contrast map, without normalizing
+  each reader by GFP. This is not the paper's TCT/TANOVA and is exploratory.
+  Reader contrast symmetry/exchangeability is an assumption. The full-time
+  mixed-model/TCT/cluster tests already exist; they are not missing analyses.
+- Reader contrast-map correlation matrices and leave-one-reader-out cosine
+  similarity. Fixed windows; descriptive consistency, not reader selection.
+- Original versus independently recovered source-block subsets: per-reader
+  accepted counts and contrast-map similarity. Both used the same reader-level
+  cleaning model and different trial/sentence pools; not independent replications.
+- Repeated-word versus same-class/different-word correlations within reader,
+  224–304 ms. Different source sentence/word occurrences required; rereading the
+  same occurrence is not counted as a new repeated-word occurrence here.
+
+Step 3: simple decoding (CPU, same notebook/run)
+Positive versus negative, raw and cleaned, fixed class-weighted logistic model
+(C=1), no hyperparameter search; dummy class-prior baseline.
+Features: all 105 electrodes, 40-ms bins in 0–800 ms, or a single 224–304-ms
+average. A separate -200–0-ms analysis is a contextual/timing control, not a clean
+biological negative control: noncausal filtering and prior fixations can affect it.
+Three deterministic outer grouped folds, separately by source sentence, normalized
+word spelling, or reader. All occurrences of a held-out grouping identity remain
+together, including across readers. Export overlap counts for the other grouping
+identities so reader-held-out is not mistaken for unseen-word/sentence evaluation.
+One word's variants are grouped conservatively by casefolded edge-punctuation-
+stripped spelling, not lemma; morphological relatives may remain across folds.
+Training-only median imputation and channel-feature scaling. Fit sees training
+only. Fixed settings avoid selecting a best model from test scores.
+Compare single fixations with disjoint within-reader/class averages of 20 and40
+trials, formed AFTER the split. Remainders dropped and actual input/test counts
+reported. This uses the known class to form test averages: not single-event
+sentiment prediction. Missing-class/low-count pseudotrial folds explicitly marked
+incomplete. No confidence/significance claim from treating folds/pseudotrials as
+independent readers. Balanced accuracy chance50%; report macroF1, AUC, confusion
+matrix, fold counts and reader/fold scores. Metadata-only logistic control uses
+length, saved frequency and fixation timing with the same grouped folds.
+
+Step 4: small CNN (secondary T4 GPU notebook)
+Independent compact EEGNet-inspired network, single fixation 0–800 ms input,
+raw and cleaned, all three grouped outer splits. Inner grouped validation inside
+outer training only, train-partition channel mean/SD, class weights,25epochs max,
+early stop after4epochs without validation improvement. Test set never selects
+epochs or settings. Save fold scores and immutable small frames every5epochs/
+completion. No weights/models downloaded. Not the authors' classifier/code.
+
+Interpretation limits shared by all new classifiers
+The saved cleaning/nuisance model and some matching decisions used each reader's
+entire recording before these new splits. Thus cleaned held-out evaluations are
+transductive and cannot establish a strictly isolated fit-on-training-only
+preprocessing result. Raw signals also retain shared filtering/matching and can
+contain ocular/contextual confounds. Preserve both results, flag pre-onset and
+metadata separability, and keep unseen-word, unseen-sentence and unseen-reader
+claims distinct. This new archive contains no neutral trials, so no three-class
+or neutral/nonneutral experiment can be run from it without a separate archive.
+Multiple fixed cases are exploratory; do not select the highest score as a
+confirmed replication or adjust labels/cutoffs to obtain significance.
+
+Paper comparison
+Published paper: https://doi.org/10.1016/j.neuroimage.2020.116934
+Reported word-level effect224–304ms and decoding of sentiment-matched40-trial
+averages around60% accuracy. Current adaptation differs in preprocessing,
+clock/source selection, exact matching/labels and these grouped classifiers.
+Do not compare a single-trial balanced-accuracy value directly to their averaged-
+trial accuracy as though they were identical experiments. Published-window tests
+are additional exploratory analyses because this dataset has already been viewed.
+
+After these results
+Review all diagnostics first. If authors share code/IDs, compare intermediate
+counts, exclusions, timing, selection and inference before any expensive rebuild.
+Choose any new preprocessing/label changes with the professor and predeclare them.
+No promise that a reasonable methodological change will yield significance.

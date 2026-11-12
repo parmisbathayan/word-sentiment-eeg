@@ -1,0 +1,43 @@
+DRAFT ONLY — not sent
+To: Christian Pfeiffer <christian.pfeiffer@uzh.ch>
+Contact verified against UZH profile:
+https://mobility.dsi.uzh.ch/member/dr-christian-pfeiffer/
+Subject: Request for analysis code and fixation selection — NeuroImage 2020 sentiment FRP study
+
+Dear Dr Pfeiffer,
+
+I am an MSc student at the University of Tehran working on EEG and sentiment
+processing during reading. I am trying to reproduce the ZuCo sentiment-reading
+analyses in your 2020 paper, “Neural dynamics of sentiment processing during
+naturalistic sentence reading” (doi:10.1016/j.neuroimage.2020.116934).
+
+Would you be willing to share the study-specific preprocessing, fixation
+selection/matching, FRP statistics and decoding scripts, together with the
+software/toolbox versions? The retained fixation IDs (reader, block and original
+eye-event index) and word-to-SST sentiment mappings would be especially helpful.
+I am using Python/Colab, but MATLAB scripts would still be very useful for
+understanding the exact procedures.
+
+Our independent implementation currently includes 88 of 96 recording blocks and
+11,296 accepted positive/negative fixation epochs across 12 readers. We have not
+yet reproduced the corrected sentiment effect. We have independently checked
+many recovered fixation timings, but do not assume our complete event timeline,
+preprocessing or selected trial set matches yours.
+
+Could you also clarify:
+1. The exact target/neighbor-fixation timing bins, word-length matching, ordering
+   and random seed, and how rejected epochs affected the paired trial analysis.
+2. The SST word-label lookup/tokenization rules and any dictionary fallbacks.
+3. The classification split/averaging procedure, including how 20–40-trial test
+   averages were formed and whether repeated words/readers crossed partitions.
+4. The intended raw/corrected eye-event files for ZDN blocks 4, 5, 7, 8 and ZKW
+   block 6, and any synchronization notes for ZDN6, ZGW5 and ZJN1.
+
+A repository, an archived code release, or a small example with the expected
+intermediate trial counts would all be very helpful.
+
+Thank you for your time.
+
+Best regards,
+Parmis Bathayan
+MSc student, University of Tehran
