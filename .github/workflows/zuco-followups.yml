@@ -1,0 +1,17 @@
+name: Recovered ZuCo follow-ups
+on:
+  workflow_dispatch:
+  push:
+    paths: ['scripts/zuco_recovered_followups.py','scripts/zuco_recovered_cnn.py','tests/cloud_zuco_followups.py','.github/workflows/zuco-followups.yml','notebooks/zuco_recovered_followups*.ipynb']
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install -r requirements-paper.txt
+      - run: python -m pip install torch --index-url https://download.pytorch.org/whl/cpu
+      - run: python tests/cloud_zuco_followups.py
