@@ -1,0 +1,15 @@
+name: Pinned notebook Git checkout
+on:
+  workflow_dispatch:
+  push:
+    paths: ['notebooks/zuco_paper_recover_*.ipynb','notebooks/teco_paper_*.ipynb','tests/cloud_notebook_checkout.py','.github/workflows/notebook-checkout.yml']
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python tests/cloud_notebook_checkout.py
