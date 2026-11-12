@@ -666,3 +666,34 @@ in both stages. No deletion/reset of runtime or Drive results required.
 Cloud run43200071546 passed: execute actual Git setup AST from all4notebooks
 on fresh --no-tags shallow clones, then unchanged resume. No local clones,
 packages/environments or EEG downloads. Main notebook code pushed7f0b195.
+
+## 2026-11-12: Zyion quota / Trash investigation — IMPORTANT BEFORE GPU RUN
+
+- User asked what can be removed. Connector profile is Parmis Gmail, NOT Zyion;
+  shared-folder metadata cannot establish Zyion ownership/quota. Used IAB Drive
+  tab9 account2; visibly verified Zyion Mutch zyionygvmutch39@gmail.com.
+- Drive quota showed11.53GB/15GB used,3.47GB available (Google UI units);
+  GoogleDrive11.5GB,Gmail29MB,Photos0. Largest live files were12 prepared_trials
+  archives~9.2–159.1MB each. GoogleOne largeDrivefiles category~1GB.
+- Zyion Trash visibly contained null_work plusmany tct_XXXXX__12.npz and
+  cluster_XXXXX__12.npz files ownedbyZyion. Completed oldstaged manifest verified
+  statuscompleted, all12readers and saved analysis/figures; null_work absent
+  fromlivecompletedrun. Old archived incompletepaper/null_work wasemptytoo.
+- Actual quota accounting bug: permutation_reader writes newimmutable generation
+  perreader and unlinksoldgeneration. ColabDrive deletion sendsoldfiles toTrash;
+  disk_bytes(root) ignoresTrash. Thus~1GB nominal work reserve can accumulate
+  manyGB of deleted generations. Finalrmtree(null_work) also fillsTrash. Repeated
+  atomic modelcheckpoint replacements may addsmaller overhead. Do not promise
+  3.6GB actualaccount footprint until GPU temp persistence is redesigned/tested.
+- No filesdeletedbyagent. User independentlyemptiedTrashmid-investigation.
+  Verified page nowexplicitly saysTrashisempty, quota sidebarstill~11.52GB.
+  OfficialGoogleOneHelp answer9776477 saysbulk-deletion quota updates can take
+  up to48–72hours. Don't delete additional EEG/trials merely for this lag.
+- Files toKEEP: trial_archive_125hz, classification featurecache, accepted
+  prepared_trials.npz, private labels, saved analysis/plots/manifests. Superseded
+  trial archives canbeassessedlater,afternewreconstructionvalid,notnow.
+- Pending: fix/retest GPU temporary-file persistence so oldchunkgenerations do
+  not accumulateinDriveTrash. Must preserve CPU archives + scientific protocol,
+  randomseed/numerical semantics and meaningful resumability. Do NOT silently
+  moveallprogress tovolatile runtime and claim cross-runtime resume. No GPU
+  cleanup involving permanentdeletion without action-time userconfirmation.
