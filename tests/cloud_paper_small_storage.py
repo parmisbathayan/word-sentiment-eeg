@@ -48,7 +48,7 @@ with tempfile.TemporaryDirectory() as tmp:
     try:permutations(D,subjects,sums,sq,n,adj,times,store,'changed',7,5,chunk=3,use_gpu=False)
     except ValueError:pass
     else:raise AssertionError('Changed identity accepted')
-    first.write_bytes(first.read_bytes().replace(b'"begin": 0',b'"begin": 1'))
+    corrupt=json.loads(first.read_text());corrupt['begin']+=1;first.write_text(json.dumps(corrupt))
     try:permutations(D,subjects,sums,sq,n,adj,times,store,'same',7,5,chunk=3,use_gpu=False)
     except ValueError:pass
     else:raise AssertionError('Corrupt completed batch accepted')

@@ -43,7 +43,13 @@ class ImmutableStore:
         self.used+=len(payload)-len(old)
         if path.read_bytes()!=payload:raise OSError('Checkpoint readback failed: '+str(relative))
         return path
-    def json(self,relative,value):return self.bytes(relative,json_bytes(value))
+    def json(self,relative,value):
+        path=self.root/relative
+        if path.exists():
+            try:
+                if json.loads(path.read_text())==value:return path
+            except (json.JSONDecodeError,UnicodeDecodeError):pass
+        return self.bytes(relative,json_bytes(value))
     def file(self,relative,source,reuse_committed=False):
         source=Path(source);path=self.root/relative;sha=file_digest(source);size=source.stat().st_size
         marker=Path('analysis_state/published')/(digest(str(relative))+'.json')
