@@ -111,8 +111,14 @@ def main():
         code={n:file_digest(ROOT/n) for n in implementation},seed='unchanged [2026, subject, kind, permutation]',
         storage='Null maps only in runtime RAM; compact all-reader batch summaries and immutable ML checkpoint frames persist on Drive')
     identity=digest(execution);budget=protocol['budget_bytes'];store=ImmutableStore(out,budget)
+    if (out/'null_work').exists() and any(p.is_file() for p in (out/'null_work').rglob('*')):
+        raise ValueError('Older full-map GPU work exists. Stop here for a storage migration review; CPU trials are retained and nothing was deleted.')
     reserve=200_000_000
-    if store.used+reserve>budget or args.free_drive_bytes<reserve:raise OSError('Need 200 MB additional verified free space for compact inference/checkpoints; CPU archives retained')
+    analysis_used=sum(disk_bytes(out/d) for d in ['analysis_state','analysis','figures'])
+    needed=max(0,reserve-analysis_used)
+    if store.used+needed>budget or args.free_drive_bytes<needed:raise OSError(f'Need {needed/1e6:.1f} MB additional verified free space for compact inference/checkpoints; CPU archives retained')
+    # Enforce the incremental analysis allowance as well as the original CPU cap.
+    store.budget=min(budget,store.used+needed)
     store.json('analysis_state/execution.json',execution)
     workbase=args.work_root or Path(tempfile.gettempdir())/'word_eeg_paper_local'
     work=workbase/identity

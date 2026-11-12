@@ -40,7 +40,7 @@ with tempfile.TemporaryDirectory() as tmp:
             if dataset=='zuco':
                 ms=np.zeros((2,2,105));mq=ms.copy()
                 for r,stop in enumerate([280,304]):
-                    maps=x[r,:,:,((times>=224)&(times<=stop))] if False else x[r][:,:,(times>=224)&(times<=stop)].mean(axis=2)
+                    maps=x[r][:,:,(times>=224)&(times<=stop)].mean(axis=2)
                     for ci,ix in enumerate([neg,pos]):ms[r,ci]=maps[ix].sum(axis=0);mq[r,ci]=(maps[ix].astype(float)**2).sum(axis=0)
                 st.update(map_sums=ms,map_squares=mq,eye_counts=np.array([6,6]),eye_sums=np.zeros((2,2,201)),eye_squares=np.ones((2,2,201)),eye_means=np.zeros((2,2,201)),neighbor_means=np.ones((2,6,len(edges)-1))*.01,neighbor_edges=edges,pz_trials=x[:,:,10],pz_duration_ms=frame.duration_ms.to_numpy())
                 write_json(folder/'example_sentence.json',dict(words=['SYNTHETIC'],bounds=[[0,0,100,30]],gaze=[dict(gaze_x=50,gaze_y=15,duration_ms=200,sentiment='positive')]))
