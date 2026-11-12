@@ -716,3 +716,32 @@ handoff and full synthetic figure/manifest publication. Native GPU hardware
 was not exercised in GitHub Actions. Notebook cold-checkout verification follows
 publication. All current Colab documentation links use?authuser=2. Existing CPU
 run must not be restarted solely for this update.
+
+## 2026-11-13: recovered-run follow-ups prepared
+
+User requested all suggested checks step by step, using existing trials. Completed
+recovery run verified in Drive:12readers,88/96blocks,11,296accepted trials
+(5,645positive/5,651negative),5,645pairs. Final manifestcompleted, four PNG/SVG
+figures and analysis present. No nonconverged mixed-model features. Minimum
+corrected cluster p raw.174825 /cleaned.241758; no corrected significant clusters.
+Do not claim a replicated effect, and do not force12,789paper trials.
+New independent scripts zuco_recovered_followups.py + zuco_recovered_cnn.py,
+separate50MB capped output zuco_recovered_followups/. Source/previousresults
+read-only; CPU phases share runtime-only mmap load. All statistical cases fixed,
+additional exact reader window tests have four-test Holm correction; existing
+TCT/window maps were already computed. SST dictionary flags are not full verified
+source-token re-joins, no automatic relabeling. Word frequency is saved corpus
+frequency, not normative external frequency. Source clock evidence reused exactly.
+Three grouped split types; train-only scaling, dummy and metadata-only controls,
+1/20/40disjoint within-reader/class averages AFTER split; pre-onset controls.
+Class-known test averages are not single-trial decoding. Source cleaning/matching
+was fit full-reader before splits: transductive, not strict inductive evaluation.
+Secondary compact CNN inner grouped validation, fixed25maxepochs, small immutable
+frames every5epochs. Neutral not in this archive. No extra waveform/feature copy
+on Drive, no original files deleted. Email request drafted docs/AUTHOR_CODE_REQUEST_EMAIL.txt
+but NOT sent; exact-author-code comparison awaits their release/response.
+Cloud synthetic run43312314414 passed actual model fits, group/averaging isolation,
+reader tests and interrupted CNN CPU resume parity;43312664202 also passed full
+diagnostics/figures. Latest whole-phase CLI + pin/checkout tests follow notebook
+publication. No Mac dependencies/environments/downloads; only bundled stdlib
+syntax/JSON editing and cloud numerical tests. No native full run claimed yet.

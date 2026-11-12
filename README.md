@@ -13,6 +13,13 @@ cap. Large permutation maps stay in runtime memory; compact statistical and mode
 checkpoints persist on Drive for resume. No automatic deletion of saved results.
 See [verified recovery and storage](docs/PAPER_VERIFIED_RECOVERY.md).
 
+## Follow-ups on the completed recovered trials
+
+1. [CPU: diagnostics + linear decoding](https://colab.research.google.com/github/parmisbathayan/word-sentiment-eeg/blob/main/notebooks/zuco_recovered_followups.ipynb?authuser=2).
+2. [T4 GPU: secondary small CNN](https://colab.research.google.com/github/parmisbathayan/word-sentiment-eeg/blob/main/notebooks/zuco_recovered_followups_cnn.ipynb?authuser=2).
+
+Both reuse existing accepted raw/clean trials. New outputs share a separate **50 MB total cap**; no new EEG archive is saved to Drive. See the [fixed plan and limitations](docs/ZUCO_RECOVERED_FOLLOWUP_PLAN.txt) and [unsent author-code request](docs/AUTHOR_CODE_REQUEST_EMAIL.txt). CPU follow-ups compare single fixations and disjoint 20/40-trial averages under sentence/word/reader group splits. These are exploratory analyses with full-reader preprocessing limitations.
+
 ## ZuCo paper figures — independent Python reconstruction
 
 [Open the four-figure Colab notebook](https://colab.research.google.com/github/parmisbathayan/word-sentiment-eeg/blob/main/notebooks/zuco_paper_figures.ipynb?authuser=2).

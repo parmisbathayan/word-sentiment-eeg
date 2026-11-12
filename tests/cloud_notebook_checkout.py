@@ -11,7 +11,7 @@ import sys
 import tempfile
 ROOT=Path(__file__).resolve().parents[1]
 if sys.platform=='darwin':raise SystemExit('Cloud only: no extra code clones on the Mac')
-paths=sorted(list((ROOT/'notebooks').glob('zuco_paper_recover_*.ipynb'))+list((ROOT/'notebooks').glob('teco_paper_*.ipynb')))
+paths=sorted(list((ROOT/'notebooks').glob('zuco_paper_recover_*.ipynb'))+list((ROOT/'notebooks').glob('teco_paper_*.ipynb'))+list((ROOT/'notebooks').glob('zuco_recovered_followups*.ipynb')))
 with tempfile.TemporaryDirectory() as tmp:
     for p in paths:
         cell=next(''.join(c['source']) for c in json.loads(p.read_text())['cells'] if c['cell_type']=='code' and 'CODE_REVISION=' in ''.join(c['source']))
@@ -30,4 +30,4 @@ with tempfile.TemporaryDirectory() as tmp:
         if p.name=='zuco_paper_recover_prepare_cpu.ipynb':assert "'--budget-bytes','3600000000'" in p.read_text()
         if p.name.endswith('analyze_gpu.ipynb'):assert 'analyze_paper_small_storage.py' in p.read_text()
         print('PASS fresh tag-free checkout + unchanged resume:',p.name,flush=True)
-print('All four notebook checkout paths verified; no scientific code or Drive files changed')
+print('All paper/follow-up notebook checkout paths verified; no scientific code or Drive files changed')

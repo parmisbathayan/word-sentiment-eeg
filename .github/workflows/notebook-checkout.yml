@@ -2,7 +2,7 @@ name: Pinned notebook Git checkout
 on:
   workflow_dispatch:
   push:
-    paths: ['notebooks/zuco_paper_recover_*.ipynb','notebooks/teco_paper_*.ipynb','tests/cloud_notebook_checkout.py','.github/workflows/notebook-checkout.yml']
+    paths: ['notebooks/zuco_paper_recover_*.ipynb','notebooks/teco_paper_*.ipynb','notebooks/zuco_recovered_followups*.ipynb','tests/cloud_notebook_checkout.py','.github/workflows/notebook-checkout.yml']
 jobs:
   check:
     runs-on: ubuntu-latest
