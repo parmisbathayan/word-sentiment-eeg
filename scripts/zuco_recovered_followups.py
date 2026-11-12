@@ -20,7 +20,7 @@ import pandas as pd
 from sklearn.dummy import DummyClassifier
 from sklearn.impute import SimpleImputer
 from sklearn.linear_model import LogisticRegression
-from sklearn.metrics import balanced_accuracy_score, confusion_matrix, f1_score, roc_auc_score
+from sklearn.metrics import accuracy_score, balanced_accuracy_score, confusion_matrix, f1_score, roc_auc_score
 from sklearn.model_selection import StratifiedGroupKFold
 from sklearn.pipeline import make_pipeline
 from sklearn.preprocessing import StandardScaler
@@ -104,7 +104,7 @@ def averaged(x,y,meta,indices,size,seed):
     return np.asarray(values,dtype=np.float32) if values else np.empty(shape,np.float32),np.asarray(labels,int),np.asarray(readers),members
 
 def metrics(y,pred,score):
-    return dict(n=int(len(y)),balanced_accuracy=float(balanced_accuracy_score(y,pred)),
+    return dict(n=int(len(y)),accuracy=float(accuracy_score(y,pred)),balanced_accuracy=float(balanced_accuracy_score(y,pred)),
         macro_f1=float(f1_score(y,pred,average='macro',zero_division=0)),
         auc=float(roc_auc_score(y,score)) if len(set(y))==2 else None,
         confusion_matrix=confusion_matrix(y,pred,labels=[0,1]).tolist())

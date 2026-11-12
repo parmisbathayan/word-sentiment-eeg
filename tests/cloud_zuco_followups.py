@@ -70,6 +70,12 @@ with tempfile.TemporaryDirectory() as tmp:
     assert saved=={p:(p.read_bytes(),p.stat().st_mtime_ns) for p in out.rglob('*') if p.is_file()}
     for path,data in before.items():assert path.read_bytes()==data
     assert not list(out.rglob('*.npz')) and store.used<50_000_000
+    # Real CLI completion and full phase resume; original CPU results untouched.
+    cli=['followups','--thesis-root',str(tmp),'--run-dir',str(run),'--output',str(tmp/'cli-output'),'--work-root',str(tmp/'cli-local'),'--phase','cpu']
+    with patch.object(f,'SPEC',small),patch.object(f,'label_audit',return_value={'synthetic':True}),patch.object(sys,'argv',cli):f.main()
+    completed={p:(p.read_bytes(),p.stat().st_mtime_ns) for p in (tmp/'cli-output').rglob('*') if p.is_file()}
+    with patch.object(f,'SPEC',small),patch.object(f,'stage',side_effect=AssertionError('Completed stage loaded EEG')),patch.object(sys,'argv',cli):f.main()
+    assert completed=={p:(p.read_bytes(),p.stat().st_mtime_ns) for p in (tmp/'cli-output').rglob('*') if p.is_file()}
     # Corruption is a hard failure; never silently skip a changed archive.
     target=run/'readers/ZAB/prepared_trials.npz';payload=target.read_bytes();target.write_bytes(payload[:-1]+bytes([payload[-1]^1]))
     try:f.stage(run,work,subjects,store,'test')
