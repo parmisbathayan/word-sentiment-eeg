@@ -745,3 +745,15 @@ reader tests and interrupted CNN CPU resume parity;43312664202 also passed full
 diagnostics/figures. Latest whole-phase CLI + pin/checkout tests follow notebook
 publication. No Mac dependencies/environments/downloads; only bundled stdlib
 syntax/JSON editing and cloud numerical tests. No native full run claimed yet.
+
+Follow-up release verified: code pin6a4624e40725740e8bde7d8e993023477267b5ff;
+notebooks published9149780, both authuser=2. Cloud43313153848 passed complete
+synthetic CPU CLI + verified whole-phase no-loading resume, actual logistic and
+CNN fit/resume tests, corruption refusal, disjoint grouped averages, diagnostics
+and immutable input/output checks. Fresh six-notebook Git checkout test
+43313217901 passed (includes both follow-up notebooks). No claim of GPU hardware
+validation; CNN actual training regression ran on cloud CPU. Next user action:
+notebooks/zuco_recovered_followups.ipynb onCPU, Runall; then
+notebooks/zuco_recovered_followups_cnn.ipynb onT4, Runall. Read saved diagnostics/
+classification/summary.json and cnn/summary.json afterward. Source parent stays
+zuco_paper_figures_recovered; new outputzuco_recovered_followups capped50MB.
