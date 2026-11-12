@@ -2,16 +2,16 @@
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/parmisbathayan/word-sentiment-eeg/blob/main/notebooks/short.ipynb?authuser=2)
 
-## CPU preparation, then GPU analysis (ZuCo paper workflow)
+## Current CPU → GPU workflow: validated ZuCo recovery
 
-1. [CPU preparation notebook](https://colab.research.google.com/github/parmisbathayan/word-sentiment-eeg/blob/main/notebooks/zuco_paper_prepare_cpu.ipynb?authuser=2): save full accepted raw/clean trials per reader. Wait for **CPU PREPARATION COMPLETE**.
-2. Switch to a GPU runtime, then [open the GPU analysis notebook](https://colab.research.google.com/github/parmisbathayan/word-sentiment-eeg/blob/main/notebooks/zuco_paper_analyze_gpu.ipynb?authuser=2). It loads saved trials without repeating native EEG loading/cleaning.
+1. [Recovery CPU preparation](https://colab.research.google.com/github/parmisbathayan/word-sentiment-eeg/blob/main/notebooks/zuco_paper_recover_prepare_cpu.ipynb?authuser=2): wait for **CPU PREPARATION COMPLETE**. An ongoing preparation does not need restarting.
+2. [Compact GPU analysis](https://colab.research.google.com/github/parmisbathayan/word-sentiment-eeg/blob/main/notebooks/zuco_paper_recover_analyze_gpu.ipynb?authuser=2): T4 GPU, same Drive. Reuses saved trials without native extraction or cleaning.
 
-This staged workflow keeps a lossless accepted-trial archive under a new
-`zuco_paper_figures_staged/` folder and caps its total storage at **4 GB**,
-including temporary permutation files. The paper GPU stage is permutation testing,
-not CNN training. Stop the older reproduction job before starting this workflow.
-See [handoff, archive structure and storage](docs/PAPER_CPU_GPU_STAGES.md).
+Results stay in `zuco_paper_figures_recovered/`. The saved workflow cap remains
+**3.6 GB**; GPU analysis allows at most **200 MB additional output** within that
+cap. Large permutation maps stay in runtime memory; compact statistical and model
+checkpoints persist on Drive for resume. No automatic deletion of saved results.
+See [verified recovery and storage](docs/PAPER_VERIFIED_RECOVERY.md).
 
 ## ZuCo paper figures — independent Python reconstruction
 
