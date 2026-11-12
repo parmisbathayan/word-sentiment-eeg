@@ -651,3 +651,18 @@ Initial reserve now fits reported free space, but this is not proof of final
 size; per-reader archive guards still stop safely if actual output hits cap.
 No Drive data deleted or modified by this fix. User should reload CPU notebook
 fromGitHub main and Runall; no need to free/delete results merely for this stop.
+
+## 2026-11-12: Colab checkout setup failure fixed
+
+User's recovery setup fetched verified-clock-recovery-v1 but checkout of that
+local tag name returned128 before extraction. Original Git stderr not supplied,
+so don't assert a broader cause. Updated BOTH recovery and BOTH TeCo paper
+notebooks: exact immutable underlying commit SHA, fetch then verify FETCH_HEAD
+commit, detach FETCH_HEAD, verify HEAD. Existing correct checkout skips fetch.
+Git failures now include captured command output for diagnosis. Scientific code
+unchanged: recovery5049fadfe80153a7ccb7cce11e18e19bac0f3f62;
+TeCo9651d15759091b01635180282962d9e8129c9a3b. Recovery budget remains3.6GB
+in both stages. No deletion/reset of runtime or Drive results required.
+Cloud run43200071546 passed: execute actual Git setup AST from all4notebooks
+on fresh --no-tags shallow clones, then unchanged resume. No local clones,
+packages/environments or EEG downloads. Main notebook code pushed7f0b195.
