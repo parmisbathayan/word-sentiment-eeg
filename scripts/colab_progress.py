@@ -34,9 +34,10 @@ def run_with_progress(command, status_path, heartbeat_seconds=30, activity='word
             snapshot=pending.get()
             try:
                 status_path.parent.mkdir(parents=True, exist_ok=True)
-                tmp=status_path.with_suffix('.tmp.json')
-                tmp.write_text(json.dumps(snapshot, indent=2)+'\n')
-                tmp.replace(status_path)
+                # Advisory heartbeat only: resumability comes from immutable
+                # scientific checkpoints. In-place updates avoid FUSE rename
+                # sending every previous heartbeat to Google Drive Trash.
+                status_path.write_text(json.dumps(snapshot, indent=2)+'\n')
             except OSError as error:
                 print(f'Progress-file update unavailable: {error}', flush=True)
             if snapshot['status'] in {'completed','failed','interrupted'}:

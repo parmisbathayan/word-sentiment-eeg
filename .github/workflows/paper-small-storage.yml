@@ -2,7 +2,7 @@ name: Compact resumable paper inference
 on:
   workflow_dispatch:
   push:
-    paths: ['src/word_sentiment_eeg/paper_small_checkpoints.py','scripts/analyze_paper_small_storage.py','tests/cloud_paper_small_storage.py','tests/cloud_small_storage_handoff.py','tests/cloud_small_storage_render.py','.github/workflows/paper-small-storage.yml']
+    paths: ['src/word_sentiment_eeg/paper_small_checkpoints.py','scripts/analyze_paper_small_storage.py','scripts/colab_progress.py','tests/cloud_progress_status.py','tests/cloud_paper_small_storage.py','tests/cloud_small_storage_handoff.py','tests/cloud_small_storage_render.py','.github/workflows/paper-small-storage.yml']
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -18,3 +18,4 @@ jobs:
       - run: python tests/cloud_paper_small_storage.py
       - run: python tests/cloud_small_storage_handoff.py
       - run: python tests/cloud_small_storage_render.py
+      - run: python tests/cloud_progress_status.py
