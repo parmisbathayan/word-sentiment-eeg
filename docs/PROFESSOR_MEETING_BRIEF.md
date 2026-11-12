@@ -4,8 +4,8 @@ Prepared 2026-10-26. Present the completed historical30Hz analyses. New40Hz/thre
 
 ## What to open
 
-- ZuCo: https://colab.research.google.com/github/parmisbathayan/word-sentiment-eeg/blob/main/notebooks/zuco_plots.ipynb
-- TeCo: https://colab.research.google.com/github/parmisbathayan/word-sentiment-eeg/blob/main/notebooks/teco_plots.ipynb
+- ZuCo: https://colab.research.google.com/github/parmisbathayan/word-sentiment-eeg/blob/main/notebooks/zuco_plots.ipynb?authuser=2
+- TeCo: https://colab.research.google.com/github/parmisbathayan/word-sentiment-eeg/blob/main/notebooks/teco_plots.ipynb?authuser=2
 
 CPU → Run all only if the saved plots need regenerating. These notebooks read compact class means, not source EEG. No label/filter/extraction changes. They save small plotting outputs under each original run's analysis/all_plots_v1 folder. They can take minutes/Drive I/O time, not the full source-extraction workload. Completed extraction results remain read only.
 

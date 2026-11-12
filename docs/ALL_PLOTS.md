@@ -1,7 +1,7 @@
 # One saved-result plotting notebook per dataset
 
-- [ZuCo: all plots](https://colab.research.google.com/github/parmisbathayan/word-sentiment-eeg/blob/main/notebooks/zuco_plots.ipynb)
-- [TeCo: all plots](https://colab.research.google.com/github/parmisbathayan/word-sentiment-eeg/blob/main/notebooks/teco_plots.ipynb)
+- [ZuCo: all plots](https://colab.research.google.com/github/parmisbathayan/word-sentiment-eeg/blob/main/notebooks/zuco_plots.ipynb?authuser=2)
+- [TeCo: all plots](https://colab.research.google.com/github/parmisbathayan/word-sentiment-eeg/blob/main/notebooks/teco_plots.ipynb?authuser=2)
 
 CPU, Runtime → Run all, allow Drive mounting. These notebooks do not run
 extraction or load source EEG. They read saved per-reader all-channel class

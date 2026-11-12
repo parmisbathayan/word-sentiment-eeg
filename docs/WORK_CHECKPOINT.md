@@ -164,7 +164,7 @@ Event membership disjointness does not automatically guarantee disjoint raw
 EEG intervals; preserve that distinction when implementing evaluation.
 
 1. Neutral/nonneutral storage fix is pushed and full cloud tests passed. Link:
-   https://colab.research.google.com/github/parmisbathayan/word-sentiment-eeg/blob/550091a/notebooks/neutral_nonneutral.ipynb
+   https://colab.research.google.com/github/parmisbathayan/word-sentiment-eeg/blob/550091a/notebooks/neutral_nonneutral.ipynb?authuser=2
    Drive manifest and runtime status now verified completed: 44 cases, all four
    tasks, child exit code 0. No rerun is required.
 2. Preserve this checkpoint and the current code commits.
@@ -697,3 +697,22 @@ packages/environments or EEG downloads. Main notebook code pushed7f0b195.
   randomseed/numerical semantics and meaningful resumability. Do NOT silently
   moveallprogress tovolatile runtime and claim cross-runtime resume. No GPU
   cleanup involving permanentdeletion without action-time userconfirmation.
+
+## 2026-11-12: GPU Drive-Trash accumulation fixed
+
+User authorized storage fix and requested authuser=2 on future notebook links.
+CPU preparation continues unchanged; scientific pins remain recovery5049fad and
+TeCo9651d15. New GPU launcher pinned310d220 verifies original protocol, code,
+software versions, reader archives and sufficient statistics before analysis.
+Large permutation maps remain RAM/GPU only; immutable small batch summaries
+preserve exact exceedance counts/cluster maxima. Up to25 unfinished permutations
+repeat after interruption; completed batches and compact model frames resume.
+No Drive unlink/rename generations or automatic cleanup. Advisory heartbeat
+writes in place. Hard200MB incremental analysis allowance within saved total
+workflow cap; legacy full-map workspace stops for review. No trials deleted.
+Cloud run43215259444 passed exact original ZuCo/TeCo CPU numerical parity,
+interruption/corruption tests, actual model-fit resume equivalence, saved CPU
+handoff and full synthetic figure/manifest publication. Native GPU hardware
+was not exercised in GitHub Actions. Notebook cold-checkout verification follows
+publication. All current Colab documentation links use?authuser=2. Existing CPU
+run must not be restarted solely for this update.

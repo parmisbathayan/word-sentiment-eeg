@@ -37,8 +37,8 @@ nor successful extraction guarantees the same sample or finding as the paper.
 
 ## Run the reconstruction after the current TeCo job
 
-1. [CPU preparation](https://colab.research.google.com/github/parmisbathayan/word-sentiment-eeg/blob/main/notebooks/zuco_paper_recover_prepare_cpu.ipynb): CPU,Run all; wait for CPU PREPARATION COMPLETE.
-2. [GPU analysis](https://colab.research.google.com/github/parmisbathayan/word-sentiment-eeg/blob/main/notebooks/zuco_paper_recover_analyze_gpu.ipynb): T4 GPU,Run all,same Drive.
+1. [CPU preparation](https://colab.research.google.com/github/parmisbathayan/word-sentiment-eeg/blob/main/notebooks/zuco_paper_recover_prepare_cpu.ipynb?authuser=2): CPU,Run all; wait for CPU PREPARATION COMPLETE.
+2. [GPU analysis](https://colab.research.google.com/github/parmisbathayan/word-sentiment-eeg/blob/main/notebooks/zuco_paper_recover_analyze_gpu.ipynb?authuser=2): T4 GPU,Run all,same Drive.
 
 No new accepted full-run counts or group findings exist before these notebooks
 complete. Raw/clean individual trials are retained. New results go only to
@@ -52,11 +52,13 @@ in the NEW reconstruction resume with checksum validation. Unfinished readers
 may need repeating after interruption. GPU permutations resume without double
 reader additions and require no repeat native extraction.
 
-**Notebook additional storage cap:3.6GB**, including about1GB temporary null maps and a
-250MB safety reserve. CPU archive allowance approximately2.34GB. Authenticated
-Drive quota is checked before extraction. No additional source EEG copies remain
-on Drive. Temporary permutation maps are removed after successful final figures.
-Do not run multiple jobs into the same destination.
+**CPU workflow cap: 3.6 GB**, unchanged. The updated GPU stage reserves at most
+**200 MB additional analysis output**, also bounded by the saved workflow cap.
+Large permutation maps stay in runtime memory. Small immutable batch summaries
+and model checkpoints persist on Drive, avoiding deleted file generations in
+Trash. Completed batches resume; an unfinished batch may repeat at most 25
+permutations. CPU trials remain unchanged. Do not run simultaneous jobs into the
+same destination. The launcher stops for review if legacy full-map work exists.
 
 ## Terms
 
@@ -82,4 +84,4 @@ CPU permutations completed from the saved archive. These are engineering-pilot
 counts with block-only matching, not counts to append to the old full-reader
 results. Latest synthetic proof-binding checks passed in43069023056.
 
-2026-11-12: both notebook commands use3,600,000,000bytes after the initial4GB reservation exceeded the reported3,726,021,983bytes free. This changes only the operational cap; raw/clean float32 trials, all channels/time points and5000+1000permutations are unchanged. The script’s CLI default remains4GB; notebook commands pass the lower cap explicitly.
+2026-11-12: the CPU notebook command uses3,600,000,000bytes after the initial4GB reservation exceeded the reported3,726,021,983bytes free. This changes only the operational cap; raw/clean float32 trials, all channels/time points and5000+1000permutations are unchanged. The script’s CLI default remains4GB; the CPU notebook passes the lower cap explicitly; the compact GPU launcher reads it from the saved protocol.

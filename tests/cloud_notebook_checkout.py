@@ -27,6 +27,7 @@ with tempfile.TemporaryDirectory() as tmp:
         for repeat in range(2):
             exec(code,ns)
             assert subprocess.check_output(['git','-C',str(ns['REPO']),'rev-parse','HEAD'],text=True).strip()==ns['CODE_REVISION']
-        if p.name.startswith('zuco_'):assert "'--budget-bytes','3600000000'" in p.read_text()
+        if p.name=='zuco_paper_recover_prepare_cpu.ipynb':assert "'--budget-bytes','3600000000'" in p.read_text()
+        if p.name.endswith('analyze_gpu.ipynb'):assert 'analyze_paper_small_storage.py' in p.read_text()
         print('PASS fresh tag-free checkout + unchanged resume:',p.name,flush=True)
 print('All four notebook checkout paths verified; no scientific code or Drive files changed')

@@ -2,10 +2,10 @@
 
 Run in this order:
 
-1. [CPU preparation](https://colab.research.google.com/github/parmisbathayan/word-sentiment-eeg/blob/main/notebooks/teco_paper_prepare_cpu.ipynb): CPU, Run all; wait for `CPU PREPARATION COMPLETE`.
-2. [GPU analysis](https://colab.research.google.com/github/parmisbathayan/word-sentiment-eeg/blob/main/notebooks/teco_paper_analyze_gpu.ipynb): T4 GPU, Run all, same Drive account.
+1. [CPU preparation](https://colab.research.google.com/github/parmisbathayan/word-sentiment-eeg/blob/main/notebooks/teco_paper_prepare_cpu.ipynb?authuser=2): CPU, Run all; wait for `CPU PREPARATION COMPLETE`.
+2. [GPU analysis](https://colab.research.google.com/github/parmisbathayan/word-sentiment-eeg/blob/main/notebooks/teco_paper_analyze_gpu.ipynb?authuser=2): T4 GPU, Run all, same Drive account.
 
-Code is pinned to the immutable `teco-paper-raw-v1` tag. The existing ZuCo
+CPU scientific code remains pinned to its original immutable commit. The updated GPU launcher verifies that code and the saved trial checksums. The existing ZuCo
 workflow and completed results are not changed by this addition.
 
 ## What is shared with the ZuCo reconstruction
@@ -46,10 +46,10 @@ Task 1 is supported until other tasks' native signals are supplied and validated
 - Native pickles: `Thesis/Data/teco_pickles/<reader>_with_total_task1/task1.pickle`, with known historical alternative layouts checked. One file per canonical reader.
 - Private CSV: `Thesis/gpt uploaded files/word_sentiment_eeg/teco/word_labels_three_level.csv`, or existing `word_labels.csv` if the revised file is absent. Exact sentence hash/token/index joins; no positional fallback.
 - Outputs: `Thesis/Results/word_sentiment_eeg/teco_paper_raw_staged/`.
-- **2 GB total additional cap**; approximately 0.61 GB temporary permutation maps plus 0.15 GB safety reserve, leaving approximately 1.24 GB for CPU archives and metadata. Quota checked before source reads. A budget failure keeps earlier reader checkpoints.
+- **2 GB saved workflow cap**, unchanged. CPU archive allocation is unchanged. The updated GPU launcher allows at most 200 MB additional analysis output within that cap. Large permutation maps stay in runtime memory; small resumable batch/model checkpoints persist on Drive. Quota checks preserve existing reader checkpoints on failure.
 - Per reader: lossless float32 `prepared_trials.npz` (trial ×126 channels ×201 samples), label/event/reader/word/sentence identities, ranked pair indices, private accepted metadata, audit of all stored candidate segments, sufficient statistics, source hash, matching policy, checksum commit marker.
 - Archive includes accepted matched positive/negative trials, not neutral or rejected waveforms. Original source pickles are retained without saving another copy.
-- Completed readers skip EEG loading after checksum verification. A disconnect during an unfinished reader can repeat that reader. GPU permutation chunks track included reader/input signatures and resume without double additions. Temporary null maps are deleted only after successful final figures; accepted trials remain.
+- Completed readers skip EEG loading after checksum verification. A disconnect during an unfinished reader can repeat that reader. GPU batch checkpoints bind all reader/input signatures and resume without double additions. They save exact statistical summaries once; no large temporary maps are written to or deleted from Drive. Accepted trials remain.
 
 ## Validation status
 

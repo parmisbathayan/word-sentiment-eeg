@@ -1,11 +1,11 @@
 # Word sentiment EEG — prepared agent annotations
 
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/parmisbathayan/word-sentiment-eeg/blob/main/notebooks/short.ipynb)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/parmisbathayan/word-sentiment-eeg/blob/main/notebooks/short.ipynb?authuser=2)
 
 ## CPU preparation, then GPU analysis (ZuCo paper workflow)
 
-1. [CPU preparation notebook](https://colab.research.google.com/github/parmisbathayan/word-sentiment-eeg/blob/main/notebooks/zuco_paper_prepare_cpu.ipynb): save full accepted raw/clean trials per reader. Wait for **CPU PREPARATION COMPLETE**.
-2. Switch to a GPU runtime, then [open the GPU analysis notebook](https://colab.research.google.com/github/parmisbathayan/word-sentiment-eeg/blob/main/notebooks/zuco_paper_analyze_gpu.ipynb). It loads saved trials without repeating native EEG loading/cleaning.
+1. [CPU preparation notebook](https://colab.research.google.com/github/parmisbathayan/word-sentiment-eeg/blob/main/notebooks/zuco_paper_prepare_cpu.ipynb?authuser=2): save full accepted raw/clean trials per reader. Wait for **CPU PREPARATION COMPLETE**.
+2. Switch to a GPU runtime, then [open the GPU analysis notebook](https://colab.research.google.com/github/parmisbathayan/word-sentiment-eeg/blob/main/notebooks/zuco_paper_analyze_gpu.ipynb?authuser=2). It loads saved trials without repeating native EEG loading/cleaning.
 
 This staged workflow keeps a lossless accepted-trial archive under a new
 `zuco_paper_figures_staged/` folder and caps its total storage at **4 GB**,
@@ -15,7 +15,7 @@ See [handoff, archive structure and storage](docs/PAPER_CPU_GPU_STAGES.md).
 
 ## ZuCo paper figures — independent Python reconstruction
 
-[Open the four-figure Colab notebook](https://colab.research.google.com/github/parmisbathayan/word-sentiment-eeg/blob/main/notebooks/zuco_paper_figures.ipynb).
+[Open the four-figure Colab notebook](https://colab.research.google.com/github/parmisbathayan/word-sentiment-eeg/blob/main/notebooks/zuco_paper_figures.ipynb?authuser=2).
 ZuCo SR only: selection/cleaning flow, raw FRPs, cleaned FRPs and control analyses
 in the four main published layouts. Uses original SST labels and all eligible
 word-associated fixations, requiring a new native-source pass. GPU recommended
@@ -29,8 +29,8 @@ claim of matching the published effects. See [scope, methods and storage](docs/Z
 
 For completed runs, use **CPU → Runtime → Run all**:
 
-- [ZuCo: overall + original 12-channel ROI + GFP + six regions + every reader](https://colab.research.google.com/github/parmisbathayan/word-sentiment-eeg/blob/main/notebooks/zuco_plots.ipynb)
-- [TeCo: overall + GFP + six regions + every reader, including both neutral controls](https://colab.research.google.com/github/parmisbathayan/word-sentiment-eeg/blob/main/notebooks/teco_plots.ipynb)
+- [ZuCo: overall + original 12-channel ROI + GFP + six regions + every reader](https://colab.research.google.com/github/parmisbathayan/word-sentiment-eeg/blob/main/notebooks/zuco_plots.ipynb?authuser=2)
+- [TeCo: overall + GFP + six regions + every reader, including both neutral controls](https://colab.research.google.com/github/parmisbathayan/word-sentiment-eeg/blob/main/notebooks/teco_plots.ipynb?authuser=2)
 
 The ZuCo notebook has separate category cells and a reader-specific cell per task.
 Each reader is one horizontal row, with whole-head mean, original ROI, GFP and
@@ -44,7 +44,7 @@ labeled as an ROI. See [gallery definitions and output structure](docs/ALL_PLOTS
 
 ## Current run: word onsets and class ERPs
 
-**Review an already completed run:** open [the saved-results review notebook](https://colab.research.google.com/github/parmisbathayan/word-sentiment-eeg/blob/main/notebooks/review.ipynb),
+**Review an already completed run:** open [the saved-results review notebook](https://colab.research.google.com/github/parmisbathayan/word-sentiment-eeg/blob/main/notebooks/review.ipynb?authuser=2),
 use CPU, and choose **Runtime → Run all**. It audits the 36 saved reader/task
 records and portable ZIP, then makes subject-specific plots from the saved
 class averages. It does not download source EEG or rerun extraction. New
@@ -59,14 +59,14 @@ notes and alignment flags). After the review notebook completes,
 `audit/word_selection.csv` adds actual accepted EEG counts, while
 `audit/accepted_word_labels.csv` contains words with at least one accepted event.
 
-**New follow-ups:** the [review notebook](https://colab.research.google.com/github/parmisbathayan/word-sentiment-eeg/blob/main/notebooks/review.ipynb)
+**New follow-ups:** the [review notebook](https://colab.research.google.com/github/parmisbathayan/word-sentiment-eeg/blob/main/notebooks/review.ipynb?authuser=2)
 now adds paired-reader contrasts, corrected exploratory tests, direction/leave-one-reader-out checks,
 and word-length/fixation balance tables using existing saved files. Results go under
 `analysis/paired_reader_contrasts/` and `analysis/covariate_balance/` inside the same completed run.
 See [follow-up methods and priorities](docs/ZUCO_FOLLOWUPS.md).
 
 **Neutral words in neutral sentences:** use the separate
-[context-controls notebook](https://colab.research.google.com/github/parmisbathayan/word-sentiment-eeg/blob/main/notebooks/context_controls.ipynb).
+[context-controls notebook](https://colab.research.google.com/github/parmisbathayan/word-sentiment-eeg/blob/main/notebooks/context_controls.ipynb?authuser=2).
 It reconstructs selected source epochs from the original saved accepted word onsets,
 while preserving the existing pooled averages. All new outputs stay under the
 same run's `analysis/neutral_context_v1/`. It distinguishes source-rated neutral SR
@@ -77,7 +77,7 @@ produce coverage reports rather than misleading curves. Comparing emotional word
 in emotional contexts against neutral words in neutral contexts still changes both
 word and sentence properties; this control alone does not isolate a word effect.
 
-**Persian TeCo:** [compact TeCo notebook](https://colab.research.google.com/github/parmisbathayan/word-sentiment-eeg/blob/main/notebooks/teco.ipynb)
+**Persian TeCo:** [compact TeCo notebook](https://colab.research.google.com/github/parmisbathayan/word-sentiment-eeg/blob/main/notebooks/teco.ipynb?authuser=2)
 uses native `raw_data` and `word.rawEEG`: 126 channels at documented 1200 Hz.
 All 165 Persian sentences / 3,016 word occurrences now have lexical, contextual,
 and sentence-context labels, followed by an independent agent quality review and
@@ -94,7 +94,7 @@ It reads existing private EEG in Colab one reader at a time, with no trial-array
 No full TeCo class-ERP extraction has been completed merely by preparing this code.
 See [TeCo compact pipeline](docs/TECO_COMPACT_ERP.md) and
 [implementation trace](docs/TECO_IMPLEMENTATION_TRACE.md).
-The older [preflight notebook](https://colab.research.google.com/github/parmisbathayan/word-sentiment-eeg/blob/main/notebooks/teco_preflight.ipynb)
+The older [preflight notebook](https://colab.research.google.com/github/parmisbathayan/word-sentiment-eeg/blob/main/notebooks/teco_preflight.ipynb?authuser=2)
 remains a bounded structure/onset check, not the full analysis.
 
 Real source data have now been checked: the prior SR audit verified word
@@ -104,7 +104,7 @@ onset recovery in NR and TSR. Three SR readers lacked `word.rawEEG`. See
 claim that every task/reader has usable waveforms.
 
 The short notebook now runs **`run_compact_erp.py`**, using the already-prepared labels.
-Open the [GitHub notebook in Colab](https://colab.research.google.com/github/parmisbathayan/word-sentiment-eeg/blob/main/notebooks/short.ipynb),
+Open the [GitHub notebook in Colab](https://colab.research.google.com/github/parmisbathayan/word-sentiment-eeg/blob/main/notebooks/short.ipynb?authuser=2),
 select a CPU runtime, and choose **Runtime → Run all**. Allow Drive mounting.
 The repository is public: **no GitHub token or Colab secret is required**.
 No annotation adjudication or code editing is required. Code stays on GitHub
@@ -216,7 +216,7 @@ They are not generated by a sentiment dictionary when Colab runs.
 - [Lexical/contextual differences](annotations/lexical_context_differences.csv)
 - [Annotation policy](annotations/POLICY.md)
 - [Coverage and counts](annotations/annotation_manifest.json)
-- [Open the short Colab runner](https://colab.research.google.com/github/parmisbathayan/word-sentiment-eeg/blob/main/notebooks/short.ipynb)
+- [Open the short Colab runner](https://colab.research.google.com/github/parmisbathayan/word-sentiment-eeg/blob/main/notebooks/short.ipynb?authuser=2)
 
 ## What is already done
 
