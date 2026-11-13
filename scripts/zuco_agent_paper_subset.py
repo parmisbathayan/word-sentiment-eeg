@@ -36,7 +36,7 @@ def labels_table(path):
     labels=pd.read_csv(path,keep_default_na=False)
     required={'sentence_key','word_index','word','tasks','lexical_class','contextual_class','alignment_warning','annotation_status'}
     if not required.issubset(labels):raise ValueError('Missing original agent annotation fields')
-    labels=labels[labels.tasks.str.split('|').map(lambda x:'SR' in x)].copy()
+    labels=labels[labels.tasks.str.split('[;|]',regex=True).map(lambda x:'SR' in x)].copy()
     labels['word_index']=pd.to_numeric(labels.word_index).astype(int)
     keys=['sentence_key','word_index']
     if labels.duplicated(keys).any():raise ValueError('Duplicate source occurrence annotation')
@@ -87,7 +87,9 @@ def inventory(run,labels,subjects,work,store):
         selections.append(dict(subject=s,selected=selected if usable else selected.iloc[:0],state=state))
         rows.append(dict(reader=s,parent_accepted=len(meta),annotation_joined=int(joined.join_status.eq('matched').sum()),
             available_agent_eligible=int((joined.join_status.eq('matched')&joined.agent_eligible.eq(True)).sum()),
-            subset_negative=int(counts.get('negative',0)),subset_positive=int(counts.get('positive',0)),included=bool(usable)))
+            matched_negative=int(counts.get('negative',0)),matched_positive=int(counts.get('positive',0)),
+            subset_negative=int(counts.get('negative',0)) if usable else 0,
+            subset_positive=int(counts.get('positive',0)) if usable else 0,included=bool(usable)))
         present=set(zip(joined.loc[joined.join_status.eq('matched'),'sentence_key'],joined.loc[joined.join_status.eq('matched'),'word_index']))
         for cls in ['negative','positive']:
             pool=eligible[eligible.lexical_class.eq(cls)];available=sum((k,w) in present for k,w in zip(pool.sentence_key,pool.word_index))
