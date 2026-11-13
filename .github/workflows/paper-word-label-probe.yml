@@ -1,0 +1,33 @@
+name: Original SST word-label probe
+on: workflow_dispatch
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Inspect original labels without EEG reads
+        run: |
+          python - <<'PY'
+          import sys, tempfile, csv, json
+          from pathlib import Path
+          from collections import Counter
+          sys.path[:0]=['scripts','src']
+          from paper_sst_source import acquire_sst
+          from word_sentiment_eeg.paper_labels import SST
+          with tempfile.TemporaryDirectory() as d:
+              path,source=acquire_sst(Path(d));sst=SST(path)
+              for word in ["isn't",'isn’t','not',"n't",'never']:
+                  print('DICTIONARY',json.dumps(dict(word=word,result=sst.lookup_word(word))))
+              seen=set()
+              with open('annotations/word_labels.csv') as stream:
+                  for row in csv.DictReader(stream):
+                      word=row['word']
+                      if word not in {"isn't",'isn’t'} or row['sentence'] in seen:continue
+                      seen.add(row['sentence']);joined=sst.join(row['sentence'].split(),allow_dictionary_fallback=True)
+                      targets=[w for w in joined['words'] if w['source_word']==word]
+                      print('SOURCE_JOIN',json.dumps(dict(sentence=row['sentence'],status=joined['status'],targets=targets)))
+          PY
