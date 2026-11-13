@@ -757,3 +757,41 @@ notebooks/zuco_recovered_followups.ipynb onCPU, Runall; then
 notebooks/zuco_recovered_followups_cnn.ipynb onT4, Runall. Read saved diagnostics/
 classification/summary.json and cnn/summary.json afterward. Source parent stays
 zuco_paper_figures_recovered; new outputzuco_recovered_followups capped50MB.
+
+## 2026-11-13: original agent-labelled word-fixation paper comparison
+User requested paper analyses on earlier agent-labelled subset. Prepared
+scripts/zuco_agent_paper_subset.py and notebooks/zuco_agent_paper_subset.ipynb,
+T4 Run all,authuser=2. Code pin3e165ec7e4cba58f30f7d57128be4e180d9faa8d.
+Originalv2 word_labels.csv lexical/context agreement, no warning, positive/negative
+only, no full-sentence or content-word restriction. SR source pool495positive,
+442negative occurrences. All available archived refixations are candidates,
+not the historical first-stored-fixation-only route.
+CRITICAL: intersection with already SST-selected/matched/rejected paper archive;
+not a full native reconstruction of all agent-labelled words. Exact sentence-key/
+word-index/spelling join; inventory reports absent source occurrences per reader,
+joined eligible trials, exclusions/rematching and final class counts. Opposite
+agent/SST polarity can relabel stored waveforms; ambiguous/neutral annotations
+excluded. Native cohort total still unknown until user runs inventory in Colab.
+Source results read-only; rematch same length/neighbor-tertile scheme within
+reader after inherited quality exclusions, rank pairs; same raw/clean mixed
+models,GFP,TCT5000/cluster1000, four additional reader window tests and fixed
+linear decoding comparisons; no CNN. Subset eye-velocity controls unavailable
+because per-trial traces not archived, and parent aggregate controls not reused.
+New outputzuco_agent_paper_subset capped200MB; no extra Drive EEG archive,
+compact immutable checkpoints/resume. Full-reader cleaning/parent selection
+retained; report this along with subset coverage and exploratory scope.
+Cloud43420619762 and43420832704 passed exact relabel/join/rematch, actual compact
+permutations, figure smoke (optimizer stub only), source-preserving resume and
+changed-protocol refusal. Fresh seven-notebook checkout43421086993 passed.
+Main offline synthetic checks43420619773 passed after isolating new recovered-
+followup tests in cloud_recovered_followups.py and restoring legacy
+cloud_zuco_followups.py (name collision had broken general checks; no scientific
+pipeline/notebook pins changed by restoring test files).
+
+Negation clarification probe43419653012: original SST lookup isn't/isn’t absent;
+source sentence joins split is+n't, word_label null; combined target span has
+negative score. No accepted isn't entries in saved accepted-word audit. Excluded
+for unavailable single-word label, not neutral. Current explicit preceding-three
+word negation rule still only no/not/without/nor/neither, so isn't does not
+exclude subsequent target automatically. Keep contraction handling as a possible
+future policy change; do not silently alter current reproduction or this subset.
