@@ -819,3 +819,16 @@ centers not exactonset. Word-frequency/context confounds remain unadjusted.
 Separate resultzuco_sliding_reader_maps capped10MB; no re-extraction/training.
 Cloud43422407364 passed marginal equivalence, batch invariance, max-family
 monotonicity, zero/null and known-effect tests. Fresh notebook check follows.
+
+## 2026-11-13: CPU/GPU notebook defaults and pre-setup checks
+User asked to enforce the intended hardware through links or code. Added first
+executable runtime-check cells to 12 CPU/GPU paper, recovery, follow-up, subset,
+sliding-window and CNN notebooks. GPU metadata requests T4; CPU notebooks remove
+accelerator metadata. Colab still controls allocation and hardware availability;
+URLs do not force GPU allocation. Guards use stdlib nvidia-smi detection before
+installation/mount/analysis, reject wrong hardware and TPU, and fail clearly if
+GPU detection errors or times out. Other CUDA GPU models are accepted. No runtime
+is disconnected or switched automatically. Existing cells, scientific pins and
+saved results are unchanged (semantic comparison verified for all 12 books).
+Standard-library tests cover 72 notebook/hardware scenarios without downloading
+or installing anything on the Mac. Links continue to use authuser=2.
