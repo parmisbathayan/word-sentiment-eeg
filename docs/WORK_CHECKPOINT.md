@@ -795,3 +795,27 @@ for unavailable single-word label, not neutral. Current explicit preceding-three
 word negation rule still only no/not/without/nor/neither, so isn't does not
 exclude subsequent target automatically. Keep contraction handling as a possible
 future policy change; do not silently alter current reproduction or this subset.
+
+## 2026-11-13: raw/clean clarification and requested sliding-window reader test
+Paper raw FRPs also had corrected clusters:232–280ms left-frontocentral p.04,
+184–304ms right-posterior p<.001(section3.1.1). Raw means before extra regression
+deconvolution, not untouched EEG. Both our raw/clean branches inherit released
+preprocessed average-referenced corpus signals, independent Python1–50Hz FIR and
+125Hz resampling. We did not rerun Automagic/MARA. Shared-reader Python nuisance
+GLM uses fixation/saccade/blink/keypress events; spline/solver/timing choices not
+verified numerically equal to MATLAB Unfold. Do not claim exact cleaning parity.
+New scripts/zuco_sliding_reader_maps.py and notebookzuco_sliding_reader_maps.ipynb,
+CPU Runall,authuser2,codepin0fa726d19d50acb6f8b1aae5f6a8029563701850.
+Loads only12saved statistics.npz files(pair_sum/pairs), not EEG archives; same
+ranked-pair mean contrast perreader as existing window follow-up. Fixed80ms
+endpoint-span(11samples),8msstep across -600..1000ms:191windows×raw/clean=382.
+Exact4096common reader sign assignments. Spatial mean removed; RMS group map
+standardized by sign-invariant expected null RMS for comparable max statistics.
+Marginal permutation p matches prior reader test; single maximum across all
+windows and both representations controls complete-scan family. No GFP-normalized
+TANOVA claim, no electrode-cluster localization. Reader symmetry assumption;
+exploratory because dataset already viewed; window overlap not independent and
+centers not exactonset. Word-frequency/context confounds remain unadjusted.
+Separate resultzuco_sliding_reader_maps capped10MB; no re-extraction/training.
+Cloud43422407364 passed marginal equivalence, batch invariance, max-family
+monotonicity, zero/null and known-effect tests. Fresh notebook check follows.
