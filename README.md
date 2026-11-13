@@ -20,6 +20,10 @@ See [verified recovery and storage](docs/PAPER_VERIFIED_RECOVERY.md).
 
 Both reuse existing accepted raw/clean trials. New outputs share a separate **50 MB total cap**; no new EEG archive is saved to Drive. See the [fixed plan and limitations](docs/ZUCO_RECOVERED_FOLLOWUP_PLAN.txt) and [unsent author-code request](docs/AUTHOR_CODE_REQUEST_EMAIL.txt). CPU follow-ups compare single fixations and disjoint 20/40-trial averages under sentence/word/reader group splits. These are exploratory analyses with full-reader preprocessing limitations.
 
+## Original agent-label comparison on saved paper fixations
+
+[Agent-labelled paper subset notebook — T4 GPU](https://colab.research.google.com/github/parmisbathayan/word-sentiment-eeg/blob/main/notebooks/zuco_agent_paper_subset.ipynb?authuser=2). Uses original lexical/context agreement labels within the saved SST-selected archive, rematches classes, and recomputes paper-style statistics/plots and linear decoding. Explicit intersection coverage audit; no new extraction or extra EEG copy on Drive. Separate output capped200MB. [Selection, coverage and limitations](docs/AGENT_PAPER_SUBSET.txt).
+
 ## ZuCo paper figures — independent Python reconstruction
 
 [Open the four-figure Colab notebook](https://colab.research.google.com/github/parmisbathayan/word-sentiment-eeg/blob/main/notebooks/zuco_paper_figures.ipynb?authuser=2).

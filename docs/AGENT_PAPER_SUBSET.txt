@@ -1,0 +1,52 @@
+Agent-labelled subset of recovered ZuCo paper archive —2026-11-13
+
+User requested paper-style analyses of the earlier agent-selected word fixations.
+Notebook: notebooks/zuco_agent_paper_subset.ipynb, T4 GPU, Run all, account2.
+Code pinned3e165ec7e4cba58f30f7d57128be4e180d9faa8d.
+No source extraction, preprocessing change or replacement of completed results.
+
+Selection
+Original annotations/word_labels.csv v2. Lexical and word-in-context agreement,
+positive or negative, no alignment_warning, agent_reviewed_not_human_gold.
+Sentence sentiment is not required to agree; no content-word filtering. Neutral
+excluded for the paper's binary analysis. SR source pool495positive442negative
+word occurrences, not reader-multiplied trials. Source-key+word-index join, exact
+NFKC/casefolded spelling validation, no positional/fuzzy fallback. All archived
+fixations of selected occurrences are candidates, including rereading. Old source
+word labels may replace the stored SST sentiment when the two differ.
+
+Coverage limit
+Parent contains only previously accepted SST-selected/matched/quality-rejected
+trials. Agent-positive/negative words excluded by SST or earlier quality/missing
+source rules have no waveform here. This is an intersection, NOT a full agent-
+label cohort. Inventory lists source-occurrence availability per reader and total
+retained fixation instances, plus all event exclusions in a compressed CSV.
+All inherited blink/duration/amplitude/clock/negation rules remain. Contractions
+are not newly filtered. New matching uses same reader/exact length/neighbor-gap
+tertiles and seed as the implemented paper route, but after parent quality
+exclusions; this ordering differs from a new native reconstruction.
+
+Statistics and plots
+Same existing Python Gaussian ML mixed models for channel×time/GFP, topography
+windows(raw224–280,clean224–304),5000electrode-shuffle TCT permutations and1000
+spatiotemporal cluster sign flips. Retained negative/positive trials ranked by
+length/duration/event ID for pairing. At least3readers with>=2trials/class.
+New subsets recompute means/models/tests; original cohort statistics are never
+relabelled or reused as subset results. Two paper A–F figures(raw/clean), a
+selection/available-controls figure, counts/labels/exclusion ledger, additional
+four Holm-corrected reader-map window tests. Subset eye-velocity traces were not
+saved per trial, so that control is explicitly unavailable, not taken from parent.
+
+Decoding
+Reuse fixed raw/clean logistic/dummy single-trial and disjoint20/40-trial average
+analyses, unseen sentence/word/reader splits, pre-onset and metadata-only controls.
+No CNN. Full-reader cleaning/initial matching precede splits: transductive,
+exploratory; class-known test averages are not single-trial deployment scores.
+
+Storage and resume
+New outputThesis/Results/word_sentiment_eeg/zuco_agent_paper_subset/ capped200MB
+including compact permutation/model frames, statistics/plots and decoding.
+No extra EEG archive/features on Drive; arrays and mutable work stay runtime-only.
+Checksum-check archived waveforms; original files read-only. Resume preserves
+completed batches/models/classifiers; a new runtime reloads parent trials.
+Do not run concurrent jobs into this destination. Original results unchanged.
