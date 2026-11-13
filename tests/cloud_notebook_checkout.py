@@ -11,7 +11,7 @@ import sys
 import tempfile
 ROOT=Path(__file__).resolve().parents[1]
 if sys.platform=='darwin':raise SystemExit('Cloud only: no extra code clones on the Mac')
-paths=sorted(list((ROOT/'notebooks').glob('zuco_paper_recover_*.ipynb'))+list((ROOT/'notebooks').glob('teco_paper_*.ipynb'))+list((ROOT/'notebooks').glob('zuco_recovered_followups*.ipynb'))+list((ROOT/'notebooks').glob('zuco_agent_paper_subset.ipynb')))
+paths=sorted(list((ROOT/'notebooks').glob('zuco_paper_recover_*.ipynb'))+list((ROOT/'notebooks').glob('teco_paper_*.ipynb'))+list((ROOT/'notebooks').glob('zuco_recovered_followups*.ipynb'))+list((ROOT/'notebooks').glob('zuco_agent_paper_subset.ipynb'))+list((ROOT/'notebooks').glob('zuco_sliding_reader_maps.ipynb')))
 with tempfile.TemporaryDirectory() as tmp:
     for p in paths:
         cell=next(''.join(c['source']) for c in json.loads(p.read_text())['cells'] if c['cell_type']=='code' and 'CODE_REVISION=' in ''.join(c['source']))
