@@ -10,7 +10,7 @@ import unittest
 from unittest.mock import patch
 
 ROOT = Path(__file__).resolve().parents[1]
-GPU = ('cnn', 'zuco_paper_analyze_gpu', 'zuco_paper_recover_analyze_gpu',
+GPU = ('zuco_pooled_cnn', 'cnn', 'zuco_paper_analyze_gpu', 'zuco_paper_recover_analyze_gpu',
        'teco_paper_analyze_gpu', 'zuco_recovered_followups_cnn', 'zuco_agent_paper_subset')
 CPU = ('zuco_paper_prepare_cpu', 'zuco_paper_recover_prepare_cpu',
        'teco_paper_prepare_cpu', 'zuco_recovered_followups',
