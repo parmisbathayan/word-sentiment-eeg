@@ -2,6 +2,10 @@
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/parmisbathayan/word-sentiment-eeg/blob/main/notebooks/short.ipynb?authuser=2)
 
+## Trial-averaging curve: one focused setup
+
+[CPU: average1,10,...,100trials](https://colab.research.google.com/github/parmisbathayan/word-sentiment-eeg/blob/main/notebooks/zuco_averaging_sweep.ipynb?authuser=2). Cleaned ZuCo SR agent subset,224–304ms logistic regression, unseen readers. Same cohort/folds across the curve, five regroupings, exact sizes, test-example counts and dummy comparison. New outputs/cache capped20MB; first run loads saved EEG once, no extraction. [Plan and limitations](docs/ZUCO_AVERAGING_SWEEP.md).
+
 ## New: one CNN trained across all three ZuCo tasks
 
 [T4 GPU: pooled SR + NR + TSR](https://colab.research.google.com/github/parmisbathayan/word-sentiment-eeg/blob/main/notebooks/zuco_pooled_cnn.ipynb?authuser=2). Binary positive/negative; CNN plus logistic comparison, single trials and up-to-40-trial averages, separate sentence/word/reader holdouts. Reuses the saved first-fixation archive; no new extraction. New outputs capped at **100 MB**, waveform staging on temporary Colab disk only. [Fixed plan, storage and interpretation](docs/ZUCO_POOLED_CNN.md).
