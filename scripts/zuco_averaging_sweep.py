@@ -149,7 +149,7 @@ def run_sweep(x,meta,store,work):
                 path=work/'predictions.csv.gz';predictions.to_csv(path,index=False,compression={'method':'gzip','mtime':0})
                 sha=store.file(relative/'predictions.csv.gz',path);store.json(relative/'score.json',dict(score=score,predictions_sha256=sha))
             scores.append(score)
-    frame=pd.DataFrame([{k:v for k,v in s.items() if k!='folds'} for s in scores]);path=work/'repeat_scores.csv';frame.to_csv(path,index=False);store.file('repeat_scores.csv',path)
+    frame=pd.DataFrame([{k:s[k] for k in sorted(s) if k!='folds'} for s in scores]);path=work/'repeat_scores.csv';frame.to_csv(path,index=False);store.file('repeat_scores.csv',path)
     summary=frame.groupby('size',sort=True).agg(balanced_accuracy=('balanced_accuracy','mean'),grouping_sd=('balanced_accuracy','std'),
         grouping_min=('balanced_accuracy','min'),grouping_max=('balanced_accuracy','max'),dummy_balanced_accuracy=('dummy_balanced_accuracy','mean'),
         test_examples=('test_examples','first'),test_original_used=('test_original_used','first'),test_readers=('test_readers','first'),groupings=('repeat','count')).reset_index()
