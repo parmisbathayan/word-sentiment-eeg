@@ -15,7 +15,7 @@ def main():
     for reader in range(6):
         for label in ['negative','positive']:
             for j in range(205):rows.append(dict(subject=f'R{reader}',sentiment=label,event_id=f'R{reader}/{label}/{j}'))
-    meta=pd.DataFrame(rows);x=rng.normal(0,.3,(len(meta),105)).astype('float32');x[:,0]+=np.where(meta.sentiment.eq('positive'),2,-2)
+    meta=pd.DataFrame(rows);x=rng.normal(0,.3,(len(meta),105)).astype('float32');x+=np.where(meta.sentiment.eq('positive').to_numpy()[:,None],2,-2)*np.r_[np.ones(50),-np.ones(50),np.zeros(5)][None,:]
     xx,mm,cohort=s.common_cohort(x,meta)
     assert len(xx)==len(x) and len(cohort['included_readers'])==6
     folds=s.grouped_folds(mm.sentiment.eq('positive').to_numpy(int),mm.subject.to_numpy())
