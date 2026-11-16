@@ -2,6 +2,10 @@
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/parmisbathayan/word-sentiment-eeg/blob/main/notebooks/short.ipynb?authuser=2)
 
+## Published classification recipe: random95/5splits
+
+[CPU: full NCA + logistic/SVM search](https://colab.research.google.com/github/parmisbathayan/word-sentiment-eeg/blob/main/notebooks/zuco_paper_classification.ipynb?authuser=2). Saved SST-labelled ZuCo SR,0–500ms,100random splits, full published inner tuning, no reader/word/sentence holdouts. Reusable feature caches and resumable grid blocks; **500 MB total cap**. This is a **long CPU workload**, not a quick sweep. Original trial set and undocumented choices differ, so this is a protocol reconstruction. [Recipe, explicit choices and limitations](docs/PAPER_CLASSIFICATION_RECONSTRUCTION.md).
+
 ## Trial-averaging curve: one focused setup
 
 [CPU: average1,10,...,100trials](https://colab.research.google.com/github/parmisbathayan/word-sentiment-eeg/blob/main/notebooks/zuco_averaging_sweep.ipynb?authuser=2). Cleaned ZuCo SR agent subset,224–304ms logistic regression, unseen readers. Same cohort/folds across the curve, five regroupings, exact sizes, test-example counts and dummy comparison. New outputs/cache capped20MB; first run loads saved EEG once, no extraction. [Plan and limitations](docs/ZUCO_AVERAGING_SWEEP.md).
