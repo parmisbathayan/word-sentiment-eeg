@@ -27,7 +27,8 @@ def occurrence_table(events,source,annotations):
     a=annotations[['sentence_key','word_index','word','sentence','lexical_class','contextual_class','annotation_note','annotation_flags','alignment_warning']].rename(columns={'word':'agent_source_word'})
     if a.duplicated(['sentence_key','word_index']).any():raise ValueError('Ambiguous source annotations')
     table=table.merge(a,on=['sentence_key','word_index'],how='left',validate='many_to_one')
-    matched=table.agent_source_word.notna()&table.word.map(norm).eq(table.agent_source_word.fillna('').map(norm))
+    source_norm=lambda x:unicodedata.normalize('NFKC',str(x)).casefold().strip()
+    matched=table.agent_source_word.notna()&table.word.map(source_norm).eq(table.agent_source_word.fillna('').map(source_norm))
     for col in ['sentence','lexical_class','contextual_class','annotation_note','annotation_flags','alignment_warning']:
         table.loc[~matched,col]='unavailable_or_text_mismatch'
     table['annotation_join_ok']=matched;table['experiment_word_pool']=source;table['word_identity']=table.word.map(norm)
@@ -54,6 +55,7 @@ def build(parent,subset,annotations_path,fixed_cohort_path=None):
     if sha(audit_path)!=subset_complete['checksums']['selection/trial_selection.csv.gz']:raise ValueError('Agent selection audit changed')
     audit=pd.read_csv(audit_path,keep_default_na=False,dtype={'event_id':str});audit['word_index']=pd.to_numeric(audit.word_index).astype(int)
     if audit.event_id.duplicated().any() or set(audit.event_id)!=set(sst.event_id):raise ValueError('SST and subset parent event pools differ')
+    if 'join_status' not in audit:audit['join_status']='unavailable'
     joined=sst[['event_id','sentiment']].merge(audit[['event_id','parent_sentiment']],on='event_id',validate='one_to_one')
     if not joined.sentiment.eq(joined.parent_sentiment).all():raise ValueError('Parent SST labels disagree')
     sst['selected_class']=sst.sentiment
@@ -65,7 +67,7 @@ def build(parent,subset,annotations_path,fixed_cohort_path=None):
         'agent_paper_used_words.csv':occurrence_table(agent,'agent paper pool',sr)}
     keys=['sentence_key','word_index','word']
     comparison=audit.groupby(keys,sort=True).agg(sst_class=('parent_sentiment','first'),
-        agent_lexical_class=('lexical_class','first'),agent_contextual_class=('contextual_class','first'),
+        agent_lexical_class=('lexical_class','first'),agent_contextual_class=('contextual_class','first'),annotation_join_status=('join_status','first'),
         sst_fixation_trials=('event_id','size'),sst_readers=('subject','nunique'),
         agent_retained_fixations=('subset_status',lambda x:int(x.eq('retained').sum())),
         outcomes=('subset_status',lambda x:json.dumps(x.value_counts().to_dict(),sort_keys=True))).reset_index()
