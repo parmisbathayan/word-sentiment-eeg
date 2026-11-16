@@ -35,45 +35,83 @@ def csv(store, relative, frame):
     store.bytes(relative, buffer.getvalue())
 
 
+def frozen_roster(source):
+    case=source/'teco/task1/cases/word_agreement__binary__sentence__post__logistic'
+    marker=read(case/'result.json');path=case/'predictions.csv.gz'
+    expected=marker['checksums']['predictions.csv.gz']
+    if a.file_digest(path)!=expected:raise ValueError('Original TeCo trial/label roster checksum mismatch')
+    roster=pd.read_csv(path,keep_default_na=False,dtype={'event_id':str,'subject':str})
+    if roster.event_id.duplicated().any() or set(roster.truth)!=set(['negative','positive']):
+        raise ValueError('Invalid saved original binary trial/label roster')
+    score=marker['score']
+    if len(roster)!=score['trials'] or roster.subject.nunique()!=score['readers']:
+        raise ValueError('Saved original roster/count mismatch')
+    counts={c:int(roster.truth.eq(c).sum()) for c in ['negative','positive']}
+    if counts!=score['class_counts']:raise ValueError('Saved original label/count mismatch')
+    return roster[['event_id','subject','truth']],dict(path=str(path),sha256=expected,
+        result_sha256=a.file_digest(case/'result.json'),class_counts=counts)
+
+
+def cached_features_only(archive,source,record):
+    """Read-only equivalent of the old cache branch, without any live label join."""
+    subject=record['subject'];reader=archive/'teco/readers/task1'/subject
+    checkpoint_path=reader/'checkpoint.json';checkpoint=read(checkpoint_path)
+    if checkpoint['status']!='completed' or checkpoint['epochs']!=record['epochs']:
+        raise ValueError('Incomplete/inconsistent reader checkpoint')
+    if checkpoint['identity']['protocol_sha256']!=a.digest(read(archive/'protocol.json')):
+        raise ValueError('Reader/archive protocol mismatch')
+    if a.file_digest(reader/'events.csv.gz')!=checkpoint['events_sha256']:
+        raise ValueError('Reader event table checksum mismatch')
+    cache=source/'features/teco/task1'/subject;saved=read(cache/'manifest.json')
+    signature=a.digest({'spec':a.FEATURE_SPEC,'checkpoint':a.file_digest(checkpoint_path)})
+    if saved['signature']!=signature:raise ValueError('Feature cache differs from archive/specification')
+    if not {'features.npz','events.csv.gz'}<=set(saved['checksums']):raise ValueError('Incomplete cache checksums')
+    for name,sha in saved['checksums'].items():
+        if a.file_digest(a.strict_path(cache,name))!=sha:raise ValueError('Feature cache checksum mismatch')
+    with np.load(cache/'features.npz',allow_pickle=False) as z:
+        post=z['post'].copy();pre=z['pre'].copy();ids=z['event_id'].astype(str).tolist()
+    meta=pd.read_csv(cache/'events.csv.gz',keep_default_na=False,dtype={'event_id':str,'sentence_key':str,'subject':str})
+    if ids!=meta.event_id.tolist() or meta.event_id.duplicated().any() or len(meta)!=record['epochs']:
+        raise ValueError('Feature cache identity mismatch')
+    if post.shape!=(len(meta),48) or pre.shape!=(len(meta),12):raise ValueError('Unexpected cached feature layout')
+    if not meta.dataset.eq('teco').all() or not meta.task.eq('task1').all() or not meta.subject.eq(subject).all():
+        raise ValueError('Reader/task metadata mismatch')
+    meta['control_numeric']=np.where(meta.is_control.astype(str).str.lower().isin(['true','1']),1.,
+        np.where(meta.is_control.astype(str).str.lower().isin(['false','0']),0.,np.nan))
+    nuisance=np.stack([pd.to_numeric(meta[c],errors='coerce').to_numpy(dtype=float) for c in a.NUISANCE],axis=1)
+    return meta,post,pre,nuisance,dict(reader=subject,cache=a.file_digest(cache/'manifest.json'))
+
+
 def load_cached(thesis):
-    source = thesis/'Results/word_sentiment_eeg/classification_similarity'
-    archive = thesis/'Results/word_sentiment_eeg/trial_archive_125hz'
-    if read(source/'manifest.json').get('status') != 'completed':
+    source=thesis/'Results/word_sentiment_eeg/classification_similarity'
+    archive=thesis/'Results/word_sentiment_eeg/trial_archive_125hz'
+    if read(source/'manifest.json').get('status')!='completed':
         raise ValueError('The original classification feature preparation must be completed first.')
-    records, _ = a.load_completed(archive)
-    records = sorted([r for r in records if r['dataset']=='teco' and r['task']=='task1'], key=lambda r:r['subject'])
+    roster,label_source=frozen_roster(source)
+    records,_=a.load_completed(archive)
+    records=sorted([r for r in records if r['dataset']=='teco' and r['task']=='task1'],key=lambda r:r['subject'])
     if len(records)!=12:raise ValueError('Expected 12 TeCo task1 recordings')
-    # Preflight ALL caches before calling the helper, whose missing-cache branch
-    # would otherwise create features. This notebook must never enter that branch.
-    for record in records:
-        cache=source/'features/teco/task1'/record['subject']
-        if not (cache/'manifest.json').is_file():
-            raise FileNotFoundError(f'Missing saved cache: {cache}. No extraction/feature preparation started.')
-    known={v['sha256'] for v in read(source/'label_sources.json')}
+    if set(roster.subject)!={r['subject'] for r in records}:raise ValueError('Original roster/reader mismatch')
     tables=[];arrays=[[],[],[]];identities=[]
     for i,record in enumerate(records,1):
         print(f'LOAD SAVED FEATURES {i}/{len(records)}: TeCo/{record["subject"]}',flush=True)
-        meta,post,pre,nuisance,label=a.reader_features(archive,record,source,thesis)
-        if not label or label['sha256'] not in known:raise ValueError('Labels differ from completed original run')
-        if not meta.dataset.eq('teco').all() or not meta.task.eq('task1').all() or not meta.subject.eq(record['subject']).all():
-            raise ValueError('Reader/task metadata mismatch')
+        meta,post,pre,nuisance,identity=cached_features_only(archive,source,record)
         tables.append(meta)
         for dst,x in zip(arrays,[post,pre,nuisance]):dst.append(x)
-        cache=source/'features/teco/task1'/record['subject']
-        identities.append(dict(reader=record['subject'],cache=a.file_digest(cache/'manifest.json'),labels=label))
+        identities.append(identity)
     meta=pd.concat(tables,ignore_index=True);post,pre,nuisance=[np.concatenate(v) for v in arrays]
     if meta.event_id.duplicated().any():raise ValueError('Duplicate event IDs')
-    duplicate=meta.duplicated(['subject','sentence_position','onset_sample_sentence_0based'],keep=False)
-    duplicate |= meta.signal_sha256.duplicated(keep=False)
-    good=~duplicate.to_numpy();meta=meta.loc[good].reset_index(drop=True)
-    post,pre,nuisance=[x[good] for x in [post,pre,nuisance]]
-    ix,y,_=a.selected(meta,'word_agreement','binary')
-    meta=meta.iloc[ix].reset_index(drop=True);meta['truth']=y
-    if post.shape[1]!=48 or pre.shape[1]!=12 or nuisance.shape[1]!=6:raise ValueError('Unexpected cached feature layout')
-    if len(set(y))!=2 or min(np.sum(y==c) for c in set(y))<10:raise ValueError('Too few binary trials')
-    return meta,dict(post=post[ix],pre=pre[ix],nuisance=nuisance[ix]),dict(
+    index=pd.Index(meta.event_id).get_indexer(roster.event_id)
+    if (index<0).any():raise ValueError('Saved original selected trials missing from caches')
+    meta=meta.iloc[index].reset_index(drop=True)
+    if meta.subject.tolist()!=roster.subject.tolist():raise ValueError('Saved original event/reader mismatch')
+    if meta.duplicated(['subject','sentence_position','onset_sample_sentence_0based'],keep=False).any() or meta.signal_sha256.duplicated(keep=False).any():
+        raise ValueError('Original selected roster contains duplicate signal/events')
+    meta['truth']=roster.truth.to_numpy()
+    print(f'RESTORED ORIGINAL LABELS: {len(meta)} trials, {label_source["class_counts"]}; no annotation CSV read.',flush=True)
+    return meta,dict(post=post[index],pre=pre[index],nuisance=nuisance[index]),dict(
         sources=identities,source_protocol=a.file_digest(source/'protocol.json'),
-        excluded_duplicate_observations=int(duplicate.sum()),selected_trials=len(meta))
+        frozen_labels=label_source,selection='exact original completed binary case; no current annotation lookup',selected_trials=len(meta))
 
 
 def groups(meta, indices, maximum, seed):
