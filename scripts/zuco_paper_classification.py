@@ -136,7 +136,7 @@ def main():
     store=ImmutableStore(out,SPEC['budget'])
     if args.free_drive_bytes<max(0,SPEC['budget']-store.used):raise OSError('Reserve up to500MB for all persistent features, averages and grid checkpoints')
     protocol=dict(spec=SPEC,parent_cpu=file_digest(parent/'cpu_preparation_manifest.json'),parent_manifest=file_digest(parent/'manifest.json'),
-        code={f:file_digest(ROOT/f) for f in ['scripts/zuco_paper_classification.py','src/word_sentiment_eeg/paper_protocol_decoding.py','src/word_sentiment_eeg/paper_decoding.py','src/word_sentiment_eeg/paper_small_checkpoints.py']},
+        code={f:file_digest(ROOT/f) for f in ['scripts/zuco_paper_classification.py','src/word_sentiment_eeg/paper_protocol_decoding.py','src/word_sentiment_eeg/paper_decoding.py','src/word_sentiment_eeg/paper_small_checkpoints.py','requirements-paper-classification.txt']},
         software={n:version(n) for n in ['numpy','pandas','scipy','scikit-learn']})
     store.json('protocol.json',protocol)
     if (out/'complete.json').exists():
