@@ -20,14 +20,11 @@ jobs:
           from word_sentiment_eeg.paper_labels import SST
           with tempfile.TemporaryDirectory() as d:
               path,source=acquire_sst(Path(d));sst=SST(path)
-              for word in ["isn't",'isn’t','not',"n't",'never']:
-                  print('DICTIONARY',json.dumps(dict(word=word,result=sst.lookup_word(word))))
-              seen=set()
+              wanted={'Sweet','Wild','Killed','convincing','improve'}
               with open('annotations/word_labels.csv') as stream:
                   for row in csv.DictReader(stream):
-                      word=row['word']
-                      if word not in {"isn't",'isn’t'} or row['sentence'] in seen:continue
-                      seen.add(row['sentence']);joined=sst.join(row['sentence'].split(),allow_dictionary_fallback=True)
-                      targets=[w for w in joined['words'] if w['source_word']==word]
-                      print('SOURCE_JOIN',json.dumps(dict(sentence=row['sentence'],status=joined['status'],targets=targets)))
+                      if 'SR' not in row['tasks'].split(';') or row['word'] not in wanted or row['lexical_class']==row['contextual_class']:continue
+                      joined=sst.join(row['sentence'].split(),allow_dictionary_fallback=True)
+                      target=joined['words'][int(row['word_index'])]
+                      print('VERIFIED_EXAMPLE',json.dumps(dict(word=row['word'],sentence=row['sentence'],sentence_key=row['sentence_key'],word_index=row['word_index'],lexical=row['lexical_class'],contextual=row['contextual_class'],note=row['annotation_note'],source_status=joined['status'],sst=target),ensure_ascii=False))
           PY
