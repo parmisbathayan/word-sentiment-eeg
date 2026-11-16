@@ -11,23 +11,23 @@ import numpy as np
 import pandas as pd
 ROOT=Path(__file__).resolve().parents[1];sys.path[:0]=[str(ROOT/'src'),str(ROOT/'scripts')]
 import zuco_averaging_sweep as b
-from zuco_recovered_followups import grouped_folds,averaged,metrics
+from zuco_recovered_followups import grouped_folds,averaged,metrics,SEED
 from word_sentiment_eeg.common import digest,file_digest
 from word_sentiment_eeg.paper_small_checkpoints import ImmutableStore
 
 SPEC=dict(version=1,dataset='ZuCo SR',selection='original complete agent subset; no>=100/class reader prefilter',
  representation='cleaned',window=[224,304],model='logistic C1 balanced liblinear',split='original three reader folds',sizes=b.SIZES,
- groupings=5,seed=2026,remainders='discard per reader/class; readers can contribute no average at large sizes',
+ groupings=5,seed=SEED,remainders='discard per reader/class; readers can contribute no average at large sizes',
  reference='original40-trial first grouping, checked against saved metrics and original-event digests',budget=15_000_000)
 
 def evaluate(x,meta,size,repeat,folds):
     y=meta.sentiment.map({'negative':0,'positive':1}).to_numpy(int);frames=[];audit=[]
     for fi,(train,test) in enumerate(folds):
-        seed=2026+1000*repeat+fi
+        seed=SEED+1000*repeat+fi
         a,ya,_,ma=averaged(x,y,meta,train,size,seed);z,yz,readers,mz=averaged(x,y,meta,test,size,seed+100)
         if set(meta.iloc[train].subject)&set(meta.iloc[test].subject) or set(ma)&set(mz):raise ValueError('Partition leakage')
         if not len(ya) or not len(yz) or len(set(ya))<2 or len(set(yz))<2:raise ValueError('Insufficient complete averages in an original fold; do not silently change folds')
-        model=b.make_pipeline(b.SimpleImputer(strategy='median',keep_empty_features=True),b.StandardScaler(),b.LogisticRegression(C=1,class_weight='balanced',max_iter=2000,solver='liblinear',random_state=2026))
+        model=b.make_pipeline(b.SimpleImputer(strategy='median',keep_empty_features=True),b.StandardScaler(),b.LogisticRegression(C=1,class_weight='balanced',max_iter=2000,solver='liblinear',random_state=SEED))
         model.fit(a,ya);prediction=model.predict(z);prob=model.predict_proba(z)[:,1]
         dummy=b.DummyClassifier(strategy='prior').fit(a,ya).predict(z)
         frame=pd.DataFrame(dict(fold=fi+1,reader=readers,truth=yz,prediction=prediction,probability_positive=prob,dummy_prediction=dummy))
