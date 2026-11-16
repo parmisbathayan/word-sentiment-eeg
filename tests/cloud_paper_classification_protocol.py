@@ -53,6 +53,27 @@ def main():
         except ValueError:pass
         else:raise AssertionError('Changed features reused')
         summary=d.summary([dict(size=40,**s) for s in result['scores']]);assert set(summary.model)=={'logistic','svm_rbf','dummy'}
+    #Exercise the saved EEG→0–500ms feature path and read-free cache reuse.
+    sys.path.insert(0,str(ROOT/'scripts'))
+    import zuco_paper_classification as runner
+    from word_sentiment_eeg.common import write_json,file_digest
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp=Path(tmp);parent=tmp/'parent';folder=parent/'readers/R0';folder.mkdir(parents=True);work=tmp/'work';work.mkdir()
+        source=pd.DataFrame(dict(event_id=['a','b'],sentiment=['negative','positive'],word=['bad','good'],word_length=[3,4],sentence_key=['s1','s2']))
+        source.to_csv(folder/'accepted_trial_metadata.csv.gz',index=False)
+        signal=rng.normal(size=(2,2,105,201)).astype('float32');montage=pd.read_csv(ROOT/'assets/zuco_chanlocs.csv').labels.to_numpy(dtype=str)
+        np.savez_compressed(folder/'prepared_trials.npz',signal=signal,event_ids=['a','b'],labels=[0,1],channel_names=montage,representations=['raw','cleaned'],times_ms=np.arange(-75,126)*8)
+        write_json(folder/'prepared.json',dict(status='prepared',checksums={f:file_digest(folder/f) for f in ['accepted_trial_metadata.csv.gz','prepared_trials.npz']}))
+        write_json(parent/'protocol.json',{'test':1});write_json(parent/'manifest.json',{'status':'completed'})
+        write_json(parent/'cpu_preparation_manifest.json',dict(status='completed',subjects=['R0'],protocol_sha256=file_digest(parent/'protocol.json'),reader_checkpoint_sha256={'R0':file_digest(folder/'prepared.json')}))
+        store=ImmutableStore(tmp/'out',20_000_000);features,meta=runner.features(parent,store,work)
+        np.testing.assert_array_equal(features,signal[1,:,:,75:138].reshape(2,6615))
+        with patch.object(runner.shutil,'copyfile',side_effect=AssertionError('EEG read after caching')):
+            features2,meta2=runner.features(parent,store,work);np.testing.assert_array_equal(features,features2)
+        for size in [1,40]:
+            z,a,m=runner.size_features(features,meta,size,store,work)
+            z2,a2,m2=runner.size_features(features,meta,size,store,work)
+            np.testing.assert_array_equal(z,z2);assert a.equals(a2) and m.equals(m2)
     print('PASS100proportional95/5splits, sharedreaders, smalljointstrata, exactmembership, retainedremainders, bothnestedgrids, train-onlyNCA/scaling and resume')
 
 if __name__=='__main__':

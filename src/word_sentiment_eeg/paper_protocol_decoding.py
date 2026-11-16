@@ -182,8 +182,13 @@ def run_repeat(x,meta,membership,store,relative,repeat,*,dims=NCA_COMPONENTS,cs=
 def summary(rows):
     frame=pd.DataFrame(rows);result=[]
     for (size,model),g in frame.groupby(['size','model'],sort=True):
-        vals=g.accuracy.to_numpy(float);n=len(vals);half=float(t.ppf(.975,n-1)*vals.std(ddof=1)/np.sqrt(n)) if n>1 else None
-        result.append(dict(size=int(size),model=model,completed_splits=n,mean_accuracy=float(vals.mean()),mean_balanced_accuracy=float(g.balanced_accuracy.mean()),
+        vals=g.accuracy.to_numpy(float);n=len(vals)
+        review=0
+        for row in g.to_dict('records'):
+            best=row.get('best_parameters');refit=row.get('refit_nca')
+            review+=int((isinstance(best,dict) and not best['all_grid_blocks_converged']) or (isinstance(refit,dict) and not refit['converged']) or row.get('classifier_converged') is False)
+        half=float(t.ppf(.975,n-1)*vals.std(ddof=1)/np.sqrt(n)) if n>1 else None
+        result.append(dict(size=int(size),model=model,completed_splits=n,numerical_review_splits=review,mean_accuracy=float(vals.mean()),mean_balanced_accuracy=float(g.balanced_accuracy.mean()),
             split_mean_t_lower=max(0,float(vals.mean()-half)) if half is not None else None,split_mean_t_upper=min(1,float(vals.mean()+half)) if half is not None else None,
             minimum=float(vals.min()),maximum=float(vals.max()),note='Descriptive t interval over correlated random splits; not independent-reader uncertainty; author CI formula unavailable'))
     return pd.DataFrame(result)
