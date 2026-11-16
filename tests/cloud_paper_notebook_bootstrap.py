@@ -1,5 +1,6 @@
 """Cloud-only integration check: no local dependency materialization."""
 import json
+import os
 import subprocess
 import sys
 import tempfile
@@ -14,7 +15,8 @@ with tempfile.TemporaryDirectory() as temporary:
     # Simulate the incomplete environment left by Colab's failed ensurepip.
     subprocess.run([sys.executable, '-m', 'venv', '--without-pip', str(env)], check=True)
     block = block.replace("Path('/content/word-eeg-paper-classification-python')", f'Path({str(env)!r})')
-    scope = dict(Path=Path, sys=sys, subprocess=subprocess, REPO=repo)
+    os.environ["MPLBACKEND"] = "module://matplotlib_inline.backend_inline"
+    scope = dict(Path=Path, sys=sys, os=os, subprocess=subprocess, REPO=repo)
     exec(compile(block, '<actual-notebook-bootstrap>', 'exec'), scope)
     # A second setup must reuse the environment successfully.
     exec(compile(block, '<notebook-bootstrap-rerun>', 'exec'), scope)
