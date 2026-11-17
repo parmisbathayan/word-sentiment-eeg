@@ -2,7 +2,7 @@ name: TeCo 40 trial averaging checks
 on:
   workflow_dispatch:
   push:
-    paths: ['scripts/teco_average40.py','tests/cloud_teco_average40.py','notebooks/teco_average40.ipynb','.github/workflows/teco-average40.yml']
+    paths: ['scripts/teco_average40.py','tests/cloud_teco_average40.py','notebooks/teco_average40.ipynb','notebooks/teco_average40_results.ipynb','.github/workflows/teco-average40.yml']
 jobs:
   test:
     runs-on: ubuntu-latest

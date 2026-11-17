@@ -92,6 +92,22 @@ with tempfile.TemporaryDirectory() as tmp:
             assert not set(lookup.loc[list(ids['train']),column])&set(lookup.loc[list(ids['test']),column])
         d=pd.read_csv(Path(tmp)/f'cases/{mode}__max40__post__dummy/memberships.csv.gz')
         pd.testing.assert_frame_equal(m,d)
+    # Execute the actual notebook plotting cells against completed synthetic
+    # outputs. CI has no Colab/IPython, so inject only its display function.
+    t.csv(store,'scores.csv',pd.DataFrame(rows))
+    paths=['scores.csv']+[str(p.relative_to(tmp)) for p in Path(tmp).glob('cases/*/result.json')]
+    store.json('complete.json',dict(status='completed',cases=18,checksums={k:t.a.file_digest(Path(tmp)/k) for k in paths}))
+    book=json.loads((ROOT/'notebooks/teco_average40_results.ipynb').read_text())
+    figures=[]
+    def show(value):
+        if hasattr(value,'axes'):figures.append(value)
+    scope=dict(display=show)
+    for cell in book['cells']:
+        if cell['cell_type']!='code' or cell['id']=='teco40-report-mount':continue
+        code=''.join(cell['source']).replace('from IPython.display import display\n','')
+        code=code.replace("Path('/content/drive/MyDrive/Thesis/Results/word_sentiment_eeg/teco_average40')",f'Path({tmp!r})')
+        exec(compile(code,'<saved-result-plot-cell>','exec'),scope)
+    assert len(figures)==3 and [len(f.axes) for f in figures]==[3,3,6]
     times={str(p):p.stat().st_mtime_ns for p in Path(tmp).rglob('*') if p.is_file()}
     resumed,_=t.analyze(meta,arrays,store)
     assert rows==resumed and times=={str(p):p.stat().st_mtime_ns for p in Path(tmp).rglob('*') if p.is_file()}
