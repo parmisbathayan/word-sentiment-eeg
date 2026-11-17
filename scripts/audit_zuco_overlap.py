@@ -12,7 +12,9 @@ import zuco_recovered_followups as z
 def count_overlap(meta,train,test,span_samples):
     # Same offsets for both conditions: common sampled EEG is possible iff
     # centers differ by <= span. Require the SAME reader and source block.
-    centers=np.floor(pd.to_numeric(meta.onset_seconds).to_numpy()*125+.5).astype(np.int64)
+    onsets=pd.to_numeric(meta.onset_seconds).to_numpy(dtype=float)
+    if not np.isfinite(onsets).all():raise ValueError('Nonfinite historical onset; overlap counts withheld')
+    centers=np.floor(onsets*125+.5).astype(np.int64)
     keys=list(zip(meta.subject.astype(str),meta.block_id.astype(str).str.removesuffix('.0')))
     train_hits=test_hits=pairs=0
     for key in set(keys[i] for i in train)&set(keys[i] for i in test):
