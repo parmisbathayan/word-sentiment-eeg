@@ -98,9 +98,10 @@ with tempfile.TemporaryDirectory() as tmp:
     paths=['scores.csv']+[str(p.relative_to(tmp)) for p in Path(tmp).glob('cases/*/result.json')]
     store.json('complete.json',dict(status='completed',cases=18,checksums={k:t.a.file_digest(Path(tmp)/k) for k in paths}))
     book=json.loads((ROOT/'notebooks/teco_average40_results.ipynb').read_text())
+    from matplotlib.figure import Figure
     figures=[]
     def show(value):
-        if hasattr(value,'axes'):figures.append(value)
+        if isinstance(value,Figure):figures.append(value)
     scope=dict(display=show)
     for cell in book['cells']:
         if cell['cell_type']!='code' or cell['id']=='teco40-report-mount':continue
