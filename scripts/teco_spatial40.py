@@ -41,7 +41,7 @@ def cohort(meta,features):
     counts['included']=counts.min(axis=1)>=40
     counts['reason']=np.where(counts.included,'eligible_before_fitting','fewer_than40_in_a_class')
     keep=meta.subject.isin(counts.index[counts.included]).to_numpy()
-    if counts.included.sum()<6:raise ValueError('Fewer than6 readers have40 trials/class. Exact40 reader evaluation cannot proceed reliably; no partial-group fallback.')
+    if counts.included.sum()<6:raise ValueError('Fewer than6 readers have40 trials/class. Exact40 reader evaluation cannot proceed reliably; no partial-group fallback. Counts: '+counts.to_string())
     return meta.loc[keep].reset_index(drop=True),{k:v[keep] for k,v in features.items()},counts.reset_index()
 
 
@@ -234,7 +234,9 @@ def main():
     rows=evaluate(meta,features,store)
     csv(store,'scores.csv',pd.DataFrame(rows))
     from audit_zuco_overlap import audit
-    overlap=audit(args.thesis_root,store)
+    try:overlap=audit(args.thesis_root,store)
+    except Exception as error:
+        overlap=dict(verified_rows=[],unverified=[dict(reason=type(error).__name__+': '+str(error))],scope='Historical audit failed; no overlap conclusion. New TeCo scores are separate.')
     store.json('zuco_overlap_audit.json',overlap)
     if overlap['verified_rows']:csv(store,'zuco_overlap_verified.csv',pd.DataFrame(overlap['verified_rows']))
     print('ZUCO METADATA AUDIT:',len(overlap['verified_rows']),'verified fold rows;',len(overlap['unverified']),'unverified cases',flush=True)
