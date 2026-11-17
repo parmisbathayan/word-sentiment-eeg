@@ -211,9 +211,15 @@ def evaluate(meta,features,store,modes=MODES,sizes=SIZES,models=MODELS,outer_n=3
     y=meta.truth.eq('positive').to_numpy(dtype=int);all_indices=np.arange(len(meta));summary=[];selection=[]
     inputs=sorted(k for k in features if k not in ['nuisance','pre_control'])
     for mode in modes:
-        outer=folds(meta,y,all_indices,mode,outer_n,SEED)
+        try:outer=folds(meta,y,all_indices,mode,outer_n,SEED)
+        except ValueError as e:
+            selection.append(dict(mode=mode,fold=-1,size=-1,status='unavailable',reason=str(e)))
+            print('UNAVAILABLE SPLIT:',mode,str(e),flush=True);continue
         for fi,(train,test,purged) in enumerate(outer):
-            inner=folds(meta,y,train,mode,inner_n,SEED+fi+100)
+            try:inner=folds(meta,y,train,mode,inner_n,SEED+fi+100)
+            except ValueError as e:
+                selection.append(dict(mode=mode,fold=fi,size=-1,status='unavailable',reason=str(e)))
+                print('UNAVAILABLE INNER SPLIT:',mode,fi+1,str(e),flush=True);continue
             for size in sizes:
                 prefix=f'fits/{mode}/fold{fi}/size{size}'
                 print(f'SWEEP {mode}: outer fold {fi+1}/{len(outer)}, average={size}; train={len(train)}, test={len(test)}, purged={purged}',flush=True)
@@ -246,7 +252,8 @@ def evaluate(meta,features,store,modes=MODES,sizes=SIZES,models=MODELS,outer_n=3
                     selection.append(dict(mode=mode,fold=fi,size=size,status='unavailable',reason=str(e)));continue
                 store.json(prefix+'/outer_membership.json',dict(train=gt.tolist(),test=ge.tolist(),purged=purged,
                     train_event_sha256=a.digest(meta.event_id.iloc[gt.ravel()].tolist()),test_event_sha256=a.digest(meta.event_id.iloc[ge.ravel()].tolist()),
-                    train_readers=sorted(meta.subject.iloc[gt.ravel()].unique()),test_readers=sorted(meta.subject.iloc[ge.ravel()].unique())))
+                    train_readers=sorted(meta.subject.iloc[gt.ravel()].unique()),test_readers=sorted(meta.subject.iloc[ge.ravel()].unique()),
+                    test_identity_seen_fraction={c:float(meta[c].iloc[ge.ravel()].isin(set(meta[c].iloc[gt.ravel()])).mean()) for c in ['subject','sentence_key','word_identity']}))
                 for variant,inp,name in [('selected_eeg',best['input'],best['model']),('fixed_reference','channels_224_304','lr_1'),('pre_control','pre_control','lr_1'),('word_eye_control','nuisance','lr_1'),('dummy','channels_224_304','dummy')]:
                     result=save_case(store,prefix+'/test/'+variant,lambda:score_one(meta,y,features[inp],(gt,ge),name,inp.startswith('residual_')))
                     summary.append(dict(mode=mode,fold=fi,size=size,variant=variant,input=inp,model=name,**result))

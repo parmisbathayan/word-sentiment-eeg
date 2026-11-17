@@ -41,10 +41,27 @@ residual=np.concatenate([X,rng.normal(size=(len(meta),6))],axis=1)
 assert 0<=t.score_one(meta,y,residual,(gt,ge),'lr_1',True)['balanced_accuracy']<=1
 # Correlated events must be removed in inner as well as outer mixed splits.
 near=meta.copy();near['onset_sample_sentence_0based']=(near.word_index*120).to_numpy()
-pairs=t.folds(near,y,np.arange(len(near)),'word',3,t.SEED)
-assert any(pr>0 for _,_,pr in pairs)
+try:t.folds(near,y,np.arange(len(near)),'word',3,t.SEED)
+except ValueError as e:assert 'coverage' in str(e)
+else:raise AssertionError('Completely overlapping word split was accepted')
 with tempfile.TemporaryDirectory() as tmp:
-    store=t.ImmutableStore(Path(tmp),50_000_000)
+    store=t.ImmutableStore(Path(tmp)/'out',50_000_000)
+    archive=Path(tmp)/'Results/word_sentiment_eeg/trial_archive_125hz'
+    augmented=meta.copy();augmented['epoch_file']='shard.npz';augmented['epoch_row']=list(range(80))*12
+    import hashlib
+    augmented['signal_sha256']=[hashlib.sha256(np.ascontiguousarray(v).tobytes()).hexdigest() for v in eeg]
+    for subject,g in augmented.groupby('subject'):
+        folder=archive/'teco/readers/task1'/subject;folder.mkdir(parents=True)
+        np.savez_compressed(folder/'shard.npz',eeg_uV=eeg[g.index],event_id=g.event_id.to_numpy(dtype=str),channel_names=montage.channel.to_numpy(dtype=str),times_ms=times)
+        (folder/'checkpoint.json').write_text(json.dumps(dict(blocks=[dict(checksums={'shard.npz':t.a.file_digest(folder/'shard.npz')})])))
+    loaded=t.load_features(Path(tmp),augmented,montage,store)
+    for k in features:np.testing.assert_allclose(loaded[k],features[k])
+    original_read=Path.read_bytes
+    def no_shards(path):
+        if path.name=='shard.npz':raise AssertionError('Read a shard despite completed feature cache')
+        return original_read(path)
+    with patch.object(Path,'read_bytes',no_shards):again=t.load_features(Path(tmp),augmented,montage,store)
+    for k in loaded:np.testing.assert_array_equal(again[k],loaded[k])
     subset={k:features[k] for k in ['channels_224_304','regional_bins','pre_control']};subset['nuisance']=rng.normal(size=(len(meta),6))
     rows,dev=t.evaluate(meta,subset,store,modes=['reader'],sizes=[1,5],models=['lr_1','lda'])
     assert len(rows)==3*2*5 and all(r['status']=='completed' for r in rows)
