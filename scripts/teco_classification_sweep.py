@@ -268,7 +268,7 @@ def report(rows,selection,store):
     for (mode,size,variant),g in pd.DataFrame(rows).groupby(['mode','size','variant']):
         complete=g[g.status.eq('completed')];rec=dict(mode=mode,size=int(size),variant=variant,completed_folds=len(complete),expected_folds=3)
         if len(complete)==3:
-            truth=np.concatenate(complete.truth);pred=np.concatenate(complete.prediction)
+            truth=np.concatenate(complete.truth.tolist());pred=np.concatenate(complete.prediction.tolist())
             rec.update(balanced_accuracy=float(balanced_accuracy_score(truth,pred)),test_examples=len(truth),test_trials=int(complete.test_trials.sum()),
                 fold_min=float(complete.balanced_accuracy.min()),fold_max=float(complete.balanced_accuracy.max()))
         combined.append(rec)
