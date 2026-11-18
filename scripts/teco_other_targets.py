@@ -116,7 +116,9 @@ def advanced_binary(thesis,rows):
     if protocol['code_sha256']['scripts/teco_classification_sweep.py']!=a.file_digest(ROOT/'scripts/teco_classification_sweep.py'):raise ValueError('Prior feature code differs from tested input specification')
     result={};seen=set()
     for subject,g in rows.groupby('subject',sort=True):
-        prefix=root/'features'/subject;marker=read(prefix/'complete.json');path=prefix/'vectors.npz'
+        prefix=root/'features'/subject;marker_path=prefix/'complete.json'
+        if a.file_digest(marker_path)!=state['checksums'][str(marker_path.relative_to(root))]:raise ValueError('Prior feature marker checksum mismatch')
+        marker=read(marker_path);path=prefix/'vectors.npz'
         if a.file_digest(path)!=marker['sha256']:raise ValueError('Corrupt prior compact feature cache')
         with np.load(path,allow_pickle=False) as f:
             ids=f['event_id'].astype(str);ix=pd.Index(ids).get_indexer(g.event_id)

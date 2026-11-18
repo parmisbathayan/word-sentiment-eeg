@@ -66,6 +66,34 @@ with tempfile.TemporaryDirectory() as tmp:
         _,d3,_=t.evaluate(meta,y,altered,classes,dict(modes=['sentence'],sizes=[1]),other,'reader_identity',models=['lr_1','lda'])
         assert [r for r in dev if r['mode']=='sentence' and r['fold']==0 and r['size']=='1']==[r for r in d3 if r['fold']==0]
     assert store.used<50_000_000
+# Broader-cache loader and frozen sentiment rosters: no live annotation lookup or raw EEG fallback.
+with tempfile.TemporaryDirectory() as tmp:
+    thesis=Path(tmp);archive=thesis/'Results/word_sentiment_eeg/trial_archive_125hz';source=thesis/'Results/word_sentiment_eeg/classification_similarity'
+    source.mkdir(parents=True);(source/'manifest.json').write_text(json.dumps(dict(status='completed')));(source/'protocol.json').write_text('{}')
+    records=[dict(dataset='teco',task='task1',subject=f'R{i}',epochs=96) for i in range(12)]
+    def cached(ar,src,record):
+        ix=np.flatnonzero(meta.subject.to_numpy()==record['subject']);return meta.iloc[ix].copy(),post[ix],pre[ix],np.zeros((len(ix),6)),dict(reader=record['subject'],cache='fixture')
+    with patch.object(t.a,'load_completed',return_value=(records,{})),patch.object(t.old,'cached_features_only',side_effect=cached) as loader:
+        broad,vectors,provenance=t.load_all(thesis)
+    assert loader.call_count==12 and len(broad)==len(meta) and vectors['metadata_control'].shape[1]==4
+    # Actual saved-roster reading restores per-event labels and validates immutable checksums.
+    for target in ['binary','three_class']:
+        labels=np.where(np.arange(len(broad))%2,'positive','negative') if target=='binary' else np.array(['negative','neutral','positive'])[np.arange(len(broad))%3]
+        roster=broad[['event_id','subject']].copy();roster['truth']=labels
+        folder=source/'teco/task1/cases'/f'word_agreement__{target}__sentence__post__logistic';folder.mkdir(parents=True)
+        path=folder/'predictions.csv.gz';roster.to_csv(path,index=False)
+        counts={c:int((labels==c).sum()) for c in set(labels)}
+        (folder/'result.json').write_text(json.dumps(dict(checksums={'predictions.csv.gz':t.a.file_digest(path)},score=dict(trials=len(roster),class_counts=counts))))
+    for target in ['sentiment_binary','sentiment_three_class','neutral_nonneutral']:
+        rows,yy,xx,cc,definition=t.prepare_target(thesis,broad,vectors,target)
+        assert len(rows)==len(broad) and len(cc)==(3 if target=='sentiment_three_class' else 2)
+        assert len(xx['metadata_control'])==len(rows)
+    # Corruption is fatal, not a fallback to live labels.
+    path=source/'teco/task1/cases/word_agreement__binary__sentence__post__logistic/predictions.csv.gz';path.write_bytes(b'broken')
+    try:t.frozen_sentiment(thesis,broad,'sentiment_binary')
+    except ValueError as error:assert 'checksum' in str(error)
+    else:raise AssertionError('Corrupt frozen label source was accepted')
+
 # Familiarity can exclude a unique word, not relabel it or pretend it was seen.
 unique=meta.copy();unique.loc[0,'word_identity']='singleton'
 for tr,te,audit in t.split(unique,y,np.arange(len(unique)),'familiar',3,t.SEED):assert 0 not in te
