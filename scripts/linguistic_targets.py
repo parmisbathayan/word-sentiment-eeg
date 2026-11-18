@@ -224,7 +224,7 @@ def limited_score(meta,y,X,groups,model_name,nclasses,detailed=False):
 def target_data(name,meta,features,raw,source=None):
     if name=='pos':labels=meta.upos.where(meta.nlp_valid&meta.upos.isin(['NOUN','VERB','ADJ']))
     elif name=='content_function':labels=meta.grammar_target.where(meta.nlp_valid&meta.grammar_target.isin(['content','function']))
-    elif name=='semantic_nouns':labels=meta.semantic_class.where(meta.nlp_valid&meta.semantic_class.isin(['physical','abstract']))
+    elif name=='semantic_nouns':labels=meta.semantic_class.where(meta.nlp_valid&meta.semantic_class.isin(['physical','abstract'])&meta.dataset.eq('zuco')&meta.task.eq('SR'))
     elif name=='repetition':
         mapping=repetition_labels(raw);labels=meta.event_id.map(mapping)
         if labels.isna().any():raise ValueError('Accepted event absent from full source-order metadata')
@@ -243,7 +243,7 @@ def target_data(name,meta,features,raw,source=None):
     vectors={k:v[ix] for k,v in features.items()}
     modes=['familiar','sentence','reader']
     if name in ['pos','content_function','semantic_nouns','repetition']:modes+=['word']
-    return rows,y,vectors,classes,dict(modes=modes,sizes=[1,10,'max40']),dict(trials=len(rows),excluded=len(meta)-len(rows),classes=classes,class_counts={c:int((values==c).sum()) for c in classes},word_vocabulary=classes if name.startswith('word_identity') else None)
+    return rows,y,vectors,classes,dict(modes=modes,sizes=[1,10,'max40']),dict(trials=len(rows),excluded=len(meta)-len(rows),datasets=sorted(rows.dataset.unique()),tasks=sorted(rows.task.unique()),classes=classes,class_counts={c:int((values==c).sum()) for c in classes},word_vocabulary=classes if name.startswith('word_identity') else None)
 
 
 def main():
