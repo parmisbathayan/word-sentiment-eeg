@@ -257,13 +257,14 @@ def save_members(store,path,train,test,audit):
     zipped_json(store,path,dict(train=[g.tolist() for g in train],test=[g.tolist() for g in test],audit=audit))
 
 
-def evaluate(meta,y,features,classes,plan,store,target,models=MODELS):
+def evaluate(meta,y,features,classes,plan,store,target,models=MODELS,splitter=None,scorer=None):
+    splitter=splitter or split;scorer=scorer or score
     rows=[];development=[];skipped=[];inputs=sorted(k for k in features if k not in ['metadata_control','pre_control']);nclasses=len(classes)
     for mode in plan['modes']:
-        try:outer=split(meta,y,np.arange(len(meta)),mode,3,SEED)
+        try:outer=splitter(meta,y,np.arange(len(meta)),mode,3,SEED)
         except ValueError as e:skipped.append(dict(target=target,mode=mode,reason=str(e)));continue
         for fi,(train,test,audit) in enumerate(outer):
-            try:inner=split(meta,y,train,mode,2,SEED+100+fi)
+            try:inner=splitter(meta,y,train,mode,2,SEED+100+fi)
             except ValueError as e:skipped.append(dict(target=target,mode=mode,fold=fi,reason=str(e)));continue
             for size in plan['sizes']:
                 prefix=f'fits/{target}/{mode}/fold{fi}/size{size}'
@@ -273,7 +274,7 @@ def evaluate(meta,y,features,classes,plan,store,target,models=MODELS):
                 for j,((gt,ge),(_,_,audit_inner)) in enumerate(zip(gs,inner)):save_members(store,prefix+f'/inner{j}/members.json.gz',gt,ge,audit_inner)
                 candidates=[]
                 def dev(inp,model_name):
-                    results=[case(store,prefix+f'/development/{inp}/{model_name}/inner{j}',lambda groups=groups:score(meta,y,features[inp],groups,model_name,nclasses)) for j,groups in enumerate(gs)]
+                    results=[case(store,prefix+f'/development/{inp}/{model_name}/inner{j}',lambda groups=groups:scorer(meta,y,features[inp],groups,model_name,nclasses)) for j,groups in enumerate(gs)]
                     value=pooled(results);r=dict(target=target,mode=mode,fold=fi,size=str(size),input=inp,model=model_name,validation_ba=value)
                     candidates.append(r)
                 for ci,inp in enumerate(inputs):
@@ -291,7 +292,7 @@ def evaluate(meta,y,features,classes,plan,store,target,models=MODELS):
                 save_members(store,prefix+'/outer_members.json.gz',gt,ge,audit)
                 fixed='advanced_channels_224_304' if 'advanced_channels_224_304' in features else 'regional_bins'
                 for variant,inp,model_name in [('selected_eeg',winner['input'],winner['model']),('fixed_eeg',fixed,'lr_1'),('pre_control','pre_control','lr_1'),('metadata_control','metadata_control','lr_1'),('dummy',fixed,'dummy')]:
-                    result=case(store,prefix+'/test/'+variant,lambda:score(meta,y,features[inp],(gt,ge),model_name,nclasses,True))
+                    result=case(store,prefix+'/test/'+variant,lambda:scorer(meta,y,features[inp],(gt,ge),model_name,nclasses,True))
                     rows.append(dict(target=target,mode=mode,fold=fi,size=str(size),variant=variant,input=inp,model=model_name,classes=classes,chance=1/nclasses,**result))
                 store.json(prefix+'/choice.json',dict(winner=winner,used_outer_test=False))
                 print('SAVED TEST RESULT:',target,mode,fi+1,size,flush=True)

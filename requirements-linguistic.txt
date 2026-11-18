@@ -1,0 +1,4 @@
+# Cloud only; install torch2.8.0 CPU wheels from the official PyTorch CPU index first.
+-r requirements-paper-classification.txt
+stanza==1.10.1
+nltk==3.9.2
