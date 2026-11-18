@@ -14,11 +14,11 @@ import analyze_trial_archive as a
 from word_sentiment_eeg.paper_small_checkpoints import ImmutableStore
 from sklearn.metrics import balanced_accuracy_score,confusion_matrix,f1_score
 SEED=20261121;CAP=10000
-TASKS=['pos','content_function','semantic_nouns','word_identity5','word_identity10','repetition','zuco_reading_task']
+TASKS=['pos','content_function','word_identity5','word_identity10','repetition','semantic_nouns','zuco_reading_task']
 SPEC=dict(version=1,seed=SEED,split_and_model_seed=t.SEED,targets=TASKS,budget=50_000_000,train_cap_examples=CAP,
  linguistic_data='TeCo task1 all accepted cached epochs, not sentiment-filtered; complete source-token metadata for annotations and repetition',
- labels='Stanza1.10.1 fa default_fast resources1.10.0, pretokenized original word positions; WordNet/OMW1.4 noun sense consensus',
- semantics='physical_entity.n.01 vs abstraction.n.06 ancestors; all noun senses must agree; ambiguous/unmapped excluded; NOT human concreteness ratings or contextual sense disambiguation',
+ labels='Stanza1.10.1 fa/en default_fast resources1.10.0, pretokenized original word positions; English WordNet noun sense consensus on ZuCo SR only',
+ semantics='ZuCo SR English only: physical_entity.n.01 vs abstraction.n.06 ancestors; all noun senses must agree; ambiguous/unmapped excluded; NOT human concreteness ratings or contextual sense disambiguation',
  repetition='first vs later stored textual presentation per reader/task, using ALL source word records, including unfixated words; not refixation or lifetime familiarity',
  identity='top5/top10 forms by source-occurrence count, >=3source occurrences and>=6readers; vocabulary fixed before EEG fitting; no unseen-word class test',
  tasks='ZuCo SR/NR/TSR; full feature pools; distinguish recording/task conditions, which are confounded with text and session',
@@ -87,10 +87,10 @@ def source_tokens(raw):
     return source,sorted(bad)
 
 
-def noun_semantics(word,lemma,wn):
+def noun_semantics(word,lemma,wn,language='eng'):
     senses=[]
     for form in dict.fromkeys([normalize(lemma),normalize(word)]):
-        if form and form!='_':senses.extend(wn.synsets(form.replace(' ','_'),pos=wn.NOUN,lang='fas'))
+        if form and form!='_':senses.extend(wn.synsets(form.replace(' ','_'),pos=wn.NOUN,lang=language))
     unique={s.name():s for s in senses};labels=set()
     for synset in unique.values():
         ancestors={s.name() for path in synset.hypernym_paths() for s in path}
@@ -101,18 +101,19 @@ def noun_semantics(word,lemma,wn):
     return next(iter(labels)),'all_mapped_noun_senses_agree'
 
 
-def linguistic_labels(source,store,model_dir,nlp_factory=None,wordnet=None):
-    identity=dict(source_sha256=a.digest(source.to_dict('records')),method=SPEC['labels'],semantics=SPEC['semantics'])
-    store.json('labels/protocol.json',identity)
-    marker=store.root/'labels/complete.json';path=store.root/'labels/words.csv.gz'
+def linguistic_labels(source,store,model_dir,nlp_factory=None,wordnet=None,language='fa'):
+    prefix=f'labels/{language}'
+    identity=dict(source_sha256=a.digest(source.to_dict('records')),method=SPEC['labels'],semantics=SPEC['semantics'],language=language)
+    store.json(prefix+'/protocol.json',identity)
+    marker=store.root/prefix/'complete.json';path=store.root/prefix/'words.csv.gz'
     if marker.is_file():
         saved=t.read(marker)
         if saved['identity']!=identity or a.file_digest(path)!=saved['sha256']:raise ValueError('Changed/corrupt annotation checkpoint')
-        print('KEEP COMPLETE PERSIAN LABELS; no NLP model download or annotation rerun',flush=True)
+        print('KEEP COMPLETE NLP LABELS; no NLP model download or annotation rerun',flush=True)
         return pd.read_csv(path,keep_default_na=False)
     nlp=None;rows=[];sentences=list(source.groupby('sentence_key',sort=True))
     for si,(key,g) in enumerate(sentences,1):
-        relative='labels/sentences/'+a.digest(str(key))[:24]+'.json.gz';p=store.root/relative
+        relative=prefix+'/sentences/'+a.digest(str(key))[:24]+'.json.gz';p=store.root/relative
         sentence_identity=a.digest(g.to_dict('records'))
         if p.is_file():
             saved=json.loads(gzip.decompress(p.read_bytes()))
@@ -122,29 +123,28 @@ def linguistic_labels(source,store,model_dir,nlp_factory=None,wordnet=None):
             if nlp_factory is None:
                 import stanza,nltk
                 model_dir.mkdir(parents=True,exist_ok=True)
-                stanza.download('fa',model_dir=str(model_dir/'stanza'),package='default_fast',processors='tokenize,pos,lemma',resources_version='1.10.0',verbose=False)
-                nlp=stanza.Pipeline('fa',dir=str(model_dir/'stanza'),package='default_fast',processors='tokenize,pos,lemma',tokenize_pretokenized=True,use_gpu=False,download_method=None,resources_version='1.10.0',verbose=False)
-                nltk.data.path.insert(0,str(model_dir/'nltk'))
-                for package in ['wordnet','omw-1.4']:
-                    if not nltk.download(package,download_dir=str(model_dir/'nltk'),quiet=True,raise_on_error=True):raise ValueError('Lexical resource download failed')
-                from nltk.corpus import wordnet as wn
-                wordnet=wn
-                # Force the public Persian lexicon to load before any labels are committed.
-                wn.synsets('کتاب',pos=wn.NOUN,lang='fas')
+                stanza.download(language,model_dir=str(model_dir/'stanza'),package='default_fast',processors='tokenize,pos,lemma',resources_version='1.10.0',verbose=False)
+                nlp=stanza.Pipeline(language,dir=str(model_dir/'stanza'),package='default_fast',processors='tokenize,pos,lemma',tokenize_pretokenized=True,use_gpu=False,download_method=None,resources_version='1.10.0',verbose=False)
+                if language=='en':
+                    nltk.data.path.insert(0,str(model_dir/'nltk'))
+                    if not nltk.download('wordnet',download_dir=str(model_dir/'nltk'),quiet=True,raise_on_error=True):raise ValueError('WordNet download failed')
+                    from nltk.corpus import wordnet as wn
+                    wordnet=wn
+                    wn.synsets('banana',pos=wn.NOUN,lang='eng')
             else:nlp=nlp_factory()
         words=g.word.astype(str).tolist();doc=nlp([words]);tokens=[w for sentence in doc.sentences for w in sentence.words]
         aligned=len(tokens)==len(words) and all(normalize(w.text)==normalize(text) for w,text in zip(tokens,words))
         current=[]
         for j,r in enumerate(g.itertuples()):
             token=tokens[j] if aligned else None;upos=str(token.upos) if token else 'X';lemma=str(token.lemma) if token else ''
-            category,reason=noun_semantics(r.word,lemma,wordnet) if upos=='NOUN' else ('unknown','not_common_noun' if aligned else 'token_alignment_failed')
+            category,reason=noun_semantics(r.word,lemma,wordnet) if upos=='NOUN' and language=='en' else ('unknown','semantic_language_not_covered' if language!='en' else 'not_common_noun' if aligned else 'token_alignment_failed')
             current.append(dict(sentence_key=str(key),word_index=int(r.word_index),word=str(r.word),normalized_word=normalize(r.word),upos=upos,lemma=lemma,
                 grammatical_class='content' if upos in CONTENT else 'function' if upos in FUNCTION else 'unknown',semantic_class=category,semantic_reason=reason,
                 annotation_status='automatic_stanza_wordnet' if aligned else 'excluded_alignment'))
         t.zipped_json(store,relative,dict(source_sha256=sentence_identity,rows=current));rows.extend(current)
-        if si==1 or si%20==0 or si==len(sentences):print(f'ANNOTATE PERSIAN SENTENCE {si}/{len(sentences)}; saved independently',flush=True)
-    labels=pd.DataFrame(rows);old.csv(store,'labels/words.csv.gz',labels)
-    store.json('labels/complete.json',dict(identity=identity,sha256=a.file_digest(path),sentences=len(sentences),words=len(labels),automatic_labels=True))
+        if si==1 or si%20==0 or si==len(sentences):print(f'ANNOTATE {language} SENTENCE {si}/{len(sentences)}; saved independently',flush=True)
+    labels=pd.DataFrame(rows);old.csv(store,prefix+'/words.csv.gz',labels)
+    store.json(prefix+'/complete.json',dict(identity=identity,sha256=a.file_digest(path),sentences=len(sentences),words=len(labels),automatic_labels=True))
     return labels
 
 
@@ -264,8 +264,13 @@ def main():
     rows=[];development=[];skipped=[]
     for i,name in enumerate(TASKS,1):
         print(f'BEGIN TARGET {i}/{len(TASKS)}: {name}',flush=True)
-        if name=='zuco_reading_task':
-            meta,features,raw,zuco_proof=load_pool(args.thesis_root,'zuco');store.json('zuco_source.json',zuco_proof);joined=meta
+        if name=='semantic_nouns':
+            zuco_meta,zuco_features,zuco_raw,zuco_proof=load_pool(args.thesis_root,'zuco');store.json('zuco_source.json',zuco_proof)
+            mask=zuco_meta.task.eq('SR').to_numpy();meta=zuco_meta.loc[mask].reset_index(drop=True);features={k:v[mask] for k,v in zuco_features.items()};raw=zuco_raw[zuco_raw.task.eq('SR')]
+            source,bad=source_tokens(raw);store.json('labels/excluded_english_source_sentences.json',bad)
+            english=linguistic_labels(source,store,args.model_dir,language='en');joined=attach(meta,english)
+        elif name=='zuco_reading_task':
+            meta,features,raw=zuco_meta,zuco_features,zuco_raw;joined=meta
         try:table,y,vectors,classes,plan,definition=target_data(name,joined,features,raw,source)
         except ValueError as error:skipped.append(dict(target=name,reason=str(error)));continue
         store.json(f'targets/{name}/definition.json',definition)
@@ -276,7 +281,8 @@ def main():
     if not rows:raise ValueError('No targets had sufficient coverage; labels and checkpoints retained')
     summary=t.summarize(rows);old.csv(store,'summary.csv',summary);old.csv(store,'development.csv.gz',pd.DataFrame(development));old.csv(store,'unavailable.csv',pd.DataFrame(skipped,columns=['target','mode','fold','size','reason']))
     t.zipped_json(store,'outer_results.json.gz',rows);t.figures(store,summary,rows)
-    paths=['protocol.json','teco_source.json','summary.csv','development.csv.gz','unavailable.csv','outer_results.json.gz','overview.png','labels/words.csv.gz','labels/complete.json']+[str(f.relative_to(out)) for f in out.rglob('result.json.gz')]+[str(f.relative_to(out)) for f in out.glob('targets/*/definition.json')]
+    paths=['protocol.json','teco_source.json','summary.csv','development.csv.gz','unavailable.csv','outer_results.json.gz','overview.png']+[str(f.relative_to(out)) for f in out.rglob('result.json.gz')]+[str(f.relative_to(out)) for f in out.glob('targets/*/definition.json')]
+    paths += [str(f.relative_to(out)) for f in out.glob('labels/*/complete.json')] + [str(f.relative_to(out)) for f in out.glob('labels/*/words.csv.gz')]
     if (out/'zuco_source.json').is_file():paths.append('zuco_source.json')
     store.json('complete.json',dict(status='completed',checksums={f:a.file_digest(out/f) for f in paths}))
     print('LINGUISTIC TARGETS COMPLETE:',out,flush=True)

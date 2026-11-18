@@ -17,10 +17,13 @@ if '--real-nlp' in sys.argv:
         assert labels.upos.isin(['NOUN','VERB','ADJ']).any(),labels.to_string()
         assert labels.grammatical_class.eq('function').any()
         print(labels.to_string(index=False))
-        # Verify public Persian noun mapping is present and labels/cache can resume without downloads.
+        # Persian POS works without pretending that NLTK supports Persian WordNet.
         with patch.dict(sys.modules,{'stanza':None}):again=l.linguistic_labels(source,l.ImmutableStore(Path(tmp)/'out',50_000_000),Path(tmp)/'models')
         assert labels.fillna('').equals(again.fillna(''))
-    print('Real Persian Stanza pretokenized POS/lemma plus OMW smoke check passed.');raise SystemExit
+        english=pd.DataFrame([dict(sentence_key='en',word_index=i,word=w) for i,w in enumerate(['The','banana','brings','happiness','.'])]);english['normalized_word']=english.word.map(l.normalize)
+        en=l.linguistic_labels(english,l.ImmutableStore(Path(tmp)/'out',50_000_000),Path(tmp)/'models',language='en')
+        assert {'physical','abstract'}<=set(en.semantic_class),en.to_string()
+    print('Real Persian Stanza pretokenized POS/lemma plus English WordNet smoke check passed.');raise SystemExit
 
 class Synset:
     def __init__(self,name,root):self.n=name;self.root=root
@@ -45,10 +48,10 @@ def factory():
     return nlp
 with tempfile.TemporaryDirectory() as tmp:
     store=l.ImmutableStore(Path(tmp),50_000_000)
-    labels=l.linguistic_labels(source,store,Path(tmp)/'models',factory,wn)
+    labels=l.linguistic_labels(source,store,Path(tmp)/'models',factory,wn,language='en')
     assert labels.semantic_class.tolist()==['physical','abstract','unknown']
     def forbidden():raise AssertionError('Reannotated completed labels')
-    again=l.linguistic_labels(source,store,Path(tmp)/'models',forbidden,wn)
+    again=l.linguistic_labels(source,store,Path(tmp)/'models',forbidden,wn,language='en')
     assert labels.equals(again)
     meta=source.drop(columns='normalized_word').copy();meta['grammatical_class']='old';meta['annotation_status']='old'
     merged=l.attach(meta,labels);assert merged.nlp_valid.all() and merged.grammar_target.tolist()==['content','content','function']
