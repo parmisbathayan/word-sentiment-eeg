@@ -41,7 +41,16 @@ assert sum(map(len,cap))==len(te) and all(len(g)<=40 for g in cap)
 for name in t.MODELS:
     result=t.score(meta,y,features['regional_bins'],(gt,ge),name,12)
     assert np.array(result['confusion']).shape==(12,12) and 0<=result['balanced_accuracy']<=1
+# Binary duration models use the original binary logistic solver; all model families fit.
+fix,fy,fx,fc,_=info[2]
+trf,tef,_=t.split(fix,fy,np.arange(len(fix)),'sentence',3,t.SEED)[0]
+fg=(t.membership(fix,fy,trf,1,7),t.membership(fix,fy,tef,1,8))
+for name in t.MODELS:
+    result=t.score(fix,fy,fx['regional_bins'],fg,name,2)
+    assert np.array(result['confusion']).shape==(2,2)
+assert t.estimator('lr_1',2).steps[-1][1].solver=='liblinear'
 # Fixed duration thresholds, exact boundary and invalid duration accounting.
+
 boundary=meta.iloc[:4].copy();boundary['first_fixation_duration_ms']=[199,200,np.nan,-1]
 _,dy,_,dc,definition=t.prepare_target(Path('/nonexistent'),boundary,{k:v[:4] for k,v in features.items()},'fixation_200')
 assert definition['excluded_invalid_duration']==2 and [dc[i] for i in dy]==['short','long']

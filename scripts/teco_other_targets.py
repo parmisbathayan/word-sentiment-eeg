@@ -217,7 +217,7 @@ def estimator(name,nclasses):
     from sklearn.neighbors import KNeighborsClassifier
     from sklearn.dummy import DummyClassifier
     base=[SimpleImputer(strategy='median',keep_empty_features=True),StandardScaler()]
-    if name.startswith('lr_'):model=LogisticRegression(C=float(name[3:]),class_weight='balanced',solver='lbfgs',max_iter=600,random_state=SEED)
+    if name.startswith('lr_'):model=LogisticRegression(C=float(name[3:]),class_weight='balanced',solver='liblinear' if nclasses==2 else 'lbfgs',max_iter=1500,random_state=SEED)
     elif name=='lda':model=LinearDiscriminantAnalysis(solver='lsqr',shrinkage='auto',priors=np.ones(nclasses)/nclasses)
     elif name=='rbf':
         base.append(Nystroem(kernel='rbf',gamma=.02,n_components=64,random_state=SEED))
