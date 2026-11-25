@@ -1,0 +1,19 @@
+name: TeCo unseen-reader sentiment
+on:
+  workflow_dispatch:
+  push:
+    paths: ['scripts/teco_sentiment_unseen_readers.py','tests/cloud_teco_sentiment_readers.py','notebooks/teco_sentiment_unseen_readers.ipynb','.github/workflows/teco-sentiment-readers.yml']
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+          cache: pip
+          cache-dependency-path: requirements-paper-classification.txt
+      - run: python -m pip install -r requirements-paper-classification.txt
+      - run: MPLBACKEND=Agg OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python tests/cloud_teco_sentiment_readers.py
+      - run: MPLBACKEND=Agg OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python tests/cloud_teco_other_targets.py
