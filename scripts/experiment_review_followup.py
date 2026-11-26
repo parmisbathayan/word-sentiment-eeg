@@ -63,7 +63,16 @@ def audit_history(thesis,all_meta,store):
                 gt=t.membership(meta,y,tr,size,t.SEED+fi+2000);ge=t.membership(meta,y,te,size,t.SEED+fi+3000)
                 if [g.tolist() for g in gt]!=old['train'] or [g.tolist() for g in ge]!=old['test']:
                     raise ValueError('Historical memberships do not reproduce: '+str(member))
-                result.append(c.audit_partition(meta,y,np.concatenate(gt),np.concatenate(ge),family,target,mode,fi+1,size,gt,ge))
+                fit_gt=gt
+                if family=='linguistic_targets' and len(gt)>l.CAP:
+                    from sklearn.model_selection import train_test_split
+                    labels=np.array([y[g[0]] for g in gt])
+                    selected,_=train_test_split(np.arange(len(gt)),train_size=l.CAP,stratify=labels,random_state=l.SEED)
+                    fit_gt=[gt[i] for i in selected]
+                record=c.audit_partition(meta,y,np.concatenate(fit_gt),np.concatenate(ge),family,target,mode,fi+1,size,fit_gt,ge)
+                record['training_group_cap_applied']=len(fit_gt)!=len(gt)
+                record['training_groups_before_cap']=json.dumps(c.size_summary(gt))
+                result.append(record)
     # First three sentiment notebooks have a frozen shared binary roster.
     binary_root=base/'teco_average40'
     if (binary_root/'complete.json').is_file():
