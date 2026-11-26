@@ -19,7 +19,8 @@ collapsed,cy,x,conflict=c.collapse(meta,y,['a','b','c'])
 assert len(collapsed)==96 and len(conflict)==0
 assert collapsed.occurrence_key.nunique()==96
 # The measured duration differs across readers, but is not an input to the four-feature controls.
-assert x.shape==(96,4) and np.array_equal(x,c.metadata_four(meta.iloc[:96]),equal_nan=True)
+expected=meta.set_index('event_id').loc[collapsed.event_id].reset_index()
+assert x.shape==(96,4) and np.array_equal(x,c.metadata_four(expected),equal_nan=True)
 bad=meta.copy();bad.loc[0,'word_length']=999
 rr,_,_,conflicts=c.collapse(bad,y,['a','b','c']);assert len(rr)==95 and len(conflicts)==1
 bad_y=y.copy();bad_y[0]=1
