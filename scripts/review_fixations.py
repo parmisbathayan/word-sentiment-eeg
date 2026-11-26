@@ -13,6 +13,7 @@ from word_sentiment_eeg.teco import find_raw_files, orient_native, NATIVE_HZ
 from word_sentiment_eeg.teco_paper import segments
 from word_sentiment_eeg.three_level_erp import preprocess40
 from word_sentiment_eeg.trial_archive import make_epoch
+from word_sentiment_eeg.erp import locate
 
 
 def confirmed_pair(raw, word, durations):
@@ -33,7 +34,7 @@ def confirmed_pair(raw, word, durations):
         duration=(segment.shape[1]-1)*1000/NATIVE_HZ
         if index<0 or index>=len(durations) or not np.isfinite(durations[index]) or abs(float(durations[index])-duration)>5:
             raise ValueError('Waveform duration disagrees with native fixation order/duration')
-        onset,method=t.a.locate(raw,segment)
+        onset,method=locate(raw,segment)
         if onset is None:raise ValueError('Native waveform cannot be uniquely localized: '+method)
         result.append(dict(onset=int(onset),duration_ms=float(duration),native_order=int(positions[j]),stored_index=int(j)))
     if result[1]['onset']<=result[0]['onset']:raise ValueError('Native fixation order disagrees with EEG onset order')
