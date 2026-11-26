@@ -15,6 +15,7 @@ import review_controls as c
 import review_fixations as f
 
 BUDGET=50_000_000
+LEGACY_REVIEW_SHA256='6bc68c8345e514b801ca2ac0ae3ddb58f7e6ecfca49d61d84b4c3b227cbf1e4e'
 SPEC=dict(version=1,seed=c.SEED,budget=BUDGET,
     controls='four metadata variables, one source word occurrence per row; occurrence-random, unseen-sentence and unseen-word splits; fixed LR C1 and dummy',
     grain='Reader-identity occurrence control is undefined. Duration control uses median first-fixation duration across>=3readers per source occurrence, a different target explicitly named occurrence_median.',
@@ -30,22 +31,61 @@ def checked(root,relative,state):
     return path
 
 
+def checked_events(root, relative, state, family, expected=None):
+    """Older linguistic manifests omitted event CSVs; verify their contents instead."""
+    if relative in state['checksums']:
+        checked(root,relative,state)
+        return 'historical_sha256'
+    if family!='linguistic_targets' or expected is None:
+        raise ValueError('Missing historical event checksum: '+str(root/relative))
+    target=Path(relative).parent.name
+    checked(root,f'targets/{target}/definition.json',state)
+    table,y=expected
+    columns=['event_id','dataset','task','subject','sentence_key','word_identity','sentence_position','onset_sample_sentence_0based']
+    rebuilt=table[columns].copy().reset_index(drop=True);rebuilt['target_code']=np.asarray(y,int)
+    actual=pd.read_csv(root/relative,keep_default_na=False,dtype={'event_id':str}).reset_index(drop=True)
+    try:pd.testing.assert_frame_equal(actual,rebuilt,check_dtype=False,check_exact=True)
+    except AssertionError as error:
+        raise ValueError('Legacy event roster differs from validated-cache/frozen-label reconstruction: '+str(root/relative)) from error
+    print(f'VERIFIED LEGACY ROSTER {family}/{target}: {len(actual)} rows, exact order/labels/metadata match',flush=True)
+    return 'exact_reconstruction_from_validated_caches_and_frozen_labels'
+
+
 def saved_labels(root,language):
     path=root/f'labels/{language}/words.csv.gz';mark=t.read(root/f'labels/{language}/complete.json')
     if t.a.file_digest(path)!=mark['sha256']:raise ValueError('Saved automatic label cache changed')
     return pd.read_csv(path,keep_default_na=False)
 
 
-def audit_history(thesis,all_meta,store):
+def record_protocol(store,proof):
+    """Preserve the failed run's provenance and reusable outputs across this audit-only fix."""
+    path=store.root/'protocol.json'
+    if not path.exists() or t.read(path)==proof:
+        store.json('protocol.json',proof);return
+    old=t.read(path);previous_code=old.get('code',{});current_code=proof.get('code',{})
+    name='scripts/experiment_review_followup.py'
+    comparable=dict(old,code={k:v for k,v in previous_code.items() if k!=name})
+    candidate=dict(proof,code={k:v for k,v in current_code.items() if k!=name})
+    if previous_code.get(name)!=LEGACY_REVIEW_SHA256 or comparable!=candidate:
+        raise ValueError('Changed experiment protocol or inputs; refusing to mix checkpoints')
+    store.json('protocol_revisions/'+t.a.digest(proof)+'.json',dict(previous_protocol_sha256=t.a.file_digest(path),protocol=proof,
+        reason='Legacy linguistic event roster missing from manifest; exact reconstruction verification added. Scientific inputs/models/splits unchanged.'))
+    print('KEEP prior protocol and phase1 outputs; recorded verified audit-only code revision',flush=True)
+
+
+def audit_history(thesis,all_meta,store,pools=None):
     """Reconstruct exact outer groups, checking saved membership when available."""
-    result=[];missing=[];base=thesis/'Results/word_sentiment_eeg'
+    result=[];missing=[];verification=[];base=thesis/'Results/word_sentiment_eeg'
     for family in ['teco_other_targets','teco_sentiment_unseen_readers','linguistic_targets']:
         root=base/family
         if not (root/'complete.json').is_file():missing.append(dict(family=family,reason='Completed run absent'));continue
         state=t.read(root/'complete.json')
         if state.get('status')!='completed':missing.append(dict(family=family,reason='Run not complete'));continue
         for targetpath in sorted((root/'targets').glob('*/events.csv.gz')):
-            relative=str(targetpath.relative_to(root));checked(root,relative,state)
+            relative=str(targetpath.relative_to(root));target=targetpath.parent.name
+            expected=pools[target][:2] if pools is not None and target in pools else None
+            method=checked_events(root,relative,state,family,expected)
+            verification.append(dict(family=family,target=target,method=method,sha256=t.a.file_digest(targetpath)))
             events=pd.read_csv(targetpath,keep_default_na=False,dtype={'event_id':str});target=targetpath.parent.name
             ix=pd.Index(all_meta.event_id).get_indexer(events.event_id)
             if (ix<0).any():raise ValueError('Historical event missing from current validated caches')
@@ -106,6 +146,7 @@ def audit_history(thesis,all_meta,store):
             result.append(c.audit_partition(meta,y,np.concatenate(gt),np.concatenate(ge),'teco_classification_sweep','sentiment_binary',mode,int(fold.removeprefix('fold'))+1,size.removeprefix('size'),gt,ge))
     t.old.csv(store,'audit/historical_occurrence_overlap_and_group_sizes.csv',pd.DataFrame(result))
     t.old.csv(store,'audit/history_unavailable.csv',pd.DataFrame(missing,columns=['family','reason']))
+    t.old.csv(store,'audit/historical_roster_verification.csv',pd.DataFrame(verification))
     return result,missing
 
 
@@ -119,7 +160,7 @@ def main():
     sources=args.thesis_root/'Results/word_sentiment_eeg';reference=sources/'linguistic_targets'
     if t.read(reference/'complete.json').get('status')!='completed':raise ValueError('Completed linguistic_targets required')
     files=['scripts/experiment_review_followup.py','scripts/review_controls.py','scripts/review_fixations.py','scripts/teco_other_targets.py','scripts/linguistic_targets.py']
-    store.json('protocol.json',dict(spec=SPEC,code={f:t.a.file_digest(ROOT/f) for f in files},versions={n:version(n) for n in ['numpy','pandas','scipy','scikit-learn']},
+    record_protocol(store,dict(spec=SPEC,code={f:t.a.file_digest(ROOT/f) for f in files},versions={n:version(n) for n in ['numpy','pandas','scipy','scikit-learn']},
         references={n:t.a.file_digest(sources/n/'complete.json') for n in ['teco_other_targets','teco_sentiment_unseen_readers','linguistic_targets'] if (sources/n/'complete.json').is_file()}))
     if (out/'complete.json').is_file():
         for name,sha in t.read(out/'complete.json')['checksums'].items():
@@ -142,7 +183,7 @@ def main():
         pools[name]=(table,y,classes);example_rows+=c.examples(table,y,classes,name)
     t.old.csv(store,'label_examples.csv',pd.DataFrame(example_rows))
     print('PHASE2/5: exact historical split/group-size and source-occurrence overlap audit',flush=True)
-    audit_history(args.thesis_root,pd.concat([tm,zm],ignore_index=True),store)
+    audit_history(args.thesis_root,pd.concat([tm,zm],ignore_index=True),store,pools)
     print('PHASE3/5: standalone occurrence-level non-EEG controls',flush=True)
     scores=[];missing=[dict(target='reader_identity',reason='Cannot define reader identity with one reader-free row per source occurrence; historical reader control is not an occurrence-level prediction problem')]
     for name,(table,y,classes) in pools.items():

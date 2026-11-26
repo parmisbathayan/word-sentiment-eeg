@@ -37,6 +37,34 @@ except ValueError:pass
 else:raise AssertionError('Too-few test averages accepted')
 with tempfile.TemporaryDirectory() as tmp:
     store=t.ImmutableStore(Path(tmp),50_000_000)
+    # Legacy linguistic completion records omitted events.csv.gz. Require an exact
+    # reconstruction, including row order/labels, instead of bypassing verification.
+    legacy=Path(tmp)/'legacy';(legacy/'targets/pos').mkdir(parents=True)
+    definition=legacy/'targets/pos/definition.json';definition.write_text('{}')
+    columns=['event_id','dataset','task','subject','sentence_key','word_identity','sentence_position','onset_sample_sentence_0based']
+    roster=meta[columns].copy();roster['target_code']=y
+    path=legacy/'targets/pos/events.csv.gz';roster.to_csv(path,index=False,compression='gzip')
+    state={'checksums':{'targets/pos/definition.json':t.a.file_digest(definition)}}
+    assert main.checked_events(legacy,'targets/pos/events.csv.gz',state,'linguistic_targets',(meta,y)).startswith('exact_reconstruction')
+    for altered in [roster.iloc[::-1],roster.assign(target_code=(y+1)%3),roster.iloc[:-1]]:
+        altered.to_csv(path,index=False,compression='gzip')
+        try:main.checked_events(legacy,'targets/pos/events.csv.gz',state,'linguistic_targets',(meta,y))
+        except ValueError:pass
+        else:raise AssertionError('Changed legacy roster accepted')
+    roster.to_csv(path,index=False,compression='gzip')
+    state['checksums']['targets/pos/events.csv.gz']='bad checksum'
+    try:main.checked_events(legacy,'targets/pos/events.csv.gz',state,'linguistic_targets',(meta,y))
+    except ValueError:pass
+    else:raise AssertionError('Present but wrong checksum bypassed')
+    protocol_store=t.ImmutableStore(Path(tmp)/'protocol',50_000_000)
+    old={'spec':main.SPEC,'code':{'scripts/experiment_review_followup.py':main.LEGACY_REVIEW_SHA256,'other':'unchanged'}}
+    protocol_store.json('protocol.json',old)
+    new=dict(old,code=dict(old['code'],**{'scripts/experiment_review_followup.py':'new audit code'}))
+    main.record_protocol(protocol_store,new);main.record_protocol(protocol_store,new)
+    assert t.read(protocol_store.root/'protocol.json')==old
+    try:main.record_protocol(protocol_store,dict(new,spec={'changed':True}))
+    except ValueError:pass
+    else:raise AssertionError('Changed scientific protocol accepted')
     rows,missing=c.run_standalone(meta,y,['a','b','c'],'pos',store,sizes=[1,10,'max40'])
     assert rows and all(r['unit']=='unique source occurrences' for r in rows)
     audit=c.audit_partition(meta,y,np.arange(96),np.arange(96,192),'test','pos','reader',1,1)
