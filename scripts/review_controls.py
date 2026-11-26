@@ -203,7 +203,7 @@ def run_numeric(meta, features, store):
                 truth=np.concatenate([c['truth'] for c in cases]);pred=np.concatenate([c['prediction'] for c in cases])
                 result.append(dict(target=target,mode=mode,size='1',model=name,
                     mean_absolute_error=float(mean_absolute_error(truth,pred)),median_absolute_error=float(median_absolute_error(truth,pred)),
-                    r2=float(r2_score(truth,pred)),correlation=float(np.corrcoef(truth,pred)[0,1]) if np.std(pred)>0 else None,
+                    r2=float(r2_score(truth,pred)),correlation=float(np.corrcoef(truth,pred)[0,1]) if np.std(pred)>1e-12 and np.std(truth)>1e-12 else None,
                     test_events=len(truth),units='fraction0–1' if target=='relative_word_position' else 'characters' if target=='word_length' else 'words',
                     interpretation='regression, not balanced accuracy; readers may share word identities unless word-held-out'))
     return result,missing
