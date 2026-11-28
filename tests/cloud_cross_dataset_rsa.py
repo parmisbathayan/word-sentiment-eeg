@@ -78,7 +78,7 @@ with tempfile.TemporaryDirectory() as tmp:
                            device='cpu',epochs=2,permutations=7,regroupings=1,inputs=['full_0_800'])
     assert len(summary)==15 and summary.completed_folds.eq(3).all()
     assert summary.holm_p.notna().all() and len(results)==60
-    assert len(list((Path(tmp)/'plots').glob('*/*.png')))==5
+    assert len(list((Path(tmp)/'plots').glob('*/*/*.png')))==10
     old=(Path(tmp)/'results.csv').read_bytes()
     again,s2=run.run(m,X,X[:,:12],{'sentiment_binary':(y,['negative','positive'])},store,
                     device='cpu',epochs=2,permutations=7,regroupings=1,inputs=['full_0_800'])

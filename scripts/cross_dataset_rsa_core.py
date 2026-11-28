@@ -218,7 +218,7 @@ def rsa_case(vectors, gm, left, right, metric='pearson', permutations=999,
         shared.append(bool(set(gm.source_keys.iloc[ia[i]]) & set(gm.source_keys.iloc[ib[j]])))
     # Reliability: correlations between disjoint same-class averages of one reader.
     rel=[]
-    for _,g in gm.groupby(['reader','label']):
+    for _,g in gm[gm.dataset.isin([left,right])].groupby(['reader','label']):
         if len(g)>1:
             sim=similarity(vectors[g.index],vectors[g.index],metric)
             vals=sim[np.triu_indices(len(g),1)]; rel.extend(vals[np.isfinite(vals)].tolist())

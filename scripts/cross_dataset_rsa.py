@@ -171,8 +171,8 @@ def fit_representations(meta,X,fit,val,out,store,device,epochs,seed):
     return z,pca,model,emb,diagnostic
 
 
-def save_matrix(store,relative,matrices,gm,classes,title,work):
-    """Save representative all-data/regroup0 matrices only; all scores are saved."""
+def save_matrix(store,relative,matrices,gm,classes,title,work,mode='all_data_descriptive'):
+    """Save representative full-input/regroup0 matrices; all scores are saved."""
     import matplotlib
     matplotlib.use('Agg')
     import matplotlib.pyplot as plt
@@ -197,7 +197,8 @@ def save_matrix(store,relative,matrices,gm,classes,title,work):
         axes[1,column].set(title='Ideal dissimilarity: 0 same / 1 different',xlabel='40-trial averages',ylabel='40-trial averages')
         arrays[left+'_'+right]=pack['similarity'];arrays[left+'_'+right+'_ideal']=pack['ideal_dissimilarity'];arrays[left+'_'+right+'_mask']=pack['inference_mask']
     fig.colorbar(image,ax=axes[0,:].ravel().tolist(),label='Pattern similarity',fraction=.02,pad=.04)
-    fig.suptitle(title+'\nAll-data descriptive; class-sorted; each example averages 40 known same-class trials',fontsize=10)
+    scope='All-data descriptive' if mode=='all_data_descriptive' else 'Held-out readers: '+mode
+    fig.suptitle(title+'\n'+scope+'; class-sorted; each example averages 40 known same-class trials',fontsize=10)
     path=work/'matrix.png';fig.savefig(path,dpi=125,bbox_inches='tight');plt.close(fig)
     store.file(str(relative)+'.png',path,reuse_committed=True)
     b=io.BytesIO();np.savez_compressed(b,**arrays);store.bytes(str(relative)+'.npz',b.getvalue())
@@ -265,13 +266,16 @@ def run(meta,post,pre,targets,store,device='cpu',epochs=60,permutations=999,regr
                                     case_rows.append(dict(**setting,**result,status='completed',trials_per_average=40,excluded_reader_tasks=len(excluded)))
                                     packs[(left,right)]=pack
                                 except ValueError as error:missing.append(dict(**setting,reason=str(error)))
-                            if mode=='all_data_descriptive' and inp=='full_0_800' and repeat==0 and len(packs)==3:
-                                save_matrix(store,Path('plots')/target/rep,packs,gm,classes,f'{target} | {rep} | {metric}',work)
+                            if mode in ['all_data_descriptive','reader_fold1'] and inp=='full_0_800' and repeat==0 and len(packs)==3:
+                                save_matrix(store,Path('plots')/mode/target/rep,packs,gm,classes,f'{target} | {rep} | {metric}',work,mode)
                         saved=dict(rows=case_rows,rows_sha256=digest(case_rows),unavailable=missing,nulls=case_null)
                         store.json(rel/'result.json',saved);rows.extend(case_rows);failures.extend(missing)
                         for k,v in case_null.items():nulls.setdefault(k,[]).append(v)
                         print(f'  SAVED {rel}: {len(case_rows)} matrices; {len(missing)} unavailable',flush=True)
-    results=pd.DataFrame(rows);summary=[]
+    results=pd.DataFrame(rows)
+    # Immutable case JSON sorts keys; export the same CSV column order on resume.
+    results=results.reindex(sorted(results.columns),axis=1)
+    summary=[]
     for key,parts in sorted(nulls.items()):
         inp,target,rep,pair=key.split('/')
         record=dict(input=inp,target=target,representation=rep,matrix=pair,regrouping=0,completed_folds=len(parts),
@@ -290,6 +294,22 @@ def run(meta,post,pre,targets,store,device='cpu',epochs=60,permutations=999,regr
     store.bytes('results.csv',csv_bytes(results));store.bytes('heldout_summary.csv',csv_bytes(frame))
     store.bytes('unavailable.csv',csv_bytes(pd.DataFrame(failures,columns=['mode','input','target','representation','regrouping','matrix','reason'])))
     store.json('vae_diagnostics.json',all_diagnostics)
+    if len(frame):
+        import matplotlib
+        matplotlib.use('Agg')
+        import matplotlib.pyplot as plt
+        fig,axes=plt.subplots(len(targets),3,figsize=(13,max(3,2.7*len(targets))),squeeze=False)
+        for ri,target in enumerate(targets):
+            for ci,(a,b) in enumerate(PAIRS):
+                g=frame[(frame.target==target)&(frame.matrix==a+'_'+b)&(frame.input=='full_0_800')]
+                ax=axes[ri,ci]
+                if len(g):
+                    ax.bar(np.arange(len(g)),g.rsa_rho_mean,color=['#33658a' if x=='features' else '#999999' if x=='pre_onset' else '#2a9d8f' for x in g.representation])
+                    ax.set_xticks(np.arange(len(g)),[s.replace('vae_','VAE ').replace('_',' ') for s in g.representation],rotation=25,ha='right',fontsize=7)
+                ax.axhline(0,color='black',lw=.6);ax.set_ylim(-1,1);ax.set_title(target+' | '+a+' × '+b,fontsize=9);ax.set_ylabel('Mean held-out RSA rho')
+        fig.suptitle('Primary grouping; mean of 3 reader folds. Bars are effects, not significance. See corrected p/q table.',fontsize=10)
+        fig.tight_layout(rect=(0,0,1,.97));path=work/'overview.png' if work.exists() else Path(tempfile.gettempdir())/'rsa-overview.png'
+        fig.savefig(path,dpi=125);plt.close(fig);store.file('overview.png',path,reuse_committed=True)
     return results,frame
 
 
@@ -310,7 +330,7 @@ def main():
             if file_digest(out/name)!=sha:raise ValueError('Completed RSA output changed: '+name)
         print('KEEP COMPLETED CROSS-DATASET RSA: verified; no feature load or training',flush=True);return
     meta,post,pre,proof=load_cached(args.thesis_root);store.json('source_identity.json',proof)
-    targets={};missing=[];counts=[]
+    targets={};missing=[];counts=[];examples=[]
     for name in TARGETS:
         try:y,classes,identity=target_labels(args.thesis_root,meta,name)
         except FileNotFoundError as error:
@@ -319,7 +339,12 @@ def main():
         targets[name]=(y,classes);store.json('targets/'+name+'/definition.json',dict(classes=classes,proof=identity,counts={d:{classes[i]:int(np.sum((y==i)&meta.dataset.eq(d).to_numpy())) for i in range(len(classes))} for d in sorted(meta.dataset.unique())}))
         for (d,s),g in meta.groupby(['dataset','subject']):
             for i,cl in enumerate(classes):counts.append(dict(target=name,dataset=d,subject=s,label=cl,eligible_trials=int(np.sum(y[g.index]==i))))
+        for d in sorted(meta.dataset.unique()):
+            for i,cl in enumerate(classes):
+                picked=meta.loc[(y==i)&meta.dataset.eq(d)].drop_duplicates('source_key').head(3)
+                for r in picked.itertuples():examples.append(dict(target=name,dataset=d,label=cl,word=r.word,source_key=r.source_key))
     store.bytes('class_counts.csv',csv_bytes(pd.DataFrame(counts)));store.json('missing_targets.json',missing)
+    store.bytes('label_examples.csv',csv_bytes(pd.DataFrame(examples)))
     results,summary=run(meta,post,pre,targets,store,args.device)
     store.json('complete.json',dict(status='completed',finished_at_utc=datetime.now(timezone.utc).isoformat(),scope=SPEC['scope'],
         targets=list(targets),result_rows=len(results),new_output_cap_bytes=BUDGET,
