@@ -140,7 +140,7 @@ def load_torch(path):
     except Exception as error:raise ValueError('Unreadable own VAE checkpoint: '+str(path)) from error
 
 
-def fit_representations(meta,X,fit,val,out,store,device,epochs,seed):
+def fit_representations(meta,X,fit,val,out,store,device,epochs,seed,evaluation=None):
     ds=meta.dataset.astype(str).to_numpy()
     balanced=c.balanced_sample(meta,fit,12000,seed);vix=c.balanced_sample(meta,val,3000,seed+1)
     transform=c.SharedTransform().fit(X[balanced],ds[balanced]);z=transform.transform(X,ds)
@@ -163,10 +163,12 @@ def fit_representations(meta,X,fit,val,out,store,device,epochs,seed):
         store.json(out/'complete.json',dict(sha256=file_digest(modelpath),epochs=len(history)))
     store.json(out/'history.json',history)
     emb=c.embeddings(model,z,device)
-    diagnostic=c.latent_diagnostics(model,z[vix],ds[vix],meta.reader.iloc[vix].to_numpy(),device)
+    evaluation=vix if evaluation is None else np.asarray(evaluation,int)
+    diagnostic=c.latent_diagnostics(model,z[evaluation],ds[evaluation],meta.reader.iloc[evaluation].to_numpy(),device)
     diagnostic.update(fitting_trials=len(fit),validation_trials=len(vix),pca_variance_explained=pca.explained_variance_ratio_.tolist(),
                       dataset_scalar_scales=transform.scales,training_event_digest=digest(meta.event_id.iloc[fit].tolist()),
-                      validation_event_digest=digest(meta.event_id.iloc[vix].tolist()))
+                      validation_event_digest=digest(meta.event_id.iloc[vix].tolist()),
+                      diagnostic_evaluation_trials=len(evaluation),diagnostic_evaluation_readers=int(meta.reader.iloc[evaluation].nunique()))
     store.json(out/'diagnostics.json',diagnostic)
     return z,pca,model,emb,diagnostic
 
@@ -227,7 +229,7 @@ def run(meta,post,pre,targets,store,device='cpu',epochs=60,permutations=9999,reg
             for ii,inp in enumerate(inputs):
                 print(f'REPRESENTATION {mi+1}/{len(modes)} {mode}; input {ii+1}/{len(inputs)} {inp}',flush=True)
                 X=c.input_view(post,inp);prefix=Path('models')/mode/inp
-                z,pca,model,emb,diagnostic=fit_representations(meta,X,fit,val,prefix,store,device,epochs,c.stable_seed(c.SEED,mode,inp))
+                z,pca,model,emb,diagnostic=fit_representations(meta,X,fit,val,prefix,store,device,epochs,c.stable_seed(c.SEED,mode,inp),te)
                 all_diagnostics.append(dict(mode=mode,input=inp,**diagnostic))
                 for ti,(target,(y,classes)) in enumerate(targets.items()):
                     print(f'  TARGET {ti+1}/{len(targets)} {target}: exact40, {regroupings} fixed regroupings',flush=True)
