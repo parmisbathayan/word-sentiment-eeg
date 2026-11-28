@@ -188,12 +188,13 @@ def save_matrix(store,relative,matrices,gm,classes,title,work,mode='all_data_des
         if left==right:np.fill_diagonal(S,np.nan)
         image=ax.imshow(S,vmin=-1,vmax=1,cmap='RdBu_r',aspect='auto')
         ax.set(title=f'{left} × {right}',xlabel='40-trial averages',ylabel='40-trial averages')
-        for ccode in sorted(gm.label.unique()):
-            for axis,ids,order in [('y',ia,ordera),('x',ib,orderb)]:
+        for axis,ids,order in [('y',ia,ordera),('x',ib,orderb)]:
+            positions=[];names=[]
+            for ccode in sorted(gm.label.unique()):
                 pos=np.flatnonzero(gm.label.iloc[ids].to_numpy()[order]==ccode)
-                if len(pos):
-                    if axis=='x':ax.text(float(pos.mean()),1.02,classes[int(ccode)],transform=ax.get_xaxis_transform(),ha='center',va='bottom',fontsize=7)
-                    else:ax.text(-.03,float(pos.mean()),classes[int(ccode)],transform=ax.get_yaxis_transform(),ha='right',va='center',fontsize=7)
+                if len(pos):positions.append(float(pos.mean()));names.append(classes[int(ccode)])
+            if axis=='x':ax.set_xticks(positions,names,fontsize=7)
+            else:ax.set_yticks(positions,names,fontsize=7)
         ideal=pack['ideal_dissimilarity'][np.ix_(ordera,orderb)]
         axes[1,column].imshow(ideal,vmin=0,vmax=1,cmap='gray_r',aspect='auto')
         axes[1,column].set(title='Ideal dissimilarity: 0 same / 1 different',xlabel='40-trial averages',ylabel='40-trial averages')
