@@ -288,7 +288,9 @@ def train_vae(X, validation, datasets, validation_datasets, seed, epochs=60,
         if device=='cuda' and resume.get('cuda_rng') is not None:torch.cuda.set_rng_state(resume['cuda_rng'].cpu())
     x=torch.as_tensor(X,dtype=torch.float32,device=device)
     vx=torch.as_tensor(validation,dtype=torch.float32,device=device)
-    ds=np.asarray(datasets);weights=np.array([len(ds)/(len(set(ds))*np.sum(ds==d)) for d in ds],np.float32)
+    ds=np.asarray(datasets);unique,counts=np.unique(ds,return_counts=True)
+    lookup={d:len(ds)/(len(unique)*count) for d,count in zip(unique,counts)}
+    weights=np.array([lookup[d] for d in ds],np.float32)
     weights=torch.as_tensor(weights,device=device)
     for epoch in range(start,epochs):
         if bad>=8:break
