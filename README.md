@@ -2,6 +2,15 @@
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/parmisbathayan/word-sentiment-eeg/blob/main/notebooks/short.ipynb?authuser=2)
 
+## TeCo–ZuCo task-1 RSA with shared PCA/VAE representations
+
+[T4 GPU: one EEG/PCA/VAE RSA notebook](https://colab.research.google.com/github/parmisbathayan/word-sentiment-eeg/blob/main/notebooks/cross_dataset_rsa_vae.ipynb?authuser=2).
+TeCo task1 versus ZuCo SR; five shared targets, exact40 averages, four feature inputs,
+three held-out-reader folds plus a separate all-data descriptive fit. Measured and
+ideal matrices, pre-onset/property controls, reader-conditional randomizations and
+corrected results. Reuses existing feature caches; **50 MB total new Drive cap**;
+no EEG extraction. [Protocol, resume and limitations](docs/CROSS_DATASET_RSA_VAE.md).
+
 ## Published classification recipe: random95/5splits
 
 [CPU: full NCA + logistic/SVM search](https://colab.research.google.com/github/parmisbathayan/word-sentiment-eeg/blob/main/notebooks/zuco_paper_classification.ipynb?authuser=2). Saved SST-labelled ZuCo SR,0–500ms,100random splits, full published inner tuning, no reader/word/sentence holdouts. Reusable feature caches and resumable grid blocks; **500 MB total cap**. This is a **long CPU workload**, not a quick sweep. Original trial set and undocumented choices differ, so this is a protocol reconstruction. [Recipe, explicit choices and limitations](docs/PAPER_CLASSIFICATION_RECONSTRUCTION.md).
