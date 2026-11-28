@@ -21,7 +21,7 @@ INPUTS=['full_0_800','window_200_400','regional_summary','normalized_0_800']
 TARGETS=['sentiment_binary','neutral_nonneutral','pos','content_function','fixation_200']
 PAIRS=[('teco','teco'),('zuco','zuco'),('teco','zuco')]
 BUDGET=50_000_000
-SPEC=dict(version=1,scope='TeCo task1 / ZuCo SR ONLY',seed=c.SEED,inputs=INPUTS,targets=TARGETS,
+SPEC=dict(version=1,scope='TeCo task1 / ZuCo SR ONLY',seed=c.SEED,inputs=INPUTS,targets=TARGETS,permutations=9999,regroupings=3,
     averaging='exact40 per reader/task/class, balanced class group counts, max4 groups/class/reader, no remainders; 3 fixed regroupings',
     labels='Frozen original word_agreement binary/three-class prediction rosters; saved verified Stanza POS/content-function; recorded first-fixation duration <200 vs >=200ms',
     preparation='original shared 40Hz/125Hz accepted caches, NO extra paper regression cleaning; 6regions x8bins0–800ms; pre12bins-200–0ms',
@@ -204,7 +204,7 @@ def save_matrix(store,relative,matrices,gm,classes,title,work,mode='all_data_des
     b=io.BytesIO();np.savez_compressed(b,**arrays);store.bytes(str(relative)+'.npz',b.getvalue())
 
 
-def run(meta,post,pre,targets,store,device='cpu',epochs=60,permutations=999,regroupings=3,inputs=INPUTS):
+def run(meta,post,pre,targets,store,device='cpu',epochs=60,permutations=9999,regroupings=3,inputs=INPUTS):
     import tempfile
     from sklearn.impute import SimpleImputer
     from sklearn.preprocessing import StandardScaler
@@ -233,10 +233,10 @@ def run(meta,post,pre,targets,store,device='cpu',epochs=60,permutations=999,regr
                     print(f'  TARGET {ti+1}/{len(targets)} {target}: exact40, {regroupings} fixed regroupings',flush=True)
                     for repeat in range(regroupings):
                         rel=Path('cases')/mode/inp/target/f'grouping{repeat}'
-                        marker=store.root/rel/'result.json'
+                        marker=store.root/rel/'result.json.gz'
                         if marker.exists():
-                            saved=read(marker)
-                            if digest(saved['rows'])!=saved['rows_sha256']:raise ValueError('Case checkpoint checksum failed')
+                            saved=json.loads(gzip.decompress(marker.read_bytes()))
+                            if digest({k:v for k,v in saved.items() if k!='checksum'})!=saved['checksum']:raise ValueError('Case checkpoint checksum failed')
                             rows.extend(saved['rows']);failures.extend(saved['unavailable'])
                             for k,v in saved['nulls'].items():nulls.setdefault(k,[]).append(v)
                             print('  KEEP completed RSA case:',rel,flush=True);continue
@@ -269,7 +269,8 @@ def run(meta,post,pre,targets,store,device='cpu',epochs=60,permutations=999,regr
                             if mode in ['all_data_descriptive','reader_fold1'] and inp=='full_0_800' and repeat==0 and len(packs)==3:
                                 save_matrix(store,Path('plots')/mode/target/rep,packs,gm,classes,f'{target} | {rep} | {metric}',work,mode)
                         saved=dict(rows=case_rows,rows_sha256=digest(case_rows),unavailable=missing,nulls=case_null)
-                        store.json(rel/'result.json',saved);rows.extend(case_rows);failures.extend(missing)
+                        saved['checksum']=digest(saved)
+                        store.bytes(rel/'result.json.gz',gzip.compress(json.dumps(saved,sort_keys=True,allow_nan=False).encode(),mtime=0));rows.extend(case_rows);failures.extend(missing)
                         for k,v in case_null.items():nulls.setdefault(k,[]).append(v)
                         print(f'  SAVED {rel}: {len(case_rows)} matrices; {len(missing)} unavailable',flush=True)
     results=pd.DataFrame(rows)

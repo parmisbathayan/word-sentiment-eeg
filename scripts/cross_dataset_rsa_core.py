@@ -208,10 +208,14 @@ def rsa_case(vectors, gm, left, right, metric='pearson', permutations=999,
                 partial = float(er@mr/(np.linalg.norm(er)*np.linalg.norm(mr)))
     null = []
     permuted=permutation_labels(tuple(gm.reader),tuple(labels),permutations,seed)
-    for perm in permuted:
-        score = rank_model_score(ranks, (perm[ia,None] != perm[None,ib])[mask])
-        if score is None: raise ValueError('Degenerate permutation model')
-        null.append(score)
+    li,ri=np.where(mask);li=ia[li];ri=ib[ri]
+    centered=ranks-ranks.mean();norm=float(np.linalg.norm(centered));n=len(ranks)
+    for begin in range(0,permutations,128):
+        batch=permuted[begin:begin+128]
+        model_batch=(batch[:,li]!=batch[:,ri]).astype(float)
+        counts=model_batch.sum(1);denom=norm*np.sqrt(counts-counts*counts/n)
+        if (denom<=1e-12).any():raise ValueError('Degenerate permutation model')
+        null.extend((model_batch@centered/denom).tolist())
     same, different = S[mask & ~model], S[mask & model]
     shared = []
     for i,j in zip(*np.where(mask)):

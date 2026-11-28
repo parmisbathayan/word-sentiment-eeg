@@ -74,7 +74,7 @@ occurrence. The same recorded EEG cannot cross reader-heldout boundaries.
 Primary randomization: shuffle the WHOLE set of class names independently for
 each reader, consistently across all that reader's groups. Binary targets are
 whole-reader label swaps. Reuse each reader's permutation across the joint fold
-aggregation. Use 999 null draws and a one-sided positive-structure test. Average
+aggregation. Use 9,999 null draws and a one-sided positive-structure test. Average
 the three held-out fold rho values, then compare that mean against jointly
 averaged null values. Require all three folds for a summary p value.
 
